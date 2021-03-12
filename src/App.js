@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 // Subpages
 import Home from "./subpages/Home";
 import Informations from "./subpages/Informations";
+import Login from "./subpages/Login";
 
 
 function App() {
@@ -20,12 +21,15 @@ function App() {
             <Navbar />
             <div className="content">
                 <Switch>
-                <Route exact path="/">
-                    <Home />
-                </Route>
-                <Route path="/informations">
-                    <Informations />
-                </Route>
+                    <Route exact path="/">
+                        <Home />
+                    </Route>
+                    <Route path="/informations">
+                        <Informations />
+                    </Route>
+                    <Route path="/login">
+                        <Login/>
+                    </Route>
                 </Switch>
             </div>
         </div>

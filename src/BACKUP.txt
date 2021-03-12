@@ -1,0 +1,19 @@
+.slider{
+    animation: slide 50s linear infinite;
+    width: 100%;
+    height: 850px;
+    background: url("../images/slider01.jpg");
+
+    transition: opacity 1s ease-in-out;
+    background-color: #e39207;
+    background-color: blanchedalmond;
+}
+
+@keyframes slide {
+    16%{background: url("../images/slider01.jpg");}
+    32%{background: url("../images/slider02.jpg");}
+    48%{background: url("../images/slider03.jpg");}
+    66%{background: url("../images/slider04.jpg");}
+    84%{background: url("../images/slider05.jpg");}
+    100%{background: url("../images/slider06.jpg");}
+}

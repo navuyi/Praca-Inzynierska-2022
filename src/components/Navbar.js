@@ -33,7 +33,7 @@ function Navbar(){
             </div>
             <div className={`${styles.col} ${styles.col_3}`}>
                 <NavbarList>
-                    <NavbarLink name={"Zaloguj"} icon={loginIcon} />
+                    <NavbarLink name={"Zaloguj"} icon={loginIcon} link="/login"/>
                     <NavbarLink name={"Rejestracja"}  icon={registerIcon}/>
                 </NavbarList>
             </div>

@@ -13,6 +13,12 @@ function HomeImageSlider(props){
     return(
         <div className={styles.slider}>
             {props.children}
+            <img src={img01} />
+            <img src={img02} />
+            <img src={img03} />
+            <img src={img04} />
+            <img src={img05} />
+            <img src={img06} />
         </div>
     );
 }
