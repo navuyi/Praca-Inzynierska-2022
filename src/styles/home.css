@@ -1,0 +1,10 @@
+.home .row-1{
+
+}
+.home .row-2{
+    display: flex;
+    flex-direction: column;
+
+    width: 30%;
+    margin: 0 auto;
+}

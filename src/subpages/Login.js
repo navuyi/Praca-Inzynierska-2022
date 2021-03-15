@@ -1,28 +1,33 @@
-import LoginPanel from "../components/LoginPanel";
+
 import {useHistory} from 'react-router-dom';
+
+import CredentialInput from "../components/CredentialInput";
+
+import person from '../images/person.png';
+import padlock from '../images/padlock.png';
+import close from '../images/close.png';
 
 function Login(){
     const history = useHistory();
-    const style = {
-        width: "100%",
-        height: "100%",
-        position: "absolute",
-
-        backgroundImage: `linear-gradient(${15}deg, #e39207, #f8c518)`,
-        zIndex: "99",
-
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-    }
-    function exit(e){
-        history.goBack();
-    }
     return(
-        <div style={style}>
-            <LoginPanel
-                exit={exit}
-            />
+        <div className="login">
+            <div className="loginPane">
+                <h1> Logowanie </h1>
+                <img src={close} alt="" className="exit" onClick={()=>history.goBack()}/>
+                <div className="inputWrapper">
+                    <CredentialInput
+                        type="text"
+                        icon={person}
+                        placeholder="Adres email"
+                    />
+                    <CredentialInput
+                        type="password"
+                        icon={padlock}
+                        placeholder="Hasło"
+                    />
+                </div>
+                <button> Zaloguj </button>
+            </div>
         </div>
     )
 };

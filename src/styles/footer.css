@@ -27,7 +27,7 @@
 
     align-items: center;
 }
-.footer .col_1{
+.footer .col-1{
     width: 20%;
     height: 100%;
 
@@ -37,7 +37,7 @@
     justify-content: center;
 
 }
-.footer .col_2{
+.footer .col-2{
     width: 45%;
     height: 100%;
 }
