@@ -1,8 +1,16 @@
-.home .row-1{
-
-}
-.home .row-2{
+.home .row{
     display: flex;
+}
+
+.home .row-2{
+    padding: 5em 0;
+    margin: 10em auto;
+    width: 100%;
+    background-image: linear-gradient(15deg, #f5ad3f, #f9d857);
+
+    justify-content: space-evenly;
+}
+.home .row-3{
     flex-direction: column;
 
     width: 30%;

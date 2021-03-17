@@ -2,7 +2,7 @@
 
 
 
-function HomeInfoPane(props){
+function HomeInfoPanel(props){
     return(
         <div className="homeInfoPane">
             <img src={props.icon} />
@@ -13,4 +13,4 @@ function HomeInfoPane(props){
 }
 
 
-export default HomeInfoPane;
+export default HomeInfoPanel;

@@ -34,7 +34,7 @@ function Navbar(){
                 <NavbarLink
                     icon={register}
                     name="Rejestracja"
-                    path="/login"
+                    path="/register"
                 />
             </div>
         </div>

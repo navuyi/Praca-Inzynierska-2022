@@ -1,0 +1,71 @@
+.homeTourPanel{
+    width: 20%;
+
+    background-color: rgb(34,34,34);
+
+    border-radius: 2em;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding: 1em 1em;
+    transition-duration: 0.4s;
+
+    user-select: none;
+    overflow: hidden;
+}
+.homeTourPanel:hover{
+    background-color: rgb(25, 119, 238);
+    cursor: pointer;
+}
+.homeTourPanel:active{
+    transition-duration: 0s;
+    box-shadow: 0px 0px 20px 5px indigo;
+}
+.homeTourPanel:hover img{
+    transform: scale(1.1);
+}
+.home .home-tour-panel-row{
+    width: 100%;
+    height: 50%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.homeTourPanel img{
+    width: 95%;
+    height: 95%;
+
+    border-radius: 50%;
+    transition-duration: 0.4s;
+}
+.homeTourPanel h1{
+    margin: 0;
+    text-align: center;
+    color: blanchedalmond;
+    font-size: 2rem;
+    font-weight: 500;
+}
+.homeTourPanel p{
+    margin: 0;
+    color: blanchedalmond;
+    font-size: 1rem;
+    font-weight: 500;
+
+    text-align: center;
+    padding: 0 1em;
+}
+.homeTourPanel button{
+    font-size: 1.2rem;
+    width: 55%;
+
+    padding: 1em 0;
+    border: none; outline: none;
+    border-radius: 0.5em;
+
+    margin: 0.2em 0;
+}
