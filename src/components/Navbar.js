@@ -3,6 +3,7 @@ import NavbarLink from "./NavbarLink";
 // Icons
 import home from '../images/home.png';
 import informations from '../images/information.png';
+import account from '../images/person.png';
 
 import login from '../images/enter.png';
 import register from '../images/register.png';
@@ -23,6 +24,11 @@ function Navbar(){
                     icon={informations}
                     name="Informacje"
                     path="/informations"
+                />
+                <NavbarLink
+                    icon={account}
+                    name="Moje konto"
+                    path="/my-account/user/user-data"
                 />
             </div>
             <div className="col col-1">

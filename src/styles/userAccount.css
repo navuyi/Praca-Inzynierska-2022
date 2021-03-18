@@ -1,0 +1,21 @@
+.userAccount{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+
+    margin: 5em 0;
+}
+.userAccount .col{
+    display: flex;
+    flex-direction: column;
+}
+.userAccount .col-1{
+    width: 15%;
+
+    align-items: center;
+}
+.userAccount .col-2{
+    width: 50%;
+
+    align-items: center;
+}

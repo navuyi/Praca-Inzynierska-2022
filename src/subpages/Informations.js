@@ -1,7 +1,11 @@
 
+import Navbar from "../components/Navbar";
+
 function Informations(){
     return(
-        <div> Informations </div>
+        <div className="informations">
+            <Navbar />
+        </div>
     )
 }
 

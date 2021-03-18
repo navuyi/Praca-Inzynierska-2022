@@ -1,12 +1,12 @@
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 function NavbarLink(props){
 
     return(
-        <Link to={props.path} className="navbarLink">
-            <img src={props.icon}/>
+        <NavLink to={props.path} className="navbarLink" activeClassName="selected">
+            {props.icon ? <img src={props.icon} alt=""/> : null}
             <p>{props.name}</p>
-        </Link>
+        </NavLink>
     )
 }
 

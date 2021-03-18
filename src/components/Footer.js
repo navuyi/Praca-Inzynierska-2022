@@ -8,11 +8,11 @@ function Footer(){
         <div className="footer">
             <div className="col-1">
                 <div className="wrapper">
-                    <img src={person} />
+                    <img src={person} alt=""/>
                     <p> Rafał Figlus </p>
                 </div>
                 <div className="wrapper">
-                    <img src={mail} />
+                    <img src={mail} alt=""/>
                     <p> figlusrafal@gmail.com </p>
                 </div>
 
