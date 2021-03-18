@@ -40,7 +40,7 @@
     width: 95%;
     height: 95%;
 
-    border-radius: 50%;
+    border-radius: 2em;
     transition-duration: 0.4s;
 }
 .homeTourPanel h1{

@@ -8,9 +8,10 @@ import img05 from '../images/slider05.jpg';
 import img06 from '../images/slider06.jpg';
 
 
-function ImageSlider(){
+function ImageSlider(props){
     return(
         <div className="imageSlider">
+            {props.children}
             <img src={img05} alt={""} />
         </div>
     )

@@ -18,6 +18,7 @@ import './styles/footer.css';
 import './styles/credentialInput.css';
 import './styles/login.css';
 import './styles/homeTourPanel.css';
+import './styles/homeQuickSearch.css';
 
 function App() {
     const isLogged = useSelector(state=>state.authReducer);

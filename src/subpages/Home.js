@@ -3,6 +3,7 @@ import ImageSlider from "../components/ImageSlider";
 import HomeInfoPanel from "../components/HomeInfoPanel";
 import Footer from "../components/Footer";
 import HomeTourPanel from "../components/HomeTourPanel";
+import HomeQuickSearch from "../components/HomeQuickSearch";
 
 import trip from '../images/tours.jpg';
 import crypto from '../images/crypto.jpg';
@@ -20,8 +21,11 @@ function Home(){
         <div className="home">
             <Navbar />
             <div className="row row-1">
-                <ImageSlider />
+                <ImageSlider>
+                    <HomeQuickSearch/>
+                </ImageSlider>
             </div>
+            <h1 className="home-row-2-header"> Najnowsze oferty </h1>
             <div className="row row-2">
                 <HomeTourPanel
                     image={test}

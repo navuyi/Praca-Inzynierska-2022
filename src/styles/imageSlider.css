@@ -1,8 +1,10 @@
 .imageSlider{
     height: 100%;
+    position: relative;
 }
 .imageSlider img{
     width: 100%;
+
 
     /*
     position: absolute;
