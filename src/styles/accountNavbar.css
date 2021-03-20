@@ -8,8 +8,10 @@
     background-image: linear-gradient(15deg, #f09c1d, #f4c003);
     border-radius: 1em;
 
+    /*
     position: sticky;
     top: 210px;
+    */
 }
 .accountNavbar h1{
     text-align: center;

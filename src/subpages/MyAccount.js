@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 
 import UserAccount from "./UserAccount";
 import GuideAccount from "./GuideAccount";
+import Messages from "./Messages";
 import {Route} from 'react-router-dom';
 import AccountSwitch from "../components/AccountSwitch";
 
@@ -17,6 +18,9 @@ function MyAccount(){
                 </Route>
                 <Route path="/my-account/guide">
                     <GuideAccount />
+                </Route>
+                <Route path="/my-account/messages">
+                    <Messages />
                 </Route>
             </div>
             <Footer />

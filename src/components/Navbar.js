@@ -4,6 +4,8 @@ import NavbarLink from "./NavbarLink";
 import home from '../images/home.png';
 import informations from '../images/information.png';
 import account from '../images/person.png';
+import tours from '../images/school-book-bag.png';
+
 
 import login from '../images/enter.png';
 import register from '../images/register.png';
@@ -24,6 +26,11 @@ function Navbar(){
                     icon={informations}
                     name="Informacje"
                     path="/informations"
+                />
+                <NavbarLink
+                    icon={tours}
+                    name="Oferty"
+                    path="/tours"
                 />
                 <NavbarLink
                     icon={account}

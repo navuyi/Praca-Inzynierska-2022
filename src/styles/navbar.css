@@ -12,7 +12,6 @@
     top: 0;
 
     z-index: 1;
-
 }
 .navbar .col{
     display: flex;
@@ -37,6 +36,14 @@
     text-decoration: none;
     outline: none;
 }
+
+.navbar .navbarLink:hover p{
+    color: white;
+    transform: scale(1.1);
+}
+.navbar .navbarLink:hover img{
+    filter: invert(1);
+}
 .navbar .navbarLink img{
     width: 30px;
     margin-right: 0.5em;
@@ -46,8 +53,4 @@
     color: blanchedalmond;
     font-weight: 500;
     text-shadow: -1px -1px black;
-}
-.navbar .navbarLink p:hover{
-    color: indigo;
-    text-shadow: none;
 }
