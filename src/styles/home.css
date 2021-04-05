@@ -1,27 +1,11 @@
-.home .row{
-    display: flex;
-}
-.home .home-row-2-header{
+.home .recent-tours-header{
     text-align: center;
-    background: orange;
-    margin: 0;
-    margin-top: 3em;
-    
-    font-size: 3rem;
-    color: blanchedalmond;
-    text-shadow: -1px -1px black;
-}
-.home .row-2{
-    padding: 5em 0;
-    margin: 0em auto;
+    color: whitesmoke;
+    font-family: 'Lora', sans-serif;
+
     width: 100%;
-    background-image: linear-gradient(15deg, #f5ad3f, #f9d857);
+    background-color: rgb(34,34,34);
 
-    justify-content: space-evenly;
-}
-.home .row-3{
-    flex-direction: column;
-
-    width: 30%;
-    margin: 0 auto;
+    margin: 0;
+    padding: 2em 0;
 }

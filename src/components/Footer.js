@@ -1,12 +1,15 @@
 
-import person from '../images/person.png';
-import mail from '../images/mail.png';
+// Dependencies
+import {Container, Row, Col} from "react-bootstrap";
 
+// Images
+import person from '../images/icons/person.png';
+import mail from '../images/icons/mail.png';
 
 function Footer(){
     return(
-        <div className="footer">
-            <div className="col-1">
+        <Row className={"flex-row footer justify-content-lg-around"}>
+            <Col lg={3} className={"flex-column justify-content-center align-items-center"}>
                 <div className="wrapper">
                     <img src={person} alt=""/>
                     <p> Rafał Figlus </p>
@@ -15,17 +18,14 @@ function Footer(){
                     <img src={mail} alt=""/>
                     <p> figlusrafal@gmail.com </p>
                 </div>
+            </Col>
+            <Col lg={3}>
 
+            </Col>
+            <Col lg={3}>
 
-            </div>
-            <div className="col-2">
-
-            </div>
-            <div className="col-1">
-
-            </div>
-        </div>
+            </Col>
+        </Row>
     )
 }
-
 export default Footer;

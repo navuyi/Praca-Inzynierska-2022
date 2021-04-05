@@ -1,0 +1,123 @@
+.guideNewTour .cont{
+    background-color: rgb(212, 212, 212);
+    border-radius: 2em;
+
+    margin-bottom: 10em;
+}
+.guideNewTour h1{
+    font-size: 2.5rem;
+    font-family: 'Lora', sans-serif;
+    font-weight: 400;
+    margin: 1em auto;
+}
+.guideNewTour h2{
+    font-size: 1.5rem;
+    margin-bottom: 0.5em;
+}
+.guideNewTour h3{
+    font-size: 1.5rem;
+    margin: 0.5em auto;
+}
+.guideNewTour .inputGroup{
+    margin: 0.7em 0;
+}
+.guideNewTour .inputGroup p{
+    margin: 0.1em 0;
+    padding: 0;
+    font-size: 1.2rem;
+}
+.guideNewTour .inputGroup input{
+    border-radius: 0.5em;
+    border:none;
+    outline: none;
+
+    font-size: 1.1rem;
+    padding: 0.2em 0.5em;
+
+    width: 60%;
+    background-color: #dadada;
+    border: 2px solid rgba(1,1,1,0);
+}
+.guideNewTour .inputGroup input:focus{
+    background-color: whitesmoke;
+    border-color: #187bcd;
+}
+.guideNewTour .inputGroup input[type=number]{
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+}
+.guideNewTour .inputGroup input[type=file]{
+    width: 100%;
+}
+
+
+.guideNewTour .point-container{
+    margin: 2em 0;
+
+    background-color: #b9b9b9;
+    padding: 1em 1em;
+    border-radius: 1em;
+}
+.guideNewTour .point-container .point-number{
+    font-size: 2rem;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    color: #187bcd;
+}
+.guideNewTour .point-container .point-content{
+    font-family: 'Lora', sans-serif;
+    font-size: 0.9rem;
+}
+.guideNewTour .point-container button{
+
+}
+
+
+@media (max-width: 900px) {
+    .guideNewTour .cont{
+        background-color: #cccccc;
+        border-radius: unset;
+    }
+
+    .guideNewTour h1{
+        font-size: 2.5rem;
+        font-family: 'Lora', sans-serif;
+        font-weight: 400;
+        margin: 1em auto;
+    }
+    .guideNewTour h2{
+        font-size: 1.5rem;
+    }
+
+    .guideNewTour .inputGroup{
+        margin: 0.7em 0;
+    }
+    .guideNewTour .inputGroup p{
+        margin: 0.1em 0;
+        padding: 0;
+        font-size: 1.2rem;
+    }
+    .guideNewTour .inputGroup input{
+        border-radius: 0.5em;
+        border:none;
+        outline: none;
+
+        font-size: 1.1rem;
+        padding: 0.2em 0.5em;
+
+        width: 100%;
+        background-color: #dadada;
+        border: 2px solid rgba(1,1,1,0);
+    }
+    .guideNewTour .inputGroup input:focus{
+        background-color: whitesmoke;
+        border-color: #187bcd;
+    }
+    .guideNewTour .inputGroup input[type=number]{
+        -webkit-appearance: textfield;
+        -moz-appearance: textfield;
+    }
+    .guideNewTour .inputGroup input[type=file]{
+        width: 100%;
+    }
+}

@@ -1,19 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from "react-router-dom";
+
 import App from './App';
-
-import {createStore} from "redux";
-import {Provider} from "react-redux";
-import allReducers from "./reducers";
-
-const store = createStore(allReducers);
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <BrowserRouter>
-      <Provider store={store}>
-          <App />
-      </Provider>
+    <App />
   </BrowserRouter>,
   document.getElementById('root')
 );
