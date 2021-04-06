@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Informations from "./pages/Informations";
 import Tours from "./pages/Tours";
 import Account from "./pages/Account";
+import Login from './pages/Login';
 
 import Guide from "./pages/guide/Guide";
 import User from "./pages/user/User";
@@ -27,6 +28,7 @@ import './styles/guideNewTour.css';
 import './styles/guideOffers.css';
 import './styles/informations.css';
 import './styles/tours.css';
+import './styles/login.css';
 
 
 
@@ -54,6 +56,9 @@ function App() {
         </Route>
         <Route  path="/account/messages">
             <Messages />
+        </Route>
+        <Route path="/login">
+            <Login />
         </Route>
     </Switch>
   );

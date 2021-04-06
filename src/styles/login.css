@@ -1,0 +1,115 @@
+.login{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left:0;
+    top:0;
+
+    background-image: url("../images/login/login-bg.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+}
+.login .login-panel{
+    background-image: linear-gradient(15deg, rgba(6, 113, 207, 0.67), #178dfeaa);
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    border-radius: 1em;
+    padding: 3em 0;
+
+
+}
+.login h2{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+
+    color: whitesmoke;
+    font-family: 'Lora', sans-serif;
+    font-weight: 400;
+    font-size: 2.3rem;
+}
+.login .exit-img{
+    width: 25px;
+    position: absolute;
+    right: 5%;
+    filter: invert(1);
+}
+.login .exit-img:hover{
+    filter: invert(0);
+}
+
+/* Input container styling*/
+.login .input-container{
+    border: 1px solid black;
+    position: relative;
+    width: 60%;
+
+    border-radius: 0.5em;
+    padding: 5px 5px;
+    margin: 0.5em;
+
+    background-color: whitesmoke;
+}
+.login img{
+    position: absolute;
+    width: 40px;
+}
+.login .input-container input{
+    height: 40px;
+    width: 100%;
+    padding-left: 25%;
+    border:none;
+    outline: none;
+    font-size: 1.2rem;
+
+    background-color: inherit;
+}
+
+.login button{
+    width: 60%;
+    border: none;
+    outline: none;
+    border-radius: 0.5em;
+
+    font-size: 1.5rem;
+    color: whitesmoke;
+
+    padding: 0.5em 0;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+    background-color: rgb(34,34,34);
+
+    transition-duration: 0.3s;
+}
+.login button:hover{
+    background-color: orange;
+}
+.login button:active{
+    transition-duration: unset;
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 5px 1px black;
+}
+
+.login p{
+    font-family: 'Roboto', sans-serif;
+    color: whitesmoke;
+    font-size: 1.2rem;
+
+    margin: 0;
+}
+.login span{
+    color: rgb(34,34,34);
+    cursor: pointer;
+    font-weight: 600;
+}
+.login span:hover{
+    color: #663399;
+}
