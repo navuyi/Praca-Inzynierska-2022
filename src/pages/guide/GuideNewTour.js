@@ -39,6 +39,14 @@ function GuideNewTour(){
         let inputToEdit = tmpPoints[e.target.id];
         setIdToEdit(e.target.id);
         setPointInput(inputToEdit);
+
+
+        // Scroll back to tour plan input
+        window.scroll({
+            top:    document.getElementById("plan-input-header").offsetParent.offsetTop - window.innerHeight/2,
+            left: 0,
+            behavior: "smooth"
+        });
     }
 
 
@@ -85,7 +93,7 @@ function GuideNewTour(){
                 <Row className={"d-flex flex-column align-items-lg-center justify-content-lg-center mt-lg-5"}>
                     <Col lg={6}>
                         <Form.Group>
-                            <h3> Plan wycieczki </h3>
+                            <h3 id="plan-input-header"> Plan wycieczki </h3>
                             <Form.Control as="textarea" rows={5} value={pointInput} onChange={(e)=>setPointInput(e.target.value)}/>
                         </Form.Group>
                     </Col>

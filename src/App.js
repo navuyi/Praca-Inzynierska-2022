@@ -24,6 +24,12 @@ import './styles/sideNavbar.css';
 import './styles/guideProfile.css';
 import './styles/socialLink.css';
 import './styles/guideNewTour.css';
+import './styles/guideOffers.css';
+import './styles/informations.css';
+import './styles/tours.css';
+
+
+
 
 function App() {
   return (

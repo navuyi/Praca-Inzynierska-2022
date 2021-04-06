@@ -8,7 +8,7 @@ import mail from '../images/icons/mail.png';
 
 function Footer(){
     return(
-        <Row className={"flex-row footer justify-content-lg-around"}>
+        <Row className={"flex-row footer  justify-content-lg-around"}>
             <Col lg={3} className={"flex-column justify-content-center align-items-center"}>
                 <div className="wrapper">
                     <img src={person} alt=""/>

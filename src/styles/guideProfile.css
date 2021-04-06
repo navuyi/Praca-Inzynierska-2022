@@ -1,7 +1,6 @@
-.guideProfile{
+.guideProfile .cont{
     border-radius: 2em;
-    padding: 2em 2em;
-    margin: 5em 0;
+
     background-color: rgb(212, 212, 212);
 
 }
@@ -9,7 +8,7 @@
     width: 60%;
     border-radius: 50%;
 
-    border: 2px solid #d36903;
+    border: 1px solid #505050;
 }
 .guideProfile .header-container{
     display: flex;
@@ -31,7 +30,10 @@
     border-radius: 0.5em;
     padding: 5px 5px;
     margin: 0.5em;
+
+    background-color: whitesmoke;
 }
+
 .guideProfile .info-icon{
     position: absolute;
     width: 40px;
