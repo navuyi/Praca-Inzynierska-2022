@@ -1,8 +1,8 @@
 .guideProfile .cont{
     border-radius: 2em;
 
-    background-color: rgb(212, 212, 212);
-
+    background-color: rgba(186, 186, 186, 0.4);
+    padding: 2em 0;
 }
 .guideProfile .profile-img{
     width: 60%;

@@ -7,6 +7,7 @@ import Informations from "./pages/Informations";
 import Tours from "./pages/Tours";
 import Account from "./pages/Account";
 import Login from './pages/Login';
+import Register from "./pages/Register";
 
 import Guide from "./pages/guide/Guide";
 import User from "./pages/user/User";
@@ -14,7 +15,6 @@ import Messages from "./pages/messages/Messages";
 
 // Styles
 import './App.css';
-
 import './styles/navbarComponent.css';
 import './styles/homeWelcomeView.css';
 import './styles/homeTourPanel.css';
@@ -29,6 +29,7 @@ import './styles/guideOffers.css';
 import './styles/informations.css';
 import './styles/tours.css';
 import './styles/login.css';
+import './styles/register.css';
 
 
 
@@ -59,6 +60,9 @@ function App() {
         </Route>
         <Route path="/login">
             <Login />
+        </Route>
+        <Route path="/register">
+            <Register/>
         </Route>
     </Switch>
   );

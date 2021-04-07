@@ -32,7 +32,7 @@ function Login(){
                         />
                     </div>
                     <button> Zaloguj </button>
-                    <p>Nie masz konta? <span>Załóż je!</span></p>
+                    <p>Nie masz konta? <span onClick={()=>history.push("/register")}>Załóż je!</span></p>
                 </Row>
             </Container>
         </div>
