@@ -1,0 +1,49 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "description": "Rafał Figlus",
+      "version": "1.0.0",
+      "title": "YourTour REST API",
+      "contact": {
+        "email": "figlusrafal@gmail.com"
+      }
+    },
+    "tags": [
+      {
+        "name": "Authenticate",
+        "description": "Endpoint for logging in to application"
+      },
+      { 
+        "name": "Register account",
+        "description": "Endpoint for new user registration"
+      }
+    ],
+    "paths": {
+      "/authenticate":{
+        "post":{
+          "tags":[
+              "Authenticate user"
+          ],
+          "requestBody":{
+            "description": "Authentication credentials",
+            "required": true,
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"schemas.json#/UserAuthentication"
+                }
+              }
+            }
+          },
+          "responses":{
+            "200":{
+              "description": "OK, user authenticated, JWT or Cookie returned"
+            },
+            "403":{
+              "description": "Not allowed - wrong password OR account not yet confirmed"
+            }
+          }
+        }
+      }
+    }
+  }

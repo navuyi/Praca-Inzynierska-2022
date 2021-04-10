@@ -10,30 +10,27 @@
     background-position: center center;
     background-repeat: no-repeat;
     overflow-y: scroll;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .register .register-panel{
     background-color: rgba(34,34,34,0.8);
     border-radius: 1em;
 
-    padding: 3em 0;
-    margin-top: 2em;
-    margin-bottom: 2em;
+    max-height: 95%;
+    overflow-y: auto;
 }
 .register .header-row{
-    position: relative;
-    padding-top: 2em;
-}
-.register .input-row{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: black;
+    padding: 1em 0;
+    margin-bottom: 2em;
+    z-index: 2;
 }
 .register h2{
-    position: absolute;
-    left: 0;
-    width: 100%;
     text-align: center;
     margin: 0;
 
@@ -44,17 +41,19 @@
 }
 .register .exit-img{
     width: 25px;
-    position: absolute;
-    right: 10%;
     filter: invert(1);
 }
-.register .exit-img:hover{
-    filter: unset;
-}
 
+.register .input-row{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .register fieldset{
-    width: 50%;
-    margin: 1em 0;
+    width: 100%;
+    margin: 2em 0;
     border: 2px solid #ffffff;
     border-radius: 0.5em;
     padding-bottom: 0.2em;
@@ -70,20 +69,23 @@
     background-color: rgb(34,34,34);
     border-radius: 0.5em;
     border: 2px solid white;
+
+    user-select: none;
 }
 .register input{
     width: 100%;
     outline: none;
     border: none;
     border-radius: 0.2em;
-    padding: 0.2em 1em;
+    padding: 0.2em 2em;
     height: 100%;
     font-size: 1.2rem;
     font-family: 'Lora', sans-serif;
     background-color: rgba(236, 99, 99, 0);
     color: whitesmoke;
 
-    cursor: pointer;
+
+    text-align: center;
 }
 .register button{
     width: 60%;
@@ -112,18 +114,11 @@
 
     }
     .register .register-panel{
-        position: static;
-        left: unset;
-        top: unset;
-        transform: unset;
-        height: 100%;
-        margin: unset;
-
         background-color: rgba(34,34,34,0.8);
         border-radius: unset;
 
+        max-height: 100%;
         overflow-y: auto;
-        overflow-x: hidden;
     }
 
 }
