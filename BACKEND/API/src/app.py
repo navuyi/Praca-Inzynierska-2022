@@ -11,6 +11,7 @@ from os import environ
 from endpoints.test import test
 from endpoints.authentication import authentication
 from endpoints.registration import registration
+from endpoints.messages import messages
 
 # Initialize flask app
 app = Flask(__name__)
@@ -21,6 +22,7 @@ app = Flask(__name__)
 app.register_blueprint(test)
 app.register_blueprint(authentication)
 app.register_blueprint(registration)
+app.register_blueprint(messages)
 
 
 

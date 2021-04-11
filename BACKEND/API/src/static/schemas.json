@@ -21,5 +21,18 @@
             "password":{"type": "string"},
             "email":{"type": "string"}
         }
+    },
+    "NewMessage":{
+        "type": "object",
+        "required":[
+            "topic", "content", "receiver_id", "sender_id"
+        ],
+        "properties":{
+            "topic": {"type": "string"},
+            "content": {"type": "string"},
+            "receiver_id": {"type": "string"},
+            "sender_id":{"type": "string"},
+            "tour_id": {"type": "string"}
+        }
     }
 }

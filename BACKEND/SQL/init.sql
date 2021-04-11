@@ -1,6 +1,7 @@
 USE yourtour;
 DROP TABLE IF EXISTS tour_has_tags CASCADE;
 DROP TABLE IF EXISTS tour_has_places CASCADE;
+DROP TABLE IF EXISTS tour_images;
 DROP TABLE IF EXISTS tours CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS messages CASCADE;
@@ -22,27 +23,38 @@ CREATE TABLE users (
 );
 
 CREATE TABLE messages(
-    id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY ,
+    id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
+    tour_id INT DEFAULT NULL, /* This field will be filled with tour_id if message is connected with some tour*/
     sender_id INT NOT NULL,
     receiver_id INT NOT NULL,
     topic varchar(255) NOT NULL DEFAULT '[Brak tematu]',
     content varchar(1024) NOT NULL,
-    send_time DATETIME NOT NULL,
-    sender_read BOOLEAN NOT NULL DEFAULT 0, 
-    receiver_read BOOLEAN NOT NULL DEFAULT 0,
+    time DATETIME NOT NULL,
+    was_read BOOLEAN NOT NULL DEFAULT 0,
     sender_deleted BOOLEAN NOT NULL DEFAULT 0,
     receiver_deleted BOOLEAN NOT NULL DEFAULT 0
 );
 
-CREATE TABLE tours(
+CREATE TABLE tours (
     id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
+    header VARCHAR(255) NOT NULL,
     description VARCHAR(255) NOT NULL,
     guide_id INT NOT NULL,
-    
-
+    price INT NOT NULL,
+    number_of_places INT NOT NULL,
+    date DATETIME NOT NULL,
     FOREIGN KEY (guide_id) REFERENCES users(id)
 );
+
+CREATE TABLE tour_images(
+    id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
+    tour_id INT NOT NULL,
+    path VARCHAR(255) NOT NULL UNIQUE,
+    is_main BOOLEAN NOT NULL DEFAULT 0,
+
+    FOREIGN KEY (tour_id) REFERENCES tours(id)
+);
+
 
 CREATE TABLE tour_tags(
     id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,

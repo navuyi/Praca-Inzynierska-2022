@@ -56,6 +56,27 @@
             }
           }
         }
+      },
+      "/send_message":{
+        "post":{
+          "tags":["Messages"],
+          "requestBody":{
+            "description": "Sending new message, tour_id is optional",
+            "required": true,
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"schemas.json#/NewMessage"
+                }
+              }
+            }
+          },
+          "responses":{
+            "204":{
+              "description": "Message sent, nothing to return"
+            }
+          }
+        }
       }
     }
   }
