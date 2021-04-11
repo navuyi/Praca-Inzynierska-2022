@@ -8,22 +8,10 @@
         "email": "figlusrafal@gmail.com"
       }
     },
-    "tags": [
-      {
-        "name": "Authenticate",
-        "description": "Endpoint for logging in to application"
-      },
-      { 
-        "name": "Register account",
-        "description": "Endpoint for new user registration"
-      }
-    ],
     "paths": {
       "/authenticate":{
         "post":{
-          "tags":[
-              "Authenticate user"
-          ],
+          "tags":["User"],
           "requestBody":{
             "description": "Authentication credentials",
             "required": true,
@@ -41,6 +29,30 @@
             },
             "403":{
               "description": "Not allowed - wrong password OR account not yet confirmed"
+            }
+          }
+        }
+      },
+      "/register":{
+        "post":{
+          "tags":["User"],
+          "requestBody":{
+            "description": "Registration credentials",
+            "required": true,
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"schemas.json#/UserRegistration"
+                }
+              }
+            }
+          },
+          "responses":{
+            "201":{
+              "description": "Ok, new account created"
+            },
+            "409":{
+              "description": "User already exists"
             }
           }
         }
