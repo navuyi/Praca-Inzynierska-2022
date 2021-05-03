@@ -7,8 +7,7 @@ import {useState} from "react";
 import mail from '../../images/icons/mail.png';
 import person from '../../images/icons/person.png';
 import phone from '../../images/icons/phone.png';
-import {forEach} from "react-bootstrap/ElementChildren";
-import Footer from "../../components/Footer";
+
 
 
 function GuideProfile(props){
