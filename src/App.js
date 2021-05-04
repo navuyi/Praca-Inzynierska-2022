@@ -1,6 +1,6 @@
 // Dependencies
 import {Switch, Route} from 'react-router-dom';
-
+import {useSelector} from 'react-redux';
 // Pages
 import Home from "./pages/Home";
 import Informations from "./pages/Informations";
@@ -38,7 +38,10 @@ import './styles/deletedMessages.css';
 
 
 
+
 function App() {
+    const isLogged = useSelector(state=>state.authenticationReducer);
+    console.log(isLogged);
   return (
     <Switch>
         <Route exact path="/">
