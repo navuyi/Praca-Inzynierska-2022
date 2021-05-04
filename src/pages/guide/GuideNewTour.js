@@ -7,6 +7,7 @@ function GuideNewTour(){
     const [pointInput, setPointInput] = useState("");
     const [editMode, setEditMode] = useState(false);
     const [idToEdit, setIdToEdit] = useState(-1);
+    const [image, setImage] = useState("");
 
     function handlePointAdd(){
         if(editMode === false){
@@ -37,22 +38,25 @@ function GuideNewTour(){
         setEditMode(true);
         let tmpPoints = [...points];
         let inputToEdit = tmpPoints[e.target.id];
+        console.log(inputToEdit);
         setIdToEdit(e.target.id);
         setPointInput(inputToEdit);
 
 
         // Scroll back to tour plan input
         window.scroll({
-            top:    document.getElementById("plan-input-header").offsetParent.offsetTop - window.innerHeight/2,
+            top:    document.getElementById("point-input").offsetParent.offsetTop - window.innerHeight/4,
             left: 0,
             behavior: "smooth"
         });
     }
 
 
+
     return(
+
         <div className="guideNewTour">
-            <Container className={"mt-lg-5 cont"}>
+            <Container className={"mt-lg-5 mt-5 cont"}>
                 <Row lg={12}>
                     <h1> Kreator wycieczki </h1>
                 </Row>
@@ -74,56 +78,59 @@ function GuideNewTour(){
                                     <input type="number"/>
                                 </div>
                                 <div className="inputGroup">
-                                    <p> Data </p>
+                                    <p> Data rozpoczęcia </p>
                                     <input type="date"/>
                                 </div>
                                 <div className="inputGroup">
+                                    <p> Data zakończenia </p>
+                                    <input type="date"/>
+                                </div>
+                                <div className="inputGroup">
+                                    <p> Miejsce </p>
+                                    <input type="text"/>
+                                </div>
+                                <div className="inputGroup">
                                     <p> Zdjęcie główne</p>
-                                    <input type="file"/>
+                                    <input type="file" onChange={(e)=>setImage(URL.createObjectURL(e.target.files[0]))}/>
+                                    <img src={image} alt={""} style={{maxWidth: "100%"}}/>
                                 </div>
                         </Col>
                     </Col>
-                    <Col lg={8}>
-                        <Form.Group controlId="exampleForm.ControlTextarea1" className={"w-100 d-flex flex-column align-items-start"}>
+                    <Col lg={8} >
+                        <Form.Group controlId="exampleForm.ControlTextarea1" className={"w-100 d-flex flex-column align-items-lg-start align-items-center"}>
                             <h2> Opis wycieczki </h2>
                             <Form.Control as="textarea" rows={20} />
                         </Form.Group>
                     </Col>
                 </Row>
-                <Row className={"d-flex flex-column align-items-lg-center justify-content-lg-center mt-lg-5"}>
-                    <Col lg={6}>
-                        <Form.Group>
-                            <h3 id="plan-input-header"> Plan wycieczki </h3>
-                            <Form.Control as="textarea" rows={5} value={pointInput} onChange={(e)=>setPointInput(e.target.value)}/>
+
+                <h3 id="plan-input-header"> Plan wycieczki </h3>
+                <Row className={"d-flex flex-row  mt-lg-5 align-items-start"}>
+                    <Col lg={4} xs={12} className={"d-flex align-items-center justify-content-center flex-column"}>
+                        <Form.Group className={"w-100"}>
+                            <Form.Control id="point-input" as="textarea" rows={2} value={pointInput} onChange={(e)=>setPointInput(e.target.value)}/>
                         </Form.Group>
-                    </Col>
-                    <Col lg={4} className={"d-flex justify-content-center"}>
                         <Button variant={"outline-dark"}  onClick={handlePointAdd} className={"m-lg-3 m-4"}> {editMode ? <span>Edytuj</span> : <span>Dodaj</span>}</Button>
                     </Col>
-
-                </Row>
-                <Row className={"d-flex justify-content-lg-center"}>
-                    <Col lg={10} sm={12}>
-                    {
-                        points.map((item, index)=>{
-                            return(
-                                <div key={index} className="point-container" id={index}>
-                                    <Row className={"d-flex align-items-lg-center justify-content-lg-between justify-content-center"}>
-                                        <Col lg={1} sm={12} className="point-number d-flex justify-content-center">
-                                            {index+1}
-                                        </Col>
-                                        <Col lg={8}  className="point-content justify-content-sm-center">
-                                            {item}
-                                        </Col>
-                                        <Col xs={6} lg={3}  className={"d-flex justify-content-between justify-content-lg-between mt-3"}>
-                                            <Button variant={"dark"} as={"button"} id={index} onClick={handlePointDelete}> Usuń </Button>
-                                            <Button variant={"dark"} as={"button"} id={index} onClick={handlePointEdit}> Edytuj </Button>
-                                        </Col>
-                                    </Row>
-                                </div>
-                            )
-                        })
-                    }
+                    <Col lg={8} className={"d-flex justify-content-center"}>
+                        <div className={"table-container"}>
+                            <table>
+                                <tbody>
+                                {
+                                    points.map((point, index)=>{
+                                        return(
+                                            <tr tabIndex={0} key={index}>
+                                                <td width="10%" style={{textAlign: "center"}}> {index+1} </td>
+                                                <td > {point} </td>
+                                                <td width="1%" ><Button className={"td-b"} variant={"dark"} onClick={handlePointEdit} id={index}> Edytuj </Button></td>
+                                                <td width="1%" ><Button className={"td-b"} variant={"dark"} onClick={handlePointDelete} id={index}> Usuń </Button></td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                                </tbody>
+                            </table>
+                        </div>
                     </Col>
                 </Row>
             </Container>

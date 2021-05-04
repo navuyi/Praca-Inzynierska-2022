@@ -23,7 +23,7 @@ function Guide(){
             <Container fluid style={{marginTop: "0em"}}>
                 <Row>
                     <Col lg={2} sm={12} style={{padding: "0"}}>
-                        <SideNavbar title="Panel użytkownika">
+                        <SideNavbar title="Panel przewodnika">
                             <SideNavbarLink
                                 name="Nowa wycieczka"
                                 path="/account/guide/new-tour"

@@ -39,10 +39,11 @@ CREATE TABLE tours (
     id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
     header VARCHAR(255) NOT NULL,
     description VARCHAR(255) NOT NULL,
-    guide_id INT NOT NULL,
+    guide_id INT NOT NULL, /* indicates guide of the tour */
     price INT NOT NULL,
-    number_of_places INT NOT NULL,
-    date DATETIME NOT NULL,
+    person_limit INT NOT NULL,
+    start_date DATETIME NOT NULL,
+    end_date DATETIME NOT NULL,
     FOREIGN KEY (guide_id) REFERENCES users(id)
 );
 

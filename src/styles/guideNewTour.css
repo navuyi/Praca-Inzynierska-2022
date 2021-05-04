@@ -1,9 +1,9 @@
-
 .guideNewTour .cont{
-    background-color: rgb(212, 212, 212);
-    border-radius: 2em;
-
+    border-radius: 0.5em;
+    background-color: #ffffff;
     margin-bottom: 10em;
+
+    box-shadow: 0px 0px 15px 3px black;
 }
 .guideNewTour h1{
     font-size: 2.5rem;
@@ -51,32 +51,42 @@
     width: 100%;
 }
 
+.guideNewTour #plan-input-header{
+    margin: 0;
+    margin-top: 3rem;
+    text-align: center;
+}
+.guideNewTour .table-container{
+    width: 100%;
+    overflow-y: auto;
+    border: 1px solid #dddddd;
+}
+.guideNewTour table{
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
 
-.guideNewTour .point-container{
-    margin: 2em 0;
+    overflow-y: scroll;
+}
+.guideNewTour tr{
+    cursor: pointer;
+}
+.guideNewTour tr:hover{
+    background-color: dodgerblue;
+    color: whitesmoke;
+}
+.guideNewTour tr:hover .td-b{
+    visibility: visible;
+}
+.guideNewTour .td-b{
+    visibility: hidden;
+}
 
-    background-color: #b9b9b9;
-    padding: 1em 1em;
-    border-radius: 1em;
-}
-.guideNewTour .point-container .point-number{
-    font-size: 2rem;
-    font-family: "Roboto", sans-serif;
-    font-weight: 700;
-    color: #187bcd;
-}
-.guideNewTour .point-container .point-content{
-    font-family: 'Lora', sans-serif;
-    font-size: 0.9rem;
-}
-.guideNewTour .point-container button{
 
-}
 
 
 @media (max-width: 900px) {
     .guideNewTour .cont{
-        background-color: #cccccc;
+        background-color: #ffffff;
         border-radius: unset;
     }
 
@@ -120,5 +130,18 @@
     }
     .guideNewTour .inputGroup input[type=file]{
         width: 100%;
+    }
+    .guideNewTour tr{
+        cursor: pointer;
+    }
+    .guideNewTour tr:hover{
+        background-color: unset;
+        color: unset;
+    }
+    .guideNewTour tr:hover .td-b{
+        visibility: unset;
+    }
+    .guideNewTour .td-b{
+        visibility: unset;
     }
 }

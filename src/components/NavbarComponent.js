@@ -12,7 +12,7 @@ function NavbarComponent(){
                 <Nav.Link as={Link} to="/informations"><span className="white">Informacje</span></Nav.Link>
                 <Nav.Link as={Link} to="/tours"><span className="white">Wycieczki</span></Nav.Link>
                 <NavDropdown id="collasible-nav-dropdown" title="Moje konto">
-                    <NavDropdown.Item as={Link} to="/account/guide"><span className="black">Przewodnik</span></NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/account/guide/new-tour"><span className="black">Przewodnik</span></NavDropdown.Item>
                     <NavDropdown.Item as={Link} to="/account/user"><span className="black">Użytkownik</span></NavDropdown.Item>
                     <NavDropdown.Item as={Link} to="/account/messages"><span className="black">Wiadomości</span></NavDropdown.Item>
                 </NavDropdown>

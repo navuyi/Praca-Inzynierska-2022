@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+./SQL_SCRIPTS/SIMC_Urzedowy_2021-04-07.csv
+./SQL_SCRIPTS/SIMC_Urzedowy_2021-04-07.zip
