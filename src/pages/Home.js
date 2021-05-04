@@ -27,7 +27,7 @@ function Home(){
         <div className="home">
             <NavbarComponent />
             <HomeWelcomeView />
-            <Container fluid>
+            <Container fluid className={"p-0"}>
                 <Row className={"justify-content-center"}>
                     <h1 className="recent-tours-header"> Najnowsze Oferty </h1>
                 </Row>

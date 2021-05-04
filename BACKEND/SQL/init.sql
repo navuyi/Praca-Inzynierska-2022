@@ -37,13 +37,16 @@ CREATE TABLE messages(
 
 CREATE TABLE tours (
     id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
+    is_active BOOLEAN NOT NULL DEFAULT 1,
     header VARCHAR(255) NOT NULL,
     description VARCHAR(255) NOT NULL,
+    image_path VARCHAR(255) NOT NULL,
     guide_id INT NOT NULL, /* indicates guide of the tour */
     price INT NOT NULL,
     person_limit INT NOT NULL,
     start_date DATETIME NOT NULL,
     end_date DATETIME NOT NULL,
+   
     FOREIGN KEY (guide_id) REFERENCES users(id)
 );
 

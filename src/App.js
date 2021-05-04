@@ -30,6 +30,10 @@ import './styles/informations.css';
 import './styles/tours.css';
 import './styles/login.css';
 import './styles/register.css';
+import './styles/newMessage.css';
+import './styles/oldMessages.css';
+import './styles/sentMessages.css';
+import './styles/deletedMessages.css';
 
 
 

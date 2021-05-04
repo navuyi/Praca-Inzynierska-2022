@@ -54,7 +54,6 @@ function GuideNewTour(){
 
 
     return(
-
         <div className="guideNewTour">
             <Container className={"mt-lg-5 mt-5 cont"}>
                 <Row lg={12}>

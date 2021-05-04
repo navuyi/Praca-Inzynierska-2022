@@ -14,7 +14,7 @@ function NavbarComponent(){
                 <NavDropdown id="collasible-nav-dropdown" title="Moje konto">
                     <NavDropdown.Item as={Link} to="/account/guide/new-tour"><span className="black">Przewodnik</span></NavDropdown.Item>
                     <NavDropdown.Item as={Link} to="/account/user"><span className="black">Użytkownik</span></NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/account/messages"><span className="black">Wiadomości</span></NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/account/messages/new_message"><span className="black">Wiadomości</span></NavDropdown.Item>
                 </NavDropdown>
             </Navbar.Collapse>
             <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">

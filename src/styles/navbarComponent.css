@@ -5,6 +5,7 @@
     align-self: center;
     display: flex;
     flex-direction: row;
+    width: 100%;
 }
 .navbarComponent a{
     outline: none;
