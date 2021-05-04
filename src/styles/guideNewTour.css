@@ -27,22 +27,7 @@
     padding: 0;
     font-size: 1.2rem;
 }
-.guideNewTour .inputGroup input{
-    border-radius: 0.5em;
-    border:none;
-    outline: none;
 
-    font-size: 1.1rem;
-    padding: 0.2em 0.5em;
-
-    width: 60%;
-    background-color: whitesmoke;
-    border: 2px solid rgba(1,1,1,0);
-}
-.guideNewTour .inputGroup input:focus{
-    background-color: whitesmoke;
-    border-color: #187bcd;
-}
 .guideNewTour .inputGroup input[type=number]{
     -webkit-appearance: textfield;
     -moz-appearance: textfield;

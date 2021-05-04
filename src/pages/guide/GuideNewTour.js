@@ -1,6 +1,7 @@
 
-import {Container, Row, Col, Form, Button} from "react-bootstrap";
+import {Container, Row, Col, Form, Button, FormControl} from "react-bootstrap";
 import {useState, useEffect} from 'react';
+import Select from 'react-select';
 
 function GuideNewTour(){
     const [points, setPoints] = useState([]);
@@ -64,29 +65,47 @@ function GuideNewTour(){
                         <Col>
                             <Form.Group controlId="exampleForm.ControlTextarea1" className={"w-100 d-flex flex-column align-items-start"}>
                                 <h2> Nagłówek wycieczki </h2>
-                                <Form.Control as="textarea" rows={2} />
+                                <FormControl
+                                    as="textarea"
+                                    rows={1}
+                                    placeholder="Nagłówek wycieczki"
+                                />
                             </Form.Group>
                         </Col>
                         <Col lg={12}>
                                 <div className="inputGroup">
                                     <p> Ilość miejsc</p>
-                                    <input type="text"/>
+                                    <FormControl
+                                        placeholder="Ilość miejsc"
+                                    />
                                 </div>
                                 <div className="inputGroup">
                                     <p> Cena</p>
-                                    <input type="number"/>
+                                    <FormControl
+                                        placeholder="Cena wycieczki na osobę"
+                                        type="number"
+                                    />
                                 </div>
                                 <div className="inputGroup">
                                     <p> Data rozpoczęcia </p>
-                                    <input type="date"/>
+                                    <FormControl
+                                        placeholder="Cena wycieczki na osobę"
+                                        type="date"
+                                    />
                                 </div>
                                 <div className="inputGroup">
                                     <p> Data zakończenia </p>
-                                    <input type="date"/>
+                                    <FormControl
+                                        placeholder="Cena wycieczki na osobę"
+                                        type="date"
+                                    />
                                 </div>
                                 <div className="inputGroup">
                                     <p> Miejsce </p>
-                                    <input type="text"/>
+                                    {/* #TODO Asynchronus select for fetching places from database*/}
+                                    <Select
+                                        placeholder="Miejsca, których dotyczy wycieczka"
+                                    />
                                 </div>
                                 <div className="inputGroup">
                                     <p> Zdjęcie główne</p>
@@ -121,8 +140,8 @@ function GuideNewTour(){
                                             <tr tabIndex={0} key={index}>
                                                 <td width="10%" style={{textAlign: "center"}}> {index+1} </td>
                                                 <td > {point} </td>
-                                                <td width="1%" ><Button className={"td-b"} variant={"dark"} onClick={handlePointEdit} id={index}> Edytuj </Button></td>
-                                                <td width="1%" ><Button className={"td-b"} variant={"dark"} onClick={handlePointDelete} id={index}> Usuń </Button></td>
+                                                <td width="5%" ><Button className={"td-b"} variant={"outline-light"}  onClick={handlePointEdit} id={index}> Edytuj </Button></td>
+                                                <td width="5%" ><Button className={"td-b"} variant={"outline-light"} onClick={handlePointDelete} id={index}> Usuń </Button></td>
                                             </tr>
                                         )
                                     })
