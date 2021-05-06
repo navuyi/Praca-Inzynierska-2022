@@ -1,12 +1,15 @@
 import {Container, Row, Col} from "react-bootstrap";
-import close from "../images/icons/close.png";
+import {Form, Button} from "react-bootstrap";
 
-import {useHistory} from 'react-router-dom';
+
+
 import {useState} from "react";
+import NavbarComponent from "../components/NavbarComponent";
+import Footer from "../components/Footer";
 
 
 function Register(){
-    const history = useHistory();
+
     const [credentials, setCredentials] = useState({
         f_name: "",
         l_name: "",
@@ -23,96 +26,46 @@ function Register(){
 
     return(
         <div className="register">
-            <Container className={"register-panel col-lg-4 col-md-8 col-sm-12 "}>
-                <Row className={"d-flex justify-content-between align-items-center header-row"}>
-                    <Col lg={2} xs={2}></Col>
-                    <Col lg={8} xs={8}>
-                        <h2>Rejestracja</h2>
-                    </Col>
-                    <Col lg={2} xs={2}>
-                        <img src={close} alt="" className={"exit-img"} onClick={()=>history.goBack()}/>
-                    </Col>
-                </Row>
-                <Row className={"d-flex flex-row align-items-center justify-content-around"}>
-                    <Col lg={5} md={10} sm={10}>
-                        <fieldset>
-                            <legend> Imię </legend>
-                            <input
-                                type="text"
-                                onChange={handleChange}
-                                id="f_name"
-                                value={credentials.f_name}
-                            />
-                        </fieldset>
-                    </Col>
-                    <Col lg={5} md={10} sm={10}>
-                        <fieldset>
-                            <legend> Nazwisko </legend>
-                            <input
-                                type="text"
-                                onChange={handleChange}
-                                id="l_name"
-                                value={credentials.l_name}
-                            />
-                        </fieldset>
-                    </Col>
-                </Row>
-                <Row className={"d-flex flex-row align-items-center justify-content-around"}>
-                    <Col lg={11} md={10} sm={10}>
-                        <fieldset>
-                            <legend> Numer telefonu </legend>
-                            <input
-                                type="text"
-                                onChange={handleChange}
-                                id="phone_number"
-                                value={credentials.phone_number}
-                            />
-                        </fieldset>
-                    </Col>
-                </Row>
-                <Row className={"d-flex flex-row align-items-center justify-content-around"}>
-                    <Col lg={11} md={10} sm={10}>
-                        <fieldset>
-                            <legend> Email </legend>
-                            <input
-                                type="email"
-                                onChange={handleChange}
-                                id="email"
-                                value={credentials.email}
-                            />
-                        </fieldset>
-                    </Col>
-                </Row>
-                <Row className={"d-flex flex-row align-items-center justify-content-around"}>
-                    <Col lg={11} md={10} sm={10}>
-                        <fieldset>
-                            <legend> Hasło </legend>
-                            <input
-                                type="password"
-                                onChange={handleChange}
-                                id="password"
-                                value={credentials.password}
-                            />
-                        </fieldset>
-                    </Col>
-                </Row>
-                <Row className={"d-flex flex-row align-items-center justify-content-around"}>
-                    <Col lg={11} md={10} sm={10}>
-                        <fieldset>
-                            <legend> Powtórz hasło </legend>
-                            <input
-                                type="password"
-                                onChange={handleChange}
-                                id="password_repeat"
-                                value={credentials.password_repeat}
-                            />
-                        </fieldset>
-                    </Col>
-                </Row>
-                <Row className={"d-flex flex-column align-items-center m-5"}>
-                    <button> Zarejestruj </button>
-                </Row>
-            </Container>
+            <NavbarComponent />
+                <Container className={"cont col-xl-4 col-lg-6 d-flex flex-column align-items-center"}>
+                    <Row className={"d-flex justify-content-center"}>
+                        <h1>Formularz rejestracyjny</h1>
+                    </Row>
+                    <Row className={"d-flex flex-column col-xl-6 col-10 col-lg-10 col-md-6"}>
+                        <Form.Label> Imię </Form.Label>
+                        <Form.Control
+                            type="text"
+                        />
+                    </Row>
+                    <Row className={"d-flex flex-column col-xl-6 col-10 col-lg-10 col-md-6"}>
+                        <Form.Label> Nazwisko </Form.Label>
+                        <Form.Control
+                            type="text"
+                        />
+                    </Row>
+                    <Row className={"d-flex flex-column col-xl-6 col-10 col-lg-10 col-md-6"}>
+                        <Form.Label> Adres email </Form.Label>
+                        <Form.Control
+                            type="email"
+                        />
+                    </Row>
+                    <Row className={"d-flex flex-column col-xl-6 col-10 col-lg-10 col-md-6"}>
+                        <Form.Label> Hasło </Form.Label>
+                        <Form.Control
+                            type="password"
+                        />
+                    </Row>
+                    <Row className={"d-flex flex-column col-xl-6 col-10 col-lg-10 col-md-6"}>
+                        <Form.Label> Powtórz Hasło </Form.Label>
+                        <Form.Control
+                            type="password"
+                        />
+                    </Row>
+                    <Row className={"d-flex justify-content-center col-lg-6 col-10 col-md-6"}>
+                        <Button size={"lg"} className={"mt-5 w-100"} variant={"outline-dark"}> Zarejestruj </Button>
+                    </Row>
+                </Container>
+            <Footer />
         </div>
     )
 }
