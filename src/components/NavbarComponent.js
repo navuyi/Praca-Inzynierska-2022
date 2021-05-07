@@ -1,19 +1,11 @@
 
-import {Navbar, Nav, NavDropdown, Container, Col, Row, Collapse, NavItem} from 'react-bootstrap';
+import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import {useSelector} from "react-redux";
 
 function NavbarComponent(){
-    const isLogged = useSelector(state => state.authenticationReducer);
-    const myAccountDropdown =
-        (
-            <NavDropdown id="collasible-nav-dropdown" title="Moje konto">
-                <NavDropdown.Item as={Link} to="/account/guide/new-tour"><span className="black">Przewodnik</span></NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/account/user"><span className="black">Użytkownik</span></NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/account/messages/new_message"><span className="black">Wiadomości</span></NavDropdown.Item>
-            </NavDropdown>
-        )
-
+    const isLogged = useSelector(state => state.isAuthenticated);
+    const isGuide = useSelector(state => state.isGuide);
 
 
     return(
@@ -24,7 +16,13 @@ function NavbarComponent(){
                 <Nav.Link as={Link} to="/informations"><span className="white">Informacje</span></Nav.Link>
                 <Nav.Link as={Link} to="/tours"><span className="white">Wycieczki</span></Nav.Link>
                 {
-                    isLogged ? myAccountDropdown : null
+                    isLogged ?
+                    <NavDropdown id="collasible-nav-dropdown" title="Moje konto">
+                        {isGuide ? <NavDropdown.Item as={Link} to="/account/guide/new-tour"><span className="black">Przewodnik</span></NavDropdown.Item> : null}
+                        <NavDropdown.Item as={Link} to="/account/user"><span className="black">Użytkownik</span></NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/account/messages/new_message"><span className="black">Wiadomości</span></NavDropdown.Item>
+                    </NavDropdown>
+                    : null
                 }
             </Navbar.Collapse>
             <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">

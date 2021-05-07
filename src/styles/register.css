@@ -16,7 +16,7 @@
 .register h1{
     margin: 0 0;
     margin-bottom: 1em;
-    font-family: 'Lora', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     color: rgb(50,50,50);
 }
 @media (max-width: 900px) {

@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from .db_connection import open_conn, close_conn
 from werkzeug.security import generate_password_hash, check_password_hash
 
+
 registration = Blueprint("registration", __name__)
 
 

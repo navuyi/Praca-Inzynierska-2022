@@ -8,3 +8,14 @@ export const logout = ()=>{
         type: "LOGOUT"
     }
 }
+
+export const set_as_guide = ()=>{
+    return{
+        type: "SET_AS_GUIDE"
+    }
+}
+export const set_as_user = ()=>{
+    return{
+        type: "SET_AS_USER"
+    }
+}
