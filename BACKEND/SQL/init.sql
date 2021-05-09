@@ -2,6 +2,7 @@ USE yourtour;
 DROP TABLE IF EXISTS tour_has_tags CASCADE;
 DROP TABLE IF EXISTS tour_has_places CASCADE;
 DROP TABLE IF EXISTS tour_images;
+dROP TABLE IF EXISTS tour_plan_points;
 DROP TABLE IF EXISTS tours CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS messages CASCADE;
@@ -39,8 +40,8 @@ CREATE TABLE tours (
     id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
     is_active BOOLEAN NOT NULL DEFAULT 1,
     header VARCHAR(255) NOT NULL,
-    description VARCHAR(255) NOT NULL,
-    image_path VARCHAR(255) NOT NULL,
+    description VARCHAR(1024) NOT NULL,
+    main_image_path VARCHAR(255) NOT NULL,
     guide_id INT NOT NULL, /* indicates guide of the tour */
     price INT NOT NULL,
     person_limit INT NOT NULL,
@@ -55,6 +56,14 @@ CREATE TABLE tour_images(
     tour_id INT NOT NULL,
     path VARCHAR(255) NOT NULL UNIQUE,
     is_main BOOLEAN NOT NULL DEFAULT 0,
+
+    FOREIGN KEY (tour_id) REFERENCES tours(id)
+);
+CREATE TABLE tour_plan_points(
+    id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
+    tour_id INT NOT NULL,
+    number INT NOT NULL,
+    description VARCHAR(1024),
 
     FOREIGN KEY (tour_id) REFERENCES tours(id)
 );
@@ -87,4 +96,13 @@ CREATE TABLE tour_has_places(
     FOREIGN KEY (place_id) REFERENCES tour_places(id)
 );
 
+
+
+
+
+/* Four accounts for testingpurposes */
+INSERT INTO users (f_name, l_name, email, phone_number, password) VALUES ("Andrew", "Golara", "andrewg@gmail.com", "568948473", "pbkdf2:sha256:150000$XLs9jVnflzGyNCyQ$36858e2c369e1379bceffc9c5ca1ec6eda809081f930de744767368b0b47ffae");
+INSERT INTO users (f_name, l_name, email, phone_number, password) VALUES ("Thomas", "Booba", "thomb@gmail.com", "5685648473", "pbkdf2:sha256:150000$XLs9jVnflzGyNCyQ$36858e2c369e1379bceffc9c5ca1ec6eda809081f930de744767368b0b47ffae");
+INSERT INTO users (f_name, l_name, email, phone_number, password) VALUES ("Lorence", "Lawg", "awrill@gmail.com", "128948473", "pbkdf2:sha256:150000$XLs9jVnflzGyNCyQ$36858e2c369e1379bceffc9c5ca1ec6eda809081f930de744767368b0b47ffae");
+INSERT INTO users (f_name, l_name, email, phone_number, password) VALUES ("Penny", "Gloria", "pennyg@gmail.com", "538948473", "pbkdf2:sha256:150000$XLs9jVnflzGyNCyQ$36858e2c369e1379bceffc9c5ca1ec6eda809081f930de744767368b0b47ffae");
 

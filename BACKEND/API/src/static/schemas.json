@@ -34,5 +34,14 @@
             "sender_id":{"type": "string"},
             "tour_id": {"type": "string"}
         }
+    },
+    "TourPlacesSearch":{
+        "type": "object",
+        "required":[
+            "place_input"
+        ],
+        "properties":{
+            "place_input": {"type": "string"}
+        }
     }
 }

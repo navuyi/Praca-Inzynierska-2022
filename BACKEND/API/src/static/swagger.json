@@ -77,6 +77,22 @@
             }
           }
         }
+      },
+      "/get_places_by_input":{
+        "post":{
+          "tags": ["Tour"],
+          "requestBody":{
+            "description": "Send search input for available places",
+            "required": "True",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"schemas.json#/TourPlacesSearch"
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
