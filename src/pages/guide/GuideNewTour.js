@@ -7,7 +7,6 @@ import GuideNewTourPlan from "../../components/GuideNewTourPlan";
 import GuideNewTourDescription from "../../components/GuideNewTourDescription";
 
 function GuideNewTour(){
-    const [points, setPoints] = useState([]);
     const [image, setImage] = useState("");
     const empty_tour_data = {
         header: "",
@@ -17,9 +16,9 @@ function GuideNewTour(){
         start_date: "",
         end_date: "",
         tour_plan: [],
+        tour_places: [],
         main_image: Object
     }
-    //TODO CREATE FORM WRITING FUNCTIONALITIES ONCHANGE UPDATE STATE
     const [tourData, setTourData] = useState(empty_tour_data)
 
 
@@ -35,11 +34,17 @@ function GuideNewTour(){
         const update = {...tourData, [e.target.id]: e.target.value};
         setTourData(update);
 
-        console.log(tourData);
+
     }
     function handleSubmit(e){
         e.preventDefault();
     }
+
+    useEffect(()=>{
+        console.log(tourData);
+    },[tourData])
+
+
 
     return(
         <div className="guideNewTour">
@@ -55,6 +60,7 @@ function GuideNewTour(){
                                 tourData={tourData}
                                 setImage={setImage}
                                 image={image}
+                                setTourData={setTourData}
                             />
                         </Col>
                         <Col lg={8} >
@@ -67,11 +73,10 @@ function GuideNewTour(){
                     <h3 id="plan-input-header"> Plan wycieczki </h3>
                     <Row className={"d-flex flex-row  mt-lg-5 align-items-start"}>
                        <GuideNewTourPlan
-                           points={points}
-                           setPoints={setPoints}
+                          tourData = {tourData}
+                          setTourData = {setTourData}
                        />
                     </Row>
-
                     <Row className={"mt-5"}>
                         <Button className={"w-100 m-3"}> Stwórz </Button>
                     </Row>

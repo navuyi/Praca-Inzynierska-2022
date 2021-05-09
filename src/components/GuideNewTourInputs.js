@@ -59,7 +59,8 @@ function GuideNewTourInputs(props){
             <div className="inputGroup">
                 <p> Miejsce </p>
                 <TourPlacesSelect
-
+                    setTourData={props.setTourData}
+                    tourData={props.tourData}
                 />
             </div>
             <div className="inputGroup">

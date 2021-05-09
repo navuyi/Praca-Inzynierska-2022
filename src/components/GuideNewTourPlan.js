@@ -5,40 +5,41 @@ import React from "react";
 function GuideNewTourPlan(props){
     const [editMode, setEditMode] = useState(false);
     const [idToEdit, setIdToEdit] = useState(-1);
-    const [pointInput, setPointInput] = useState("");
+    const [planInput, setPlanInput] = useState("");
+
 
     function handlePointAdd(){
         if(editMode === false){
             // Add new point
-            props.setPoints(prevPoints => [...prevPoints, pointInput]);
-            setPointInput("");
+            const tmp_plan = [...props.tourData.tour_plan];
+            tmp_plan.push(planInput);
+            props.setTourData({...props.tourData, ["tour_plan"]: tmp_plan});
+            setPlanInput("");
         }
         else if(editMode === true){
             // Modify selected point
-            let tmpPoints = [...props.points];
-            tmpPoints[idToEdit] = pointInput;
+            const tmp_plan = [...props.tourData.tour_plan];
+            tmp_plan[idToEdit] = planInput;
 
-            props.setPoints(tmpPoints);
+            props.setTourData({...props.tourData, ["tour_plan"]: tmp_plan});
             setEditMode(false);
-            setPointInput("");
+            setPlanInput("");
         }
     }
     function handlePointDelete(e){
-        let tmpPoints = [...props.points];
-        let index = e.target.id;
-        tmpPoints.splice(index, 1);
-        props.setPoints(tmpPoints);
-
-        console.log(tmpPoints);
+        const tmp_plan = [...props.tourData.tour_plan];
+        const index = e.target.id;
+        tmp_plan.splice(index, 1);
+        props.setTourData({...props.tourData, ["tour_plan"]: tmp_plan});
     }
     function handlePointEdit(e){
         // Enable edit mode
         setEditMode(true);
-        let tmpPoints = [...props.points];
-        let inputToEdit = tmpPoints[e.target.id];
-        console.log(inputToEdit);
+        const tmp_plan = [...props.tourData.tour_plan];
+        let inputToEdit = tmp_plan[e.target.id];
+
         setIdToEdit(e.target.id);
-        setPointInput(inputToEdit);
+        setPlanInput(inputToEdit);
 
         // Scroll back to tour plan input
         window.scroll({
@@ -51,7 +52,7 @@ function GuideNewTourPlan(props){
         <React.Fragment>
             <Col lg={4} xs={12} className={"d-flex align-items-center justify-content-center flex-column"}>
                 <Form.Group className={"w-100"}>
-                    <Form.Control id="point-input" as="textarea" rows={2} value={pointInput} onChange={(e)=>setPointInput(e.target.value)}/>
+                    <Form.Control id="point-input" as="textarea" rows={2} value={planInput} onChange={(e)=>setPlanInput(e.target.value)}/>
                 </Form.Group>
                 <Button variant={"outline-dark"}  onClick={handlePointAdd} className={"m-lg-3 m-4"}> {editMode ? <span>Edytuj</span> : <span>Dodaj</span>}</Button>
             </Col>
@@ -60,7 +61,7 @@ function GuideNewTourPlan(props){
                     <table>
                         <tbody>
                         {
-                            props.points.map((point, index)=>{
+                            props.tourData.tour_plan.map((point, index)=>{
                                 return(
                                     <tr tabIndex={0} key={index}>
                                         <td width="10%" style={{textAlign: "center"}}> {index+1} </td>

@@ -12,7 +12,7 @@ const mapToValueLabel = (data) => {
     }))
 }
 
-const fetchPlaces = (inputValue, callback) => {
+const fetchTourPlaces = (inputValue, callback) => {
     const data = {
         "place_input": inputValue
     }
@@ -26,16 +26,22 @@ const fetchPlaces = (inputValue, callback) => {
         })
 }
 
-const handleChange = (selectedOptions) => {
-    console.log(selectedOptions);
-}
 
-function TourPlacesSelect(){
+
+function TourPlacesSelect(props){
+    const handleChange = (selectedOptions) => {
+        const tmp_places = [];
+        selectedOptions.map((item)=>{
+            tmp_places.push(item.value);
+        })
+        const update = {...props.tourData, ["tour_places"]: tmp_places}
+        props.setTourData(update);
+    }
     return(
         <AsyncSelect
             placeholder="Miejsca, których dotyczy wycieczka"
             isMulti
-            loadOptions={fetchPlaces}
+            loadOptions={fetchTourPlaces}
             onChange = {handleChange}
         />
     )
