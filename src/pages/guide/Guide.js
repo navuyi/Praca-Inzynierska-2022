@@ -10,6 +10,7 @@ import GuideNewTour from "./GuideNewTour";
 import GuideOffers from "./GuideOffers";
 import GuideProfile from "./GuideProfile";
 
+
 // Dependencies
 import {Container, Row, Col} from "react-bootstrap";
 import {Switch, Route} from 'react-router-dom';

@@ -40,8 +40,7 @@ import './styles/deletedMessages.css';
 
 
 function App() {
-    const isLogged = useSelector(state=>state.authenticationReducer);
-    console.log(isLogged);
+
   return (
     <Switch>
         <Route exact path="/">
