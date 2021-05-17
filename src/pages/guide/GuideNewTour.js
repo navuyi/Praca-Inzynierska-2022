@@ -1,14 +1,18 @@
-
 import {Container, Row, Col, Form, Button, FormControl} from "react-bootstrap";
 import {useState, useEffect} from 'react';
-import Select from 'react-select';
+import FormData from 'form-data';
+
 import GuideNewTourInputs from "../../components/GuideNewTourInputs";
 import GuideNewTourPlan from "../../components/GuideNewTourPlan";
 import GuideNewTourDescription from "../../components/GuideNewTourDescription";
 
+import {create_tour} from "../../API_CALLS/create_tour";
+
+const formData = new FormData();
 function GuideNewTour(){
-    const [image, setImage] = useState("");
+    const [mainUrl, setMainUrl] = useState("");
     const empty_tour_data = {
+        guide_id: 303,
         header: "",
         description: "",
         person_limit: "",
@@ -16,11 +20,9 @@ function GuideNewTour(){
         start_date: "",
         end_date: "",
         tour_plan: [],
-        tour_places: [],
-        main_image: Object
+        tour_places: []
     }
     const [tourData, setTourData] = useState(empty_tour_data)
-
 
 
     function handleChange(e){
@@ -33,16 +35,27 @@ function GuideNewTour(){
 
         const update = {...tourData, [e.target.id]: e.target.value};
         setTourData(update);
-
-
     }
+
     function handleSubmit(e){
         e.preventDefault();
+
+        // Add tourData to formData object
+        formData.set('tour_data', JSON.stringify(tourData));
+
+        create_tour(formData)
+            .then(res=>{
+                console.log(res);
+            })
+            .catch(err=>{
+                console.log(err);
+            })
     }
 
     useEffect(()=>{
         console.log(tourData);
     },[tourData])
+
 
 
 
@@ -58,9 +71,10 @@ function GuideNewTour(){
                             <GuideNewTourInputs
                                 handleChange={handleChange}
                                 tourData={tourData}
-                                setImage={setImage}
-                                image={image}
                                 setTourData={setTourData}
+                                mainUrl={mainUrl}
+                                setMainUrl={setMainUrl}
+                                formData={formData}
                             />
                         </Col>
                         <Col lg={8} >
@@ -78,7 +92,7 @@ function GuideNewTour(){
                        />
                     </Row>
                     <Row className={"mt-5"}>
-                        <Button className={"w-100 m-3"}> Stwórz </Button>
+                        <Button className={"w-100 m-3"} type="submit"> Stwórz </Button>
                     </Row>
                 </Form>
             </Container>

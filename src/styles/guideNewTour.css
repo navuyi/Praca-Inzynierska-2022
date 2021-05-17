@@ -56,6 +56,7 @@
 .guideNewTour tr{
     cursor: pointer;
 }
+
 .guideNewTour tr:hover{
     background-color: dodgerblue;
     color: whitesmoke;

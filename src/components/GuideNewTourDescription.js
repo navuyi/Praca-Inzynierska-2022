@@ -16,6 +16,7 @@ function GuideNewTourDescription(props){
                     onChange={props.handleChange}
                     id="description"
                     value={props.tourData.description}
+                    required
                 />
             </Form.Group>
         </Fragment>

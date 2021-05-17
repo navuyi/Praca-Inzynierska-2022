@@ -1,8 +1,20 @@
-import {Col, Row, Form, FormControl} from "react-bootstrap";
+import {Row, FormControl} from "react-bootstrap";
 import TourPlacesSelect from "./TourPlacesSelect";
 
 
 function GuideNewTourInputs(props){
+
+    const handleMainImageChange = (e) => {
+        // Set image to display
+        props.setMainUrl(URL.createObjectURL(e.target.files[0]));
+
+        // Add image to FormData
+        props.formData.set('main_image', e.target.files[0], e.target.files[0].name);
+        for (var value of props.formData.entries()) {
+            console.log(value);
+        }
+    }
+
     return(
         <Row className={"d-flex flex-column ml-3 mr-3"}>
             <div className="inputGroup">
@@ -14,6 +26,7 @@ function GuideNewTourInputs(props){
                     rows={1}
                     placeholder="Nagłówek wycieczki"
                     value={props.tourData.header}
+                    required
                 />
             </div>
             <div className="inputGroup">
@@ -24,6 +37,7 @@ function GuideNewTourInputs(props){
                     onChange={props.handleChange}
                     placeholder="Ilość miejsc"
                     value={props.tourData.person_limit}
+                    required
                 />
             </div>
             <div className="inputGroup">
@@ -34,6 +48,7 @@ function GuideNewTourInputs(props){
                     placeholder="Cena wycieczki na osobę"
                     type="text"
                     value={props.tourData.price}
+                    required
                 />
             </div>
             <div className="inputGroup">
@@ -44,6 +59,7 @@ function GuideNewTourInputs(props){
                     placeholder="Cena wycieczki na osobę"
                     type="date"
                     value={props.tourData.start_date}
+                    required
                 />
             </div>
             <div className="inputGroup">
@@ -54,6 +70,7 @@ function GuideNewTourInputs(props){
                     placeholder="Cena wycieczki na osobę"
                     type="date"
                     value={props.tourData.end_date}
+                    required
                 />
             </div>
             <div className="inputGroup">
@@ -61,12 +78,17 @@ function GuideNewTourInputs(props){
                 <TourPlacesSelect
                     setTourData={props.setTourData}
                     tourData={props.tourData}
+                    required
                 />
             </div>
             <div className="inputGroup">
                 <p> Zdjęcie główne</p>
-                <input type="file" onChange={(e)=>props.setImage(URL.createObjectURL(e.target.files[0]))}/>
-                <img src={props.image} alt={""} style={{maxWidth: "100%"}}/>
+                <input
+                    type="file"
+                    onChange={handleMainImageChange}
+                    required
+                />
+                <img src={props.mainUrl} alt={""} style={{maxWidth: "100%"}}/>
             </div>
         </Row>
     )

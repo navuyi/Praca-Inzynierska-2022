@@ -7,7 +7,6 @@ registration = Blueprint("registration", __name__)
 
 
 @registration.route("/register", methods=["POST"])
-
 def register_user():
     # Get registration data from request
     f_name = request.json.get("f_name")

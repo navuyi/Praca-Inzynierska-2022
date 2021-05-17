@@ -14,6 +14,7 @@ from endpoints.authentication import authentication
 from endpoints.registration import registration
 from endpoints.messages import messages
 from endpoints.get_places import get_places
+from endpoints.create_tour import create_tour
 
 # Initialize flask app
 app = Flask(__name__)
@@ -33,6 +34,7 @@ app.register_blueprint(authentication)
 app.register_blueprint(registration)
 app.register_blueprint(messages)
 app.register_blueprint(get_places)
+app.register_blueprint(create_tour)
 
 
 

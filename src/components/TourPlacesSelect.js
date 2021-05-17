@@ -1,9 +1,5 @@
-
-import {Fragment} from "react";
-import Select from "react-select";
 import AsyncSelect from 'react-select/async';
 import axios from 'axios';
-
 
 
 const mapToValueLabel = (data) => {
@@ -27,7 +23,6 @@ const fetchTourPlaces = (inputValue, callback) => {
 }
 
 
-
 function TourPlacesSelect(props){
     const handleChange = (selectedOptions) => {
         const tmp_places = [];
@@ -43,6 +38,7 @@ function TourPlacesSelect(props){
             isMulti
             loadOptions={fetchTourPlaces}
             onChange = {handleChange}
+            required
         />
     )
 }
