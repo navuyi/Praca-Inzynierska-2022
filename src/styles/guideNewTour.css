@@ -43,30 +43,22 @@
 }
 .guideNewTour .table-container{
     width: 100%;
-    overflow-y: auto;
     border: 1px solid #dddddd;
     max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
-.guideNewTour table{
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
+.guideNewTour .table-container .plan-row{
+    border-radius: 0.5em;
+}
+.guideNewTour .table-container .plan-row:hover{
+    background-color: rgba(1, 110, 210, 0.5);
+}
+.guideNewTour .table-container .plan-row-button{
+    width: 30%;
+}
 
-    overflow-y: scroll;
-}
-.guideNewTour tr{
-    cursor: pointer;
-}
 
-.guideNewTour tr:hover{
-    background-color: dodgerblue;
-    color: whitesmoke;
-}
-.guideNewTour tr:hover .td-b{
-    visibility: visible;
-}
-.guideNewTour .td-b{
-    visibility: hidden;
-}
 
 
 
@@ -117,18 +109,5 @@
     }
     .guideNewTour .inputGroup input[type=file]{
         width: 100%;
-    }
-    .guideNewTour tr{
-        cursor: pointer;
-    }
-    .guideNewTour tr:hover{
-        background-color: unset;
-        color: unset;
-    }
-    .guideNewTour tr:hover .td-b{
-        visibility: unset;
-    }
-    .guideNewTour .td-b{
-        visibility: unset;
     }
 }

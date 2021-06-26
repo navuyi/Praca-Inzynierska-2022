@@ -82,7 +82,7 @@ function GuideNewTourInputs(props){
                 />
             </div>
             <div className="inputGroup">
-                <p> Zdjęcie główne</p>
+                <p> Zdjęcie główne </p>
                 <input
                     type="file"
                     onChange={handleMainImageChange}
