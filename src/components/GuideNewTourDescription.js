@@ -13,6 +13,7 @@ function GuideNewTourDescription(props){
                 <Form.Control
                     as="textarea"
                     rows={20}
+                    placeholder="Miejsce na opis wycieczki"
                     onChange={props.handleChange}
                     id="description"
                     value={props.tourData.description}

@@ -1,7 +1,6 @@
 import {Container, Row, Col, Form, Button, FormControl} from "react-bootstrap";
-import {useState, useEffect} from 'react';
+import {useState, useEffect, Fragment} from 'react';
 import FormData from 'form-data';
-
 import GuideNewTourInputs from "../../components/GuideNewTourInputs";
 import GuideNewTourPlan from "../../components/GuideNewTourPlan";
 import GuideNewTourDescription from "../../components/GuideNewTourDescription";
@@ -12,7 +11,7 @@ const formData = new FormData();
 function GuideNewTour(){
     const [mainUrl, setMainUrl] = useState("");
     const empty_tour_data = {
-        guide_id: 303,
+        guide_id: 1,  // For now it is set to 1 later it will be fetched from cookie or sth
         header: "",
         description: "",
         person_limit: "",
@@ -39,6 +38,11 @@ function GuideNewTour(){
 
     function handleSubmit(e){
         e.preventDefault();
+        // Check if tour plan is provided
+        if(tourData.tour_plan.length <= 0){
+            window.alert("Proszę wypełnić plan wycieczki");
+            return true
+        }
 
         // Add tourData to formData object
         formData.set('tour_data', JSON.stringify(tourData));
@@ -82,6 +86,7 @@ function GuideNewTour(){
                                 handleChange={handleChange}
                                 tourData={tourData}
                             />
+
                         </Col>
                     </Row>
                     <h3 id="plan-input-header"> Plan wycieczki </h3>

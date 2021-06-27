@@ -1,4 +1,4 @@
-import {Row, FormControl} from "react-bootstrap";
+import {Row, FormControl, FormGroup} from "react-bootstrap";
 import TourPlacesSelect from "./TourPlacesSelect";
 
 
@@ -17,6 +17,8 @@ function GuideNewTourInputs(props){
 
     return(
         <Row className={"d-flex flex-column ml-3 mr-3"}>
+            <FormGroup>
+            <h2> Podstawowe informacje </h2>
             <div className="inputGroup">
                 <p> Nagłówek wycieczki </p>
                 <FormControl
@@ -88,8 +90,9 @@ function GuideNewTourInputs(props){
                     onChange={handleMainImageChange}
                     required
                 />
-                <img src={props.mainUrl} alt={""} style={{maxWidth: "100%"}}/>
+                <img src={props.mainUrl} alt={""} style={{maxWidth: "100%", marginTop: "1em", borderRadius: "0.5em"}}/>
             </div>
+            </FormGroup>
         </Row>
     )
 }

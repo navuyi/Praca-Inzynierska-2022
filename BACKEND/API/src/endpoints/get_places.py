@@ -15,5 +15,5 @@ def get_places_by_input():
     result = cur.fetchall()
 
     print(result)
-
+    close_conn(conn, cur)
     return jsonify(result), 200
