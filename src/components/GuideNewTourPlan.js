@@ -55,16 +55,16 @@ function GuideNewTourPlan(props) {
     }
 
     return (
-        <React.Fragment>
-            <Col lg={4} xs={12} className={"d-flex align-items-center justify-content-center flex-column"}>
+        <Row className={"d-flex flex-row justify-content-center"}>
+            <Col lg={3} xs={12} className={"d-flex align-items-center justify-content-between flex-column"}>
                 <Form.Group className={"w-100"}>
-                    <Form.Control id="point-input" as="textarea" rows={2} value={planInput} placeholder="Dodaj punkt planu wycieczki"
+                    <Form.Control id="point-input" as="textarea" rows={6} value={planInput} placeholder="Dodaj punkt planu wycieczki"
                                   onChange={(e) => setPlanInput(e.target.value)}/>
                 </Form.Group>
-                <Button variant={"outline-dark"} onClick={handlePointAdd} className={"m-lg-3 m-4"}> {editMode ?
+                <Button variant={"outline-dark"} onClick={handlePointAdd} className={"w-100"}> {editMode ?
                     <span>Edytuj</span> : <span>Dodaj</span>}</Button>
             </Col>
-            <Col lg={8} className={"d-flex justify-content-center"}>
+            <Col lg={8} className={"d-flex justify-content-center mt-5 mt-sm-5 mt-md-5 mt-lg-0 mt-xl-0"}>
                 <div className={"table-container"}>
                     {
                         props.tourData.tour_plan.length == 0 ? <Row><Col> <p style={{textAlign: "center", margin: "0 0"}}> Tutaj pojawią się dodane przez Ciebie punkty planu </p> </Col></Row> : null
@@ -90,7 +90,7 @@ function GuideNewTourPlan(props) {
                     }
                 </div>
             </Col>
-        </React.Fragment>
+        </Row>
     )
 }
 

@@ -43,8 +43,9 @@
 }
 .guideNewTour .table-container{
     width: 100%;
-    border: 1px solid #dddddd;
-    max-height: 300px;
+    border: 2px solid #d4d3d3;
+    border-radius: 5px;
+    max-height: 250px;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -67,6 +68,7 @@
     .guideNewTour .cont{
         background-color: #ffffff;
         border-radius: unset;
+        box-shadow: unset;
     }
 
     .guideNewTour h1{

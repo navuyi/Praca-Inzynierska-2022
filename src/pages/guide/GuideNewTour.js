@@ -3,9 +3,10 @@ import {useState, useEffect, Fragment} from 'react';
 import FormData from 'form-data';
 import GuideNewTourInputs from "../../components/GuideNewTourInputs";
 import GuideNewTourPlan from "../../components/GuideNewTourPlan";
-import GuideNewTourDescription from "../../components/GuideNewTourDescription";
+
 
 import {create_tour} from "../../API_CALLS/create_tour";
+
 
 const formData = new FormData();
 function GuideNewTour(){
@@ -31,7 +32,6 @@ function GuideNewTour(){
                 return
             }
         }
-
         const update = {...tourData, [e.target.id]: e.target.value};
         setTourData(update);
     }
@@ -70,34 +70,21 @@ function GuideNewTour(){
                     <Row lg={12}>
                         <h1> Kreator wycieczki </h1>
                     </Row>
-                    <Row  className={"d-flex justify-content-lg-center"}>
-                        <Col lg={4}>
-                            <GuideNewTourInputs
-                                handleChange={handleChange}
-                                tourData={tourData}
-                                setTourData={setTourData}
-                                mainUrl={mainUrl}
-                                setMainUrl={setMainUrl}
-                                formData={formData}
-                            />
-                        </Col>
-                        <Col lg={8} >
-                            <GuideNewTourDescription
-                                handleChange={handleChange}
-                                tourData={tourData}
-                            />
-
-                        </Col>
-                    </Row>
-                    <h3 id="plan-input-header"> Plan wycieczki </h3>
-                    <Row className={"d-flex flex-row  mt-lg-5 align-items-start"}>
-                       <GuideNewTourPlan
-                          tourData = {tourData}
-                          setTourData = {setTourData}
-                       />
-                    </Row>
+                    <GuideNewTourInputs
+                        handleChange={handleChange}
+                        tourData={tourData}
+                        setTourData={setTourData}
+                        mainUrl={mainUrl}
+                        setMainUrl={setMainUrl}
+                        formData={formData}
+                    />
+                    <Row className={"d-flex justify-content-center mt-5 mb-2"}> <h5 style={{textAlign: "center"}}> Plan wycieczki</h5> </Row>
+                    <GuideNewTourPlan
+                        tourData={tourData}
+                        setTourData={setTourData}
+                    />
                     <Row className={"mt-5"}>
-                        <Button className={"w-100 m-3"} type="submit"> Stwórz </Button>
+                        <Button className={"w-100 m-3"} type="submit"> Opublikuj ofertę wycieczki </Button>
                     </Row>
                 </Form>
             </Container>
