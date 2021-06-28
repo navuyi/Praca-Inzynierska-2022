@@ -1,5 +1,6 @@
 import {Row, FormControl, FormGroup, Col, Form} from "react-bootstrap";
 import TourPlacesSelect from "./TourPlacesSelect";
+
 import React from "react"
 
 function GuideNewTourInputs(props){

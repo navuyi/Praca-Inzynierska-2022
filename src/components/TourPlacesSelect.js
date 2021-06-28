@@ -34,7 +34,7 @@ function TourPlacesSelect(props){
     }
     return(
         <AsyncSelect
-            placeholder="Miejsca, których dotyczy wycieczka"
+            placeholder="Miejscowość"
             isMulti
             loadOptions={fetchTourPlaces}
             onChange = {handleChange}
