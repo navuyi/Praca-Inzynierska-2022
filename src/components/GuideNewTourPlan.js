@@ -72,7 +72,7 @@ function GuideNewTourPlan(props) {
                     {
                         props.tourData.tour_plan.map((point, index) => {
                             return (
-                                <Row lg={12} className={"d-flex flex-xl-row flex-lg-row flex-md-row flex-row justify-content-center mt-5 mt-xl-0 mt-lg-0 mt-md-1 p-1 plan-row"}>
+                                <Row key={index} lg={12} className={"d-flex flex-xl-row flex-lg-row flex-md-row flex-row justify-content-center mt-5 mt-xl-0 mt-lg-0 mt-md-1 p-1 plan-row"}>
                                     <Col xl={1} lg={1} md={1} xs={2}
                                          className={"d-flex justify-content-xl-center justify-content-md-around justify-content-center align-items-center"}> {index + 1} </Col>
                                     <Col xl={7} lg={6} md={6} xs={7}

@@ -3,7 +3,7 @@ import {Container, Row, Col} from "react-bootstrap";
 import {useState} from "react";
 import Select from "react-select";
 import {FormControl} from "react-bootstrap";
-import X from '../../images/icons/close.png';
+import X from '../../images/icons/reject.png';
 
 function NewMessage(){
     const [contacts, setContacts] = useState([]);

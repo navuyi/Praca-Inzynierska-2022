@@ -4,6 +4,9 @@ import FormData from 'form-data';
 import GuideNewTourInputs from "../../components/GuideNewTourInputs";
 import GuideNewTourPlan from "../../components/GuideNewTourPlan";
 import GuideNewTourElectivesSelector from "../../components/GuideNewTourElectivesSelector";
+import GuideNewTourImageGallery from "../../components/GuideNewTourImageGallery";
+import GuideNewTourPriceList from "../../components/GuideNewTourPriceList";
+import GuideNewTourImportantInfo from "../../components/GuideNewTourImportantInfo";
 
 import {create_tour} from "../../API_CALLS/create_tour";
 
@@ -28,7 +31,11 @@ function GuideNewTour(){
         importantInfo: false,
         imageGallery: false
     })
+    const [priceList, setPriceList] = useState([{text: "Nocleg w hotelu", variant: true}, {text: "Wyżywienie", variant: false}]);
 
+    useEffect(()=>{
+        console.log(electives);
+    },[electives])
 
     function handleChange(e){
         // Check if price and person limit is a numeric value
@@ -61,11 +68,6 @@ function GuideNewTour(){
             })
     }
 
-    useEffect(()=>{
-        console.log(tourData);
-    },[tourData])
-
-
 
 
     return(
@@ -90,8 +92,14 @@ function GuideNewTour(){
                     />
                     <Row className={"d-flex justify-content-center mt-5 mb-2"}> <h5 style={{textAlign: "center"}}> Opcje dodatkowe </h5> </Row>
                     <GuideNewTourElectivesSelector
-
+                        electives={electives}
+                        setElectives={setElectives}
                     />
+
+                    { electives.imageGallery ? <GuideNewTourImageGallery /> : null }
+                    { electives.priceList ? <GuideNewTourPriceList priceList={priceList} setPriceList={setPriceList} /> : null }
+                    { electives.importantInfo ? <GuideNewTourImportantInfo /> : null }
+
                     <Row className={"mt-5"}>
                         <Button className={"w-100 m-3"} type="submit"> Opublikuj ofertę wycieczki </Button>
                     </Row>
