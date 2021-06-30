@@ -31,7 +31,7 @@ function GuideNewTour(){
         importantInfo: false,
         imageGallery: false
     })
-    const [priceList, setPriceList] = useState([{text: "Nocleg w hotelu", variant: true}, {text: "Wyżywienie", variant: false}]);
+    const [priceList, setPriceList] = useState([]);
 
     useEffect(()=>{
         console.log(electives);

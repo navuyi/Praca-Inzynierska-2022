@@ -74,7 +74,6 @@ function GuideNewTourInputs(props){
                         value={props.tourData.person_limit}
                         required
                     />
-                    <br></br>
                     <h6> Cena</h6>
                     <FormControl
                         id="price"
@@ -84,7 +83,6 @@ function GuideNewTourInputs(props){
                         value={props.tourData.price}
                         required
                     />
-                    <br></br>
                 </Col>
                 <Col xl={3} lg={4}>
                     <h6> Data rozpoczęcia </h6>
@@ -96,7 +94,6 @@ function GuideNewTourInputs(props){
                         value={props.tourData.start_date}
                         required
                     />
-                    <br></br>
                     <h6> Data zakończenia </h6>
                     <FormControl
                         id="end_date"
@@ -106,7 +103,6 @@ function GuideNewTourInputs(props){
                         value={props.tourData.end_date}
                         required
                     />
-                    <br></br>
                 </Col>
                 <Col xl={3} lg={4}>
                     <h6> Miejsce </h6>
