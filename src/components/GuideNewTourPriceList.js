@@ -27,6 +27,14 @@ export default function GuideNewTourPriceList(props){
         // Clear the text input
         setInput("");
     }
+    function handleDelete(e){
+        const text = e.target.innerText;
+        const index = e.target.getAttribute("index");
+
+        const tmp_price_list = [...props.priceList];
+        tmp_price_list.splice(index,1);
+        props.setPriceList(tmp_price_list);
+    }
     return(
         <React.Fragment >
             <Row className={"mt-5"}>
@@ -62,7 +70,7 @@ export default function GuideNewTourPriceList(props){
                                 let style;
                                 item.variant ? style={backgroundColor: "#5cb85c"} : style={backgroundColor: "#d9534f"}
                                 return(
-                                    <div key={index} className={"price-list-element"} style={style}>
+                                    <div key={index} index={index} className={"price-list-element"} style={style} onDoubleClick={handleDelete}>
                                         {item.text}
                                     </div>
                                 )

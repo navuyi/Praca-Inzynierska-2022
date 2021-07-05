@@ -74,11 +74,16 @@
     color: whitesmoke;
     text-shadow: -1px -0.5px black;
     padding: 0.3em 1em;
-    margin: 0.2em 0;
 
-    text-align: left;
+    user-select: none;
+    text-align: center;
     font-family: "Lora", sans-serif;
     font-size: 1.1rem;
+    cursor: pointer;
+    border-bottom: 1px solid black;
+}
+.guideNewTour .price-list .price-list-element:hover{
+    background-color: rgb(34,34,34) !important;
 }
 
 

@@ -61,8 +61,9 @@ function GuideNewTourPlan(props) {
                     <Form.Control id="point-input" as="textarea" rows={6} value={planInput} placeholder="Dodaj punkt planu wycieczki"
                                   onChange={(e) => setPlanInput(e.target.value)}/>
                 </Form.Group>
-                <Button variant={"outline-dark"} onClick={handlePointAdd} className={"w-100"}> {editMode ?
-                    <span>Edytuj</span> : <span>Dodaj</span>}</Button>
+                {
+                    editMode ? <Button onClick={handlePointAdd} className={"w-100 btn-primary"}> Edytuj </Button> : <Button onClick={handlePointAdd} className={"w-100 btn-success"}> Dodaj </Button>
+                }
             </Col>
             <Col lg={8} className={"d-flex justify-content-center mt-5 mt-sm-5 mt-md-5 mt-lg-0 mt-xl-0"}>
                 <div className={"table-container"}>
@@ -79,9 +80,9 @@ function GuideNewTourPlan(props) {
                                          className={"d-flex justify-content-xl-start justify-content-lg-start justify-content-md-start justify-content-center align-items-center "}> {point} </Col>
                                     <Col xl={4} lg={5} md={5} xs={12}
                                          className={"d-flex justify-content-xl-around justify-content-lg-around justify-content-md-around justify-content-around align-items-center mt-3 mt-xl-0 mt-lg-0 mt-md-0"}>
-                                        <Button className={"td-b plan-row-button"} variant={"outline-dark"}
+                                        <Button className={"td-b plan-row-button"} variant={"outline-primary"}
                                                 onClick={handlePointEdit} id={index}> Edytuj </Button>
-                                        <Button className={"td-b plan-row-button"} variant={"outline-dark"}
+                                        <Button className={"td-b plan-row-button"} variant={"outline-danger"}
                                                 onClick={handlePointDelete} id={index}> Usuń </Button>
                                     </Col>
                                 </Row>
