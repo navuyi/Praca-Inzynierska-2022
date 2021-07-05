@@ -75,7 +75,7 @@ function GuideNewTour(){
             <Container className={"mt-lg-5 mt-5 cont"}>
                 <Form onSubmit={handleSubmit}>
                     <Row lg={12}>
-                        <h1 style={{color: "#1c1c1c", fontSize: "3em", fontWeight: "100"}}> Kreator wycieczki </h1>
+                        <h1 style={{color: "#f3a431", fontSize: "4em", fontWeight: "100"}}> Kreator wycieczki </h1>
                     </Row>
                     <GuideNewTourInputs
                         handleChange={handleChange}
@@ -85,12 +85,12 @@ function GuideNewTour(){
                         setMainUrl={setMainUrl}
                         formData={formData}
                     />
-                    <Row className={"d-flex justify-content-center mt-5 mb-2"}> <h5 style={{textAlign: "center"}}> Plan wycieczki</h5> </Row>
+                    <Row className={"d-flex justify-content-center mt-5 mb-2 "}> <h2 style={{textAlign: "center", color: "#1d6cf5"}}> Plan wycieczki</h2> </Row>
                     <GuideNewTourPlan
                         tourData={tourData}
                         setTourData={setTourData}
                     />
-                    <Row className={"d-flex justify-content-center mt-5 mb-2"}> <h5 style={{textAlign: "center"}}> Opcje dodatkowe </h5> </Row>
+                    <Row className={"d-flex justify-content-center mt-5 mb-2 "}> <h2 style={{textAlign: "center", color: "#1d6cf5"}}> Opcje dodatkowe </h2> </Row>
                     <GuideNewTourElectivesSelector
                         electives={electives}
                         setElectives={setElectives}

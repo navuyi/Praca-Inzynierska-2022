@@ -16,7 +16,7 @@ function GuideNewTourInputs(props){
         <React.Fragment>
             <Row className={"d-flex justify-content-center"}>
                 <Col xl={8} lg={8}>
-                    <h5> Nagłówek wycieczki </h5>
+                    <h2 style={{textAlign: "left", color: "#1d6cf5"}}> Nagłówek wycieczki </h2>
                     <FormControl
                         as="textarea"
                         id="header"
@@ -30,7 +30,7 @@ function GuideNewTourInputs(props){
             </Row>
             <Row className={"d-flex justify-content-center mt-4"}>
                 <Col xl={8} lg={8}>
-                    <h5> Opis wycieczki </h5>
+                    <h2 style={{textAlign: "left", color: "#1d6cf5"}}> Opis wycieczki </h2>
                     <Form.Control
                         as="textarea"
                         rows={5}
@@ -43,7 +43,7 @@ function GuideNewTourInputs(props){
                 </Col>
             </Row>
             <Row className={"d-flex justify-content-center mt-5"}>
-                <h5> Zdjęcie główne </h5>
+                <h2 style={{textAlign: "center", color: "#1d6cf5"}}> Zdjęcie główne </h2>
             </Row>
             <Row className={"d-flex justify-content-center align-items-center flex-column mb-5 mt-2"}>
                 <Col xl={6} lg={6} className={"d-flex justify-content-center"}>
@@ -58,10 +58,10 @@ function GuideNewTourInputs(props){
                     <img src={props.mainUrl} alt={""} style={{maxWidth: "100%", marginTop: "1em", borderRadius: "0.5em"}}/>
                 </Col>
             </Row>
-            <Row className={"d-flex justify-content-center mt-5"}>
-                <h5> Dane szczegółowe </h5>
+            <Row className={"d-flex justify-content-center mt-5 mb-2"}>
+                <h2 style={{textAlign: "center", color: "#1d6cf5"}}> Dane szczegółowe </h2>
             </Row>
-            <Row className={"d-flex justify-content-center mt-1"}>
+            <Row className={"d-flex justify-content-center mt-1 "}>
                 <Col xl={3} lg={4} className={"d-flex flex-column"}>
                     <h6> Ilość miejsc</h6>
                     <FormControl

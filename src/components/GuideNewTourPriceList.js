@@ -39,7 +39,7 @@ export default function GuideNewTourPriceList(props){
         <React.Fragment >
             <Row className={"mt-5"}>
                 <Col>
-                    <h5 style={{textAlign: "center"}}> Cennik </h5>
+                    <h2 style={{textAlign: "center", color: "#1d6cf5"}}> Cennik </h2>
                 </Col>
             </Row>
             <Row>
