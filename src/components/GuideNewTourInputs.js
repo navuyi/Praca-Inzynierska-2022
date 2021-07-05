@@ -11,9 +11,6 @@ function GuideNewTourInputs(props){
 
         // Add image to FormData
         props.formData.set('main_image', e.target.files[0], e.target.files[0].name);
-        for (var value of props.formData.entries()) {
-            console.log(value);
-        }
     }
     return(
         <React.Fragment>
@@ -53,6 +50,7 @@ function GuideNewTourInputs(props){
                     <input
                         type="file"
                         onChange={handleMainImageChange}
+                        accept="image/*"
                         required
                     />
                 </Col>

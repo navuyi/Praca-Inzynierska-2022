@@ -3,6 +3,7 @@ from .db_connection import open_conn, close_conn
 from datetime import datetime
 from werkzeug.utils import secure_filename
 
+
 import os
 import json
 import uuid
@@ -10,6 +11,7 @@ import uuid
 create_tour = Blueprint("create_tour", __name__)
 
 TOUR_IMAGES_DIRECTORY = "/home/rfiglus/BACKEND/API/src/static/tour_images"
+AVAILABLE_EXTENSIONS = ['.jpg', '.png', '.gif', '.tif', '.tiff', '.jpeg', '.bmp']
 
 @create_tour.route("/new_tour", methods=["POST"])
 def new_tour():
@@ -38,14 +40,16 @@ def new_tour():
     main_image_filename = secure_filename(main_image.filename)
     name = os.path.splitext(main_image_filename)[0] + str(":") + str(uuid.uuid4())
     ext = os.path.splitext(main_image_filename)[1]
+    if ext not in AVAILABLE_EXTENSIONS:
+        return {"msg": "Invalid file"}, 422
     main_image_path = os.path.join(TOUR_IMAGES_DIRECTORY, str(name+ext))
 
     # Save the image in under the genertated path
     try:
-        print(main_image_path)
         main_image.save(main_image_path)
     except Exception as e:
         print(e)
+        return {"msg": "Failed"}, 500
 
     try:
         [conn, cur] = open_conn()
@@ -75,15 +79,9 @@ def new_tour():
         
     except Exception as e:
         print(e)
-        pass
-    
-    
-
-
-    
-
+        return {"msg": "Didn't work"}, 422
+       
     
 
 
-   
     return {"msg": "OK"}, 201
