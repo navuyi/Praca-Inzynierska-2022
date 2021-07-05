@@ -11,14 +11,15 @@ rows = root.findall('.//row')
 # Array for places
 places = []
 
-for row in rows:
-    places.append(row.find("NAZWA").text)
 
-#print(places)
+for row in rows:
+    place = row.find("NAZWA").text
+    if place not in places:
+        places.append(place)
+        print(place)
 
 # Erase content of places.sql file
 open('places.sql', 'w').close()
-
 
 
 with open('places.sql', 'a', encoding='utf8') as fd:
