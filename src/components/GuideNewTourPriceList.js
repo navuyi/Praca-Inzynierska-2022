@@ -1,6 +1,7 @@
 import React from "react";
 import {useState} from "react";
 import {Row, Col, Container, Form, Button} from "react-bootstrap"
+import isEmptyString from "../utils/isEmptyString";
 
 export default function GuideNewTourPriceList(props){
     const [input, setInput] = useState("");
@@ -8,6 +9,10 @@ export default function GuideNewTourPriceList(props){
         setInput(e.target.value);
     }
     function handleSubmit(e){
+        // Check if input field is not empty string
+        if(isEmptyString(input)){
+            return 1;
+        }
         // Get the variant - included/excluded
         let variant;
         if(e.target.id === "included"){

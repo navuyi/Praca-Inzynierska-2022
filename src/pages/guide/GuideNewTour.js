@@ -10,8 +10,9 @@ import GuideNewTourImportantInfo from "../../components/GuideNewTourImportantInf
 
 import {create_tour} from "../../API_CALLS/create_tour";
 
-
+// Create form data
 const formData = new FormData();
+
 function GuideNewTour(){
     const [mainUrl, setMainUrl] = useState("");
     const empty_tour_data = {
@@ -96,9 +97,9 @@ function GuideNewTour(){
                         setElectives={setElectives}
                     />
 
-                    { electives.imageGallery ? <GuideNewTourImageGallery /> : null }
                     { electives.priceList ? <GuideNewTourPriceList priceList={priceList} setPriceList={setPriceList} /> : null }
                     { electives.importantInfo ? <GuideNewTourImportantInfo /> : null }
+                    { electives.imageGallery ? <GuideNewTourImageGallery /> : null }
 
                     <Row className={"mt-5"}>
                         <Button className={"w-100 m-3"} type="submit"> Opublikuj ofertę wycieczki </Button>
