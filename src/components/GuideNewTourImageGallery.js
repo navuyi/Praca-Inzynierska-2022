@@ -51,6 +51,7 @@ export default function GuideNewTourImageGallery(props) {
                         multiple={true}
                         style={{display: "none"}}
                         onChange={handleChange}
+                        accept="image/*"
                     />
                 </Col>
                 <Col xl={6} className={"mt-3"}>

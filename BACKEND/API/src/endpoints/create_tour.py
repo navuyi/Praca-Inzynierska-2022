@@ -16,26 +16,23 @@ AVAILABLE_EXTENSIONS = ['.jpg', '.png', '.gif', '.tif', '.tiff', '.jpeg', '.bmp'
 
 @create_tour.route("/new_tour", methods=["POST"])
 def new_tour():
+    # Main image is required!!!
     if "main_image" not in request.files:
-        return {"msg": "No image provided"}, 400
+        return {"msg": "Main image not provided"}, 400
     
     try:
-        main_image = request.files["main_image"]
         data = json.loads(request.form["tour_data"])
         electives = json.loads(request.form["electives"])
         if(electives["priceList"]):
-            price_list = request.form["priceList"]
+            price_list = json.loads(request.form["priceList"])
             print(price_list)
         if(electives["imageGallery"]):
-            # TODO: ADD SAVING THE TOUR GALLERY IMAGES - REJECT THE main_photo
             pass
         if(electives["importantInfo"]):
-            important_info = request.form["importantInfo"]
+            important_info = json.loads(request.form["importantInfo"])
     except Exception as e:
         print(e)
         return {"msg": "Could not load the data"}, 400
-
-    
 
     try:
         header = data["header"]
@@ -51,49 +48,73 @@ def new_tour():
         print(e)
         return {"msg": "Not all data was provided"}, 400
     
-    # Create image name with random sequence 
-    main_image_filename = secure_filename(main_image.filename)
-    name = os.path.splitext(main_image_filename)[0] + str(":") + str(uuid.uuid4())
-    ext = os.path.splitext(main_image_filename)[1]
-    if ext not in AVAILABLE_EXTENSIONS:
-        return {"msg": "Invalid file"}, 422
-    main_image_path = os.path.join(TOUR_IMAGES_DIRECTORY, str(name+ext))
-
-    # Save the image in under the genertated path
-    try:
-        main_image.save(main_image_path)
-    except Exception as e:
-        print(e)
-        return {"msg": "Failed"}, 500
 
     try:
         [conn, cur] = open_conn()
 
         # Insert proper positions into tours table
-        columns = "header, description, guide_id, price, person_limit, start_date, end_date, main_image_path"
-        statement = f"INSERT INTO tours ({columns}) VALUES (%s, %s, %s, %s , %s, %s, %s, %s)"
-        insert = (header, description, guide_id, price, person_limit, start_date, end_date, main_image_path)
+        columns = """header, description, guide_id, price, person_limit, start_date, end_date, 
+        has_price_list, has_image_gallery, has_important_info"""
+        statement = f"INSERT INTO tours ({columns}) VALUES (%s, %s, %s, %s , %s, %s, %s, %s, %s, %s)"
+        insert = (header, description, guide_id, price, person_limit, start_date, end_date, 
+        electives["priceList"], electives["imageGallery"], electives["importantInfo"])
         cur.execute(statement, insert)
         conn.commit()
-
 
         # Get this tour id which was assigned by the database operations
         tour_id = cur.lastrowid
 
+        # Save uploaded images and insert paths to database
+        for key in request.files:
+            if(key != "main_image" and electives["imageGallery"] == False):
+                break
+            file = request.files[key]
+            name = secure_filename(file.filename)
+            file_prefix = os.path.splitext(name)[0] + str(":") + str(uuid.uuid4()) # File prefix and appended random sequence
+            file_ext = os.path.splitext(name)[1]
+            if file_ext not in AVAILABLE_EXTENSIONS:
+                return {"msg": "Invalid file"}, 422
+            file_path = os.path.join(TOUR_IMAGES_DIRECTORY, str(file_prefix + file_ext))
+
+            # Save the image and add path to database
+            try:
+                statement = "INSERT INTO tour_images (tour_id, path, is_main) VALUES (%s, %s, %s)"
+                if(key == "main_image"):
+                    is_main = True
+                else:
+                    is_main = False
+                insert = (tour_id, file_path, is_main)
+                cur.execute(statement, insert)
+                conn.commit()
+                file.save(file_path)
+            except Exception as e:
+                print(e)
+                return {"msg": "Failed handling image"}, 500
+
+        # Insert in(ex)cluded positions into tour_price_list table
+        if(electives["priceList"]):
+            for item in price_list:
+                statement = "INSERT INTO tour_price_list (tour_id, description, is_included) values (%s, %s, %s)"
+                insert = (tour_id, item["text"], item["variant"])
+                cur.execute(statement, insert)
+                conn.commit()
+
         # Insert tour plan points into tour_plan_points table
         for index, point in enumerate(tour_plan):
-            statement = f"INSERT INTO tour_plan_points (tour_id, number, description) VALUES (%s, %s, %s)"
+            statement = "INSERT INTO tour_plan_points (tour_id, number, description) VALUES (%s, %s, %s)"
             insert = (tour_id, index+1, point)
             cur.execute(statement, insert)
             conn.commit()
         
         # Insert tour places into tour_has_places table
-        #TODO in roder to do that get rid of doubles in tour_places table
-        # tour_has_places table indicates which tour has which places many-to-many relation
-        
+        for place_id in tour_places:
+            statement = "INSERT INTO tour_has_places (place_id, tour_id) VALUES (%s, %s)"
+            insert = (place_id, tour_id)
+            cur.execute(statement, insert)
+            conn.commit()
     except Exception as e:
         print(e)
-        return {"msg": "Didn't work"}, 422
+        return {"msg": "Something went wrong"}, 422
        
     
 

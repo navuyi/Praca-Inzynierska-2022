@@ -1,4 +1,5 @@
 USE yourtour;
+DROP TABLE IF EXISTS tour_price_list CASCADE;
 DROP TABLE IF EXISTS tour_has_tags CASCADE;
 DROP TABLE IF EXISTS tour_has_places CASCADE;
 DROP TABLE IF EXISTS tour_images;
@@ -41,7 +42,6 @@ CREATE TABLE tours (
     is_active BOOLEAN NOT NULL DEFAULT 1,
     header VARCHAR(255) NOT NULL,
     description VARCHAR(1024) NOT NULL,
-    main_image_path VARCHAR(255) NOT NULL,
     guide_id INT NOT NULL, /* indicates guide of the tour */
     price INT NOT NULL,
     person_limit INT NOT NULL,
@@ -72,6 +72,14 @@ CREATE TABLE tour_plan_points(
     FOREIGN KEY (tour_id) REFERENCES tours(id)
 );
 
+CREATE TABLE tour_price_list(
+    id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
+    tour_id INT NOT NULL,
+    is_included BOOLEAN NOT NULL,
+    description TEXT NOT NULL,
+
+    FOREIGN KEY (tour_id) REFERENCES tours(id)
+);
 
 CREATE TABLE tour_tags(
     id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
@@ -94,7 +102,6 @@ CREATE TABLE tour_has_places(
     id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
     place_id INT NOT NULL,
     tour_id INT NOT NULL,
-
 
     FOREIGN KEY (tour_id) REFERENCES tours(id),
     FOREIGN KEY (place_id) REFERENCES tour_places(id)
