@@ -47,6 +47,10 @@ CREATE TABLE tours (
     person_limit INT NOT NULL,
     start_date DATETIME NOT NULL,
     end_date DATETIME NOT NULL,
+
+    has_price_list BOOLEAN NOT NULL DEFAULT 0,
+    has_image_gallery BOOLEAN NOT NULL DEFAULT 0,
+    has_important_info BOOLEAN NOT NULL DEFAULT 0,
    
     FOREIGN KEY (guide_id) REFERENCES users(id)
 );
@@ -95,6 +99,8 @@ CREATE TABLE tour_has_places(
     FOREIGN KEY (tour_id) REFERENCES tours(id),
     FOREIGN KEY (place_id) REFERENCES tour_places(id)
 );
+
+
 
 
 

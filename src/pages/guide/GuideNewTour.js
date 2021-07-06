@@ -33,10 +33,7 @@ function GuideNewTour(){
         imageGallery: false
     })
     const [priceList, setPriceList] = useState([]);
-
-    useEffect(()=>{
-        console.log(electives);
-    },[electives])
+    const [importantInfo, setImportantInfo] = useState([]);
 
     function handleChange(e){
         // Check if price and person limit is a numeric value
@@ -59,7 +56,18 @@ function GuideNewTour(){
 
         // Add tourData to formData object
         formData.set('tour_data', JSON.stringify(tourData));
+        formData.set('electives', JSON.stringify(electives));
 
+        // Add conditional elements
+        if(electives.priceList === true){
+            formData.set('priceList', JSON.stringify(priceList));
+        }
+
+        // Image gallery will be sent if images were added and then the section was unchecked - checking it on the server side //
+
+        if(electives.importantInfo === true){
+            formData.set('importantInfo', JSON.stringify(importantInfo))
+        }
         create_tour(formData)
             .then(res=>{
                 console.log(res);
@@ -76,7 +84,7 @@ function GuideNewTour(){
             <Container className={"mt-lg-5 mt-5 cont"}>
                 <Form onSubmit={handleSubmit}>
                     <Row lg={12}>
-                        <h1 style={{color: "#f3a431", fontSize: "4em", fontWeight: "100"}}> Kreator wycieczki </h1>
+                        <h1 style={{color: "#1d6cf5", fontWeight: "100"}}> Kreator wycieczki </h1>
                     </Row>
                     <GuideNewTourInputs
                         handleChange={handleChange}
@@ -99,7 +107,7 @@ function GuideNewTour(){
 
                     { electives.priceList ? <GuideNewTourPriceList priceList={priceList} setPriceList={setPriceList} /> : null }
                     { electives.importantInfo ? <GuideNewTourImportantInfo /> : null }
-                    { electives.imageGallery ? <GuideNewTourImageGallery /> : null }
+                    { electives.imageGallery ? <GuideNewTourImageGallery formData={formData} /> : null }
 
                     <Row className={"mt-5"}>
                         <Button className={"w-100 m-3"} type="submit"> Opublikuj ofertę wycieczki </Button>

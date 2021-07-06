@@ -3,7 +3,7 @@ import {Row, Col, Form, Carousel, Button, Container} from "react-bootstrap";
 import {useState} from "react";
 
 
-export default function GuideNewTourImageGallery() {
+export default function GuideNewTourImageGallery(props) {
     const [images, setImages] = useState([]);
 
     function handleChange(e) {
@@ -14,9 +14,25 @@ export default function GuideNewTourImageGallery() {
                 name: file.name,
                 url: URL.createObjectURL(file)
             }
-            tmp_images.push(image);
+            // Check if image with given name was already uploaded
+            if(images.filter(e => e.name === image.name).length === 0){
+                // Add image to temporary array
+                tmp_images.push(image)
+                // Add files to formData - for upload to database
+                props.formData.set(file.name, file, file.name);
+            }
         }
         setImages(tmp_images);
+    }
+    function handleDelete(e){
+        const index = e.target.getAttribute("index");
+        const tmp_images = [...images];
+        // Delete from array - display
+        tmp_images.splice(index, 1);
+        setImages(tmp_images);
+
+        // Delete from formData - for upload to database
+        props.formData.delete(images[index].name);
     }
 
     return (
@@ -27,7 +43,7 @@ export default function GuideNewTourImageGallery() {
                 </Col>
             </Row>
             <Row className={"d-flex flex-column align-items-center justify-content-around mt-2"}>
-                <Col xl={5} className={"d-flex align-items-center justify-content-between flex-column"}>
+                <Col xl={6} className={"d-flex align-items-center justify-content-between flex-column"}>
                     <Button className={"btn-success w-100"} onClick={()=>{document.getElementById("pg-input").click()}}> Dodaj zdjęcia </Button>
                     <input
                         id="pg-input"
@@ -37,14 +53,16 @@ export default function GuideNewTourImageGallery() {
                         onChange={handleChange}
                     />
                 </Col>
-                <Col xl={5} className={"mt-3 image-list"}>
-                    {
-                        images.map((image, index) => {
-                            return(
-                                <div className={"image-list-element"}> {image.name} </div>
-                            )
-                        })
-                    }
+                <Col xl={6} className={"mt-3"}>
+                    <div className={"image-list"}>
+                        {
+                            images.map((image, index) => {
+                                return(
+                                    <div key={index} index={index} className={"image-list-element"} onDoubleClick={handleDelete}> {image.name} </div>
+                                )
+                            })
+                        }
+                    </div>
                 </Col>
             </Row>
         </React.Fragment>

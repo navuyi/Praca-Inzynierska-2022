@@ -1,3 +1,4 @@
+import re
 from flask import Blueprint, jsonify, request
 from .db_connection import open_conn, close_conn
 from datetime import datetime
@@ -18,14 +19,28 @@ def new_tour():
     if "main_image" not in request.files:
         return {"msg": "No image provided"}, 400
     
-    main_image = request.files["main_image"]
-    data = json.loads(request.form["tour_data"])
+    try:
+        main_image = request.files["main_image"]
+        data = json.loads(request.form["tour_data"])
+        electives = json.loads(request.form["electives"])
+        if(electives["priceList"]):
+            price_list = request.form["priceList"]
+            print(price_list)
+        if(electives["imageGallery"]):
+            # TODO: ADD SAVING THE TOUR GALLERY IMAGES - REJECT THE main_photo
+            pass
+        if(electives["importantInfo"]):
+            important_info = request.form["importantInfo"]
+    except Exception as e:
+        print(e)
+        return {"msg": "Could not load the data"}, 400
+
     
+
     try:
         header = data["header"]
         description = data["description"]
         guide_id = data["guide_id"]
-        print(guide_id)
         price = data["price"]
         person_limit = data["person_limit"]
         start_date = data["start_date"]
@@ -67,7 +82,6 @@ def new_tour():
 
         # Insert tour plan points into tour_plan_points table
         for index, point in enumerate(tour_plan):
-            print(point + " " + str(index))
             statement = f"INSERT INTO tour_plan_points (tour_id, number, description) VALUES (%s, %s, %s)"
             insert = (tour_id, index+1, point)
             cur.execute(statement, insert)
