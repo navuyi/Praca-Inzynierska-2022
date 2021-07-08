@@ -7,7 +7,8 @@ import GuideNewTourElectivesSelector from "../../components/GuideNewTourElective
 import GuideNewTourImageGallery from "../../components/GuideNewTourImageGallery";
 import GuideNewTourPriceList from "../../components/GuideNewTourPriceList";
 import GuideNewTourImportantInfo from "../../components/GuideNewTourImportantInfo";
-
+import Separator from "../../components/Separator";
+import SeparatorShort from "../../components/SeparatorShort";
 import {create_tour} from "../../API_CALLS/create_tour";
 
 // Create form data
@@ -62,12 +63,12 @@ function GuideNewTour(){
         if(electives.priceList === true){
             formData.set('priceList', JSON.stringify(priceList));
         }
-
+        if(electives.importantInfo === true){
+            formData.set('importantInfo', JSON.stringify(importantInfo));
+        }
         // Image gallery will be sent if images were added and then the section was unchecked - checking it on the server side //
 
-        if(electives.importantInfo === true){
-            formData.set('importantInfo', JSON.stringify(importantInfo))
-        }
+
         create_tour(formData)
             .then(res=>{
                 console.log(res);
@@ -94,19 +95,23 @@ function GuideNewTour(){
                         setMainUrl={setMainUrl}
                         formData={formData}
                     />
-                    <Row className={"d-flex justify-content-center mt-5 mb-2 "}> <h2 style={{textAlign: "center", color: "#1d6cf5"}}> Plan wycieczki</h2> </Row>
+                    <Separator />
+                    <Row className={"d-flex justify-content-center"}> <h2 style={{textAlign: "center", color: "#1d6cf5"}}> Plan wycieczki</h2> </Row>
                     <GuideNewTourPlan
                         tourData={tourData}
                         setTourData={setTourData}
                     />
-                    <Row className={"d-flex justify-content-center mt-5 mb-2 "}> <h2 style={{textAlign: "center", color: "#1d6cf5"}}> Opcje dodatkowe </h2> </Row>
+                    <Separator />
+                    <Row className={"d-flex justify-content-center"}> <h2 style={{textAlign: "center", color: "#1d6cf5"}}> Opcje dodatkowe </h2> </Row>
                     <GuideNewTourElectivesSelector
                         electives={electives}
                         setElectives={setElectives}
                     />
-
+                    <SeparatorShort />
                     { electives.priceList ? <GuideNewTourPriceList priceList={priceList} setPriceList={setPriceList} /> : null }
-                    { electives.importantInfo ? <GuideNewTourImportantInfo /> : null }
+                    <SeparatorShort />
+                    { electives.importantInfo ? <GuideNewTourImportantInfo importantInfo={importantInfo} setImportantInfo={setImportantInfo} /> : null }
+                    <SeparatorShort />
                     { electives.imageGallery ? <GuideNewTourImageGallery formData={formData} /> : null }
 
                     <Row className={"mt-5"}>

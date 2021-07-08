@@ -83,9 +83,9 @@ function GuideNewTourPlan(props) {
                                      className={"d-flex flex-xl-row flex-lg-row flex-md-row flex-row justify-content-center mt-5 mt-xl-0 mt-lg-0 mt-md-1 p-1 plan-row"}>
                                     <Col xl={1} lg={1} md={1} xs={2}
                                          className={"d-flex justify-content-xl-center justify-content-md-around justify-content-center align-items-center"}> {index + 1} </Col>
-                                    <Col xl={7} lg={6} md={6} xs={7}
+                                    <Col xl={6} lg={6} md={6} xs={7}
                                          className={"d-flex justify-content-xl-start justify-content-lg-start justify-content-md-start justify-content-center align-items-center "}> {point} </Col>
-                                    <Col xl={4} lg={5} md={5} xs={12}
+                                    <Col xl={5} lg={5} md={5} xs={12}
                                          className={"d-flex justify-content-xl-around justify-content-lg-around justify-content-md-around justify-content-around align-items-center mt-3 mt-xl-0 mt-lg-0 mt-md-0"}>
                                         <Button className={"td-b plan-row-button"} variant={"outline-primary"}
                                                 onClick={handlePointEdit} id={index}> Edytuj </Button>

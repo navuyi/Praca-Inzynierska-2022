@@ -1,6 +1,6 @@
-import {Row, FormControl, FormGroup, Col, Form} from "react-bootstrap";
+import {Row, FormControl, FormGroup, Col, Form, Button} from "react-bootstrap";
 import TourPlacesSelect from "./TourPlacesSelect";
-
+import Separator from "./Separator";
 import React from "react"
 
 function GuideNewTourInputs(props){
@@ -42,26 +42,31 @@ function GuideNewTourInputs(props){
                     />
                 </Col>
             </Row>
-            <Row className={"d-flex justify-content-center mt-5"}>
+            <Separator />
+            <Row className={"d-flex justify-content-center"}>
                 <h2 style={{textAlign: "center", color: "#1d6cf5"}}> Zdjęcie główne </h2>
             </Row>
-            <Row className={"d-flex justify-content-center align-items-center flex-column mb-5 mt-2"}>
+            <Row className={"d-flex justify-content-center align-items-center flex-column "}>
                 <Col xl={6} lg={6} className={"d-flex justify-content-center"}>
+                    <Button variant={"outline-primary"} className={"w-100"} onClick={()=>{document.getElementById("main-img-input").click()}}> Dodaj zdjęcie główne</Button>
                     <input
                         type="file"
                         onChange={handleMainImageChange}
                         accept="image/*"
                         required
+                        id="main-img-input"
+                        style={{display: "none"}}
                     />
                 </Col>
                 <Col xl={6} lg={6}>
                     <img src={props.mainUrl} alt={""} style={{maxWidth: "100%", marginTop: "1em", borderRadius: "0.5em"}}/>
                 </Col>
             </Row>
-            <Row className={"d-flex justify-content-center mt-5 mb-2"}>
+            <Separator />
+            <Row className={"d-flex justify-content-center"}>
                 <h2 style={{textAlign: "center", color: "#1d6cf5"}}> Dane szczegółowe </h2>
             </Row>
-            <Row className={"d-flex justify-content-center mt-1 "}>
+            <Row className={"d-flex justify-content-center"}>
                 <Col xl={3} lg={4} className={"d-flex flex-column"}>
                     <h6> Ilość miejsc</h6>
                     <FormControl
