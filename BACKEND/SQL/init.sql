@@ -81,6 +81,14 @@ CREATE TABLE tour_price_list(
     FOREIGN KEY (tour_id) REFERENCES tours(id)
 );
 
+CREATE TABLE tour_important_info(
+    id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
+    tour_id INT NOT NULL,
+    description TEXT NOT NULL,
+
+    FOREIGN KEY (tour_id) REFERENCES tours(id)
+);
+
 CREATE TABLE tour_tags(
     id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
     tag varchar(255) NOT NULL UNIQUE

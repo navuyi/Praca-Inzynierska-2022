@@ -99,6 +99,14 @@ def new_tour():
                 cur.execute(statement, insert)
                 conn.commit()
 
+        # Insert important informations into tour_important_info 
+        if(electives["importantInfo"]):
+            for info in important_info:
+                statement = "INSERT INTO tour_important_info (tour_id, description) values (%s, %s)"
+                insert = (tour_id, info)
+                cur.execute(statement, insert)
+                conn.commit()
+
         # Insert tour plan points into tour_plan_points table
         for index, point in enumerate(tour_plan):
             statement = "INSERT INTO tour_plan_points (tour_id, number, description) VALUES (%s, %s, %s)"
