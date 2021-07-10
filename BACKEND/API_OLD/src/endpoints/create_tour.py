@@ -47,12 +47,12 @@ def new_tour():
         tour_places = data["tour_places"]           # Array of IDs
     except Exception as e:
         print(e)
-        return {"msg": "Not all data was provided"}, 400
+        return {"msg": "Not all data was provided"}, 422
     
 
     try:
         [conn, cur] = open_conn()
-
+        
         # Insert proper positions into tours table
         columns = """header, description, guide_id, price, person_limit, start_date, end_date, 
         has_price_list, has_image_gallery, has_important_info"""
@@ -123,7 +123,7 @@ def new_tour():
             conn.commit()
     except Exception as e:
         print(e)
-        return {"msg": "Something went wrong"}, 422
+        return {"msg": "Something went wrong"}, 500
        
     
 

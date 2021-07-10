@@ -30,7 +30,7 @@ def rollback():
     db_get().rollback()
 
 def lastrowid():
-    return cursor.lastrowid()
+    return cursor().lastrowid
 
 def db_close(e=None):
     cur = g.pop('cursor', None)

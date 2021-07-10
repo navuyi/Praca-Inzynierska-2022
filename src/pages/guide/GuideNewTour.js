@@ -71,8 +71,8 @@ function GuideNewTour(){
 
         create_tour(formData)
             .then(res=>{
-                console.log(res);
-                window.alert("Success");
+                console.log(res.data)
+                window.alert(res.data.msg)
             })
             .catch(err=>{
                 console.log(err);
