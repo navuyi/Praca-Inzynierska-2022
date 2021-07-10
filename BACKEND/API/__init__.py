@@ -2,6 +2,7 @@ import os
 from flask import Flask, jsonify, g, request
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
+from API.handlers import APIException
 
 
 def create_app(test_config=None):               # test_config - independent from the instance configuration
@@ -20,6 +21,12 @@ def create_app(test_config=None):               # test_config - independent from
         os.makedirs(app.instance_path)
     except OSError as e:
         print(e)
+
+    ### Error handler ###
+    @app.errorhandler(APIException)
+    def invalid_api_usage(e):
+        [msg, code] = e.drop_err()
+        return jsonify(msg), code
 
     ### CORS setup ###
     cors = CORS(app, resources={r"/*": {"origins": app.config["ORIGINS"]}}, supports_credentials=True)
@@ -45,16 +52,17 @@ def create_app(test_config=None):               # test_config - independent from
 
     @app.route('/', methods=['GET'])
     def index_get():
+        raise API_Exception("ADA", 405)
         return jsonify({"msg": "Hello World"}), 200
 
     # Import blueprints
-    from . endpoints.authentication import bp as bp_authentication
-    from . endpoints.tour.new_tour import bp as bp_new_tour
-    from . endpoints.tour.places import bp as bp_places
-    from . endpoints.tour.tags import bp as bp_tags
-    from . endpoints.tour.tour_places import bp as bp_tour_places
-    from . endpoints.tour.tour_tags import bp as bp_tour_tags
-    from . endpoints.tour.tours import bp as bp_tour_tours
+    from API.endpoints.authentication import bp as bp_authentication
+    from API.endpoints.tour.new_tour import bp as bp_new_tour
+    from API.endpoints.tour.places import bp as bp_places
+    from API.endpoints.tour.tags import bp as bp_tags
+    from API.endpoints.tour.tour_places import bp as bp_tour_places
+    from API.endpoints.tour.tour_tags import bp as bp_tour_tags
+    from API.endpoints.tour.tours import bp as bp_tour_tours
 
     # Register blueprints
     app.register_blueprint(bp_authentication)

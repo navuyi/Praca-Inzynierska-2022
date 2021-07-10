@@ -1,7 +1,8 @@
 from flask import Blueprint
 from flask import request
 from flask import jsonify
-from API_NEW.database.db import db_get, cursor, begin_transaction, commit, rollback, lastrowid
+from API.database.db import db_get, cursor, begin_transaction, commit, rollback, lastrowid
+
 
 bp = Blueprint("places", __name__, url_prefix="/tour")
 
@@ -12,7 +13,6 @@ def get_places():
     place = args["place"]
     if not place:
         return {"msg": "no input"}, 400
-
 
     limit = 10
     # Open databse connection

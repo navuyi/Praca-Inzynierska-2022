@@ -14,3 +14,8 @@ ORIGINS = [
     "http://167.99.143.194",
     "http://localhost:3000"
 ]
+
+# Image upload configuration
+TOUR_IMAGES_DIRECTORY = "/home/rfiglus/BACKEND/API/storage/tour_images"
+AVAILABLE_EXTENSIONS = ['.jpg', '.png', '.gif', '.tif', '.tiff', '.jpeg', '.bmp']
+
