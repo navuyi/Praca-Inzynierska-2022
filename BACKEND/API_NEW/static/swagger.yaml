@@ -1,0 +1,58 @@
+---
+openapi: 3.0.0
+info:
+  description: Rafał Figlus
+  version: 1.0.0
+  title: YourTour REST API
+  contact:
+    email: figlusrafal@gmail.com
+paths:
+  # Authentication endpoints
+  "/authentication/register":
+    post:
+      tags:
+        - Authentication
+        #TODO: Continue
+  "/authentication/login":
+    post:
+      tags:
+        - Authentication
+        #TODO: Continue
+  "/authentication/logout":
+    post:
+       tags:
+        - Authentication
+        #TODO: Continue
+
+  # Tours endpoints
+  "/tour/new_tour":
+    post:
+      tags:
+        - Tours
+        #TODO: Continue
+  "/tour/tours":
+    get:
+      tags:
+        - Tours
+        #TODO: Continue
+  "/tour/tags":
+    get:
+      tags:
+        - Tours
+        #TODO: Continue
+  "/tour/places":
+    get:
+      tags:
+        - Tours
+        #TODO: Continue
+  "/tour/tour_places":
+    get:
+      tags:
+        - Tours
+        #TODO: Continue
+  "/tour/tour_tags":
+    get:
+      tags:
+        - Tours
+        #TODO: Continue
+    

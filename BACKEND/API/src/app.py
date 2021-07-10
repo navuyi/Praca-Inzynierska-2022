@@ -2,7 +2,6 @@ from flask import Flask
 from flask import jsonify, request
 from flask import Blueprint
 from flask_cors import CORS
-
 from flask_swagger_ui import get_swaggerui_blueprint
 
 from os import environ

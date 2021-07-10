@@ -10,15 +10,17 @@ const mapToValueLabel = (data) => {
 
 const fetchTourPlaces = (inputValue, callback) => {
     const data = {
-        "place_input": inputValue
+        "place": inputValue
     }
-    const url = "http://167.99.143.194:5000/get_places_by_input";
-    axios.post(url, data)
-        .then(res=>{
-           callback(mapToValueLabel(res.data));
+    const url = "http://167.99.143.194:5000/tour/places";
+    axios.get(url, {
+        params: data
+    })
+        .then(response => {
+            callback(mapToValueLabel(response.data));
         })
-        .catch(err=>{
-
+        .catch(err => {
+            console.log(err);
         })
 }
 

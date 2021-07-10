@@ -9,6 +9,7 @@ import os
 import json
 import uuid
 
+
 create_tour = Blueprint("create_tour", __name__)
 
 TOUR_IMAGES_DIRECTORY = "/home/rfiglus/BACKEND/API/src/static/tour_images"
