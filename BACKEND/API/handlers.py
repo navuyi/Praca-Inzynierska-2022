@@ -16,5 +16,4 @@ class APIException(Exception):
         }
         return [msg, self.status_code]
 
-def APISuccess(msg="Success", code=200):
-    return jsonify({"msg": msg}), code
+

@@ -28,31 +28,135 @@ paths:
   "/tour/new_tour":
     post:
       tags:
-        - Tours
-        #TODO: Continue
+        - Tour
+      summary: Creates new tour
+      description: New tour is created if all necessary data is provided
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+             $ref: "#/components/schemas/NewTour"
+      responses:
+
+
+
+
+
+
+
+
+
+
+
   "/tour/tours":
     get:
       tags:
-        - Tours
+        - Tour
         #TODO: Continue
   "/tour/tags":
     get:
       tags:
-        - Tours
+        - Tour
         #TODO: Continue
   "/tour/places":
     get:
       tags:
-        - Tours
-        #TODO: Continue
+        - Tour
+      summary: Returns array of objects with cities/towns in Poland
+      description: >
+        All cities and town in Poland are stored in the database. While creating new tour guide can select proper cities for his tour. Array of objects is returned
+        based on input sent in query. Number of returned items is limited.
+      parameters:
+        - in: query
+          name: place
+          schema:
+            type: string
+          required: true
+          description: User input, may be incomplete
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    place:
+                      type: string
+
   "/tour/tour_places":
     get:
       tags:
-        - Tours
+        - Tour
         #TODO: Continue
   "/tour/tour_tags":
     get:
       tags:
-        - Tours
+        - Tour
         #TODO: Continue
-    
+
+
+
+
+
+
+components:
+  schemas:
+    NewTour:
+      type: object
+      properties:
+        tour_data:
+          type: object
+          properties:
+            guide_id:
+              type: integer
+            header:
+              type: string
+            description:
+              type: string
+            person_limit:
+              type: integer
+            price:
+              type: integer
+            start_date:
+              type: string
+            end_date:
+              type: string
+            tour_plan:
+              type: array
+              items:
+                type: string
+            tour_places:
+              type: array
+              items:
+                type: integer
+        electives:
+          type: object
+          properties:
+            imageGallery:
+              type: boolean
+            importantInfo:
+              type: boolean
+            priceList:
+              type: boolean
+        price_list:
+          type: array
+          items:
+            type: object
+            properties:
+              text:
+                type: string
+              variant:
+                type: boolean
+        important_info:
+          type: array
+          items:
+            type: string
+      required:
+        - tour_data
+        - electives

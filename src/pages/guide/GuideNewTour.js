@@ -68,6 +68,10 @@ function GuideNewTour(){
         }
         // Image gallery will be sent if images were added and then the section was unchecked - checking it on the server side //
 
+        console.log(tourData);
+        console.log(electives);
+        console.log(priceList);
+        console.log(importantInfo);
 
         create_tour(formData)
             .then(res=>{

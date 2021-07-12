@@ -4,9 +4,7 @@ from mysql.connector.cursor import CursorBase
 from werkzeug.utils import secure_filename
 
 from API.handlers import APIException
-from API.handlers import APISuccess
 from API.database.db import cursor, lastrowid
-
 
 import os
 import json
