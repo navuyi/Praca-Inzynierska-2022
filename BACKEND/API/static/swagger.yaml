@@ -30,19 +30,44 @@ paths:
       tags:
         - Tour
       summary: Creates new tour
-      description: New tour is created if all necessary data is provided
       requestBody:
         required: true
         content:
           multipart/form-data:
             schema:
-              type: object
-              additionalProperties: true
               $ref: "#/components/schemas/NewTour"
 
       responses:
-
-
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Done"
+        '422':
+          description: Not enough data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Could not process data"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Server error, try again"
 
 
 
@@ -163,6 +188,11 @@ components:
         main_image:
           type: string
           format: binary
+        images:
+          type: array
+          items:
+            type: string
+            format: binary
       required:
         - tour_data
         - electives
