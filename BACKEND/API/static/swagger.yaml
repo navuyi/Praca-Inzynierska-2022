@@ -36,7 +36,10 @@ paths:
         content:
           multipart/form-data:
             schema:
-             $ref: "#/components/schemas/NewTour"
+              type: object
+              additionalProperties: true
+              $ref: "#/components/schemas/NewTour"
+
       responses:
 
 
@@ -157,6 +160,10 @@ components:
           type: array
           items:
             type: string
+        main_image:
+          type: string
+          format: binary
       required:
         - tour_data
         - electives
+        - main_image
