@@ -65,7 +65,7 @@ export default function GuideNewTourPriceList(props){
                     </Row>
                     <Row className={"d-flex justify-content-around mt-4 "}>
                         <Button id="included" className={"btn-success "} onClick={handleSubmit}> W cenie </Button>
-                        <Button id="excluded" className={"btn-danger "} onClick={handleSubmit}> Nie wliczone </Button>
+                        <Button id="excluded" className={"btn-danger "} onClick={handleSubmit}> Niewliczone </Button>
                     </Row>
                 </Col>
                 <Col xl={5} lg={5} md={5} sm={11} xs={11} className={"mt-5 mt-sm-5 mt-md-0"}>

@@ -100,6 +100,7 @@ paths:
           name: place
           schema:
             type: string
+            example: "Tarnowskie Gó"
           required: true
           description: User input, may be incomplete
       responses:
