@@ -1,6 +1,6 @@
 # Example execution below
 # raise APIException(msg="Not found", code=405, payload="some payload")
-from flask import jsonify
+
 
 class APIException(Exception):
     def __init__(self, msg="Something went wrong", code=400, payload=None):

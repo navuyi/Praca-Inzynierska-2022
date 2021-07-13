@@ -1,6 +1,7 @@
+
 from flask import Blueprint, request, current_app, jsonify
 from datetime import datetime
-from mysql.connector.cursor import CursorBase
+
 from werkzeug.utils import secure_filename
 
 from API.handlers import APIException
@@ -32,8 +33,21 @@ def create_new_tour():
         if not important_info:
             raise APIException(msg="Brakuje danych z sekcji Ważne Informacje", code=422)
 
+    ### Check number of files limit ###
+    numOfFiles = 0
+    for key in request.files:
+        if(key!= "main_image"):
+            numOfFiles += 1
+    file_limit = current_app.config["TOUR_IMAGES_LIMIT"]
+    if numOfFiles > file_limit:
+        raise APIException(msg="Zbyt dużo plików, limit wynosi: "+str(file_limit), code=413)
 
-    print(tour_data)
+    ### Check date correctness ###
+    start_date = datetime.strptime(tour_data["start_date"], "%Y-%m-%d")
+    end_date = datetime.strptime(tour_data["end_date"], "%Y-%m-%d")
+    if end_date < start_date:
+        raise APIException(msg="Data zakończenia wycieczki nie może być wcześniejsza niż data jej rozpoczęcia", code=422)
+
 
     ### Create new tour in tours table ###
     try:
@@ -116,6 +130,6 @@ def create_new_tour():
 
 
 
-    return jsonify({"msg": "Oferta utworzona pomyślnie"}), 201
+    return jsonify({"message": "Pomyślnie utworzono nową ofertę wycieczki"}), 201
     
    

@@ -9,12 +9,47 @@ import GuideNewTourPriceList from "../../components/GuideNewTourPriceList";
 import GuideNewTourImportantInfo from "../../components/GuideNewTourImportantInfo";
 import Separator from "../../components/Separator";
 import SeparatorShort from "../../components/SeparatorShort";
+
+
 import {create_tour} from "../../API_CALLS/create_tour";
 
-// Create form data
+
+import {Alert} from "@material-ui/lab";
+
+
+// Create form data - it changes on every render
 const formData = new FormData();
 
 function GuideNewTour(){
+    // Create data for post submit informations
+    const [submitInfo, setSubmitInfo] = useState({
+        visible: false,
+        severity: "success",        // success or error
+        variant: "filled",
+        text: "Oferta założona pomyślnie"
+    });
+
+
+    async function clearData(){
+        const lastInfoState = submitInfo;
+
+        await setMainUrl("");
+        await setTourData(empty_tour_data);
+        await setElectives({
+            priceList: false,
+            importantInfo: false,
+            imageGallery: false
+        })
+        await setPriceList([])
+        await setImportantInfo([])
+
+        // clear form data
+        for(let key of formData.keys()){
+            formData.delete(key);
+        }
+        await setSubmitInfo(lastInfoState);
+    }
+
     const [mainUrl, setMainUrl] = useState("");
     const empty_tour_data = {
         guide_id: 1,  // For now it is set to 1 later it will be fetched from cookie or sth
@@ -35,6 +70,12 @@ function GuideNewTour(){
     })
     const [priceList, setPriceList] = useState([]);
     const [importantInfo, setImportantInfo] = useState([]);
+
+    useEffect(()=>{
+        const update = {...submitInfo, visible: false}
+        setSubmitInfo(update);
+    }, [tourData, priceList, importantInfo, electives, mainUrl])
+
 
     function handleChange(e){
         // Check if price and person limit is a numeric value
@@ -75,11 +116,23 @@ function GuideNewTour(){
 
         create_tour(formData)
             .then(res=>{
-                console.log(res.data)
-                window.alert(res.data.msg)
+                const data = res.data;
+                clearData();
+                setSubmitInfo({
+                    visible: true,
+                    variant: "filled",
+                    severity: "success",
+                    text: data.message
+                })
             })
             .catch(err=>{
-                console.log(err);
+                const data = err.response.data;
+                setSubmitInfo({
+                    visible: true,
+                    variant: "filled",
+                    severity: "error",
+                    text: data.message
+                })
             })
     }
 
@@ -119,8 +172,13 @@ function GuideNewTour(){
                     <SeparatorShort />
                     { electives.imageGallery ? <GuideNewTourImageGallery formData={formData} /> : null }
 
-                    <Row className={"mt-5"}>
-                        <Button className={"w-100 m-3"} type="submit"> Opublikuj ofertę wycieczki </Button>
+
+                    <Row className={"mt-5 d-flex justify-content-center pb-5"}>
+                        {
+                            submitInfo.visible ?
+                                <Alert severity={submitInfo.severity} variant={submitInfo.variant} > {submitInfo.text} </Alert> :
+                                <Button className={"w-50 pt-3 pb-3"} type="submit"> Opublikuj ofertę wycieczki </Button>
+                        }
                     </Row>
                 </Form>
             </Container>

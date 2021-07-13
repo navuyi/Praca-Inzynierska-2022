@@ -4,6 +4,7 @@ from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
 from API.handlers import APIException
 
+import werkzeug
 
 def create_app(test_config=None):               # test_config - independent from the instance configuration
     app = Flask(__name__, instance_relative_config=False)
@@ -27,6 +28,10 @@ def create_app(test_config=None):               # test_config - independent from
     def invalid_api_usage(e):
         [msg, code] = e.drop_err()
         return jsonify(msg), code
+
+    @app.errorhandler(werkzeug.exceptions.RequestEntityTooLarge)
+    def handle_entity_too_large(e):
+        return {"message": "Załączony plik jest za duży"}, 413
 
     ### CORS setup ###
     cors = CORS(app, resources={r"/*": {"origins": app.config["ORIGINS"]}}, supports_credentials=True)
@@ -52,7 +57,6 @@ def create_app(test_config=None):               # test_config - independent from
 
     @app.route('/', methods=['GET'])
     def index_get():
-        raise API_Exception("ADA", 405)
         return jsonify({"msg": "Hello World"}), 200
 
     # Import blueprints
