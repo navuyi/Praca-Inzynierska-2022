@@ -1,7 +1,7 @@
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import {useState} from "react";
 import React from "react";
-import isEmptyString from "../utils/isEmptyString";
+import isEmptyString from "../../utils/isEmptyString";
 
 function GuideNewTourPlan(props) {
     const [editMode, setEditMode] = useState(false);

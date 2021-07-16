@@ -4,7 +4,7 @@ import {Container, Row, Col} from "react-bootstrap";
 import {useState} from "react";
 
 // Images
-import image from '../images/home/rounded.png';
+import image from '../../images/home/rounded.png';
 
 
 function HomeWelcomeView(){

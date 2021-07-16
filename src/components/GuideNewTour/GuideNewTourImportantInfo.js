@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Row, Col, Button, Form} from "react-bootstrap";
-import isEmptyString from "../utils/isEmptyString";
+import isEmptyString from "../../utils/isEmptyString";
 
 export default function GuideNewTourImportantInfo(props){
 

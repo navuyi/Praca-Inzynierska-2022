@@ -1,13 +1,14 @@
 import NavbarComponent from "../components/NavbarComponent";
 import Footer from "../components/Footer";
 
-import {Row, Col, Container, ListGroup} from "react-bootstrap"
+import {Row, Col, Container, ListGroup, FormControl} from "react-bootstrap"
 import TourPlacesSelect from "../components/TourPlacesSelect";
-import {MuiPickersUtilsProvider, KeyboardDatePicker} from "@material-ui/pickers"
+import TextField from '@material-ui/core/TextField';
 
-import DateFnsUtils from '@date-io/date-fns';
+
+
 import {Slider} from "@material-ui/core";
-import {useState} from "react";
+import React, {useState} from "react";
 
 function Tours(){
     const [tourPrice, setTourPrice] = useState([20, 900]);
@@ -47,24 +48,18 @@ function Tours(){
                                 </div>
                                 <div className={"tours-filters-element"}>
                                     <label> Data początkowa </label>
-                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-
-                                            <KeyboardDatePicker
-                                                disableToolbar
-                                                variant="inline"
-                                                format="MM/dd/yyyy"
-                                                margin="normal"
-                                                id="date-picker-inline"
-                                                label="Date picker inline"
-
-                                                KeyboardButtonProps={{
-                                                    'aria-label': 'change date',
-                                                }}
-                                            />
-
-                                    </MuiPickersUtilsProvider>
+                                    <FormControl
+                                        id="start_date"
+                                        type="date"
+                                    />
                                 </div>
-
+                                <div className={"tours-filters-element"}>
+                                    <label> Data końcowa </label>
+                                    <FormControl
+                                        id="start_date"
+                                        type="date"
+                                    />
+                                </div>
                             </div>
 
                         </Row>

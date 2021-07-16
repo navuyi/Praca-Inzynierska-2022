@@ -1,12 +1,12 @@
 import {Container, Row, Col, Form, Button, FormControl} from "react-bootstrap";
 import {useState, useEffect, Fragment} from 'react';
 import FormData from 'form-data';
-import GuideNewTourInputs from "../../components/GuideNewTourInputs";
-import GuideNewTourPlan from "../../components/GuideNewTourPlan";
-import GuideNewTourElectivesSelector from "../../components/GuideNewTourElectivesSelector";
-import GuideNewTourImageGallery from "../../components/GuideNewTourImageGallery";
-import GuideNewTourPriceList from "../../components/GuideNewTourPriceList";
-import GuideNewTourImportantInfo from "../../components/GuideNewTourImportantInfo";
+import GuideNewTourInputs from "../../components/GuideNewTour/GuideNewTourInputs";
+import GuideNewTourPlan from "../../components/GuideNewTour/GuideNewTourPlan";
+import GuideNewTourElectivesSelector from "../../components/GuideNewTour/GuideNewTourElectivesSelector";
+import GuideNewTourImageGallery from "../../components/GuideNewTour/GuideNewTourImageGallery";
+import GuideNewTourPriceList from "../../components/GuideNewTour/GuideNewTourPriceList";
+import GuideNewTourImportantInfo from "../../components/GuideNewTour/GuideNewTourImportantInfo";
 import Separator from "../../components/Separator";
 import SeparatorShort from "../../components/SeparatorShort";
 

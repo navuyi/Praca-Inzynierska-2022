@@ -1,7 +1,7 @@
 import React from "react";
 import {useState} from "react";
 import {Row, Col, Container, Form, Button} from "react-bootstrap"
-import isEmptyString from "../utils/isEmptyString";
+import isEmptyString from "../../utils/isEmptyString";
 
 export default function GuideNewTourPriceList(props){
     const [input, setInput] = useState("");

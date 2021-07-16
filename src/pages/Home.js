@@ -1,8 +1,8 @@
 // Components
 import NavbarComponent from "../components/NavbarComponent";
-import HomeWelcomeView from "../components/HomeWelcomeView";
-import HomeTourPanel from "../components/HomeTourPanel";
-import HomeInfoPanel from "../components/HomeInfoPanel";
+import HomeWelcomeView from "../components/Home/HomeWelcomeView";
+import HomeTourPanel from "../components/Home/HomeTourPanel";
+import HomeInfoPanel from "../components/Home/HomeInfoPanel";
 import Footer from "../components/Footer";
 
 // Dependencies
