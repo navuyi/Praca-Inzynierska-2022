@@ -3,6 +3,9 @@
     padding: 3em 0;
     width: 100%;
 
+    position: relative;
+
+    bottom: 0;
 }
 .footer img{
     width: 40px;

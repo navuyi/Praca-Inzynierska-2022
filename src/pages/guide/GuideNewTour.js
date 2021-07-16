@@ -15,41 +15,20 @@ import {create_tour} from "../../API_CALLS/create_tour";
 
 
 import {Alert} from "@material-ui/lab";
+import {useHistory} from "react-router-dom";
 
 
 // Create form data - it changes on every render
 const formData = new FormData();
 
 function GuideNewTour(){
+    const history = useHistory();
+
     // Create data for post submit informations
-    const [submitInfo, setSubmitInfo] = useState({
+    const [errorInfo, setErrorInfo] = useState({
         visible: false,
-        severity: "success",        // success or error
-        variant: "filled",
-        text: "Oferta założona pomyślnie"
+        text: ""
     });
-
-
-    async function clearData(){
-        const lastInfoState = submitInfo;
-
-        await setMainUrl("");
-        await setTourData(empty_tour_data);
-        await setElectives({
-            priceList: false,
-            importantInfo: false,
-            imageGallery: false
-        })
-        await setPriceList([])
-        await setImportantInfo([])
-
-        // clear form data
-        for(let key of formData.keys()){
-            formData.delete(key);
-        }
-        await setSubmitInfo(lastInfoState);
-    }
-
     const [mainUrl, setMainUrl] = useState("");
     const empty_tour_data = {
         guide_id: 1,  // For now it is set to 1 later it will be fetched from cookie or sth
@@ -72,8 +51,7 @@ function GuideNewTour(){
     const [importantInfo, setImportantInfo] = useState([]);
 
     useEffect(()=>{
-        const update = {...submitInfo, visible: false}
-        setSubmitInfo(update);
+        setErrorInfo({...errorInfo, visible: false});
     }, [tourData, priceList, importantInfo, electives, mainUrl])
 
 
@@ -117,22 +95,15 @@ function GuideNewTour(){
         create_tour(formData)
             .then(res=>{
                 const data = res.data;
-                clearData();
-                setSubmitInfo({
-                    visible: true,
-                    variant: "filled",
-                    severity: "success",
-                    text: data.message
-                })
+                // Redirect to success page
+                history.push("/account/guide/new-tour-success");
             })
             .catch(err=>{
                 const data = err.response.data;
-                setSubmitInfo({
+                setErrorInfo({
                     visible: true,
-                    variant: "filled",
-                    severity: "error",
                     text: data.message
-                })
+                });
             })
     }
 
@@ -175,8 +146,8 @@ function GuideNewTour(){
 
                     <Row className={"mt-5 d-flex justify-content-center pb-5"}>
                         {
-                            submitInfo.visible ?
-                                <Alert severity={submitInfo.severity} variant={submitInfo.variant} > {submitInfo.text} </Alert> :
+                            errorInfo.visible ?
+                                <Alert severity={"error"} variant={"filled"}> {errorInfo.text} </Alert> :
                                 <Button className={"w-50 pt-3 pb-3"} type="submit"> Opublikuj ofertę wycieczki </Button>
                         }
                     </Row>

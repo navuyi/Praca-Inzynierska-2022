@@ -34,6 +34,7 @@ function TourPlacesSelect(props){
         const update = {...props.tourData, ["tour_places"]: tmp_places}
         props.setTourData(update);
     }
+    const style = props.style;
     return(
         <AsyncSelect
             placeholder="Miejscowość"
@@ -41,6 +42,7 @@ function TourPlacesSelect(props){
             loadOptions={fetchTourPlaces}
             onChange = {handleChange}
             required
+            style = {style}
         />
     )
 }

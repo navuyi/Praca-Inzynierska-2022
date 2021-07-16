@@ -9,7 +9,7 @@ import SideNavbarLink from "../../components/SideNavbarLink";
 import GuideNewTour from "./GuideNewTour";
 import GuideOffers from "./GuideOffers";
 import GuideProfile from "./GuideProfile";
-
+import GuideNewTourSuccess from "./GuideNewTourSuccess";
 
 // Dependencies
 import {Container, Row, Col} from "react-bootstrap";
@@ -17,12 +17,20 @@ import {Switch, Route} from 'react-router-dom';
 
 function Guide(){
 
+    const style={
+        position: "relative",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "stretch",
+
+    }
 
     return(
-        <div className="guide">
+        <div className="guide" style={style}>
             <NavbarComponent />
-            <Container fluid style={{marginTop: "0em"}}>
-                <Row>
+            <Container fluid className={"h-100"} style={{marginTop: "0em", top: "0", flexGrow: "1"}}>
+                <Row style={{minHeight: "75vh"}}>
                     <Col lg={2} sm={12} style={{padding: "0"}}>
                         <SideNavbar title="Panel przewodnika">
                             <SideNavbarLink
@@ -43,6 +51,9 @@ function Guide(){
                         <Switch>
                             <Route exact path="/account/guide/new-tour">
                                 <GuideNewTour />
+                            </Route>
+                            <Route exact path={"/account/guide/new-tour-success"}>
+                                <GuideNewTourSuccess />
                             </Route>
                             <Route exact path="/account/guide/offers">
                                 <GuideOffers />

@@ -2,5 +2,35 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: space-between;
+}
+
+.tours .tours-filters-container{
+    background-color: rgb(34,34,34);
+    width: 100%;
+
+    padding: 1em 1em;
+    margin-top: 20%;
+
+    border-radius: 1em;
+
+}
+.tours .tours-filters-container h1{
+    text-align: center;
+    margin: 0.5em 0;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
+    color: whitesmoke;
+}
+.tours-filters-container .tours-filters-element{
+    margin: 1em 0;
+    padding: 0.5em 0.5em;
+    border-radius: 1em;
+    border: 1px solid whitesmoke;
+}
+
+.tours-filters-container .tours-filters-element label{
+    color: whitesmoke;
+    font-size: 1.3rem;
+    margin-bottom: 0.5em;
 }
