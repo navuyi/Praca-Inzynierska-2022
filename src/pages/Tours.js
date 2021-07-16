@@ -1,7 +1,7 @@
 import NavbarComponent from "../components/NavbarComponent";
 import Footer from "../components/Footer";
 
-import {Row, Col, Container, ListGroup, FormControl} from "react-bootstrap"
+import {Row, Col, Container, ListGroup, FormControl, Button} from "react-bootstrap"
 import TourPlacesSelect from "../components/TourPlacesSelect";
 
 import ToursPriceSlider from "../components/Tours/ToursPriceSlider";
@@ -11,8 +11,10 @@ import ToursPriceSlider from "../components/Tours/ToursPriceSlider";
 import React, {useState} from "react";
 
 function Tours(){
-    const [tourPrice, setTourPrice] = useState([20, 900]);
-
+    const [tourPrice, setTourPrice] = useState([20,900])
+    const [filterData, setFilterData] = useState({
+        tourPlaces: [],
+    })
 
     return(
     <div className="tours">
@@ -26,7 +28,10 @@ function Tours(){
                                 <h1> Filtry </h1>
                                 <div className={"tours-filters-element"}>
                                   <label> Miejsce </label>
-                                  <TourPlacesSelect />
+                                  <TourPlacesSelect
+                                    tourData={filterData}
+                                    setTourData={setFilterData}
+                                  />
                                 </div>
                                 <div className={"tours-filters-element"}>
                                     <label> Przedział cenowy </label>
@@ -34,6 +39,10 @@ function Tours(){
                                         tourPrice={tourPrice}
                                         setTourPrice={setTourPrice}
                                     />
+                                    <div className={"price-indicator"}>
+                                        <Button variant={"light"}> {tourPrice[0]} </Button>
+                                        <Button variant={"light"}> {tourPrice[1]} </Button>
+                                    </div>
                                 </div>
                                 <div className={"tours-filters-element"}>
                                     <label> Data początkowa </label>

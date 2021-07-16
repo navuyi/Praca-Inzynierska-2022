@@ -26,6 +26,7 @@ const fetchTourPlaces = (inputValue, callback) => {
 
 
 function TourPlacesSelect(props){
+
     const handleChange = (selectedOptions) => {
         const tmp_places = [];
         selectedOptions.map((item)=>{

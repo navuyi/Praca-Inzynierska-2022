@@ -34,3 +34,11 @@
     font-size: 1.1rem;
     margin-bottom: 0.5em;
 }
+
+.tours-filters-element  .price-indicator{
+    display: flex;
+    justify-content: space-around;
+}
+.tours-filters-element .price-indicator button{
+    width: 30%;
+}

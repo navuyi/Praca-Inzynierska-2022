@@ -4,8 +4,7 @@ import {Slider} from "@material-ui/core";
 function ToursPriceSlider(props){
 
     function handleChange(e, newValue){
-        props.setTourPrice(newValue)
-        console.log(newValue)
+        props.setTourPrice(newValue);
     }
 
     return(
