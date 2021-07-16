@@ -3,21 +3,16 @@ import Footer from "../components/Footer";
 
 import {Row, Col, Container, ListGroup, FormControl} from "react-bootstrap"
 import TourPlacesSelect from "../components/TourPlacesSelect";
-import TextField from '@material-ui/core/TextField';
+
+import ToursPriceSlider from "../components/Tours/ToursPriceSlider";
 
 
 
-import {Slider} from "@material-ui/core";
 import React, {useState} from "react";
 
 function Tours(){
     const [tourPrice, setTourPrice] = useState([20, 900]);
-    function handleChange(e, newValue){
-        if(e.target.id === "tour-price"){
-            setTourPrice(newValue)
-            console.log(newValue)
-        }
-    }
+
 
     return(
     <div className="tours">
@@ -35,15 +30,9 @@ function Tours(){
                                 </div>
                                 <div className={"tours-filters-element"}>
                                     <label> Przedział cenowy </label>
-                                    <Slider
-                                        id="tour-price"
-                                        min={20}
-                                        max={1000}
-                                        step={1}
-                                        onChange={handleChange}
-                                        value={tourPrice}
-                                        color={"secondary"}
-                                        valueLabelDisplay="auto"
+                                    <ToursPriceSlider
+                                        tourPrice={tourPrice}
+                                        setTourPrice={setTourPrice}
                                     />
                                 </div>
                                 <div className={"tours-filters-element"}>
