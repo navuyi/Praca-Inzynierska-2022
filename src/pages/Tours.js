@@ -4,9 +4,10 @@ import React, {useState} from "react";
 import NavbarComponent from "../components/NavbarComponent";
 import Footer from "../components/Footer";
 import {Row, Col, Container, Button, FormControl, Dropdown, DropdownButton} from "react-bootstrap"
-import Select from "react-select"
+import {Pagination} from "@material-ui/lab";
 import TourPlacesSelect from "../components/TourPlacesSelect";
-
+import {createTheme} from "@material-ui/core";
+import {ThemeProvider} from "@material-ui/core";
 import ToursPriceSlider from "../components/Tours/ToursPriceSlider";
 import ToursTourPanel from "../components/Tours/ToursTourPanel";
 
@@ -17,9 +18,16 @@ function Tours(){
     const [filterData, setFilterData] = useState({
         tourPlaces: [],
     })
-
-
-
+    const theme = createTheme({
+        palette: {
+            primary: {
+                light: '#ffffff',
+                main: '#ffffff',
+                dark: '#ffffff',
+                contrastText: '#ffffff'
+            },
+        },
+    });
 
     const options = [
         { value: 'chocolate', label: 'Chocolate' },
@@ -100,7 +108,9 @@ function Tours(){
                             />
                         </div>
                         <div className={"center-footer"}>
-                            <Button> Paginacja here </Button>
+                            <ThemeProvider theme={theme}>
+                                <Pagination count={12} variant="outlined" color={"primary"} />
+                            </ThemeProvider>
                         </div>
                     </Container>
                 </Col>

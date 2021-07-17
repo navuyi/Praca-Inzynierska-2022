@@ -33,3 +33,18 @@
     background-color: rgba(34,34,34, 0.5);
     border-radius: 1em;
 }
+.toursTourPanel .tour-panel-info:hover{
+    background-color: rgba(34,34,34,0.8)
+}
+.toursTourPanel .tour-panel-label{
+    margin: 0.5em 0;
+}
+
+.toursTourPanel .tour-panel-label p{
+    margin: 0;
+    padding: 0;
+    color: whitesmoke;
+}
+.toursTourPanel .tour-panel-label span{
+    font-weight: bold;
+}

@@ -2,6 +2,13 @@ import React from "react"
 import {Container, Row, Col, Button} from "react-bootstrap"
 import image from "../../images/home/tour01.jpg"
 
+import PersonIcon from '@material-ui/icons/Person';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import GroupIcon from '@material-ui/icons/Group';
+import DateRangeIcon from '@material-ui/icons/DateRange';
+
+import TourPanelLabel from "./TourPanelLabel";
+
 const ToursTourPanel = (props) => {
 
 
@@ -20,8 +27,27 @@ const ToursTourPanel = (props) => {
                             Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
                         </p>
                     </Col>
-                    <Col xl={6} className={"tour-panel-info d-flex flex-column align-items-center justify-content-center"}>
-                        <p></p>
+                    <Col xl={6} className={"tour-panel-info d-flex flex-column align-items-start justify-content-center"}>
+                       <TourPanelLabel
+                            image={<PersonIcon fontSize={"medium"} />}
+                            text="Przewodnik"
+                            value="John Doe"
+                       />
+                        <TourPanelLabel
+                            image={<AttachMoneyIcon fontSize={"medium"} />}
+                            text="Cena"
+                            value="XYZ"
+                        />
+                        <TourPanelLabel
+                            image={<DateRangeIcon fontSize={"medium"} />}
+                            text="Data"
+                            value=" od dd/mm/YY do dd/mm/YY"
+                        />
+                        <TourPanelLabel
+                            image={<GroupIcon fontSize={"medium"} />}
+                            text="Miejsca"
+                            value="xx/YY"
+                        />
                     </Col>
                 </Row>
             </Col>
