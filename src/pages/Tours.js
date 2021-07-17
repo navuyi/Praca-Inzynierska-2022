@@ -8,7 +8,7 @@ import Select from "react-select"
 import TourPlacesSelect from "../components/TourPlacesSelect";
 
 import ToursPriceSlider from "../components/Tours/ToursPriceSlider";
-
+import ToursTourPanel from "../components/Tours/ToursTourPanel";
 
 
 
@@ -86,16 +86,18 @@ function Tours(){
                             </DropdownButton>
                         </div>
                         <div className={"center-body"}>
-                            <div className={"tour-panel"}>
+                            <ToursTourPanel
 
-                            </div>
-                            <div className={"tour-panel"}>
+                            />
+                            <ToursTourPanel
 
-                            </div>
-                            <div className={"tour-panel"}>
+                            />
+                            <ToursTourPanel
 
-                            </div>
+                            />
+                            <ToursTourPanel
 
+                            />
                         </div>
                         <div className={"center-footer"}>
                             <Button> Paginacja here </Button>

@@ -11,7 +11,7 @@
 
     padding: 1em 0.5em;
     border-radius: 1em;
-    margin: 0 0.5em;
+    margin: 0 1em;
 }
 .tours .tours-filters-container h1{
     text-align: center;
@@ -19,6 +19,7 @@
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 600;
     color: whitesmoke;
+    font-size: 2rem;
 }
 .tours-filters-container .tours-filters-element{
     margin: 1em 0;

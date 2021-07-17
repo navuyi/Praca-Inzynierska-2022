@@ -1,0 +1,35 @@
+.toursTourPanel{
+    background-image: linear-gradient(15deg, rgb(34,34,34), rgb(69, 69, 69));
+    transition-duration: 0.3s;
+    cursor: pointer;
+    user-select: none;
+
+    margin: 1em 0;
+    padding: 1em 1em;
+
+    border-radius: 1em;
+
+    color: white;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.toursTourPanel:hover{
+    background-image: linear-gradient(15deg, #b47901, #d99d03);
+    background-image: linear-gradient(15deg, #004187, #308dff);
+}
+
+.toursTourPanel .tour-panel-main-img{
+    width: 100%;
+    border-radius: 1em;
+}
+.toursTourPanel .tour-panel-header{
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+.toursTourPanel .tour-panel-description{
+    font-size: 1.1rem;
+}
+.toursTourPanel .tour-panel-info{
+    background-color: rgba(34,34,34, 0.5);
+    border-radius: 1em;
+}

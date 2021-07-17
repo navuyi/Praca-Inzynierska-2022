@@ -34,7 +34,7 @@ import './styles/newMessage.css';
 import './styles/oldMessages.css';
 import './styles/sentMessages.css';
 import './styles/deletedMessages.css';
-
+import './styles/toursTourPanel.css';
 
 
 
