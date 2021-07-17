@@ -1,14 +1,16 @@
+
+import React, {useState} from "react";
+
 import NavbarComponent from "../components/NavbarComponent";
 import Footer from "../components/Footer";
-import {Row, Col, Container, Button, FormControl} from "react-bootstrap"
-import Select from 'react-select'
+import {Row, Col, Container, Button, FormControl, Dropdown, DropdownButton} from "react-bootstrap"
+import Select from "react-select"
 import TourPlacesSelect from "../components/TourPlacesSelect";
 
 import ToursPriceSlider from "../components/Tours/ToursPriceSlider";
 
 
 
-import React, {useState} from "react";
 
 function Tours(){
     const [tourPrice, setTourPrice] = useState([20,900])
@@ -17,6 +19,13 @@ function Tours(){
     })
 
 
+
+
+    const options = [
+        { value: 'chocolate', label: 'Chocolate' },
+        { value: 'strawberry', label: 'Strawberry' },
+        { value: 'vanilla', label: 'Vanilla' }
+    ]
 
     return(
     <div className="tours">
@@ -68,14 +77,24 @@ function Tours(){
                 <Col lg={8} sm={12} style={{padding: "0"}} >
                     <Container style={{marginTop: "2rem"}}>
                         <div className={"center-header"}>
-
+                            <p> Wyszukano ofert: <span> 56 </span> </p>
+                            <DropdownButton id="dropdown-basic-button" title="Sortuj" style={{height: "38px"}} variant="danger">
+                                <Dropdown.Item href="#/action-1"> Cena rosnąco </Dropdown.Item>
+                                <Dropdown.Item href="#/action-2"> Cena malejąco </Dropdown.Item>
+                                <Dropdown.Item href="#/action-3"> Czas trwania rosnąco </Dropdown.Item>
+                                <Dropdown.Item href="#/action-3"> Czas trwania malejąco </Dropdown.Item>
+                            </DropdownButton>
                         </div>
                         <div className={"center-body"}>
-                            <div className={"tour-panel"}></div>
-                            <div className={"tour-panel"}></div>
-                            <div className={"tour-panel"}></div>
-                            <div className={"tour-panel"}></div>
-                            <div className={"tour-panel"}></div>
+                            <div className={"tour-panel"}>
+
+                            </div>
+                            <div className={"tour-panel"}>
+
+                            </div>
+                            <div className={"tour-panel"}>
+
+                            </div>
 
                         </div>
                         <div className={"center-footer"}>
