@@ -9,22 +9,20 @@
     background-color: rgb(34,34,34);
     width: 100%;
 
-    padding: 1em 1em;
-    margin-top: 20%;
-
+    padding: 1em 0.5em;
     border-radius: 1em;
-
+    margin: 0 0.5em;
 }
 .tours .tours-filters-container h1{
     text-align: center;
-    margin: 0.5em 0;
+    margin: 0em 0;
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 600;
     color: whitesmoke;
 }
 .tours-filters-container .tours-filters-element{
     margin: 1em 0;
-    padding: 0.5em 0.5em;
+    padding: 0.6em 1em;
     border-radius: 1em;
     border: 1px solid whitesmoke;
 }
@@ -41,4 +39,26 @@
 }
 .tours-filters-element .price-indicator button{
     width: 30%;
+}
+
+.tours .center-header{
+    background-color: rgb(34,34,34);
+    width: 100%;
+    height: 50px;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    margin-bottom: 1em;
+}
+.tours .center-footer{
+    background-color: goldenrod;
+    width: 100%;
+    height: 50px;
+    border-radius: 1em;
+    margin-bottom: 1em;
+}
+.tours .tour-panel{
+    width: 100%;
+    height: 300px;
+    background-color: #979796;
+    margin: 2em 0;
 }

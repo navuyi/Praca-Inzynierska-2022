@@ -1,7 +1,7 @@
 import NavbarComponent from "../components/NavbarComponent";
 import Footer from "../components/Footer";
-
-import {Row, Col, Container, ListGroup, FormControl, Button} from "react-bootstrap"
+import {Row, Col, Container, Button, FormControl} from "react-bootstrap"
+import Select from 'react-select'
 import TourPlacesSelect from "../components/TourPlacesSelect";
 
 import ToursPriceSlider from "../components/Tours/ToursPriceSlider";
@@ -16,13 +16,15 @@ function Tours(){
         tourPlaces: [],
     })
 
+
+
     return(
     <div className="tours">
         <NavbarComponent />
         <Container fluid className={"h-100"} style={{marginTop: "0em", top: "0", flexGrow: "1"}}>
             <Row style={{minHeight: "75vh"}}>
                 <Col lg={2} sm={12} style={{backgroundColor: "orange", padding: "0"}}>
-                    <Container>
+                    <Container style={{position: "sticky", top: "3rem", padding: "2rem 0"}}>
                         <Row style={{margin: "0 0"}}>
                             <div className={"tours-filters-container"}>
                                 <h1> Filtry </h1>
@@ -64,7 +66,22 @@ function Tours(){
                     </Container>
                 </Col>
                 <Col lg={8} sm={12} style={{padding: "0"}} >
-                    asd
+                    <Container style={{marginTop: "2rem"}}>
+                        <div className={"center-header"}>
+
+                        </div>
+                        <div className={"center-body"}>
+                            <div className={"tour-panel"}></div>
+                            <div className={"tour-panel"}></div>
+                            <div className={"tour-panel"}></div>
+                            <div className={"tour-panel"}></div>
+                            <div className={"tour-panel"}></div>
+
+                        </div>
+                        <div className={"center-footer"}>
+                            <Button> Paginacja here </Button>
+                        </div>
+                    </Container>
                 </Col>
                 <Col lg={2} sm={12} style={{padding: "0"}} >
 
