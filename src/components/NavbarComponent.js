@@ -13,7 +13,7 @@ function NavbarComponent(){
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav" className={"justify-content-center"}>
                 <Nav.Link as={Link} to="/"><span className="white">Główna</span></Nav.Link>
-                <Nav.Link as={Link} to="/informations"><span className="white">Informacje</span></Nav.Link>
+                <Nav.Link as={Link} to="/information"><span className="white">Informacje</span></Nav.Link>
                 <Nav.Link as={Link} to="/tours"><span className="white">Wycieczki</span></Nav.Link>
                 {
                     isLogged ?

@@ -1,15 +1,15 @@
 
 import React, {useState} from "react";
 
-import NavbarComponent from "../components/NavbarComponent";
-import Footer from "../components/Footer";
+import NavbarComponent from "../../components/NavbarComponent";
+import Footer from "../../components/Footer";
 import {Row, Col, Container, Button, FormControl, Dropdown, DropdownButton} from "react-bootstrap"
 import {Pagination} from "@material-ui/lab";
-import TourPlacesSelect from "../components/TourPlacesSelect";
+import TourPlacesSelect from "../../components/TourPlacesSelect";
 import {createTheme} from "@material-ui/core";
 import {ThemeProvider} from "@material-ui/core";
-import ToursPriceSlider from "../components/Tours/ToursPriceSlider";
-import ToursTourPanel from "../components/Tours/ToursTourPanel";
+import ToursPriceSlider from "../../components/Tours/ToursPriceSlider";
+import ToursTourPanel from "../../components/Tours/ToursTourPanel";
 
 
 

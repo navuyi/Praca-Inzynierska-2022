@@ -3,8 +3,9 @@ import {Switch, Route} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 // Pages
 import Home from "./pages/Home";
-import Informations from "./pages/Informations";
-import Tours from "./pages/Tours";
+import Information from "./pages/Informations";
+import Tours from "./pages/tours/Tours";
+import TourDetails from "./pages/tours/TourDetails";
 import Account from "./pages/Account";
 import Login from './pages/Login';
 import Register from "./pages/Register";
@@ -35,7 +36,7 @@ import './styles/oldMessages.css';
 import './styles/sentMessages.css';
 import './styles/deletedMessages.css';
 import './styles/toursTourPanel.css';
-
+import './styles/tourDetails.css';
 
 
 
@@ -46,11 +47,14 @@ function App() {
         <Route exact path="/">
             <Home />
         </Route>
-        <Route path="/informations">
-            <Informations />
+        <Route path="/information">
+            <Information />
         </Route>
-        <Route path="/tours">
+        <Route exact path="/tours">
             <Tours />
+        </Route>
+        <Route exact path={"/tours/tour"}>
+            <TourDetails />
         </Route>
         <Route exact path="/account">
             <Account />
