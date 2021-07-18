@@ -1,0 +1,17 @@
+.tour-panel-label{
+    margin: 0.5em 0;
+}
+
+.tour-panel-label p{
+    margin: 0;
+    padding: 0;
+    color: whitesmoke;
+}
+.tour-panel-label span{
+    font-weight: bold;
+    color: whitesmoke;
+}
+.tour-panel-label svg{
+    margin-right: 10px;
+    color: whitesmoke;
+}
