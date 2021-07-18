@@ -68,7 +68,7 @@ function Register(){
     return(
         <div className="register">
             <NavbarComponent />
-                <Container className={"cont col-xl-4 col-lg-6 d-flex flex-column align-items-center"}>
+                <Container className={"cont col-xl-4 col-lg-6 d-flex flex-column align-items-center"} style={{flexGrow: "1"}}>
                     <Row className={"d-flex justify-content-center"}>
                         <h1>Formularz rejestracyjny</h1>
                     </Row>

@@ -83,7 +83,7 @@ function TourDetails(){
                                         text="Numer tel."
                                         value="xxx yyy zzz"
                                     />
-                                    <Button variant={"outline-light w-100 mt-4"}> Masz pytanie? Napisz. </Button>
+                                    <Button variant={"outline-light w-100 mt-4"}> Masz pytanie? Napisz wiadomość. </Button>
                                 </Col>
                             </Row>
                             <Separator />

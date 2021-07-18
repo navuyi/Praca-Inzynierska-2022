@@ -11,11 +11,12 @@ function TourImportantInfo(){
         color: "#d9534f"
     }
     const style = {
-        backgroundColor: "#222222",
+        border: "2px solid #d9534f",
         borderRadius: "0.5em",
-        color: "white",
+        color: "#222222",
         fontFamily: "Source Sans Pro, sans-serif",
         fontWeight: "bold",
+        fontSize: "1.1rem",
         padding: "0.5em 1em",
         margin: "0.1em 0"
     }
