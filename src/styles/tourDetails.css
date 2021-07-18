@@ -6,9 +6,9 @@
 }
 .tourDetails .details-body{
     background-color: whitesmoke;
-    margin-top: 2em;
-    margin-bottom: 2em;
-    border-radius: 1em;
+
+
+
     box-shadow: 0 0 20px 5px rgb(34,34,34);
 }
 .tourDetails h1{
@@ -48,6 +48,11 @@
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
 }
+.tourDetails h3{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    color: rgb(34,34,34);
+}
 
 .tourDetails .tour-plan-point{
     font-family: 'Source Sans Pro', sans-serif;
@@ -63,3 +68,4 @@
 
     border-radius: 0.5em;
 }
+

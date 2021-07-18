@@ -14,6 +14,9 @@ import GroupIcon from "@material-ui/icons/Group";
 import EmailIcon from '@material-ui/icons/Email';
 import PhoneIcon from '@material-ui/icons/Phone';
 
+import TourPriceList from "../../components/Tours/TourPriceList";
+import TourImportantInfo from "../../components/Tours/TourImportantInfo";
+
 function TourDetails(){
 
     // I will use query string to indicate tour id and then fetch full data
@@ -30,7 +33,7 @@ function TourDetails(){
             <Container fluid className={"h-100"} style={{marginTop: "0em", top: "0", flexGrow: "1"}}>
                 <Row style={{minHeight: "75vh"}}>
                     <Col lg={2} sm={12} style={{backgroundColor: "orange", padding: "0"}} className={"d-flex justify-content-center align-items-center"}>
-                        <Button variant={"dark"}> Poprzednia </Button>
+
                     </Col>
                     <Col lg={8} sm={12} style={{padding: "0"}} >
                         <Container className={"details-body d-flex flex-column align-items-center justify-content-center"}>
@@ -99,10 +102,19 @@ function TourDetails(){
                                 }
                             </Row>
                             <Separator />
+                            <Row className={"w-100 col-10 d-flex justify-content-between"} >
+                                <Col xl={6} className={"d-flex align-items-center flex-column"}>
+                                    <TourPriceList />
+                                </Col>
+                                <Col xl={6} className={"d-flex align-items-center flex-column"}>
+                                   <TourImportantInfo />
+                                </Col>
+                            </Row>
+                            <Separator />
                         </Container>
                     </Col>
                     <Col lg={2} sm={12} style={{backgroundColor: "orange", padding: "0"}} className={"d-flex justify-content-center align-items-center"}>
-                        <Button variant={"dark"}> Następna </Button>
+
                     </Col>
                 </Row>
             </Container>
