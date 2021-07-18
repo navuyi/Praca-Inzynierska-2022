@@ -10,14 +10,17 @@ import {createTheme} from "@material-ui/core";
 import {ThemeProvider} from "@material-ui/core";
 import ToursPriceSlider from "../../components/Tours/ToursPriceSlider";
 import ToursTourPanel from "../../components/Tours/ToursTourPanel";
+import {useHistory} from "react-router-dom";
 
 
 
 function Tours(){
+    const history = useHistory();
     const [tourPrice, setTourPrice] = useState([20,900])
     const [filterData, setFilterData] = useState({
         tourPlaces: [],
     })
+    const [tours, setTours] = useState([1,2,3,4,5]) // numbers for now
     const theme = createTheme({
         palette: {
             primary: {
@@ -94,18 +97,16 @@ function Tours(){
                             </DropdownButton>
                         </div>
                         <div className={"center-body"}>
-                            <ToursTourPanel
+                            {
+                                tours.map((tour, index) => {
+                                    return(
+                                        <ToursTourPanel
+                                            tourId={123} // Change it when data is fetched from server
+                                        />
+                                    )
 
-                            />
-                            <ToursTourPanel
-
-                            />
-                            <ToursTourPanel
-
-                            />
-                            <ToursTourPanel
-
-                            />
+                                })
+                            }
                         </div>
                         <div className={"center-footer"}>
                             <ThemeProvider theme={theme}>

@@ -8,12 +8,14 @@ import GroupIcon from '@material-ui/icons/Group';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 
 import TourPanelLabel from "./TourPanelLabel";
+import {useHistory} from "react-router-dom";
 
 const ToursTourPanel = (props) => {
-
+    const history = useHistory();
 
     return(
-        <Row className={"toursTourPanel"}>
+        <div  onClick={()=>{history.push(`/tours/tour?id=${props.tourId}`)}}>
+        <Row className={"toursTourPanel"} >
             <Col xl={5} className={"d-flex flex-column align-items-center justify-content-center"}>
                 <img src={image} alt={""} className={"tour-panel-main-img"}/>
             </Col>
@@ -31,7 +33,7 @@ const ToursTourPanel = (props) => {
                        <TourPanelLabel
                             image={<PersonIcon fontSize={"medium"} />}
                             text="Przewodnik"
-                            value="John Doe"
+                            value="Johny Deep"
                        />
                         <TourPanelLabel
                             image={<AttachMoneyIcon fontSize={"medium"} />}
@@ -52,6 +54,7 @@ const ToursTourPanel = (props) => {
                 </Row>
             </Col>
         </Row>
+        </div>
     )
 }
 

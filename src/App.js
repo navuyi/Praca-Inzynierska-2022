@@ -37,7 +37,7 @@ import './styles/sentMessages.css';
 import './styles/deletedMessages.css';
 import './styles/toursTourPanel.css';
 import './styles/tourDetails.css';
-
+import './styles/tourPanelLabel.css';
 
 
 function App() {
