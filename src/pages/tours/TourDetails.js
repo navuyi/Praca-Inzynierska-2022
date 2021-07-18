@@ -22,6 +22,8 @@ function TourDetails(){
     //const values = queryString.parse(search)
     //console.log(values);
 
+    const arr = [1,2,3,4,3]
+
     return(
         <div className={"tourDetails"}>
             <NavbarComponent/>
@@ -45,7 +47,7 @@ function TourDetails(){
                             </Row>
                             <Separator />
                             <Row className={"w-100 d-flex flex-row justify-content-around"}>
-                                <Col xl={5} className={"info-panel"}>
+                                <Col xl={5} className={"info-panel d-flex flex-column justify-content-start align-items-center mb-5 mb-xl-0"}>
                                     <TourPanelLabel
                                         image={<AttachMoneyIcon fontSize={"medium"} />}
                                         text="Cena"
@@ -62,7 +64,7 @@ function TourDetails(){
                                         value="xx/YY"
                                     />
                                 </Col>
-                                <Col xl={5} className={"info-panel"}>
+                                <Col xl={5} className={"info-panel d-flex flex-column justify-content-start align-items-center"}>
                                     <TourPanelLabel
                                         image={<PersonIcon fontSize={"medium"} />}
                                         text="Przewodnik"
@@ -78,7 +80,23 @@ function TourDetails(){
                                         text="Numer tel."
                                         value="xxx yyy zzz"
                                     />
+                                    <Button variant={"outline-light w-100 mt-4"}> Masz pytanie? Napisz. </Button>
                                 </Col>
+                            </Row>
+                            <Separator />
+                            <Row className={"w-100 col-11"}>
+                                <h2> Plan wycieczki </h2>
+                            </Row>
+                            <Row className={"w-100 col-10"}>
+                                {
+                                    arr.map((item, index)=>{
+                                        return(
+                                            <div className={"tour-plan-point"}>
+                                                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi
+                                            </div>
+                                        )
+                                    })
+                                }
                             </Row>
                             <Separator />
                         </Container>
