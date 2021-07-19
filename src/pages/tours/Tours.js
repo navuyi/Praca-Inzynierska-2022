@@ -6,38 +6,54 @@ import Footer from "../../components/Footer";
 import {Row, Col, Container, Button, FormControl, Dropdown, DropdownButton} from "react-bootstrap"
 import {Pagination} from "@material-ui/lab";
 import TourPlacesSelect from "../../components/TourPlacesSelect";
-import {createTheme} from "@material-ui/core";
-import {ThemeProvider} from "@material-ui/core";
+import {useQueryParams, NumberParam, StringParam, withDefault, ArrayParam, useQueryParam} from "use-query-params";
 import ToursPriceSlider from "../../components/Tours/ToursPriceSlider";
 import ToursTourPanel from "../../components/Tours/ToursTourPanel";
 import {useHistory} from "react-router-dom";
-
+import {useEffect} from "react";
 
 
 function Tours(){
     const history = useHistory();
     const [tourPrice, setTourPrice] = useState([20,900])
+    const [query, setQuery] = useQueryParams({
+        x: withDefault(NumberParam, 39),
+        q: StringParam,
+        tourDate: withDefault(ArrayParam, ["", ""]),
+    });
+
+
+
     const [filterData, setFilterData] = useState({
         tourPlaces: [],
     })
-    const [tours, setTours] = useState([1,2,3,4,5]) // numbers for now
-    const theme = createTheme({
-        palette: {
-            primary: {
-                light: '#ffffff',
-                main: '#ffffff',
-                dark: '#ffffff',
-                contrastText: '#ffffff'
-            },
-        },
-    });
+    const [tours, setTours] = useState([1,2,3,4,522]) // numbers for now
+
+
+
+
+    function handleChange(e){
+        if(e.target.id === "start_date"){
+            const date = e.target.value;
+            const tmp = query;
+            tmp.tourDate[0]=date;
+            setQuery(tmp, 'push')
+        }
+        else if(e.target.id === "end_date"){
+            const date = e.target.value;
+            const tmp = query;
+            tmp.tourDate[1]=date;
+            console.log(tmp)
+            setQuery(tmp, 'push')
+        }
+    }
+
 
     const options = [
         { value: 'chocolate', label: 'Chocolate' },
         { value: 'strawberry', label: 'Strawberry' },
         { value: 'vanilla', label: 'Vanilla' }
     ]
-
     return(
     <div className="tours">
         <NavbarComponent />
@@ -71,13 +87,17 @@ function Tours(){
                                     <FormControl
                                         id="start_date"
                                         type="date"
+                                        value={query.tourDate[0]}
+                                        onChange={handleChange}
                                     />
                                 </div>
                                 <div className={"tours-filters-element"}>
                                     <label> Data końcowa </label>
                                     <FormControl
-                                        id="start_date"
+                                        id="end_date"
                                         type="date"
+                                        value={query.tourDate[1]}
+                                        onChange={handleChange}
                                     />
                                 </div>
                             </div>
@@ -101,6 +121,7 @@ function Tours(){
                                 tours.map((tour, index) => {
                                     return(
                                         <ToursTourPanel
+                                            key={index}
                                             tourId={123} // Change it when data is fetched from server
                                         />
                                     )
@@ -109,9 +130,7 @@ function Tours(){
                             }
                         </div>
                         <div className={"center-footer"}>
-                            <ThemeProvider theme={theme}>
-                                <Pagination count={12} variant="outlined" color={"primary"} />
-                            </ThemeProvider>
+                            <Pagination count={12} variant="outlined" color={"secondary"} />
                         </div>
                     </Container>
                 </Col>

@@ -81,7 +81,41 @@ paths:
     get:
       tags:
         - Tour
-        #TODO: Continue
+      summary: Returns limited number of tour's data and information about total search results and number of pages
+
+
+  "/tour/tour":
+    get:
+      tags:
+        - Tour
+      summary: Returns all informations about tour specified by its ID
+      parameters:
+        - in: query
+          name: tourId
+          schema:
+            type: integer
+            example: "310"
+          required: true
+          description: ID of tour which information will be returned
+      responses:
+        '200':
+          description: OK
+          content:
+            multipart/form-data:
+              schema:
+                #TODO: Continue
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Pożądana oferta nie została znaleziona
+
+
   "/tour/tags":
     get:
       tags:

@@ -10,13 +10,17 @@ import {createStore} from "redux";
 import {Provider} from "react-redux";
 import allReducers from "./redux/reducers";
 
+import {QueryParamProvider} from "use-query-params";
+
 const store = createStore(allReducers);
 
 ReactDOM.render(
   <BrowserRouter>
-      <Provider store={store}>
-          <App />
-      </Provider>
+      <QueryParamProvider>
+          <Provider store={store}>
+              <App />
+          </Provider>
+      </QueryParamProvider>
   </BrowserRouter>,
   document.getElementById('root')
 );
