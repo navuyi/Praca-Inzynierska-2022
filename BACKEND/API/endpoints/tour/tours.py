@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, jsonify
 from flask import request
 from API.handlers import APIException
 from API.endpoints.utils.defineSQLParams import sqlParams
@@ -39,10 +39,27 @@ def get_tours():
     ######
 
     ### Get filter applicable tours data ###
-    if not applicable_tours:
+    if not applicable_tours: # <-- Return with code 404 if no matches were found
         print("Not found")
         return {"msg": "Nie znaleziono ofert o podanych parametrach"}, 404
-    #TODO - get the data of apllicable tours and send it back to frontend
+    return_data = []
+    for tour_id in applicable_tours:
+        tour = {}
+        # Get general information about the tour
+        cursor().execute(f"SELECT * FROM tours WHERE id = %s", (tour_id,))
+        general_data = cursor().fetchall()
+
+        tour["general_data"] = general_data
+
+        # Get tour plan
+        cursor().execute(f"SELECT * FROM tour_plan_points WHERE tour_id = %s", (tour_id,))
+        tour_plan = cursor().fetchall()
+
+        tour["tour_plan"] = tour_plan
+        #T ODO - GET GOING - tour_ price lists etc
+
+        return_data.append(tour)
 
 
-    return {"msg": "OK"}, 200
+
+    return jsonify(return_data), 200

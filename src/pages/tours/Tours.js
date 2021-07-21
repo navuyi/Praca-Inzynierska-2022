@@ -49,10 +49,10 @@ function Tours(){
         console.log(params)
         axios.get(url, {params})
             .then(res => {
-                console.log(res)
+                console.log(res.data)
             })
             .catch(err => {
-                console.log(err.response)
+                console.log(err.response.tour_data)
             })
     }
 
