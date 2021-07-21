@@ -32,6 +32,7 @@ function TourPlacesSelect(props){
         selectedOptions.map((item)=>{
             tmp_places.push(item.value);
         })
+
         const update = {...props.tourData, ["tour_places"]: tmp_places}
         props.setTourData(update);
     }

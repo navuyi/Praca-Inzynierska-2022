@@ -1,52 +1,64 @@
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import NavbarComponent from "../../components/NavbarComponent";
 import Footer from "../../components/Footer";
 import {Row, Col, Container, Button, FormControl, Dropdown, DropdownButton} from "react-bootstrap"
 import {Pagination} from "@material-ui/lab";
 import TourPlacesSelect from "../../components/TourPlacesSelect";
-import {useQueryParams, NumberParam, StringParam, withDefault, ArrayParam, useQueryParam} from "use-query-params";
+
 import ToursPriceSlider from "../../components/Tours/ToursPriceSlider";
 import ToursTourPanel from "../../components/Tours/ToursTourPanel";
 import {useHistory} from "react-router-dom";
-import {useEffect} from "react";
-
+import {stringify} from "querystring"
+import axios from "axios";
 
 function Tours(){
     const history = useHistory();
-    const [tourPrice, setTourPrice] = useState([20,900])
-    const [query, setQuery] = useQueryParams({
-        x: withDefault(NumberParam, 39),
-        q: StringParam,
-        tourDate: withDefault(ArrayParam, ["", ""]),
-    });
 
 
 
     const [filterData, setFilterData] = useState({
-        tourPlaces: [],
+        tour_price: [20, 900],
+        tour_places: [],
+        tour_date: ["",""]
     })
-    const [tours, setTours] = useState([1,2,3,4,522]) // numbers for now
-
-
-
 
     function handleChange(e){
         if(e.target.id === "start_date"){
-            const date = e.target.value;
-            const tmp = query;
-            tmp.tourDate[0]=date;
-            setQuery(tmp, 'push')
-        }
-        else if(e.target.id === "end_date"){
-            const date = e.target.value;
-            const tmp = query;
-            tmp.tourDate[1]=date;
-            console.log(tmp)
-            setQuery(tmp, 'push')
+            const tmp_date = filterData.tour_date;
+            tmp_date[0] = e.target.value;
+            const update = {...filterData, tour_date: tmp_date}
+            setFilterData(update)
+        }else if(e.target.id === "end_date"){
+            const tmp_date = filterData.tour_date;
+            tmp_date[1] = e.target.value;
+            const update = {...filterData, tour_date: tmp_date}
+            setFilterData(update)
         }
     }
+
+    useEffect(()=>{
+        //console.log(stringify(filterData))
+        fetchData(stringify(filterData))
+    }, [filterData])
+
+    function fetchData(queryString){
+        const url = "http://167.99.143.194:5000/tour/tours"
+        const params = filterData;
+        console.log(params)
+        axios.get(url, {params})
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.log(err.response)
+            })
+    }
+
+    const [tours, setTours] = useState([1,2,3,4,522]) // numbers for now
+
+
 
 
     const options = [
@@ -74,12 +86,12 @@ function Tours(){
                                 <div className={"tours-filters-element"}>
                                     <label> Przedział cenowy </label>
                                     <ToursPriceSlider
-                                        tourPrice={tourPrice}
-                                        setTourPrice={setTourPrice}
+                                        filterData={filterData}
+                                        setFilterData={setFilterData}
                                     />
                                     <div className={"price-indicator"}>
-                                        <Button variant={"light"}> {tourPrice[0]} </Button>
-                                        <Button variant={"light"}> {tourPrice[1]} </Button>
+                                        <Button variant={"light"}> {filterData.tour_price[0]} </Button>
+                                        <Button variant={"light"}> {filterData.tour_price[1]} </Button>
                                     </div>
                                 </div>
                                 <div className={"tours-filters-element"}>
@@ -87,7 +99,7 @@ function Tours(){
                                     <FormControl
                                         id="start_date"
                                         type="date"
-                                        value={query.tourDate[0]}
+                                        value={filterData.tour_date[0]}
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -96,7 +108,7 @@ function Tours(){
                                     <FormControl
                                         id="end_date"
                                         type="date"
-                                        value={query.tourDate[1]}
+                                        value={filterData.tour_date[1]}
                                         onChange={handleChange}
                                     />
                                 </div>

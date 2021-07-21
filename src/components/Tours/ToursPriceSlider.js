@@ -4,7 +4,8 @@ import {Slider} from "@material-ui/core";
 function ToursPriceSlider(props){
 
     function handleChange(e, newValue){
-        props.setTourPrice(newValue);
+        const update = {...props.filterData, tour_price: newValue}
+        props.setFilterData(update)
     }
 
     return(
@@ -14,7 +15,7 @@ function ToursPriceSlider(props){
             max={1000}
             step={1}
             onChange={handleChange}
-            value={props.tourPrice}
+            value={props.filterData.tour_price}
             color={"secondary"}
             valueLabelDisplay="auto"
         />

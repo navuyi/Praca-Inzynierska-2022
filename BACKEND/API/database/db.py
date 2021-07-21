@@ -1,6 +1,6 @@
 from flask import g, current_app
 import mysql.connector
-from mysql.connector import errorcode
+
 
 def db_get():
     if 'db' not in g:
