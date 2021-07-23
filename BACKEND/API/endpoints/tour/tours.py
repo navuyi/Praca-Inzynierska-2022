@@ -22,7 +22,37 @@ def get_tours():
     sql_params = sqlParams(price=filter_price, date=filter_date, places=filter_places)
     applicable_tours = []  # <-- array for tour IDs that match filtering
 
-    ### Filtering statement <-- get tours IDs with defined places
+    # Filtration - price, date, places
+    if ('price_upper' in sql_params) and ('price_lower' in sql_params):
+        by_price = True
+        price_lower = sql_params["price_lower"]
+        price_upper = sql_params["price_upper"]
+    else:
+        by_price = False
+    if ('date_lower' in sql_params)  and ('date_upper' in sql_params):
+        by_date = True
+        date_lower = sql_params['date_lower']
+        date_upper = sql_params['date_upper']
+    else:
+        by_date = False
+    if 'tour_places' in sql_params:
+        by_place = True
+    else:
+        by_place = False
+
+
+    statement = f'''SELECT id FROM tours {f'WHERE price BETWEEN {price_lower} AND {price_upper}' if by_price else 'WHERE'}
+                        {f'AND' if (by_price and by_date) else ""} {f'start_date > "{date_lower}" AND end_date < "{date_upper}"' if by_date else ""}'''
+
+    cursor().execute(statement)
+    price_date_tours = []
+    res = cursor().fetchall()
+    for item in res:
+        price_date_tours.append(item["id"])
+
+
+    # Filter by tours
+    place_tours = []
     if "tour_places" in sql_params:
         for place_id in sql_params["tour_places"]:
             print(place_id)
@@ -34,11 +64,11 @@ def get_tours():
                     tour_id = item["tour_id"]
                     if tour_id not in applicable_tours:  # <-- Prevent duplicates
                         applicable_tours.append(tour_id)
-    ######
-    ### More filtering will be done here <-- price and date filtering
-    ######
+    applicable_tours = set(price_date_tours).intersection(place_tours)
 
-    ### Get filter applicable tours data ###
+    print(applicable_tours)
+
+    ### Get applicable tours data ###
     if not applicable_tours: # <-- Return with code 404 if no matches were found
         print("Not found")
         return {"msg": "Nie znaleziono ofert o podanych parametrach"}, 404
@@ -46,20 +76,39 @@ def get_tours():
     for tour_id in applicable_tours:
         tour = {}
         # Get general information about the tour
-        cursor().execute(f"SELECT * FROM tours WHERE id = %s", (tour_id,))
-        general_data = cursor().fetchall()
+        cursor().execute(f"SELECT * FROM tours WHERE id = %s", (tour_id, ))
+        general_data = cursor().fetchall()[0]
+        general_data["start_date"] = general_data["start_date"].strftime("%d/%m/%Y") # <-- format date
+        general_data["end_date"] = general_data["end_date"].strftime("%d/%m/%Y")    # <-- format date
+
+        # Get guide data
+        guide_id = general_data["guide_id"]
+        cursor().execute(f"SELECT * FROM users WHERE id = %s", (guide_id, ))
+        guide_data = cursor().fetchall()[0]
+
+
 
         tour["general_data"] = general_data
+        tour["guide_data"] = guide_data
 
+        ### <-- Use this whe fetching full information about the tour
         # Get tour plan
-        cursor().execute(f"SELECT * FROM tour_plan_points WHERE tour_id = %s", (tour_id,))
-        tour_plan = cursor().fetchall()
+        #cursor().execute(f"SELECT * FROM tour_plan_points WHERE tour_id = %s", (tour_id, ))
+        #tour_plan = cursor().fetchall()
+        #tour["tour_plan"] = tour_plan
 
-        tour["tour_plan"] = tour_plan
-        #T ODO - GET GOING - tour_ price lists etc
+        # Get tour important information <-- if exists
+        #cursor().execute(f"SELECT * FROM tour_important_info WHERE tour_id =%s", (tour_id, ))
+        #important_info = cursor().fetchall()
+        #if important_info:
+        #    tour["important_info"] = important_info
+
+        # Get tour price list   <-- if exists
+        #cursor().execute(f"SELECT * FROM tour_price_list WHERE tour_id = %s", (tour_id, ))
+        #price_list = cursor().fetchall()
+        #if price_list:
+        #    tour["price_list"] = price_list
 
         return_data.append(tour)
-
-
 
     return jsonify(return_data), 200

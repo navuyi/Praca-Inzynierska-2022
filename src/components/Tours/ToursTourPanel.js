@@ -13,6 +13,15 @@ import {useHistory} from "react-router-dom";
 const ToursTourPanel = (props) => {
     const history = useHistory();
 
+
+    function limitText(text, limit){
+            let n;
+            n = text.slice(0, limit)
+            console.log(text.length)
+            n = n + "..."
+            return n
+    }
+
     return(
         <div  onClick={()=>{history.push(`/tours/tour?id=${props.tourId}`)}}>
         <Row className={"toursTourPanel"} >
@@ -21,34 +30,34 @@ const ToursTourPanel = (props) => {
             </Col>
             <Col xl={7}>
                 <Row>
-                    <h1 className={"tour-panel-header"}> Tour header</h1>
+                    <h1 className={"tour-panel-header"}> {limitText(props.header, 30)} </h1>
                 </Row>
                 <Row>
                     <Col xl={6}>
                         <p className={"tour-panel-description"}>
-                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
+                            {limitText(props.description, 256)}
                         </p>
                     </Col>
                     <Col xl={6} className={"tour-panel-info d-flex flex-column align-items-start justify-content-center"}>
                        <TourPanelLabel
                             image={<PersonIcon fontSize={"medium"} />}
                             text="Przewodnik"
-                            value="Johny Deep"
+                            value={props.guide_fname + " "+ props.guide_lname}
                        />
                         <TourPanelLabel
                             image={<AttachMoneyIcon fontSize={"medium"} />}
                             text="Cena"
-                            value="XYZ"
+                            value={props.price}
                         />
                         <TourPanelLabel
                             image={<DateRangeIcon fontSize={"medium"} />}
                             text="Data"
-                            value=" od dd/mm/YY do dd/mm/YY"
+                            value={`od ${props.start_date} do ${props.end_date}`}
                         />
                         <TourPanelLabel
                             image={<GroupIcon fontSize={"medium"} />}
                             text="Miejsca"
-                            value="xx/YY"
+                            value={`xx/${props.person_limit}`}
                         />
                     </Col>
                 </Row>
