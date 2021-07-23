@@ -40,7 +40,6 @@ def get_tours():
     else:
         by_place = False
 
-
     statement = f'''SELECT id FROM tours {f'WHERE price BETWEEN {price_lower} AND {price_upper}' if by_price else 'WHERE'}
                         {f'AND' if (by_price and by_date) else ""} {f'start_date > "{date_lower}" AND end_date < "{date_upper}"' if by_date else ""}'''
 
@@ -50,10 +49,9 @@ def get_tours():
     for item in res:
         price_date_tours.append(item["id"])
 
-
     # Filter by tours
-    place_tours = []
     if "tour_places" in sql_params:
+        place_tours = []
         for place_id in sql_params["tour_places"]:
             print(place_id)
             statement = f"SELECT tour_id FROM tour_has_places WHERE place_id = %s"
@@ -63,8 +61,12 @@ def get_tours():
                 for item in res:
                     tour_id = item["tour_id"]
                     if tour_id not in applicable_tours:  # <-- Prevent duplicates
-                        applicable_tours.append(tour_id)
-    applicable_tours = set(price_date_tours).intersection(place_tours)
+                        place_tours.append(tour_id)
+
+    if "tour_places" in sql_params:
+        applicable_tours = set(price_date_tours).intersection(place_tours)
+    else:
+        applicable_tours = price_date_tours
 
     print(applicable_tours)
 

@@ -67,6 +67,8 @@ def create_app(test_config=None):               # test_config - independent from
     from API.endpoints.tour.tour_places import bp as bp_tour_places
     from API.endpoints.tour.tour_tags import bp as bp_tour_tags
     from API.endpoints.tour.tours import bp as bp_tour_tours
+    from API.endpoints.tour.tour import bp as bp_tour_tour
+    from API.endpoints.download.image import bp as bp_image_dl
 
     # Register blueprints
     app.register_blueprint(bp_authentication)
@@ -76,6 +78,8 @@ def create_app(test_config=None):               # test_config - independent from
     app.register_blueprint(bp_tour_places)
     app.register_blueprint(bp_tour_tags)
     app.register_blueprint(bp_tour_tours)
+    app.register_blueprint(bp_image_dl)
+    app.register_blueprint(bp_tour_tour)
 
 
     return app
