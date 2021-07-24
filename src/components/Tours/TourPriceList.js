@@ -51,12 +51,12 @@ function TourPriceList(props){
         <React.Fragment>
             <h3 style={{width: "100%", textAlign: "center"}}> Cennik </h3>
             {
-                list.map((item, index) => {
-                    item.variant ? style=styleSuccess : style=styleDanger
-                    item.variant ? icon=<CheckIcon/> : icon=<BlockIcon/>
+                props.price_list.map((item, index) => {
+                    item.is_included ? style=styleSuccess : style=styleDanger
+                    item.is_included ? icon=<CheckIcon/> : icon=<BlockIcon/>
                     return(
-                        <div style={style}>
-                            {item.text}
+                        <div style={style} key={index}>
+                            {item.description}
                             {icon}
                         </div>
                     )

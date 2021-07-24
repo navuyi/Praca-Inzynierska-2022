@@ -1,9 +1,9 @@
 import React from "react"
 
 
-function TourImportantInfo(){
+function TourImportantInfo(props){
 
-    const arr = [1,2,3,32,3]
+
     const fontStyle = {
         width: "100%",
         textAlign: "center",
@@ -18,16 +18,17 @@ function TourImportantInfo(){
         fontWeight: "bold",
         fontSize: "1.1rem",
         padding: "0.5em 1em",
-        margin: "0.1em 0"
+        margin: "0.1em 0",
+        width: "100%"
     }
     return(
         <React.Fragment>
             <h3 style={fontStyle}> Ważne informacje </h3>
             {
-                arr.map((info, index) => {
+                props.important_info.map((info, index) => {
                     return(
-                        <div style={style}>
-                            Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores
+                        <div style={style} key={index}>
+                            {info.description}
                         </div>
                     )
                 })

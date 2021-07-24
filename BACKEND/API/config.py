@@ -16,7 +16,7 @@ ORIGINS = [
 ]
 
 # Image upload configuration
-TOUR_IMAGES_DIRECTORY = "/home/rfiglus/BACKEND/API/storage/tour_images"
+TOUR_IMAGES_DIRECTORY = "/var/www/html/static/media"
 AVAILABLE_EXTENSIONS = ['.jpg', '.png', '.gif', '.tif', '.tiff', '.jpeg', '.bmp']
 MAX_CONTENT_LENGTH = 16 * 1000 * 1000
 TOUR_IMAGES_LIMIT = 20

@@ -13,6 +13,7 @@
 }
 .tourDetails h1{
     text-align: center;
+    width: 100%;
     color: rgb(34,34,34);
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
@@ -39,14 +40,14 @@
 }
 
 .tourDetails h2{
-    background-color: rgb(34,34,34);
-    color: whitesmoke;
+
+    color: rgb(34,34,34);
     width: 100%;
     text-align: center;
     padding: 0.5em 0;
     border-radius: 0.5em;
     font-family: 'Source Sans Pro', sans-serif;
-    font-weight: bold;
+    font-weight: 1000;
 }
 .tourDetails h3{
     font-family: 'Source Sans Pro', sans-serif;
@@ -56,13 +57,14 @@
 
 .tourDetails .tour-plan-point{
     font-family: 'Source Sans Pro', sans-serif;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: bold;
     color:whitesmoke;
 
+    width: 100%;
+    filter: opacity(0.9);
 
-
-    background-image: linear-gradient(15deg, rgb(34,34,34), rgb(73, 73, 73));
+    background-image: linear-gradient(15deg, #336699, #0a3b5e);
     padding: 1em 1em;
     margin: 0.1em;
 

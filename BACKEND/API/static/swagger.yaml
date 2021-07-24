@@ -91,19 +91,19 @@ paths:
       summary: Returns all informations about tour specified by its ID
       parameters:
         - in: query
-          name: tourId
+          name: tour_id
           schema:
             type: integer
-            example: "310"
+            example: 310
           required: true
           description: ID of tour which information will be returned
       responses:
         '200':
           description: OK
           content:
-            multipart/form-data:
+            application/json:
               schema:
-                #TODO: Continue
+                $ref: "#/components/schemas/TourDetails"
         '404':
           description: Not found
           content:
@@ -232,3 +232,61 @@ components:
         - tour_data
         - electives
         - main_image
+    TourDetails:
+      type: object
+      properties:
+        general_data:
+          type: object
+          properties:
+            header:
+              type: string
+              example: "Header of the tour"
+            description:
+              type: string
+              example: "Description of the tour. Very well described."
+            start_date:
+              type: string
+              example: "2021/07/01"
+            end_date:
+              type: string
+              example: "2021/08/30"
+            price:
+              type: integer
+              example: 150
+            person_limit:
+              type: integer
+              example: 25
+            guide_id:
+              type: integer
+              example: 1
+        guide_data:
+          type: object
+          properties:
+            f_name:
+              type: string
+              example: "Joe"
+            l_name:
+              type: string
+              example: "Black"
+            id:
+              type: integer
+              example: 1
+            email:
+              type: string
+              example: "joeblackk@gmail.com"
+            phone_number:
+              type: integer
+              example: 956567393
+        tour_plan:
+          type: array
+          items:
+            type: object
+            properties:
+              description:
+                type: string
+                example: "Description of the tour plan point"
+              number:
+                type: integer
+                example: 1
+                summary: Defines the order of the plan points
+
