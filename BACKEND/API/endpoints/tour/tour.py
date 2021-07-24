@@ -44,18 +44,21 @@ def get_tour():
         "important_info": False,
         "image_gallery": False
     }
+
     # Get tour price list if exists
-    cursor().execute(f"SELECT * FROM tour_price_list WHERE tour_id = %s", (tour_id, ))
+    cursor().execute(f"SELECT description, is_included FROM tour_price_list WHERE tour_id = %s", (tour_id, ))
     price_list = cursor().fetchall()
     if price_list:
         electives["price_list"] = True
         tour_data["price_list"] = price_list
+
     # Get important info if exists
-    cursor().execute(f"SELECT * FROM tour_important_info WHERE tour_id = %s", (tour_id, ))
+    cursor().execute(f"SELECT description FROM tour_important_info WHERE tour_id = %s", (tour_id, ))
     important_info = cursor().fetchall()
     if important_info:
         electives["important_info"] = True
         tour_data["important_info"] = important_info
+
     # Get gllery images if exist
     #TODO - Continue after WSGI implementation
 

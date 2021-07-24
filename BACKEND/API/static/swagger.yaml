@@ -234,6 +234,7 @@ components:
         - main_image
     TourDetails:
       type: object
+      required: ["general_data", "guide_data", "tour_plan"]
       properties:
         general_data:
           type: object
@@ -289,4 +290,27 @@ components:
                 type: integer
                 example: 1
                 summary: Defines the order of the plan points
-
+        price_list:
+          type: array
+          items:
+            type: object
+            properties:
+              description:
+                type: string
+                example: "This is included in the tour price"
+              is_included:
+                type: boolean
+                example: true
+        important_info:
+          type: array
+          items:
+            type: object
+            properties:
+              description:
+                type: string
+                example: "This is very imporant informaion"
+        gallery_images:
+          type: array
+          items:
+            type: string
+            example: "path-to-image"

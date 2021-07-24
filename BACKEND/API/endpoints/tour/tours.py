@@ -88,28 +88,13 @@ def get_tours():
         cursor().execute(f"SELECT * FROM users WHERE id = %s", (guide_id, ))
         guide_data = cursor().fetchall()[0]
 
+        #TODO Get URL to the main image
 
 
         tour["general_data"] = general_data
         tour["guide_data"] = guide_data
 
-        ### <-- Use this whe fetching full information about the tour
-        # Get tour plan
-        #cursor().execute(f"SELECT * FROM tour_plan_points WHERE tour_id = %s", (tour_id, ))
-        #tour_plan = cursor().fetchall()
-        #tour["tour_plan"] = tour_plan
 
-        # Get tour important information <-- if exists
-        #cursor().execute(f"SELECT * FROM tour_important_info WHERE tour_id =%s", (tour_id, ))
-        #important_info = cursor().fetchall()
-        #if important_info:
-        #    tour["important_info"] = important_info
-
-        # Get tour price list   <-- if exists
-        #cursor().execute(f"SELECT * FROM tour_price_list WHERE tour_id = %s", (tour_id, ))
-        #price_list = cursor().fetchall()
-        #if price_list:
-        #    tour["price_list"] = price_list
 
         return_data.append(tour)
 
