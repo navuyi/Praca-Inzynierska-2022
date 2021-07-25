@@ -1,7 +1,7 @@
 from flask import Blueprint
 from flask import request
 from flask import jsonify
-from API.database.db import db_get, cursor, begin_transaction, commit, rollback, lastrowid
+from app.database.db import db_get, cursor, begin_transaction, commit, rollback, lastrowid
 
 
 bp = Blueprint("places", __name__, url_prefix="/tour")

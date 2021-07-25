@@ -1,8 +1,8 @@
 from flask import Blueprint, request, current_app, jsonify
 from flask import send_from_directory
 import numpy as np
-from API.handlers import APIException
-from API.database.db import cursor, lastrowid
+from app.handlers import APIException
+from app.database.db import cursor, lastrowid
 
 bp = Blueprint("main_image", __name__, url_prefix="/download")
 

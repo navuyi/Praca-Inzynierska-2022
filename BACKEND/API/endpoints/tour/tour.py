@@ -1,7 +1,7 @@
 from flask import Blueprint
 from flask import request, redirect
-from API.handlers import APIException
-from API.database.db import cursor
+from app.handlers import APIException
+from app.database.db import cursor
 
 bp = Blueprint("tour", __name__, url_prefix="/tour")
 

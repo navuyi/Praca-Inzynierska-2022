@@ -5,7 +5,9 @@
       <paths name="Inżynierka-Digital Ocean">
         <serverdata>
           <mappings>
-            <mapping deploy="/" local="$PROJECT_DIR$/BACKEND" web="/" />
+            <mapping deploy="app/app/" local="$PROJECT_DIR$/BACKEND/API/" web="/" />
+            <mapping deploy="SQL" local="$PROJECT_DIR$/BACKEND/SQL" />
+            <mapping deploy="public_html" local="$PROJECT_DIR$/build" />
           </mappings>
         </serverdata>
       </paths>

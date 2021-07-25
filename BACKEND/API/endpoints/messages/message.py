@@ -1,7 +1,7 @@
 from flask import Blueprint, request, current_app, jsonify
 
-from API.handlers import APIException
-from API.database.db import cursor, lastrowid
+from app.handlers import APIException
+from app.database.db import cursor, lastrowid
 
 bp = Blueprint("message", __name__, url_prefix="/messages")
 

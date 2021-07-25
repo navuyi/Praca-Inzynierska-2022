@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="221143b0-a03f-4735-a86c-4daf2b9dcba5" name="Inżynierka-Digital Ocean" url="">
-        <fileTransfer rootFolder="/home/rfiglus/BACKEND/" accessType="SFTP" host="167.99.143.194" port="22" sshConfigId="bdeb7a37-e904-4f37-9c4c-d0531c1ba5d0" sshConfig="rfiglus@167.99.143.194:22 password">
+        <fileTransfer rootFolder="/home/rfiglus/" accessType="SFTP" host="167.99.143.194" port="22" sshConfigId="bdeb7a37-e904-4f37-9c4c-d0531c1ba5d0" sshConfig="rfiglus@167.99.143.194:22 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

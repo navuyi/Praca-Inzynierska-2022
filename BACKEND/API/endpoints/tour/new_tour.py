@@ -4,8 +4,8 @@ from datetime import datetime
 
 from werkzeug.utils import secure_filename
 
-from API.handlers import APIException
-from API.database.db import cursor, lastrowid
+from app.handlers import APIException
+from app.database.db import cursor, lastrowid
 
 import os
 import json

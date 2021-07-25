@@ -1,9 +1,9 @@
 from flask import Blueprint, jsonify
 from flask import request
-from API.handlers import APIException
-from API.endpoints.utils.defineSQLParams import sqlParams
+from app.handlers import APIException
+from app.endpoints.utils.defineSQLParams import sqlParams
 
-from API.database.db import cursor
+from app.database.db import cursor
 
 import json
 

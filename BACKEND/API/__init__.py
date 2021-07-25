@@ -2,7 +2,7 @@ import os
 from flask import Flask, jsonify, g, request
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
-from API.handlers import APIException
+from app.handlers import APIException
 
 import werkzeug
 
@@ -58,17 +58,17 @@ def create_app(test_config=None):               # test_config - independent from
     @app.route('/', methods=['GET'])
     def index_get():
         return jsonify({"msg": "Hello World"}), 200
+    from app.endpoints.authentication import bp as bp_authentication
+    from app.endpoints.tour.new_tour import bp as bp_new_tour
 
     # Import blueprints
-    from API.endpoints.authentication import bp as bp_authentication
-    from API.endpoints.tour.new_tour import bp as bp_new_tour
-    from API.endpoints.tour.places import bp as bp_places
-    from API.endpoints.tour.tags import bp as bp_tags
-    from API.endpoints.tour.tour_places import bp as bp_tour_places
-    from API.endpoints.tour.tour_tags import bp as bp_tour_tags
-    from API.endpoints.tour.tours import bp as bp_tour_tours
-    from API.endpoints.tour.tour import bp as bp_tour_tour
-    from API.endpoints.download.image import bp as bp_image_dl
+    from app.endpoints.tour.tags import bp as bp_tags
+    from app.endpoints.tour.tour_places import bp as bp_tour_places
+    from app.endpoints.tour.places import bp as bp_places
+    from app.endpoints.tour.tour_tags import bp as bp_tour_tags
+    from app.endpoints.tour.tours import bp as bp_tour_tours
+    from app.endpoints.tour.tour import bp as bp_tour_tour
+    from app.endpoints.download.image import bp as bp_image_dl
 
     # Register blueprints
     app.register_blueprint(bp_authentication)
