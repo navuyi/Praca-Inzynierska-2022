@@ -20,7 +20,7 @@ import TourPriceList from "../../components/Tours/TourPriceList"
 import TourImportantInfo from "../../components/Tours/TourImportantInfo"
 import {useLocation} from "react-router-dom"
 import {parse} from "querystring";
-
+import TourImagesGallery from "../../components/TourImagesGallery";
 
 function TourDetails(){
 
@@ -154,7 +154,15 @@ function TourDetails(){
                                 </Col>
                             </Row>
                             {
-                                (tourData.important_info && tourData.price_list) ? <Separator /> : null
+                                (tourData.important_info || tourData.price_list) ? <Separator /> : null
+                            }
+                            {
+                                tourData.image_gallery ?
+                                    <Row className={"w-100 col-10 d-flex justify-content-between align-items-center"}
+                                         style={{minHeight: "500px"}}>
+                                        <TourImagesGallery urls={tourData.image_gallery}/>
+                                    </Row>
+                                : null
                             }
                         </Container>
                     </Col>

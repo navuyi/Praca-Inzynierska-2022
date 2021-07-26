@@ -71,3 +71,9 @@
     border-radius: 0.5em;
 }
 
+ .image-gallery {
+    width: 100% !important;
+    min-width: 100%;
+
+}
+

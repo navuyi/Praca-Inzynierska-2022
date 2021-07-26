@@ -36,7 +36,7 @@ def create_app(test_config=None):               # test_config - independent from
     ### CORS setup ###
     cors = CORS(app, resources={r"/*": {"origins": app.config["ORIGINS"]}}, supports_credentials=True)
 
-    ### Swagger Setup ### - swagger setup causes error #TODO SOLVE THIS
+    ### Swagger Setup ###
     SWAGGER_URL = '/swagger'
     API_URL = '/static/swagger.yaml'
     SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
