@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const create_tour = (data) => {
-    const url = "http://167.99.143.194:5000/tour/new_tour";
+    const url = "http://167.99.143.194/api/tour/new_tour";
     const config = {
         headers:{
             'Accept': 'application/json',

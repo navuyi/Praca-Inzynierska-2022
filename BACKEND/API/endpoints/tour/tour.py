@@ -1,7 +1,8 @@
 from flask import Blueprint
-from flask import request, redirect
+from flask import request, current_app
 from app.handlers import APIException
 from app.database.db import cursor
+import os
 
 bp = Blueprint("tour", __name__, url_prefix="/tour")
 
@@ -59,8 +60,28 @@ def get_tour():
         electives["important_info"] = True
         tour_data["important_info"] = important_info
 
-    # Get gllery images if exist
-    #TODO - Continue after WSGI implementation
+    # Get main image URL
+    cursor().execute(f"SELECT filename FROM tour_images WHERE tour_id = %(tour_id)s AND is_main = %(is_main)s", {
+        "tour_id": tour_id,
+        "is_main": True
+    })
+    filename = cursor().fetchone()["filename"]
+    image_url = os.path.join(current_app.config["TOUR_IMAGES_DOWNLOAD_DIRECTORY"], filename)
+    tour_data["image_url"] = image_url
+
+    # Get gallery images URLs if exist
+    cursor().execute(f"SELECT filename FROM tour_images WHERE tour_id = %(tour_id)s AND is_main = %(is_main)s", {
+        "tour_id": tour_id,
+        "is_main": False
+    })
+    files = cursor().fetchall()
+    if files:
+        tour_data["image_gallery"] = []
+        for file in files:
+            filename = file["filename"]
+            tour_data["image_gallery"].append(os.path.join(current_app.config["TOUR_IMAGES_DOWNLOAD_DIRECTORY"], filename))
+
+
 
 
     tour_data["electives"] = electives

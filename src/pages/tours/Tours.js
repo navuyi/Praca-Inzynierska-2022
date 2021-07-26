@@ -49,7 +49,7 @@ function Tours(){
     }, []);
 
     function fetchData(queryString){
-        const url = "http://167.99.143.194:5000/tour/tours"
+        const url = "http://167.99.143.194/api/tour/tours"
         const params = filterData;
 
         setLoading(true)
@@ -156,6 +156,7 @@ function Tours(){
                                                 end_date={tour.general_data.end_date}
                                                 guide_fname={tour.guide_data.f_name}
                                                 guide_lname={tour.guide_data.l_name}
+                                                image_url={tour.image_url}
                                             />
                                         )
                                     })

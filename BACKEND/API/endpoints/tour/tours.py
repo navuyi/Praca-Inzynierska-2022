@@ -1,5 +1,7 @@
+import os.path
+
 from flask import Blueprint, jsonify
-from flask import request
+from flask import request, current_app
 from app.handlers import APIException
 from app.endpoints.utils.defineSQLParams import sqlParams
 
@@ -88,12 +90,18 @@ def get_tours():
         cursor().execute(f"SELECT * FROM users WHERE id = %s", (guide_id, ))
         guide_data = cursor().fetchall()[0]
 
-        #TODO Get URL to the main image
+        # Get main image url
+        cursor().execute(f"SELECT filename FROM tour_images WHERE tour_id = %(tour_id)s AND is_main = %(is_main)s", {
+            "tour_id": tour_id,
+            "is_main": True
+        })
+        filename = cursor().fetchone()["filename"]
+        image_url = os.path.join(current_app.config["TOUR_IMAGES_DOWNLOAD_DIRECTORY"], filename)
 
 
         tour["general_data"] = general_data
         tour["guide_data"] = guide_data
-
+        tour["image_url"] = image_url
 
 
         return_data.append(tour)

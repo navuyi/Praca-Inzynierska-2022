@@ -12,7 +12,7 @@ const fetchTourPlaces = (inputValue, callback) => {
     const data = {
         "place": inputValue
     }
-    const url = "http://167.99.143.194:5000/tour/places";
+    const url = "http://167.99.143.194/api/tour/places";
     axios.get(url, {
         params: data
     })

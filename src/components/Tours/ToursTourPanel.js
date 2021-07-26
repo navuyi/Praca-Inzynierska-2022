@@ -17,7 +17,6 @@ const ToursTourPanel = (props) => {
     function limitText(text, limit){
             let n;
             n = text.slice(0, limit)
-            console.log(text.length)
             n = n + "..."
             return n
     }
@@ -26,7 +25,7 @@ const ToursTourPanel = (props) => {
         <div  onClick={()=>{history.push(`/tours/tour?id=${props.tourId}`)}}>
         <Row className={"toursTourPanel"} >
             <Col xl={5} className={"d-flex flex-column align-items-center justify-content-center"}>
-                <img src={image} alt={""} className={"tour-panel-main-img"}/>
+                <img src={props.image_url} alt={""} className={"tour-panel-main-img"}/>
             </Col>
             <Col xl={7}>
                 <Row>

@@ -78,11 +78,11 @@ def create_new_tour():
         file_ext = os.path.splitext(name)[1]
         if file_ext not in current_app.config["AVAILABLE_EXTENSIONS"]:
             raise APIException(msg="Dany format pliku nie jest obsługiwany", code=422)
-        file_path = os.path.join(current_app.config["TOUR_IMAGES_DIRECTORY"], str(file_prefix + file_ext))
+        file_path = os.path.join(current_app.config["TOUR_IMAGES_UPLOAD_DIRECTORY"], str(file_prefix + file_ext))
 
         # Save the image and add path to database
         try:
-            statement = "INSERT INTO tour_images (tour_id, path, is_main) VALUES (%(tour_id)s, %(path)s, %(is_main)s)"
+            statement = "INSERT INTO tour_images (tour_id, path, is_main, filename) VALUES (%(tour_id)s, %(path)s, %(is_main)s, %(filename)s)"
             if(key == "main_image"):
                 is_main = True
             else:
@@ -90,7 +90,8 @@ def create_new_tour():
             insert = {
                 "tour_id": TOUR_ID,
                 "path": file_path,
-                "is_main": is_main
+                "is_main": is_main,
+                "filename": str(file_prefix + file_ext)
             }
             cursor().execute(statement, insert)
             file.save(file_path)

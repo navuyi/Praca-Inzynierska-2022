@@ -39,7 +39,7 @@ function TourDetails(){
 
     function fetchData(){
         setLoading(true)
-        const url = "http://167.99.143.194:5000/tour/tour"
+        const url = "http://167.99.143.194/api/tour/tour"
         const tour_id = queryParams["?id"]
         const params = {
             tour_id: tour_id
@@ -71,7 +71,7 @@ function TourDetails(){
                     <Col lg={8} sm={12} style={{padding: "0"}} >
                         <Container className={"details-body d-flex flex-column align-items-center justify-content-center"}>
                             <Row className={"d-flex justify-content-center"}>
-                                <img src={img} alt={""} className="details-main-img"/>
+                                <img src={tourData.image_url} alt={""} className="details-main-img"/>
                             </Row>
                             <Row className={"col-xl-10 mt-5"}>
                                 <h1> {tourData.general_data.header} </h1>

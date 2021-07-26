@@ -4,7 +4,7 @@ from os import environ
 DATABASE_HOST = 'localhost'
 DATABASE_NAME = 'yourtour'
 DATABASE_USER = 'api_operator'
-DATABASE_PASSWORD = environ["FLASK_DB_PASSWORD"]
+DATABASE_PASSWORD = "loremipsumDB"
 CHARSET = 'utf8mb4'
 COLLATION = 'utf8mb4_unicode_ci'
 AUTOCOMMIT_ENABLED = True
@@ -16,7 +16,10 @@ ORIGINS = [
 ]
 
 # Image upload configuration
-TOUR_IMAGES_DIRECTORY = "/var/www/html/static/media"
+HOST = "http://167.99.143.194"
+
+TOUR_IMAGES_UPLOAD_DIRECTORY = "/home/rfiglus/app/app/storage/tour_images"
+TOUR_IMAGES_DOWNLOAD_DIRECTORY = HOST+"/storage/tour_images/"
 AVAILABLE_EXTENSIONS = ['.jpg', '.png', '.gif', '.tif', '.tiff', '.jpeg', '.bmp']
 MAX_CONTENT_LENGTH = 16 * 1000 * 1000
 TOUR_IMAGES_LIMIT = 20
