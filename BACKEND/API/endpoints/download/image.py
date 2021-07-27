@@ -1,6 +1,5 @@
 from flask import Blueprint, request, current_app, jsonify
 from flask import send_from_directory
-import numpy as np
 from app.handlers import APIException
 from app.database.db import cursor, lastrowid
 

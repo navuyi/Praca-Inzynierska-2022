@@ -7,7 +7,7 @@ from app.endpoints.utils.defineSQLParams import sqlParams
 
 from app.database.db import cursor
 
-import json
+
 
 bp = Blueprint("tours", __name__, url_prefix="/tour")
 
@@ -55,7 +55,6 @@ def get_tours():
     if "tour_places" in sql_params:
         place_tours = []
         for place_id in sql_params["tour_places"]:
-            print(place_id)
             statement = f"SELECT tour_id FROM tour_has_places WHERE place_id = %s"
             cursor().execute(statement, (place_id,))
             res = cursor().fetchall()  # <-- Get all tours where places matches given places returns array of objects: {"tour_id": XY}
@@ -70,7 +69,7 @@ def get_tours():
     else:
         applicable_tours = price_date_tours
 
-    print(applicable_tours)
+
 
     ### Get applicable tours data ###
     if not applicable_tours: # <-- Return with code 404 if no matches were found

@@ -2,14 +2,17 @@ import os
 from flask import Flask, jsonify, g, request
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
+from flask_jwt_extended import create_access_token, create_refresh_token
+from flask_jwt_extended import JWTManager
 from app.handlers import APIException
+from uuid import uuid4
 
 import werkzeug
 
 def create_app(test_config=None):               # test_config - independent from the instance configuration
     app = Flask(__name__, instance_relative_config=False)
     app.config.from_mapping(
-        SECRET_KEY = 'dev'                      #TODO - IT HAS TO BE CHANGED IN PRODUCTION
+        SECRET_KEY = uuid4()
     )
     # Load configuration file
     if test_config is None:
@@ -22,6 +25,10 @@ def create_app(test_config=None):               # test_config - independent from
         os.makedirs(app.instance_path)
     except OSError as e:
         print(e)
+
+    ### Flask JWT configuration ###
+    app.config["JWT_SECRET_KEY"] = str(uuid4()) # <-- NEEDS TO BE STRING
+    jwt = JWTManager(app)
 
     ### Error handler ###
     @app.errorhandler(APIException)
@@ -70,6 +77,8 @@ def create_app(test_config=None):               # test_config - independent from
     from app.endpoints.tour.tour import bp as bp_tour_tour
     from app.endpoints.download.image import bp as bp_image_dl
 
+    from app.endpoints.authentication import bp as bp_auth
+
     # Register blueprints
     app.register_blueprint(bp_authentication)
     app.register_blueprint(bp_new_tour)
@@ -81,5 +90,6 @@ def create_app(test_config=None):               # test_config - independent from
     app.register_blueprint(bp_image_dl)
     app.register_blueprint(bp_tour_tour)
 
+    app.register_blueprint(bp_auth)
 
     return app
