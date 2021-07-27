@@ -1,6 +1,6 @@
 // Dependencies
 import {Switch, Route} from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 // Pages
 import Home from "./pages/Home";
 import Information from "./pages/Informations";
@@ -39,10 +39,13 @@ import './styles/toursTourPanel.css';
 import './styles/tourDetails.css';
 import './styles/tourPanelLabel.css';
 
+import {logout} from "./redux/actions";
+
 
 function App() {
-
-  return (
+    const dispatch = useDispatch()
+    dispatch(logout("LOGOUT")) // <-- only for now later we want to be logged in based on refresh token ! ! !
+    return (
     <Switch>
         <Route exact path="/">
             <Home />

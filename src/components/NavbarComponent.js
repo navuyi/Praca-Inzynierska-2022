@@ -1,12 +1,23 @@
-
+import React from "react"
 import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import {useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
+import {logout} from "../redux/actions";
 
 function NavbarComponent(){
     const isLogged = useSelector(state => state.isAuthenticated);
     const isGuide = useSelector(state => state.isGuide);
+    const dispatch = useDispatch()
 
+    function handleLogout(){
+        // Set redux state to logged out
+        dispatch(logout("LOGOUT"))
+
+        // Clear local storage from JSON Web Tokens
+        localStorage.removeItem("refresh_token")
+        localStorage.removeItem("access_token")
+    }
 
     return(
         <Navbar collapseOnSelect expand="md" variant="dark"  className="navbarComponent sticky-top">
@@ -26,8 +37,14 @@ function NavbarComponent(){
                 }
             </Navbar.Collapse>
             <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
-                <Nav.Link as={Link} to="/login"><span className="white">Logowanie</span></Nav.Link>
-                <Nav.Link as={Link} to="/register"><span className="white">Rejestracja</span></Nav.Link>
+                {
+                    isLogged ? <div onClick={handleLogout}><Nav.Link as={Link} to="/"><span className="white">Wyloguj</span></Nav.Link></div>:
+                        <React.Fragment>
+                            <Nav.Link as={Link} to="/login"><span className="white">Logowanie</span></Nav.Link>
+                            <Nav.Link as={Link} to="/register"><span className="white">Rejestracja</span></Nav.Link>
+                        </React.Fragment>
+                }
+
             </Navbar.Collapse>
 
         </Navbar>

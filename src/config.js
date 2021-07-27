@@ -1,0 +1,1 @@
+export const API_PREFIX = "http://167.99.143.194/api"

@@ -4,7 +4,12 @@
     flex-direction: column;
 
     background-image: radial-gradient(#f6ba30, #e57701);
-
+}
+.login form{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 .login .cont{
     background-color: whitesmoke;
@@ -29,6 +34,12 @@
 .login span:hover{
     color: orangered;
     cursor: pointer;
+}
+.login .error-msg{
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #dc3545;
 }
 
 @media (max-width: 900px) {
