@@ -1,0 +1,47 @@
+{
+    "UserAuthentication":{
+        "type": "object",
+        "required":[
+            "password", "email"
+        ],
+        "properties":{
+            "password":{"type": "string"},
+            "email":{"type": "string"}
+        }
+    },
+    "UserRegistration":{
+        "type": "object",
+        "required":[
+            "l_name", "f_name", "phone_number", "password", "email"
+        ],
+        "properties":{
+            "f_name": {"type": "string"},
+            "l_name": {"type": "string"},
+            "phone_number": {"type": "string"},
+            "password":{"type": "string"},
+            "email":{"type": "string"}
+        }
+    },
+    "NewMessage":{
+        "type": "object",
+        "required":[
+            "topic", "content", "receiver_id", "sender_id"
+        ],
+        "properties":{
+            "topic": {"type": "string"},
+            "content": {"type": "string"},
+            "receiver_id": {"type": "string"},
+            "sender_id":{"type": "string"},
+            "tour_id": {"type": "string"}
+        }
+    },
+    "TourPlacesSearch":{
+        "type": "object",
+        "required":[
+            "place_input"
+        ],
+        "properties":{
+            "place_input": {"type": "string"}
+        }
+    }
+}

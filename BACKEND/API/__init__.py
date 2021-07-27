@@ -43,6 +43,7 @@ def create_app(test_config=None):               # test_config - independent from
     ### CORS setup ###
     cors = CORS(app, resources={r"/*": {"origins": app.config["ORIGINS"]}}, supports_credentials=True)
 
+    '''
     ### Swagger Setup ###
     SWAGGER_URL = '/swagger'
     API_URL = '/static/swagger.yaml'
@@ -54,6 +55,7 @@ def create_app(test_config=None):               # test_config - independent from
         }
     )
     app.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
+    '''
 
 
     # Import database methods
