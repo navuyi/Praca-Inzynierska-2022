@@ -1,3 +1,4 @@
+import datetime
 import os
 from flask import Flask, jsonify, g, request
 from flask_cors import CORS
@@ -28,6 +29,8 @@ def create_app(test_config=None):               # test_config - independent from
 
     ### Flask JWT configuration ###
     app.config["JWT_SECRET_KEY"] = str(uuid4()) # <-- NEEDS TO BE STRING
+    app.config["JWT_TOKEN_LOCATION"] = ["headers"]
+    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = datetime.timedelta(minutes=30)
     jwt = JWTManager(app)
 
     ### Error handler ###
@@ -80,6 +83,8 @@ def create_app(test_config=None):               # test_config - independent from
     from app.endpoints.download.image import bp as bp_image_dl
 
     from app.endpoints.authentication import bp as bp_auth
+    from app.endpoints.token.token_check import bp as bp_token_check
+    from app.endpoints.token.token_refresh import bp as bp_token_refresh
 
     # Register blueprints
     app.register_blueprint(bp_authentication)
@@ -93,5 +98,7 @@ def create_app(test_config=None):               # test_config - independent from
     app.register_blueprint(bp_tour_tour)
 
     app.register_blueprint(bp_auth)
+    app.register_blueprint(bp_token_refresh)
+    app.register_blueprint(bp_token_check)
 
     return app

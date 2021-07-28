@@ -15,6 +15,7 @@ import DeletedMessages from "./DeletedMessages";
 
 
 function Messages(){
+
     return(
         <div className="messages">
             <NavbarComponent />

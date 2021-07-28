@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {useSelector} from "react-redux";
 import {useDispatch} from "react-redux";
 import {logout, set_as_user} from "../redux/actions";
-
+import {set_user_id} from "../redux/actions";
 
 function NavbarComponent(){
     const isLogged = useSelector(state => state.isAuthenticated);
@@ -15,6 +15,7 @@ function NavbarComponent(){
         // Set redux state to logged out
         dispatch(logout("LOGOUT"))
         dispatch(set_as_user("SET_AS_USER"))
+        dispatch(set_user_id(null)) // <-- null for holding no value, undefined throws an error
         // Clear local storage from JSON Web Tokens
         localStorage.removeItem("refresh_token")
         localStorage.removeItem("access_token")

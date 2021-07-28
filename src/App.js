@@ -1,6 +1,11 @@
 // Dependencies
 import {Switch, Route} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
+import ProtectedRoute from "./components/ProtectedRoute";
+import GuideOnlyRoute from "./components/GuideOnlyRoute";
+import {useEffect} from "react";
+import {API_PREFIX} from "./config";
+import axios from "axios";
 // Pages
 import Home from "./pages/Home";
 import Information from "./pages/Informations";
@@ -43,8 +48,27 @@ import {logout} from "./redux/actions";
 
 
 function App() {
-    const dispatch = useDispatch()
-    dispatch(logout("LOGOUT")) // <-- only for now later we want to be logged in based on refresh token ! ! !
+    useEffect(() => {
+        const url = API_PREFIX + "/token/check"
+        const access_token = localStorage.getItem("access_token")
+        const refresh_token = localStorage.getItem("refresh_token")
+        console.log(access_token)
+        const config = {
+            headers: {Authorization: `Bearer ${access_token}`}
+        }
+
+        axios.post(url, {
+            access_token: access_token,
+            refresh_token: refresh_token
+        }, config)
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }, [])
+
     return (
     <Switch>
         <Route exact path="/">
@@ -59,18 +83,16 @@ function App() {
         <Route exact path={"/tours/tour"}>
             <TourDetails />
         </Route>
-        <Route exact path="/account">
-            <Account />
-        </Route>
-        <Route  path="/account/guide">
-            <Guide />
-        </Route>
-        <Route  path="/account/user">
-            <User />
-        </Route>
-        <Route  path="/account/messages">
-            <Messages />
-        </Route>
+
+        <ProtectedRoute exact path="/account" component={Account}/>
+
+        <GuideOnlyRoute path="/account/guide" component={Guide}/>
+
+        <ProtectedRoute path="/account/user" component={User} />
+
+        <ProtectedRoute path="/account/messages" component={Messages}/>
+
+
         <Route path="/login">
             <Login />
         </Route>

@@ -4,6 +4,7 @@ import NavbarComponent from "../../components/NavbarComponent";
 import Footer from "../../components/Footer";
 import SideNavbar from "../../components/SideNavbar";
 import SideNavbarLink from "../../components/SideNavbarLink";
+import GuideOnlyRoute from "../../components/GuideOnlyRoute";
 
 // Subpages
 import GuideNewTour from "./GuideNewTour";
@@ -49,9 +50,8 @@ function Guide(){
                     </Col>
                     <Col lg={10} sm={12} style={{padding: "0"}} >
                         <Switch>
-                            <Route exact path="/account/guide/new-tour">
-                                <GuideNewTour />
-                            </Route>
+                            <GuideOnlyRoute exact path="/account/guide/new-tour" component={GuideNewTour} />
+
                             <Route exact path={"/account/guide/new-tour-success"}>
                                 <GuideNewTourSuccess />
                             </Route>
