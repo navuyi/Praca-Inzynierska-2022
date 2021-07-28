@@ -17,7 +17,59 @@ paths:
     post:
       tags:
         - Authentication
-        #TODO: Continue
+      summary:  Provide credentials ang get JSON Web Tokens in response body
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: joedoe@gmail.com
+                password:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                  refresh_token:
+                    type: string
+                  is_guide:
+                    type: integer
+                  user_id:
+                    type: integer
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "User with given email was not found"
+                  payload:
+                    type: object
+        '401':
+          description: Wrong password
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Wrong password"
+                  payload:
+                    type: object
   "/api/authentication/logout":
     post:
        tags:

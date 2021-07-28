@@ -39,9 +39,10 @@ def login():
     access_token = create_access_token(identity=str(user_id))
     refresh_token = create_refresh_token(identity=str(user_id))
     is_guide = user_data["is_guide"]
+    user_id = user_data["id"]
 
 
-    return jsonify(access_token=access_token, refresh_token=refresh_token, is_guide=is_guide), 200
+    return jsonify(access_token=access_token, refresh_token=refresh_token, is_guide=is_guide, user_id=user_id), 200
 
 
 

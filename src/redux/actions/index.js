@@ -19,3 +19,10 @@ export const set_as_user = ()=>{
         type: "SET_AS_USER"
     }
 }
+
+export const set_user_id = (userID) => {
+    return{
+        type: 'SET_USER_ID',
+        payload: userID
+    }
+}

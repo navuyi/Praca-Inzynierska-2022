@@ -12,7 +12,9 @@ import allReducers from "./redux/reducers";
 
 import {QueryParamProvider} from "use-query-params";
 
-const store = createStore(allReducers);
+const store = createStore(
+    allReducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 ReactDOM.render(
   <BrowserRouter>

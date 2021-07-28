@@ -12,6 +12,7 @@ import {useDispatch} from "react-redux";
 import {login} from "../redux/actions";
 import {set_as_user} from "../redux/actions";
 import {set_as_guide} from "../redux/actions";
+import {set_user_id} from "../redux/actions";
 
 function Login(){
     const history = useHistory();
@@ -56,12 +57,17 @@ function Login(){
                 localStorage.setItem("access_token", res.data.access_token)
                 localStorage.setItem("refresh_token", res.data.refresh_token)
                 const is_guide = res.data.is_guide
+                const user_id = res.data.user_id
+                console.log(user_id)
+                // Set user status
                 if(is_guide == 1){
                     dispatch(set_as_guide("SET_AS_GUIDE"))
                 }
                 else if(is_guide == 0){
                     dispatch(set_as_user("SET_AS_USER"))
                 }
+                // Set user ID
+                dispatch(set_user_id(user_id))
 
                 dispatch(login("LOGIN"))
                 history.push("/account/user")
