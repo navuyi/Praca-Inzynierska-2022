@@ -8,7 +8,7 @@ function SideNavbarLink(props){
 
 
     return(
-        <ListGroup.Item action as={Link} to={props.path} active={isActive} className={"side-navbar-button"}>
+        <ListGroup.Item action as={Link} to={props.path} active={isActive} className={"side-navbar-button"} >
             {props.name}
         </ListGroup.Item>
     )
