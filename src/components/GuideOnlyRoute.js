@@ -7,9 +7,12 @@ import {useHistory} from "react-router-dom";
 function GuideOnlyRoute({component: Component, ...rest}){
     console.log("Checking Guide Only Route")
 
-    const is_logged = useSelector(state => state.isAuthenticated)
-    const is_guide = useSelector(state => state.isGuide)
-
+    const is_logged = localStorage.getItem("access_token")
+    const guide_status = localStorage.getItem("is_guide")
+    let is_guide = false
+    if(guide_status == 1){
+        is_guide = true
+    }
 
 
     return (

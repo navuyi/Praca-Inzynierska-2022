@@ -3,9 +3,12 @@ import {Switch, Route} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import ProtectedRoute from "./components/ProtectedRoute";
 import GuideOnlyRoute from "./components/GuideOnlyRoute";
-import {useEffect} from "react";
-import {API_PREFIX} from "./config";
-import axios from "axios";
+import {useEffect, useState} from "react";
+import {set_as_guide} from "./redux/actions";
+import {set_as_user} from "./redux/actions";
+import {login} from "./redux/actions";
+import {CircularProgress} from "@material-ui/core";
+
 // Pages
 import Home from "./pages/Home";
 import Information from "./pages/Informations";
@@ -48,28 +51,33 @@ import {logout} from "./redux/actions";
 
 
 function App() {
-    useEffect(() => {
-        const url = API_PREFIX + "/token/check"
-        const access_token = localStorage.getItem("access_token")
-        const refresh_token = localStorage.getItem("refresh_token")
-        console.log(access_token)
-        const config = {
-            headers: {Authorization: `Bearer ${access_token}`}
-        }
+    const dispatch = useDispatch()
+    const [loading, setLoading] = useState(true)
 
-        axios.post(url, {
-            access_token: access_token,
-            refresh_token: refresh_token
-        }, config)
-        .then(res => {
-            console.log(res)
-        })
-        .catch(err => {
-            console.log(err)
-        })
+    useEffect(() => {
+        const access_token = localStorage.getItem("access_token")
+        const is_guide = localStorage.getItem("is_guide")
+        if(access_token){
+            dispatch(login("LOGIN"))
+            if(is_guide == 1){
+                dispatch(set_as_guide("SET_AS_GUIDE"))
+            }else if(is_guide==0){
+                dispatch(set_as_user("SET_AS_USER"))
+            }
+        }
+        setLoading(false)
     }, [])
 
+    const style = {
+        width: "5vw",
+        height: "5vw",
+        top: "45vh",
+        left: "48vw",
+        position:"absolute",
+    }
+
     return (
+    loading ? <CircularProgress style={style}/> :
     <Switch>
         <Route exact path="/">
             <Home />

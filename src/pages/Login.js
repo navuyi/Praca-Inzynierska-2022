@@ -9,18 +9,19 @@ import NavbarComponent from "../components/NavbarComponent";
 import Footer from "../components/Footer";
 import {API_PREFIX} from "../config";
 import {useDispatch} from "react-redux";
-import {login} from "../redux/actions";
+
 import {set_as_user} from "../redux/actions";
 import {set_as_guide} from "../redux/actions";
 import {set_user_id} from "../redux/actions";
+import {_login} from "../utils/_login";
 
 function Login(){
     const history = useHistory();
+    const dispatch  = useDispatch()
+
     const [error, setError] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-
-    const dispatch  = useDispatch()
 
     function handleChange(e){
         if(e.target.type === "email"){
@@ -56,21 +57,10 @@ function Login(){
                 }
                 localStorage.setItem("access_token", res.data.access_token)
                 localStorage.setItem("refresh_token", res.data.refresh_token)
-                const is_guide = res.data.is_guide
-                const user_id = res.data.user_id
-                console.log(user_id)
-                // Set user status
-                if(is_guide == 1){
-                    dispatch(set_as_guide("SET_AS_GUIDE"))
-                }
-                else if(is_guide == 0){
-                    dispatch(set_as_user("SET_AS_USER"))
-                }
-                // Set user ID
-                dispatch(set_user_id(user_id))
+                localStorage.setItem("is_guide", res.data.is_guide)
+                localStorage.setItem("user_id", res.data.user_id)
 
-                dispatch(login("LOGIN"))
-                history.push("/account/user")
+                _login(res.data.access_token, res.data.refresh_token, res.data.is_guide, res.data.user_id, dispatch, history)
             })
             .catch(err => {
                 const code = err.response.status
@@ -80,8 +70,8 @@ function Login(){
                     setError(err.response.data.message)
                 }
                 // Clear credentials input
-                setPassword("")
-                setEmail("")
+                //setPassword("")
+                //setEmail("")
             })
     }
 

@@ -8,12 +8,11 @@ import {useSelector} from "react-redux";
 
 function ProtectedRoute({component: Component, ...rest}){
 
-    const is_logged = useSelector(state => state.isAuthenticated)
-    const history = useHistory()
-    if(is_logged === false){
-        console.log("ASDADASDASDS")
-        history.push("/home")
-    }
+   const access_token = localStorage.getItem("access_token")
+    let is_logged = false
+   if(access_token){
+       is_logged = true
+   }
 
     return (
         is_logged ?
