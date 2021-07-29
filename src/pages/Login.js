@@ -55,12 +55,7 @@ function Login(){
                     setError("Coś poszło nie tak. Spróbuj ponownie.")
                     return
                 }
-                localStorage.setItem("access_token", res.data.access_token)
-                localStorage.setItem("refresh_token", res.data.refresh_token)
-                localStorage.setItem("is_guide", res.data.is_guide)
-                localStorage.setItem("user_id", res.data.user_id)
-
-                _login(res.data.access_token, res.data.refresh_token, res.data.is_guide, res.data.user_id, dispatch, history)
+                _login(res.data.access_token, res.data.refresh_token, res.data.user_id, res.data.is_guide, dispatch, history)
             })
             .catch(err => {
                 const code = err.response.status
