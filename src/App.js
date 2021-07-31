@@ -46,8 +46,10 @@ import './styles/deletedMessages.css';
 import './styles/toursTourPanel.css';
 import './styles/tourDetails.css';
 import './styles/tourPanelLabel.css';
+import './styles/guideNewTourSuccess.css'
 
 import {logout} from "./redux/actions";
+import GuideNewTourSuccess from "./pages/guide/GuideNewTourSuccess";
 
 
 function App() {
@@ -100,6 +102,9 @@ function App() {
 
         <ProtectedRoute path="/account/messages" component={Messages}/>
 
+        <Route exact path={"/new-tour-success"}>
+            <GuideNewTourSuccess />
+        </Route>
 
         <Route path="/login">
             <Login />

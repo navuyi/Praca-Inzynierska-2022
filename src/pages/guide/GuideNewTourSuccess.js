@@ -1,36 +1,34 @@
-import React from 'react'
-import {Container, Row, Col, Button, Card, Nav} from 'react-bootstrap'
-import {Alert} from "@material-ui/lab";
-import {useHistory} from "react-router-dom";
+import NavbarComponent from "../../components/NavbarComponent";
+import Footer from "../../components/Footer";
+import React from "react";
+import {Container, Row, Col, Button} from "react-bootstrap"
+import {Link} from "react-router-dom"
+
+import confirm from "../../images/icons/success.svg"
 
 function GuideNewTourSuccess(){
-    const history = useHistory()
-    const style = {
-        minHeight: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center"
-    }
-
     return(
-        <div className={"guideNewTourSuccess"} style={style}>
-            <Card bg={"success"} text={"light"}>
-                <Card.Header style={{fontSize: "1.5rem"}}>
-                  Oferta wycieczki została założona pomyślnie
-                </Card.Header>
-                <Card.Body>
-                    <Card.Title>Co chciałbyś zrobić teraz?</Card.Title>
-                    <Card.Text>
-                        <Button variant="outline-dark" className={"w-75"} onClick={()=>{history.push("/account/guide/new-tour")}}>Stwórz kolejną</Button>
-                    </Card.Text>
-                    <Card.Text>
-                        <Button variant="outline-dark" className={"w-75"} onClick={()=>{history.push("/account/guide/offers")}}>Zobacz utworzone oferty</Button>
-                    </Card.Text>
-                </Card.Body>
-            </Card>
+        <div className="guideNewTourSuccess">
+            <NavbarComponent />
+            <Container fluid className={"h-100 d-flex flex-column justify-content-center align-items-center pt-5 mb-5"} style={{marginTop: "0em", top: "0", flexGrow: "1"}}>
+                <Row>
+                    <img src={confirm} alt={""} width={150}/>
+                </Row>
+                <Row className={"d-flex flex-column align-items-center mt-3"}>
+                    <h1> Udało się!</h1>
+                    <h2> Oferta wycieczki została pomyślnie utworzona </h2>
+                </Row>
+                <Row className={"mt-5"}>
+                    <h3> Co chciałbys zrobić teraz?</h3>
+                </Row>
+                <Row className={"d-flex flex-column"}>
+                    <Link to={"/account/guide/new-tour"}><Button variant={"outline-dark"}> Stwórz kolejną </Button></Link>
+                    <Link to={"/account/guide/offers"}><Button variant={"outline-dark"}> Zobacz utworzone oferty </Button></Link>
+                </Row>
+            </Container>
+            <Footer />
         </div>
     )
 }
 
-export default GuideNewTourSuccess;
+export default GuideNewTourSuccess

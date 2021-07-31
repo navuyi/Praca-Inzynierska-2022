@@ -52,9 +52,6 @@ function Guide(){
                         <Switch>
                             <GuideOnlyRoute exact path="/account/guide/new-tour" component={GuideNewTour} />
 
-                            <Route exact path={"/account/guide/new-tour-success"}>
-                                <GuideNewTourSuccess />
-                            </Route>
                             <Route exact path="/account/guide/offers">
                                 <GuideOffers />
                             </Route>
