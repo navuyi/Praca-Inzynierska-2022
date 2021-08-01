@@ -18,7 +18,7 @@ import tour from '../images/home/tours.jpg';
 import crypto from '../images/home/crypto.jpg';
 import {Route, Switch} from "react-router-dom";
 import GuideNewTour from "./guide/GuideNewTour";
-import GuideOffers from "./guide/GuideOffers";
+import GuideActiveOffers from "./guide/GuideActiveOffers";
 
 
 

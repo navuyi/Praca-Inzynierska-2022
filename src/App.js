@@ -47,7 +47,7 @@ import './styles/toursTourPanel.css';
 import './styles/tourDetails.css';
 import './styles/tourPanelLabel.css';
 import './styles/guideNewTourSuccess.css'
-
+import './styles/guideActiveOffers.css'
 
 
 import GuideNewTourSuccess from "./pages/guide/GuideNewTourSuccess";

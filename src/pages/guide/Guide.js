@@ -8,9 +8,9 @@ import GuideOnlyRoute from "../../components/GuideOnlyRoute";
 
 // Subpages
 import GuideNewTour from "./GuideNewTour";
-import GuideOffers from "./GuideOffers";
+import GuideActiveOffers from "./GuideActiveOffers";
 import GuideProfile from "./GuideProfile";
-
+import GuideClosedOffers from "./GuideClosedOffers";
 
 // Dependencies
 import {Container, Row, Col} from "react-bootstrap";
@@ -40,8 +40,12 @@ function Guide(){
                                 path="/account/guide/new-tour"
                             />
                             <SideNavbarLink
-                                name="Moje oferty"
-                                path="/account/guide/offers"
+                                name="Aktywne oferty"
+                                path="/account/guide/active-offers"
+                            />
+                            <SideNavbarLink
+                                name="Zakończone oferty"
+                                path="/account/guide/closed-offers"
                             />
                             <SideNavbarLink
                                 name="Mój profil"
@@ -53,8 +57,11 @@ function Guide(){
                         <Switch>
                             <GuideOnlyRoute exact path="/account/guide/new-tour" component={GuideNewTour} />
 
-                            <Route exact path="/account/guide/offers">
-                                <GuideOffers />
+                            <Route exact path="/account/guide/active-offers">
+                                <GuideActiveOffers />
+                            </Route>
+                            <Route exact path="/account/guide/closed-offers">
+                                <GuideClosedOffers />
                             </Route>
                             <Route exact path="/account/guide/profile">
                                 <GuideProfile />
