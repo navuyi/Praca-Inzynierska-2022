@@ -1,6 +1,6 @@
 .guideNewTour .cont{
     border-radius: 0.5em;
-    background-image: linear-gradient(15deg, white, whitesmoke, white);
+    background-image: linear-gradient(white, #f8f8f8, white);
     margin-bottom: 10em;
 }
 .guideNewTour h1{

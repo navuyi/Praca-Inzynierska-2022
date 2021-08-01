@@ -5,11 +5,7 @@
     justify-content: space-between;
 }
 .tourDetails .details-body{
-    background-color: whitesmoke;
 
-
-
-    box-shadow: 0 0 20px 5px rgb(34,34,34);
 }
 .tourDetails h1{
     text-align: center;

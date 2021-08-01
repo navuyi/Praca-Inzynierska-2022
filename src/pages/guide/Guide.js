@@ -10,7 +10,7 @@ import GuideOnlyRoute from "../../components/GuideOnlyRoute";
 import GuideNewTour from "./GuideNewTour";
 import GuideOffers from "./GuideOffers";
 import GuideProfile from "./GuideProfile";
-import GuideTourCreator from "../../components/GuideNewTour/GuideTourCreator";
+
 
 // Dependencies
 import {Container, Row, Col} from "react-bootstrap";

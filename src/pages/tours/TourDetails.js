@@ -141,17 +141,18 @@ function TourDetails(){
                                 </React.Fragment>
                                 : null
                             }
-                            <Row className={"w-100 col-10 d-flex justify-content-between"} >
-                                <Col xl={6} className={"d-flex align-items-center flex-column"}>
-                                    {
-                                        tourData.price_list ? <TourPriceList price_list={tourData.price_list}/> : null
-                                    }
-                                </Col>
-                                <Col xl={6} className={"d-flex align-items-center flex-column"}>
-                                    {
-                                        tourData.important_info ? <TourImportantInfo important_info={tourData.important_info} /> : null
-                                    }
-                                </Col>
+                            <Row className={"w-100 col-10 d-flex justify-content-around"} >
+                                {
+                                    tourData.price_list ?
+                                        <Col xl={6} className={"d-flex align-items-center flex-column"}>
+                                    <TourPriceList price_list={tourData.price_list}/> </Col> : null
+                                }
+                                {
+                                    tourData.important_info ?
+                                        <Col xl={6} className={"d-flex align-items-center flex-column"}>
+                                            <TourImportantInfo important_info={tourData.important_info} />
+                                        </Col> : null
+                                }
                             </Row>
                             {
                                 (tourData.important_info || tourData.price_list) ? <Separator /> : null
