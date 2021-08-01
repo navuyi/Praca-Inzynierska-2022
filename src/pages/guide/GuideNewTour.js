@@ -111,11 +111,11 @@ function GuideNewTour(){
 
     return(
         <div className="guideNewTour">
-            <Container className={"mt-lg-5 mt-5 cont"}>
+            <Container className={"cont"}>
+                <Row lg={12}>
+                    <h1> Kreator wycieczki </h1>
+                </Row>
                 <Form onSubmit={handleSubmit}>
-                    <Row lg={12}>
-                        <h1 style={{color: "#1d6cf5", fontWeight: "100"}}> Kreator wycieczki </h1>
-                    </Row>
                     <GuideNewTourInputs
                         handleChange={handleChange}
                         tourData={tourData}
@@ -125,13 +125,13 @@ function GuideNewTour(){
                         formData={formData}
                     />
                     <Separator />
-                    <Row className={"d-flex justify-content-center"}> <h2 style={{textAlign: "center", color: "#1d6cf5"}}> Plan wycieczki</h2> </Row>
+                    <Row className={"d-flex justify-content-center"}> <h2 style={{textAlign: "center", color: "#222222"}}> Plan wycieczki</h2> </Row>
                     <GuideNewTourPlan
                         tourData={tourData}
                         setTourData={setTourData}
                     />
                     <Separator />
-                    <Row className={"d-flex justify-content-center"}> <h2 style={{textAlign: "center", color: "#1d6cf5"}}> Opcje dodatkowe </h2> </Row>
+                    <Row className={"d-flex justify-content-center"}> <h2 style={{textAlign: "center", color: "#222222"}}> Opcje dodatkowe </h2> </Row>
                     <GuideNewTourElectivesSelector
                         electives={electives}
                         setElectives={setElectives}

@@ -16,7 +16,7 @@ function GuideNewTourInputs(props){
         <React.Fragment>
             <Row className={"d-flex justify-content-center"}>
                 <Col xl={8} lg={8}>
-                    <h2 style={{textAlign: "left", color: "#1d6cf5"}}> Nagłówek wycieczki </h2>
+                    <h2 style={{textAlign: "left", color: "#222222"}}> Nagłówek wycieczki </h2>
                     <FormControl
                         as="textarea"
                         id="header"
@@ -30,7 +30,7 @@ function GuideNewTourInputs(props){
             </Row>
             <Row className={"d-flex justify-content-center mt-4"}>
                 <Col xl={8} lg={8}>
-                    <h2 style={{textAlign: "left", color: "#1d6cf5"}}> Opis wycieczki </h2>
+                    <h2 style={{textAlign: "left", color: "#222222"}}> Opis wycieczki </h2>
                     <Form.Control
                         as="textarea"
                         rows={5}
@@ -44,7 +44,7 @@ function GuideNewTourInputs(props){
             </Row>
             <Separator />
             <Row className={"d-flex justify-content-center"}>
-                <h2 style={{textAlign: "center", color: "#1d6cf5"}}> Zdjęcie główne </h2>
+                <h2 style={{textAlign: "center", color: "#222222"}}> Zdjęcie główne </h2>
             </Row>
             <Row className={"d-flex justify-content-center align-items-center flex-column "}>
                 <Col xl={6} lg={6} className={"d-flex justify-content-center"}>
@@ -64,7 +64,7 @@ function GuideNewTourInputs(props){
             </Row>
             <Separator />
             <Row className={"d-flex justify-content-center"}>
-                <h2 style={{textAlign: "center", color: "#1d6cf5"}}> Dane szczegółowe </h2>
+                <h2 style={{textAlign: "center", color: "#222222"}}> Dane szczegółowe </h2>
             </Row>
             <Row className={"d-flex justify-content-center"}>
                 <Col xl={3} lg={4} className={"d-flex flex-column"}>

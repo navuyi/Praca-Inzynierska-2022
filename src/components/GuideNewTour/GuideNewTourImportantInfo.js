@@ -54,7 +54,7 @@ export default function GuideNewTourImportantInfo(props){
         <React.Fragment>
             <Row>
                 <Col>
-                    <h2 style={{textAlign: "center", color: "#1d6cf5"}}> Ważne informacje </h2>
+                    <h2 style={{textAlign: "center", color: "#222222"}}> Ważne informacje </h2>
                 </Col>
             </Row>
             <Row className={"d-flex flex-row justify-content-center"}>

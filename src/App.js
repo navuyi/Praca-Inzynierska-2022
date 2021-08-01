@@ -47,6 +47,7 @@ import './styles/toursTourPanel.css';
 import './styles/tourDetails.css';
 import './styles/tourPanelLabel.css';
 import './styles/guideNewTourSuccess.css'
+import './styles/guideTourCreator.css'
 
 import {logout} from "./redux/actions";
 import GuideNewTourSuccess from "./pages/guide/GuideNewTourSuccess";

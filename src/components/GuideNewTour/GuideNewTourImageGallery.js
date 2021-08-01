@@ -39,7 +39,7 @@ export default function GuideNewTourImageGallery(props) {
         <React.Fragment>
             <Row>
                 <Col>
-                    <h2 style={{textAlign: "center", color: "#1d6cf5"}}> Galeria zdjęć </h2>
+                    <h2 style={{textAlign: "center", color: "#222222"}}> Galeria zdjęć </h2>
                 </Col>
             </Row>
             <Row className={"d-flex flex-column align-items-center justify-content-around mt-2"}>

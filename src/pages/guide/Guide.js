@@ -10,11 +10,12 @@ import GuideOnlyRoute from "../../components/GuideOnlyRoute";
 import GuideNewTour from "./GuideNewTour";
 import GuideOffers from "./GuideOffers";
 import GuideProfile from "./GuideProfile";
-import GuideNewTourSuccess from "./GuideNewTourSuccess";
+import GuideTourCreator from "../../components/GuideNewTour/GuideTourCreator";
 
 // Dependencies
 import {Container, Row, Col} from "react-bootstrap";
 import {Switch, Route} from 'react-router-dom';
+
 
 function Guide(){
 

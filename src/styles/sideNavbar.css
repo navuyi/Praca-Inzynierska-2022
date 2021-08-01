@@ -3,8 +3,12 @@
     border-bottom-right-radius: 0em;
 
     /*border-top: solid #d36903 5px;*/
+    /*
     background-image: linear-gradient(15deg, #192841, #152238);
     background-image: linear-gradient(15deg, #1167b1, #187bcd);
+     */
+
+    background-color: orange;
 
     height: 100%;
     padding: 5em 1em;
