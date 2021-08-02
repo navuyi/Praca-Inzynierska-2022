@@ -20,6 +20,17 @@ def get_tours():
     filter_places = args.getlist("tour_places[]")
     filter_date = args.getlist("tour_date[]")
 
+    results_per_page = int(args.get("results_per_page"))
+    sort_by = args.get("sort_by")
+    page = int(args.get("page"))
+
+    if sort_by == "most_recent":
+        ORDER = "creation_date"
+    elif sort_by == "price":
+        ORDER = "price"
+    elif sort_by == "price_desc":
+        ORDER = "price DESC"
+
     ### Define sql_params ###
     sql_params = sqlParams(price=filter_price, date=filter_date, places=filter_places)
     applicable_tours = []  # <-- array for tour IDs that match filtering
@@ -43,7 +54,7 @@ def get_tours():
         by_place = False
 
     statement = f'''SELECT id FROM tours {f'WHERE price BETWEEN {price_lower} AND {price_upper}' if by_price else 'WHERE'}
-                        {f'AND' if (by_price and by_date) else ""} {f'start_date > "{date_lower}" AND end_date < "{date_upper}"' if by_date else ""}'''
+                        {f'AND' if (by_price and by_date) else ""} {f'start_date > "{date_lower}" AND end_date < "{date_upper}"' if by_date else ""} ORDER BY {ORDER}'''
 
     cursor().execute(statement)
     price_date_tours = []
@@ -69,7 +80,11 @@ def get_tours():
     else:
         applicable_tours = price_date_tours
 
-
+    ### After filtration ###
+    tours_found = len(applicable_tours) # <-- total  number of found results - matching filter parameters
+    lower_limit = (page-1)*results_per_page
+    upper_limit = lower_limit + results_per_page
+    applicable_tours = applicable_tours[lower_limit : upper_limit] # <-- Implement pagination
 
     ### Get applicable tours data ###
     if not applicable_tours: # <-- Return with code 404 if no matches were found
@@ -103,7 +118,8 @@ def get_tours():
 
         tours_data.append(tour)
 
-    tours_found = len(applicable_tours)
+    print(tours_found)
+
     response = jsonify(tours_data=tours_data, tours_found=tours_found)
 
     return response, 200

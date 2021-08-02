@@ -19,17 +19,19 @@ function Tours(){
     const history = useHistory();
     const [loading, setLoading] = useState(true)
     const [tourData, setTourData] = useState([])
+    const [toursFound, setToursFound] = useState(0)
     const [filterData, setFilterData] = useState({
         tour_price: [20, 900],
         tour_places: [],
         tour_date: ["",""]
     })
     const [resultsConfig, setResultsConfig] = useState({
-        results_per_page: 10,
-        sort_by: "most_recent"
+        results_per_page: 5,
+        sort_by: "most_recent",
+        page: 1
     })
 
-    function handleChange(e){
+    function handleChange(e, value){
         if(e.target.id === "start_date"){
             const tmp_date = filterData.tour_date;
             tmp_date[0] = e.target.value;
@@ -42,37 +44,46 @@ function Tours(){
             setFilterData(update)
         }
         else if(e.target.id === "sort-select"){
-            console.log(e.target.value)
+            const update = {...resultsConfig, sort_by: e.target.value, page: 1}
+            setResultsConfig(update)
         }
         else if(e.target.id === "results-per-page-select"){
-            console.log(e.target.value)
+            const update = {...resultsConfig, results_per_page: e.target.value, page: 1}
+            setResultsConfig(update)
         }
+    }
+    function handlePage(e, value){
+        const update = {...resultsConfig, page: value}
+        setResultsConfig(update)
     }
 
     useEffect(()=>{
         //console.log(stringify(filterData))
         fetchData(stringify(filterData))
-    }, [filterData])
+    }, [filterData, resultsConfig])
 
     useEffect(()=>{
         fetchData(stringify(filterData))
     }, []);
 
     function fetchData(queryString){
-        const url = "http://167.99.143.194/api/tour/tours"
-        const params = filterData;
-
+        setTourData([])
         setLoading(true)
+        const url = "http://167.99.143.194/api/tour/tours"
+        const params = {...filterData, ...resultsConfig};
+        window.scroll(0, null)
+        console.log(params)
+
         axios.get(url, {params})
             .then(res => {
-                console.log(res.data)
                 setTourData(res.data.tours_data)
+                setToursFound(res.data.tours_found)
                 setLoading(false)
             })
             .catch(err => {
                 console.log(err.response)
                 setTourData([])
-                //setLoading(false)
+                setLoading(false)
             })
     }
 
@@ -137,11 +148,12 @@ function Tours(){
                         <Container style={{flexGrow: "1", height: "100%"}} className={"d-flex flex-column "}>
                             <Row className={"center-header d-flex justify-content-between align-items-center "}>
                                 <Col xl={3} >
-                                    <p> Wyszukano ofert: <span> {tourData.length} </span></p>
+                                    <p> Wyszukano ofert: <span> {toursFound} </span></p>
                                 </Col>
                                 <Col xl={5}  className={"header-sort d-flex flex-row align-items-start justify-content-xl-center align-items-xl-center mt-3 mt-xl-0"}>
                                     <label> Wyników na stronę </label>
-                                    <FormControl as={"select"}  className={"w-25"} onChange={handleChange} id="results-per-page-select">
+                                    <FormControl as={"select"}  className={"w-25"} onChange={handleChange} id="results-per-page-select" value={resultsConfig.results_per_page}>
+                                        <option value={5}> 5 </option>
                                         <option value={10}> 10 </option>
                                         <option value={50}> 50 </option>
                                         <option value={100}> 100 </option>
@@ -149,7 +161,7 @@ function Tours(){
                                 </Col>
                                 <Col xl={4}  className={" header-sort d-flex flex-row align-items-start justify-content-xl-center align-items-xl-center mt-3 mt-xl-0"}>
                                     <label> Sortowanie: </label>
-                                    <FormControl as={"select"}   className={"w-50"} onChange={handleChange} id="sort-select">
+                                    <FormControl as={"select"}   className={"w-50"} onChange={handleChange} id="sort-select" value={resultsConfig.sort_by}>
                                         <option value={"most_recent"}> Od najnowszych </option>
                                         <option value={"price"}> Cena rosnąco </option>
                                         <option value={"price_desc"}> Cena malejąco </option>
@@ -180,7 +192,7 @@ function Tours(){
                                 }
                             </Row>
                             <div className={"center-footer"}>
-                                <Pagination count={12} variant="outlined" color={"secondary"} />
+                                <Pagination count={Math.ceil(toursFound/resultsConfig.results_per_page)} variant="outlined" color={"secondary"} page={resultsConfig.page} onChange={handlePage}/>
                             </div>
                         </Container>
                 </Col>
