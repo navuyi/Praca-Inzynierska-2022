@@ -9,7 +9,7 @@ import GuideNewTourPriceList from "../../components/GuideNewTour/GuideNewTourPri
 import GuideNewTourImportantInfo from "../../components/GuideNewTour/GuideNewTourImportantInfo";
 import Separator from "../../components/Separator";
 import SeparatorShort from "../../components/SeparatorShort";
-
+import {CircularProgress} from "@material-ui/core";
 
 import {create_tour} from "../../API_CALLS/create_tour";
 
@@ -29,6 +29,9 @@ function GuideNewTour(){
         visible: false,
         text: ""
     });
+    const [upload, setUpload] = useState(false)
+
+
     const [mainUrl, setMainUrl] = useState("");
     const empty_tour_data = {
         guide_id: localStorage.getItem("user_id"),  // Guide ID fetch from localStorage
@@ -54,7 +57,6 @@ function GuideNewTour(){
         setErrorInfo({...errorInfo, visible: false});
     }, [tourData, priceList, importantInfo, electives, mainUrl])
 
-
     function handleChange(e){
         // Check if price and person limit is a numeric value
         if(e.target.id == "person_limit" || e.target.id == "price"){
@@ -68,6 +70,7 @@ function GuideNewTour(){
 
     function handleSubmit(e){
         e.preventDefault();
+        setUpload(true)
         // Check if tour plan is provided
         if(tourData.tour_plan.length <= 0){
             window.alert("Proszę wypełnić plan wycieczki");
@@ -96,10 +99,13 @@ function GuideNewTour(){
             .then(res=>{
                 const data = res.data;
                 // Redirect to success page
+                setUpload(false)
                 history.push("/new-tour-success");
             })
             .catch(err=>{
                 const data = err.response.data;
+                setUpload(false)
+                window.scrollTo(0,document.body.scrollHeight);
                 setErrorInfo({
                     visible: true,
                     text: data.message
@@ -146,6 +152,11 @@ function GuideNewTour(){
 
                     <Row className={"mt-5 d-flex justify-content-center pb-5"}>
                         {
+                            upload ?
+                                <div className={"upload-indicator"}>
+                                    <p> Proszę czekać </p>
+                                    <CircularProgress  size={"120px"} color={"primary"}/>
+                                </div> :
                             errorInfo.visible ?
                                 <Alert severity={"error"} variant={"filled"}> {errorInfo.text} </Alert> :
                                 <Button className={"w-50 pt-3 pb-3"} type="submit"> Opublikuj ofertę wycieczki </Button>
