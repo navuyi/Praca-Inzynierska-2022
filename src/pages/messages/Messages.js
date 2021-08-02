@@ -10,9 +10,8 @@ import NewMessage from "./NewMessage";
 import OldMessages from "./OldMessages";
 import SentMessages from "./SentMessages";
 import DeletedMessages from "./DeletedMessages";
-
 // Dependencies
-
+import Select from "react-select";
 
 function Messages(){
 

@@ -134,6 +134,7 @@ function Tours(){
                                 <p> Wyszukano ofert: <span> 56 </span></p>
                                 <DropdownButton id="dropdown-basic-button" title="Sortuj" style={{height: "38px"}}
                                                 variant="danger">
+                                    <Dropdown.Item href="#/action-3"> Od najnowszych </Dropdown.Item>
                                     <Dropdown.Item href="#/action-1"> Cena rosnąco </Dropdown.Item>
                                     <Dropdown.Item href="#/action-2"> Cena malejąco </Dropdown.Item>
                                     <Dropdown.Item href="#/action-3"> Czas trwania rosnąco </Dropdown.Item>

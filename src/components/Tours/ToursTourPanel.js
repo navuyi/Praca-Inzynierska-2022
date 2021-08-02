@@ -27,12 +27,12 @@ const ToursTourPanel = (props) => {
             <Col xl={5} className={"d-flex flex-column align-items-center justify-content-center"}>
                 <img src={props.image_url} alt={""} className={"tour-panel-main-img"}/>
             </Col>
-            <Col xl={7}>
+            <Col xl={7} className={"d-flex flex-column"}>
                 <Row>
                     <h1 className={"tour-panel-header"}> {limitText(props.header, 30)} </h1>
                 </Row>
-                <Row>
-                    <Col xl={6}>
+                <Row style={{flexGrow: "1"}}>
+                    <Col xl={6} className={"d-flex flex-column justify-content-center"}>
                         <p className={"tour-panel-description"}>
                             {limitText(props.description, 256)}
                         </p>

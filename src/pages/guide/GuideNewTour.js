@@ -31,7 +31,7 @@ function GuideNewTour(){
     });
     const [mainUrl, setMainUrl] = useState("");
     const empty_tour_data = {
-        guide_id: 1,  // For now it is set to 1 later it will be fetched from cookie or sth
+        guide_id: localStorage.getItem("user_id"),  // Guide ID fetch from localStorage
         header: "",
         description: "",
         person_limit: "",
@@ -96,7 +96,7 @@ function GuideNewTour(){
             .then(res=>{
                 const data = res.data;
                 // Redirect to success page
-                history.push("/account/guide/new-tour-success");
+                history.push("/new-tour-success");
             })
             .catch(err=>{
                 const data = err.response.data;
@@ -113,7 +113,7 @@ function GuideNewTour(){
         <div className="guideNewTour">
             <Container className={"cont"}>
                 <Row lg={12}>
-                    <h1> Kreator wycieczki </h1>
+                    <h1 style={{color: "#222222", fontWeight: "100"}}> Kreator wycieczki </h1>
                 </Row>
                 <Form onSubmit={handleSubmit}>
                     <GuideNewTourInputs

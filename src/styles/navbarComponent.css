@@ -1,6 +1,6 @@
 .navbarComponent{
     background-color: rgb(34,34,34);
-
+    min-height: 3rem;
     justify-content: center;
     align-self: center;
     display: flex;

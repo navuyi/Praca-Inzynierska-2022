@@ -11,9 +11,9 @@ function GuideActiveTourPanel(props){
                         <h1> Limited header of the t... </h1>
                     </Row>
                     <Row className={"d-flex flex-column justify-content-center align-items-start pl-5 pr-5 mt-5"} style={{flexGrow: "1"}}>
-                        <p> Zapisanych osób: xx/YY, pozostało XY dni </p>
-                        <p> Czas trwania: dd/mm/YY - dd/mm/YY </p>
-                        <p> Cena: xyz </p>
+                        <p> Zapisanych osób: <span>xx/YY</span>, pozostało <span>XY dni</span> </p>
+                        <p> Czas trwania:  od <span>dd/mm/YY</span> do <span>dd/mm/YY</span> </p>
+                        <p> Cena: <span>xyz</span> </p>
                     </Row>
                 </Col>
                 <Col xl={6}>
