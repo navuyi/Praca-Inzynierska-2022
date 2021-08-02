@@ -51,7 +51,7 @@ def get_tours():
     for item in res:
         price_date_tours.append(item["id"])
 
-    # Filter by tours
+    # Filter by places
     if "tour_places" in sql_params:
         place_tours = []
         for place_id in sql_params["tour_places"]:
@@ -75,7 +75,7 @@ def get_tours():
     if not applicable_tours: # <-- Return with code 404 if no matches were found
         print("Not found")
         return {"msg": "Nie znaleziono ofert o podanych parametrach"}, 404
-    return_data = []
+    tours_data = []
     for tour_id in applicable_tours:
         tour = {}
         # Get general information about the tour
@@ -97,12 +97,13 @@ def get_tours():
         filename = cursor().fetchone()["filename"]
         image_url = os.path.join(current_app.config["TOUR_IMAGES_DOWNLOAD_DIRECTORY"], filename)
 
-
         tour["general_data"] = general_data
         tour["guide_data"] = guide_data
         tour["image_url"] = image_url
 
+        tours_data.append(tour)
 
-        return_data.append(tour)
+    tours_found = len(applicable_tours)
+    response = jsonify(tours_data=tours_data, tours_found=tours_found)
 
-    return jsonify(return_data), 200
+    return response, 200

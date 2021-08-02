@@ -43,40 +43,53 @@
 }
 
 .tours .center-header{
-    background-color: rgb(34,34,34);
-    width: 100%;
+    background-color: orange;
     min-height: 50px;
-    border-top-left-radius: 1em;
-    border-top-right-radius: 1em;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
     margin-bottom: 1em;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 
     padding: 1em 2em;
 
 }
 .tours .center-header p{
-    color: whitesmoke;
+    color: rgb(34,34,34);
     margin: 0 0;
     padding: 0 0;
     font-size: 1.4rem;
-    font-weight: 500;
+    font-weight: bold;
     font-family: 'Source Sans Pro', sans-serif;
 }
 .tours .center-header span{
-    font-weight: 700;
+    font-weight: bold;
+    font-size: 1.4rem;
     color: white;
+    margin-left: 1em;
+}
+.tours .center-header .header-sort{
+
+}
+.tours .center-header .header-sort label{
+    margin: 0;
+    padding: 0;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 0 0.2em;
 }
 
+.tours .center-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
 .tours .center-footer{
     background-color: goldenrod;
     width: 100%;
-    border-bottom-left-radius: 1em;
-    border-bottom-right-radius: 1em;
-    margin-bottom: 1em;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
 
     display: flex;
     flex-direction: row;

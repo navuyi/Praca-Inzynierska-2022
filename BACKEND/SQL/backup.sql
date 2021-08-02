@@ -290,6 +290,7 @@ CREATE TABLE `tours` (
   `guide_id` int NOT NULL,
   `price` int NOT NULL,
   `person_limit` int NOT NULL,
+  creation_date DATETIME NOT NULL DEFAULT NOW(),  /* tour creation time - notice that it is UTC time  */
   `start_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
   PRIMARY KEY (`id`),

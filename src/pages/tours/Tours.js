@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 
 import NavbarComponent from "../../components/NavbarComponent";
 import Footer from "../../components/Footer";
-import {Row, Col, Container, Button, FormControl, Dropdown, DropdownButton} from "react-bootstrap"
+import {Row, Col, Container, Button, FormControl, Dropdown, DropdownButton, FormGroup} from "react-bootstrap"
 import {Pagination} from "@material-ui/lab";
 import {CircularProgress} from "@material-ui/core";
 
@@ -24,6 +24,10 @@ function Tours(){
         tour_places: [],
         tour_date: ["",""]
     })
+    const [resultsConfig, setResultsConfig] = useState({
+        results_per_page: 10,
+        sort_by: "most_recent"
+    })
 
     function handleChange(e){
         if(e.target.id === "start_date"){
@@ -36,6 +40,12 @@ function Tours(){
             tmp_date[1] = e.target.value;
             const update = {...filterData, tour_date: tmp_date}
             setFilterData(update)
+        }
+        else if(e.target.id === "sort-select"){
+            console.log(e.target.value)
+        }
+        else if(e.target.id === "results-per-page-select"){
+            console.log(e.target.value)
         }
     }
 
@@ -56,13 +66,13 @@ function Tours(){
         axios.get(url, {params})
             .then(res => {
                 console.log(res.data)
-                setTourData(res.data)
+                setTourData(res.data.tours_data)
                 setLoading(false)
             })
             .catch(err => {
                 console.log(err.response)
                 setTourData([])
-                setLoading(false)
+                //setLoading(false)
             })
     }
 
@@ -71,11 +81,7 @@ function Tours(){
 
 
 
-    const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' }
-    ]
+
     return(
     <div className="tours">
         <NavbarComponent />
@@ -127,21 +133,31 @@ function Tours(){
                         </Row>
                     </Container>
                 </Col>
-                <Col lg={8} sm={12} style={{padding: "0"}} className={"d-flex  justify-content-center align-items-center"}>
-                    { loading ? <CircularProgress  size={120}  color={"secondary"} /> :
-                        <Container style={{marginTop: "2rem"}}>
-                            <div className={"center-header"}>
-                                <p> Wyszukano ofert: <span> 56 </span></p>
-                                <DropdownButton id="dropdown-basic-button" title="Sortuj" style={{height: "38px"}}
-                                                variant="danger">
-                                    <Dropdown.Item href="#/action-3"> Od najnowszych </Dropdown.Item>
-                                    <Dropdown.Item href="#/action-1"> Cena rosnąco </Dropdown.Item>
-                                    <Dropdown.Item href="#/action-2"> Cena malejąco </Dropdown.Item>
-                                    <Dropdown.Item href="#/action-3"> Czas trwania rosnąco </Dropdown.Item>
-                                    <Dropdown.Item href="#/action-3"> Czas trwania malejąco </Dropdown.Item>
-                                </DropdownButton>
-                            </div>
-                            <div className={"center-body"}>
+                <Col lg={8} sm={12} style={{padding: "0"}} className={"d-flex  justify-content-center align-items-start"}>
+                        <Container style={{flexGrow: "1", height: "100%"}} className={"d-flex flex-column "}>
+                            <Row className={"center-header d-flex justify-content-between align-items-center "}>
+                                <Col xl={3} >
+                                    <p> Wyszukano ofert: <span> {tourData.length} </span></p>
+                                </Col>
+                                <Col xl={5}  className={"header-sort d-flex flex-row align-items-start justify-content-xl-center align-items-xl-center mt-3 mt-xl-0"}>
+                                    <label> Wyników na stronę </label>
+                                    <FormControl as={"select"}  className={"w-25"} onChange={handleChange} id="results-per-page-select">
+                                        <option value={10}> 10 </option>
+                                        <option value={50}> 50 </option>
+                                        <option value={100}> 100 </option>
+                                    </FormControl>
+                                </Col>
+                                <Col xl={4}  className={" header-sort d-flex flex-row align-items-start justify-content-xl-center align-items-xl-center mt-3 mt-xl-0"}>
+                                    <label> Sortowanie: </label>
+                                    <FormControl as={"select"}   className={"w-50"} onChange={handleChange} id="sort-select">
+                                        <option value={"most_recent"}> Od najnowszych </option>
+                                        <option value={"price"}> Cena rosnąco </option>
+                                        <option value={"price_desc"}> Cena malejąco </option>
+                                    </FormControl>
+                                </Col>
+                            </Row>
+                            <Row className={"center-body"} style={{flexGrow: "1"}}>
+                                { loading ? <CircularProgress  size={120}  color={"secondary"} /> : null}
                                 {
                                     tourData.map((tour, index) => {
                                         return (
@@ -162,12 +178,11 @@ function Tours(){
                                         )
                                     })
                                 }
-                            </div>
+                            </Row>
                             <div className={"center-footer"}>
                                 <Pagination count={12} variant="outlined" color={"secondary"} />
                             </div>
                         </Container>
-                    }
                 </Col>
                 <Col lg={2} sm={12} style={{padding: "0"}} >
 
