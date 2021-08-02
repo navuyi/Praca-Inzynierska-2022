@@ -25,7 +25,7 @@ const ToursTourPanel = (props) => {
         <div  onClick={()=>{history.push(`/tours/tour?id=${props.tourId}`)}}>
         <Row className={"toursTourPanel"} >
             <Col xl={5} className={"d-flex flex-column align-items-center justify-content-center"}>
-                <img src={props.image_url} alt={""} className={"tour-panel-main-img"}/>
+                <img src={props.image_url} alt={""} className={"tour-panel-main-img"} />
             </Col>
             <Col xl={7} className={"d-flex flex-column"}>
                 <Row>

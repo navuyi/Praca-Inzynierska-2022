@@ -3,7 +3,7 @@ import os
 from flask import Flask, jsonify, g, request
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
-from flask_jwt_extended import create_access_token, create_refresh_token
+from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required
 from flask_jwt_extended import JWTManager
 from app.handlers import APIException
 from uuid import uuid4
@@ -31,6 +31,7 @@ def create_app(test_config=None):               # test_config - independent from
     app.config["JWT_SECRET_KEY"] = str(uuid4()) # <-- NEEDS TO BE STRING
     app.config["JWT_TOKEN_LOCATION"] = ["headers"]
     app.config["JWT_ACCESS_TOKEN_EXPIRES"] = datetime.timedelta(minutes=30)
+    app.config["JWT_REFRESH_TOKEN_EXPIRES"] = datetime.timedelta(days=30)
     jwt = JWTManager(app)
 
     ### Error handler ###
@@ -68,6 +69,7 @@ def create_app(test_config=None):               # test_config - independent from
     db_init_app(app)
 
     @app.route('/', methods=['GET'])
+    @jwt_required()
     def index_get():
         return jsonify({"msg": "Hello World"}), 200
     from app.endpoints.authentication import bp as bp_authentication

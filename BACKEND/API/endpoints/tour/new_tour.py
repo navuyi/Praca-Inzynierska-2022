@@ -1,9 +1,8 @@
-
 from flask import Blueprint, request, current_app, jsonify
 from datetime import datetime
 
 from werkzeug.utils import secure_filename
-
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.handlers import APIException
 from app.database.db import cursor, lastrowid
 
@@ -14,7 +13,15 @@ import uuid
 bp = Blueprint("new_tour", __name__, url_prefix="/tour")
 
 @bp.route("/new_tour", methods=["POST"])
+@jwt_required()
 def create_new_tour():
+    # Check if request come from account with guide privileges
+    user_id = get_jwt_identity()
+    cursor().execute(f"SELECT is_guide FROM users WHERE id = %s", (user_id, ))
+    is_guide = cursor().fetchone()["is_guide"]
+    if is_guide != 1:
+        raise APIException(msg="Brak uprawnień", code=401)
+
     ### Get the general data ###
     files = request.files
     tour_data = json.loads(request.form["tour_data"])

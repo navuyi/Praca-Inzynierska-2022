@@ -13,10 +13,10 @@ import {CircularProgress} from "@material-ui/core";
 
 import {create_tour} from "../../API_CALLS/create_tour";
 
-
 import {Alert} from "@material-ui/lab";
 import {useHistory} from "react-router-dom";
-
+import {refesh_token} from "../../API_CALLS/token_refresh";
+import {_logout} from "../../utils/_logout";
 
 // Create form data - it changes on every render
 const formData = new FormData();
@@ -103,15 +103,34 @@ function GuideNewTour(){
                 history.push("/new-tour-success");
             })
             .catch(err=>{
-                const data = err.response.data;
-                setUpload(false)
-                window.scrollTo(0,document.body.scrollHeight);
-                setErrorInfo({
-                    visible: true,
-                    text: data.message
-                });
+                console.log(err)
+                console.log(err.response)
+                if(err.response.status === 401){
+                    // Access token might be expired, try refreshing
+                    refesh_token()
+                        .then(res => {
+                            localStorage.setItem("access_token", res.data.access_token)     // <-- set new access token
+                            handleSubmit(new Event("submit"))       // <-- successful token refresh, passing custom Event becouse the function takes event as argument
+                        })
+                        .catch(err => {
+                            console.log(err)
+                            console.log(err.response)
+                            _logout()                                      // <-- logout in case of failure
+                            history.push("/login")      // <-- redirect to to login page in case of failure
+                        })
+                }
+                else{
+                    const data = err.response.data;
+                    setUpload(false)
+                    window.scrollTo(0,document.body.scrollHeight);
+                    setErrorInfo({
+                        visible: true,
+                        text: data.message
+                    });
+                }
             })
     }
+
 
 
 

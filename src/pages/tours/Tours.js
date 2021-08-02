@@ -53,6 +53,9 @@ function Tours(){
         }
     }
     function handlePage(e, value){
+        if(value === resultsConfig.page){
+            return
+        }
         const update = {...resultsConfig, page: value}
         setResultsConfig(update)
     }
