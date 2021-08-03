@@ -167,6 +167,73 @@ paths:
                     type: string
                     example: Pożądana oferta nie została znaleziona
 
+  "/api/guide/tours/active":
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Guide
+      summary: Returns all active tours created and held by specific guide
+      parameters:
+        - in: query
+          name: sort
+          schema:
+            type: string
+            example: "most_recent"
+      responses:
+        '401':
+          description: Not allowed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: "Reason for blocked access"
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 207
+                    header:
+                      type: string
+                      example: Haeder of the tour
+                    start_date:
+                      type: string
+                      example: "03/08/2021"
+                    end_date:
+                      type: string
+                      example: "03/08/2021"
+                    price:
+                      type: integer
+                      example: 909
+                    creation_date:
+                      type: string
+                      example: 03/08/2021
+                    person_limit:
+                      type: string
+                      example: 35
+                    image_url:
+                      type: string
+                      example: 123/path/to/the/file.jpg
+
+
+
+
+
+
+  "/api/guide/tours/closed":
+    get:
+      tags:
+        - Guide
 
   "/api/tour/tags":
     get:
@@ -221,6 +288,11 @@ paths:
 
 
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     NewTour:
       type: object

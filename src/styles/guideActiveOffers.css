@@ -42,14 +42,14 @@
 }
 .guideActiveOffers .guide-active-tour-panel img{
     border-radius: 0.5em;
-
 }
 .guideActiveOffers .guide-active-tour-panel p{
     color: whitesmoke;
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
     font-size: 1.1rem;
-    margin: 1em 0;
+    margin: 0 0;
+    padding: 0 0;
 }
 .guideActiveOffers .guide-active-tour-panel span{
     color: orange;

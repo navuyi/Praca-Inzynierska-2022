@@ -62,14 +62,14 @@ function Tours(){
 
     useEffect(()=>{
         //console.log(stringify(filterData))
-        fetchData(stringify(filterData))
+        fetchData()
     }, [filterData, resultsConfig])
 
     useEffect(()=>{
-        fetchData(stringify(filterData))
+        fetchData()
     }, []);
 
-    function fetchData(queryString){
+    function fetchData(){
         setTourData([])
         setLoading(true)
         const url = "http://167.99.143.194/api/tour/tours"

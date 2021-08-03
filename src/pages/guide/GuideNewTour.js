@@ -103,8 +103,6 @@ function GuideNewTour(){
                 history.push("/new-tour-success");
             })
             .catch(err=>{
-                console.log(err)
-                console.log(err.response)
                 if(err.response.status === 401){
                     // Access token might be expired, try refreshing
                     refesh_token()

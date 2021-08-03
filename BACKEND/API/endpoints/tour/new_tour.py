@@ -63,7 +63,7 @@ def create_new_tour():
         insert = {
             "header": tour_data["header"],
             "description": tour_data["description"],
-            "guide_id": tour_data["guide_id"],
+            "guide_id": user_id,            # <-- Get user id from JWT not frontend localstorage
             "price": tour_data["price"],
             "person_limit": tour_data["person_limit"],
             "start_date": tour_data["start_date"],
