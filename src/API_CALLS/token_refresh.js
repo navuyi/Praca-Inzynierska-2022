@@ -2,7 +2,7 @@ import {API_PREFIX} from "../config";
 import axios from "axios";
 
 export const refesh_token = async () => {
-    const url = API_PREFIX + "/token/refresh"
+    const url = API_PREFIX + "/authentication/token/refresh"
     const refresh_token = localStorage.getItem("refresh_token")
     const config = {
         headers:{

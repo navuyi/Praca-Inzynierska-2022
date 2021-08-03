@@ -79,6 +79,8 @@ paths:
   # Tours endpoints
   "/api/tour/new_tour":
     post:
+      security:
+        - bearerAuth: []
       tags:
         - Tour
       summary: Creates new tour
@@ -166,6 +168,33 @@ paths:
                   msg:
                     type: string
                     example: Pożądana oferta nie została znaleziona
+  "/api/authentication/token/refresh":
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Authentication
+      summary: Returns fresh access token in case of successful refreshing
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+        '401':
+          description: Bad refresh token or token not present
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
 
   "/api/guide/tours/active":
     get:

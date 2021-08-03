@@ -5,10 +5,10 @@ from app.handlers import APIException
 from app.database.db import cursor
 from werkzeug.security import generate_password_hash, check_password_hash
 
-bp = Blueprint("token_refresh", __name__, url_prefix="/token")
+bp = Blueprint("token_refresh", __name__, url_prefix="/authentication")
 
 
-@bp.route("/refresh", methods=["GET"])
+@bp.route("/token/refresh", methods=["GET"])
 @jwt_required(refresh=True)
 def refresh_token():
     identity = get_jwt_identity() # <-- should be user ID
