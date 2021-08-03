@@ -62,7 +62,7 @@ function Tours(){
 
     useEffect(()=>{
         //console.log(stringify(filterData))
-        fetchData()
+        //fetchData()
     }, [filterData, resultsConfig])
 
     useEffect(()=>{
@@ -85,6 +85,7 @@ function Tours(){
             })
             .catch(err => {
                 console.log(err.response)
+                setToursFound(0)
                 setTourData([])
                 setLoading(false)
             })
@@ -142,8 +143,8 @@ function Tours(){
                                         onChange={handleChange}
                                     />
                                 </div>
+                                <Button className={"w-100"} variant={"outline-light"} onClick={fetchData}> Szukaj </Button>
                             </div>
-
                         </Row>
                     </Container>
                 </Col>

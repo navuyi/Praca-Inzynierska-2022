@@ -15,7 +15,7 @@ import DateRangeIcon from "@material-ui/icons/DateRange"
 import GroupIcon from "@material-ui/icons/Group"
 import EmailIcon from '@material-ui/icons/Email'
 import PhoneIcon from '@material-ui/icons/Phone'
-
+import {CircularProgress} from "@material-ui/core";
 import TourPriceList from "../../components/Tours/TourPriceList"
 import TourImportantInfo from "../../components/Tours/TourImportantInfo"
 import {useLocation} from "react-router-dom"
@@ -61,7 +61,7 @@ function TourDetails(){
         <div className={"tourDetails"}>
             <NavbarComponent/>
             {
-                loading ? <div> nic </div> :
+                loading ? <CircularProgress size={150} color={"primary"}/> :
 
             <Container fluid className={"h-100"} style={{marginTop: "0em", top: "0", flexGrow: "1"}}>
                 <Row style={{minHeight: "75vh"}}>
