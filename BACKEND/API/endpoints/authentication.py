@@ -1,9 +1,12 @@
-from flask import Blueprint
+from flask import Blueprint, current_app
 from flask_jwt_extended import create_refresh_token, create_access_token, get_jwt_identity, jwt_required
 from flask import request, jsonify
 from app.handlers import APIException
 from app.database.db import cursor
 from werkzeug.security import generate_password_hash, check_password_hash
+from urllib.parse import urlencode
+from urllib.request import urlopen
+import json
 
 bp = Blueprint("authentication", __name__, url_prefix="/authentication")
 
@@ -12,6 +15,28 @@ bp = Blueprint("authentication", __name__, url_prefix="/authentication")
 @bp.route('/register', methods=['POST'])
 def register():
     credentials = request.json
+
+    if(current_app.config["RECAPTCHA_ENABLED"]):        # <-- Check config for reCAPTCHA settings
+        # Verify reCAPTCHA token
+        url = "https://www.google.com/recaptcha/api/siteverify"
+        payload = urlencode({
+            "secret": current_app.config["RECAPTCHA_SECRET_KEY"],
+            "response": credentials["token"]
+        })
+        data = urlopen(url, payload.encode('utf-8')).read()
+        result = json.loads(data)
+        '''
+            {
+            "success": true|false,
+            "challenge_ts": timestamp,  // timestamp of the challenge load (ISO format yyyy-MM-dd'T'HH:mm:ssZZ)
+            "hostname": string,         // the hostname of the site where the reCAPTCHA was solved
+            "error-codes": [...]        // optional
+            }
+        '''
+        if result["success"] == False:
+            raise APIException(msg="reCAPTCHA jest nieprawidłowa", code=422)
+        else:
+            pass
 
     # Check if user already exists
     cursor().execute(f"SELECT id FROM users WHERE email =%s", (credentials["email"], ))

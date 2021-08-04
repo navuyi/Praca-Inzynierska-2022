@@ -147,7 +147,7 @@ function Register(){
                         <ReCAPTCHA
                             sitekey={RECAPTCHA_PUBLIC_KEY}
                             size={"normal"}
-                            onChange={(value)=>{setToken(value)}}
+                            onChange={(value)=>{setToken(value);}}
                         />
                     </Row>
                     {
@@ -161,7 +161,6 @@ function Register(){
                         {redirect ? <CircularProgress /> : null}
                     </Row>
                     </Form>
-
                 </Container>
             <Footer />
         </div>
