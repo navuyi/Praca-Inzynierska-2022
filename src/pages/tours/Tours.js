@@ -62,8 +62,8 @@ function Tours(){
 
     useEffect(()=>{
         //console.log(stringify(filterData))
-        //fetchData()
-    }, [filterData, resultsConfig])
+        fetchData()
+    }, [resultsConfig])
 
     useEffect(()=>{
         fetchData()

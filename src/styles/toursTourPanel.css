@@ -23,6 +23,8 @@
 .toursTourPanel .tour-panel-main-img{
     width: 100%;
     border-radius: 1em;
+    max-height: 350px;
+    object-fit: cover;
 }
 .toursTourPanel .tour-panel-header{
     width: 100%;

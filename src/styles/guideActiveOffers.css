@@ -23,7 +23,7 @@
     padding: 1em 1em;
     border-radius: 1em;
 
-    min-height: 300px;
+    min-height: 350px;
     transition-duration: 0.4s;
     cursor: pointer;
 }
@@ -42,6 +42,8 @@
 }
 .guideActiveOffers .guide-active-tour-panel img{
     border-radius: 0.5em;
+    max-height: 350px;
+    object-fit: cover;
 }
 .guideActiveOffers .guide-active-tour-panel p{
     color: whitesmoke;
