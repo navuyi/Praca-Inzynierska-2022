@@ -21,6 +21,7 @@ import Register from "./pages/Register";
 import Guide from "./pages/guide/Guide";
 import User from "./pages/user/User";
 import Messages from "./pages/messages/Messages";
+import GuideOfferDetails from "./pages/guide/GuideOfferDetails";
 
 // Styles
 import './App.css';
@@ -98,6 +99,8 @@ function App() {
         <ProtectedRoute exact path="/account" component={Account}/>
 
         <GuideOnlyRoute path="/account/guide" component={Guide}/>
+
+        <GuideOnlyRoute path="/guide/offer/details/active" component={GuideOfferDetails}/>
 
         <ProtectedRoute path="/account/user" component={User} />
 

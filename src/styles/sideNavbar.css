@@ -10,7 +10,8 @@
 
     background-color: orange;
 
-    height: 100%;
+    position: sticky;
+    top: 10%;
     padding: 5em 1em;
 }
 .sideNavbar h1{

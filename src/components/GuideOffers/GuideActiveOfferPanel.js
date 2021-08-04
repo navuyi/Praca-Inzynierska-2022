@@ -3,10 +3,12 @@ import {Container, Row, Col} from "react-bootstrap"
 import image from "../../images/home/high-res.jpg"
 import {limitText} from "../../utils/limitText";
 import {API_PREFIX} from "../../config";
+import {useHistory} from "react-router-dom";
 
-function GuideActiveTourPanel(props){
+function GuideActiveOfferPanel(props){
+    const history = useHistory()
     return(
-        <Container  className="guide-active-tour-panel d-flex align-items-center justify-content-center">
+        <Container  className="guide-active-tour-panel d-flex align-items-center justify-content-center" onClick={()=>history.push(`/guide/offer/details/active/enrollment/${props.tourId}`)}>
             <Row className={"w-100"}>
                 <Col xl={6} className={"d-flex flex-column justify-content-start"}>
                     <Row>
@@ -24,7 +26,8 @@ function GuideActiveTourPanel(props){
                 </Col>
             </Row>
         </Container>
+
     )
 }
 
-export default GuideActiveTourPanel
+export default GuideActiveOfferPanel

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import {Container, Row, Col, Button, Form} from "react-bootstrap"
-import GuideActiveTourPanel from "../../components/GuideTours/GuideActiveTourPanel";
+import GuideActiveOfferPanel from "../../components/GuideOffers/GuideActiveOfferPanel";
 import axios from "axios";
 import {API_PREFIX} from "../../config";
 import {refesh_token} from "../../API_CALLS/token_refresh";
@@ -79,7 +79,8 @@ function GuideActiveOffers(){
                         loading ? <CircularProgress size={100} color={"secondary"}/> :
                             data.map((tour, index) => {
                                 return(
-                                    <GuideActiveTourPanel
+                                    <GuideActiveOfferPanel
+                                        tourId={tour.id}
                                         key={index}
                                         header={tour.header}
                                         person_limit={tour.person_limit}

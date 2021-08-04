@@ -33,7 +33,7 @@ function Guide(){
             <NavbarComponent />
             <Container fluid className={"h-100"} style={{marginTop: "0em", top: "0", flexGrow: "1"}}>
                 <Row style={{minHeight: "75vh"}}>
-                    <Col lg={2} sm={12} style={{padding: "0"}}>
+                    <Col lg={2} sm={12} style={{padding: "0", backgroundColor: "orange"}}>
                         <SideNavbar title="Panel przewodnika">
                             <SideNavbarLink
                                 name="Nowa wycieczka"

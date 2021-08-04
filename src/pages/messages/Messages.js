@@ -20,7 +20,7 @@ function Messages(){
             <NavbarComponent />
             <Container fluid style={{marginTop: "0em"}}>
                 <Row>
-                    <Col lg={2} sm={12} style={{padding: "0"}}>
+                    <Col lg={2} sm={12} style={{padding: "0", backgroundColor: "orange"}}>
                         <SideNavbar title="Wiadomości">
                             <SideNavbarLink
                                 name="Nowa wiadomość"
