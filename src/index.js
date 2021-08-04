@@ -11,6 +11,7 @@ import {Provider} from "react-redux";
 import allReducers from "./redux/reducers";
 
 import {QueryParamProvider} from "use-query-params";
+import {ReCAPTCHA} from "react-google-recaptcha";
 
 const store = createStore(
     allReducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

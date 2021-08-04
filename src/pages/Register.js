@@ -3,13 +3,15 @@ import {Form, Button} from "react-bootstrap";
 
 import {register_account} from '../API_CALLS/register_account'
 
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {useHistory} from 'react-router-dom'
 import NavbarComponent from "../components/NavbarComponent";
 import Footer from "../components/Footer";
-
-
+import {CircularProgress} from "@material-ui/core";
+import ReCAPTCHA from "react-google-recaptcha";
+import {RECAPTCHA_PUBLIC_KEY} from "../config";
 function Register(){
+    const [token, setToken] = useState("")
 
     const history = useHistory();
     const empty_credentials = {
@@ -22,6 +24,7 @@ function Register(){
     }
     const [info_popup, setInfoPopup] = useState("");
     const [credentials, setCredentials] = useState(empty_credentials);
+    const [redirect, setRedirect] = useState(false)
     const handleChange = e =>{
         // Check if phone_number input is a number
         if(e.target.id == "phone_number"){
@@ -31,12 +34,13 @@ function Register(){
                 return;
             }
         }
-
-
         const update = {...credentials, [e.target.id]: e.target.value}
         console.log(update);
         setCredentials(update);
     }
+
+
+
     const handleSubmit = e =>{
         e.preventDefault();
 
@@ -50,17 +54,23 @@ function Register(){
         setInfoPopup("");
 
         // Register acount
-        register_account(credentials)
+        const data = {...credentials, token: token}
+        console.log(data)
+        register_account(data)
         .then(res=>{
             if(res.status == 201){
-                setInfoPopup("Konto założone pomyślnie");
+                setRedirect(true)
+                setInfoPopup(res.data.message);
 
-                // Clear credentials
+                // Clear input fields and schedule redirect
                 setCredentials(empty_credentials);
+                setTimeout(()=>{
+                    history.push("/login")
+                }, 2000)
             }
         })
         .catch(err=>{
-            console.log(err);
+            setInfoPopup(err.response.data.message)
         })
 
     }
@@ -133,11 +143,25 @@ function Register(){
                             required
                         />
                     </Row>
-                    <Row className={"d-flex justify-content-center"}>
-                        <Button type="submit" size={"lg"} className={"mt-5 mb-2 w-100"} variant={"outline-dark"}> Zarejestruj </Button>
-                        <p>{info_popup}</p>
+                    <Row className={"mt-3 d-flex justify-content-center"}>
+                        <ReCAPTCHA
+                            sitekey={RECAPTCHA_PUBLIC_KEY}
+                            size={"normal"}
+                            onChange={(value)=>{setToken(value)}}
+                        />
+                    </Row>
+                    {
+                        token ?
+                            <Row className={"d-flex justify-content-center"}>
+                            <Button type="submit" size={"lg"} className={"mt-5 mb-2 w-100"} variant={"outline-dark"}> Zarejestruj </Button>
+                            <p>{info_popup}</p>
+                        </Row> : null
+                    }
+                    <Row className={"d-flex justify-content-center align-items-center"}>
+                        {redirect ? <CircularProgress /> : null}
                     </Row>
                     </Form>
+
                 </Container>
             <Footer />
         </div>

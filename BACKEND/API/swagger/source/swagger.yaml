@@ -12,7 +12,57 @@ paths:
     post:
       tags:
         - Authentication
-        #TODO: Contine
+      summary: Register new account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                f_name:
+                  type: string
+                  example: Joe
+                l_name:
+                  type: string
+                  example: Doe
+                email:
+                  type: string
+                  example: joedoe@gmail.com
+                phone_number:
+                  type: string
+                  example: 666999666
+                password:
+                  type: string
+                  example: cisco123
+                password_repeat:
+                  type: string
+                  example: cisco123
+                recaptcha_string:
+                  type: string
+                  example: example123-dont-know-yet
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  payload:
+                    type: object
+
   "/api/authentication/login":
     post:
       tags:

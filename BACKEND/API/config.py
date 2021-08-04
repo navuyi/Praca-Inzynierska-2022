@@ -23,3 +23,6 @@ TOUR_IMAGES_DOWNLOAD_DIRECTORY = HOST+"/storage/tour_images/"
 AVAILABLE_EXTENSIONS = ['.jpg', '.png', '.gif', '.tif', '.tiff', '.jpeg', '.bmp']
 MAX_CONTENT_LENGTH = 16 * 1000 * 1000
 TOUR_IMAGES_LIMIT = 20
+
+# ReCAPTCHA
+RECAPTCHA_SECRET_KEY = "6LcQltwbAAAAALw8n8WyiflolEo-Bc_Sg9dxrWBE"

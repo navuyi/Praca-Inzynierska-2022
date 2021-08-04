@@ -9,9 +9,45 @@ bp = Blueprint("authentication", __name__, url_prefix="/authentication")
 
 
 
-@bp.route('/register', methods=['POST', 'GET'])
+@bp.route('/register', methods=['POST'])
 def register():
-    pass
+    credentials = request.json
+
+    # Check if user already exists
+    cursor().execute(f"SELECT id FROM users WHERE email =%s", (credentials["email"], ))
+    res = cursor().fetchall()
+    if res:
+        raise APIException(msg="Podane konto już istnieje", code=409)
+
+    # Check if submitted passwords are the same
+    valid = True if credentials["password"] == credentials["password_repeat"] else False
+    if valid == False:
+        raise APIException(msg="Hasła muszą być takie same", code=422)
+
+    # Check if phone number is valid
+    pn = credentials["phone_number"]
+    if (str(pn).isnumeric()) == False or len(pn) != 9:
+        raise APIException(msg="Numer telefonu jest nieprawidłowy", code=422)
+
+    # Generate password hash
+    pw_hash = generate_password_hash(credentials["password"])
+
+    # Create new account
+    try:
+        cursor().execute(f"INSERT INTO users (f_name, l_name, password, email, phone_number) VALUES "
+                     f"(%(f_name)s, %(l_name)s, %(password)s, %(email)s, %(phone_number)s)",
+                     {
+                         "f_name": credentials["f_name"],
+                         "l_name": credentials["l_name"],
+                         "password": pw_hash,
+                         "email": credentials["email"],
+                         "phone_number": credentials["phone_number"]
+                     })
+    except Exception as e:
+        print(e)
+        raise APIException(msg="Wystąpił błąd, spróbuj ponownie", code=500, payload=jsonify(err=e))
+
+    return jsonify(message="Konto zostało pomyślnie utworzone"), 201
 
 @bp.route("/login", methods=['POST'])
 def login():
