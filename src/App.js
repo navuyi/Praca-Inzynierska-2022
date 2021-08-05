@@ -96,14 +96,13 @@ function App() {
             <TourDetails />
         </Route>
 
-        <ProtectedRoute exact path="/account" component={Account}/>
 
+        <GuideOnlyRoute path="/account/guide/active-offer" component={GuideOfferDetails}/>
         <GuideOnlyRoute path="/account/guide" component={Guide}/>
 
-        <GuideOnlyRoute path="/guide/offer/details/active" component={GuideOfferDetails}/>
 
+        <ProtectedRoute exact path="/account" component={Account}/>
         <ProtectedRoute path="/account/user" component={User} />
-
         <ProtectedRoute path="/account/messages" component={Messages}/>
 
         <Route exact path={"/new-tour-success"}>

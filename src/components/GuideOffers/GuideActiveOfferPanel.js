@@ -8,7 +8,7 @@ import {useHistory} from "react-router-dom";
 function GuideActiveOfferPanel(props){
     const history = useHistory()
     return(
-        <Container  className="guide-active-tour-panel d-flex align-items-center justify-content-center" onClick={()=>history.push(`/guide/offer/details/active/enrollment/${props.tourId}`)}>
+        <Container  className="guide-active-tour-panel d-flex align-items-center justify-content-center" onClick={()=>history.push(`/account/guide/active-offer/enrollment/${props.tourId}`)}>
             <Row className={"w-100"}>
                 <Col xl={6} className={"d-flex flex-column justify-content-start"}>
                     <Row>

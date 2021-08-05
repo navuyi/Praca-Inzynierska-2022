@@ -15,6 +15,10 @@ import GuideClosedOffers from "./GuideClosedOffers";
 // Dependencies
 import {Container, Row, Col} from "react-bootstrap";
 import {Switch, Route} from 'react-router-dom';
+import GuideOfferDetails from "./GuideOfferDetails";
+import GuideOfferDetailsMessages from "./GuideOfferDetailsMessages";
+import GuideOfferDetailsEnrollment from "./GuideOfferDetailsEnrollment";
+import GuideOfferDetailsModification from "./GuideOfferDetailsModification";
 
 
 function Guide(){
@@ -56,16 +60,9 @@ function Guide(){
                     <Col lg={10} sm={12} style={{padding: "0"}} >
                         <Switch>
                             <GuideOnlyRoute exact path="/account/guide/new-tour" component={GuideNewTour} />
-
-                            <Route exact path="/account/guide/active-offers">
-                                <GuideActiveOffers />
-                            </Route>
-                            <Route exact path="/account/guide/closed-offers">
-                                <GuideClosedOffers />
-                            </Route>
-                            <Route exact path="/account/guide/profile">
-                                <GuideProfile />
-                            </Route>
+                            <GuideOnlyRoute exact path="/account/guide/active-offers" component={GuideActiveOffers} />
+                            <GuideOnlyRoute exact path="/account/guide/closed-offers" component={GuideClosedOffers} />
+                            <GuideOnlyRoute exact path="/account/guide/profile" component={GuideProfile} />
                         </Switch>
                     </Col>
                 </Row>

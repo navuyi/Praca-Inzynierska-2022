@@ -27,23 +27,23 @@ function GuideOfferDetails(props){
                             <Button onClick={()=>history.push("/account/guide/active-offers")} className={"mb-3 w-100 p-3"} variant={"dark"}> Powrót do listy </Button>
                             <SideNavbarLink
                                 name="Zapisy"
-                                path="/guide/offer/details/active/enrollment"
+                                path="/account/guide/active-offer/enrollment"
                             />
                             <SideNavbarLink
-                                name="Wątki wiadomości"
-                                path="/guide/offer/details/active/messages"
+                                name="Wiadomości"
+                                path="/account/guide/active-offer/messages"
                             />
                             <SideNavbarLink
                                 name="Modyfikacja oferty"
-                                path="/guide/offer/details/active/modification"
+                                path="/account/guide/active-offer/modification"
                             />
                         </SideNavbar>
                     </Col>
                     <Col lg={10} sm={12} style={{padding: "0"}} >
                         <Switch>
-                            <GuideOnlyRoute path={"/guide/offer/details/active/messages"} component={GuideOfferDetailsMessages} />
-                            <GuideOnlyRoute path={"/guide/offer/details/active/enrollment"} component={GuideOfferDetailsEnrollment} />
-                            <GuideOnlyRoute path={"/guide/offer/details/active/modification"} component={GuideOfferDetailsModification} />
+                            <GuideOnlyRoute path={"/account/guide/active-offer/messages"} component={GuideOfferDetailsMessages} />
+                            <GuideOnlyRoute path={"/account/guide/active-offer/enrollment"} component={GuideOfferDetailsEnrollment} />
+                            <GuideOnlyRoute path={"/account/guide/active-offer/modification"} component={GuideOfferDetailsModification} />
                         </Switch>
                     </Col>
                 </Row>
