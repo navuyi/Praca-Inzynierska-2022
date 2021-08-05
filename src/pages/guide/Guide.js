@@ -7,7 +7,7 @@ import SideNavbarLink from "../../components/SideNavbarLink";
 import GuideOnlyRoute from "../../components/GuideOnlyRoute";
 
 // Subpages
-import GuideNewTour from "./GuideNewTour";
+import GuideNewTour from "./guide-new-tour/GuideNewTour";
 import GuideActiveOffers from "./GuideActiveOffers";
 import GuideProfile from "./GuideProfile";
 import GuideClosedOffers from "./GuideClosedOffers";
@@ -15,10 +15,10 @@ import GuideClosedOffers from "./GuideClosedOffers";
 // Dependencies
 import {Container, Row, Col} from "react-bootstrap";
 import {Switch, Route} from 'react-router-dom';
-import GuideOfferDetails from "./GuideOfferDetails";
-import GuideOfferDetailsMessages from "./GuideOfferDetailsMessages";
-import GuideOfferDetailsEnrollment from "./GuideOfferDetailsEnrollment";
-import GuideOfferDetailsModification from "./GuideOfferDetailsModification";
+import GuideActiveOffer from "./guide-active-offer/GuideActiveOffer";
+import GuideActiveOfferMessages from "./guide-active-offer/GuideActiveOfferMessages";
+import GuideActiveOfferEnrollment from "./guide-active-offer/GuideActiveOfferEnrollment";
+import GuideActiveOfferModification from "./guide-active-offer/GuideActiveOfferModification";
 
 
 function Guide(){

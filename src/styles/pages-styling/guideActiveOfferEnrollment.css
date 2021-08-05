@@ -1,0 +1,31 @@
+.guideActiveOfferEnrollment{
+    height: 100%;
+}
+.guideActiveOfferEnrollment .list-header{
+    width: 100%;
+    text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    background-color: #222222;
+    color: whitesmoke;
+    font-size: 2.1rem;
+    margin: 0 0;
+    padding: 0.2em 0;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+}
+
+.guideActiveOfferEnrollment svg{
+    transform: scale(1.2);
+    margin-right: 0.5em;
+}
+.guideActiveOfferEnrollment textarea{
+    resize: none;
+}
+.guideActiveOfferEnrollment p{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 0;
+    padding: 0;
+}

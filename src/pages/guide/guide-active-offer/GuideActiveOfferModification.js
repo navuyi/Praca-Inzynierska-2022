@@ -1,6 +1,6 @@
 import React from "react";
 
-function GuideOfferDetailsModification(){
+function GuideActiveOfferModification(){
     return(
         <div className={"guideOfferDetailsModification"}>
             Modification
@@ -8,4 +8,4 @@ function GuideOfferDetailsModification(){
     )
 }
 
-export default GuideOfferDetailsModification
+export default GuideActiveOfferModification

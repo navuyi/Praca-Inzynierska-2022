@@ -1,10 +1,10 @@
-import NavbarComponent from "../../components/NavbarComponent";
-import Footer from "../../components/Footer";
+import NavbarComponent from "../../../components/NavbarComponent";
+import Footer from "../../../components/Footer";
 import React from "react";
 import {Container, Row, Col, Button} from "react-bootstrap"
 import {Link} from "react-router-dom"
 
-import confirm from "../../images/icons/success.svg"
+import confirm from "../../../images/icons/success.svg"
 
 function GuideNewTourSuccess(){
     return(

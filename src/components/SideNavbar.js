@@ -2,7 +2,7 @@
 // Dependencies
 import {Container, Row, Col, ListGroup} from "react-bootstrap";
 import {Link, Route, Switch} from 'react-router-dom';
-import GuideNewTour from "../pages/guide/GuideNewTour";
+import GuideNewTour from "../pages/guide/guide-new-tour/GuideNewTour";
 import GuideActiveOffers from "../pages/guide/GuideActiveOffers";
 
 function SideNavbar(props){

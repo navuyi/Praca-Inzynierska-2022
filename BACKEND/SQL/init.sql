@@ -1,10 +1,11 @@
 USE yourtour;
+DROP TABLE IF EXISTS enrollments CASCADE;
 DROP TABLE IF EXISTS tour_important_info CASCADE;
 DROP TABLE IF EXISTS tour_price_list CASCADE;
 DROP TABLE IF EXISTS tour_has_tags CASCADE;
 DROP TABLE IF EXISTS tour_has_places CASCADE;
 DROP TABLE IF EXISTS tour_images;
-dROP TABLE IF EXISTS tour_plan_points;
+DROP TABLE IF EXISTS tour_plan_points;
 DROP TABLE IF EXISTS tours CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS messages CASCADE;
@@ -26,17 +27,21 @@ CREATE TABLE users (
     is_confirmed BOOLEAN NOT NULL DEFAULT 0 /* mail confirmation status */
 );
 
+
 CREATE TABLE messages(
     id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
-    tour_id INT DEFAULT NULL, /* This field will be filled with tour_id if message is connected with some tour*/
+    tour_id INT DEFAULT NULL, /* This field will be filled with tour_id if message is connected with a tour*/
     sender_id INT NOT NULL,
     receiver_id INT NOT NULL,
     topic varchar(255) NOT NULL DEFAULT '[Brak tematu]',
-    content varchar(1024) NOT NULL,
+    content varchar(4096) NOT NULL,
     time DATETIME NOT NULL,
     was_read BOOLEAN NOT NULL DEFAULT 0,
     sender_deleted BOOLEAN NOT NULL DEFAULT 0,
-    receiver_deleted BOOLEAN NOT NULL DEFAULT 0
+    receiver_deleted BOOLEAN NOT NULL DEFAULT 0,
+
+    FOREIGN KEY (sender_id) REFERENCES users(id),
+    FOREIGN KEY (receiver_id REFERENCES users(id)
 );
 
 CREATE TABLE tours (
@@ -52,6 +57,28 @@ CREATE TABLE tours (
     end_date DATETIME NOT NULL,
 
     FOREIGN KEY (guide_id) REFERENCES users(id)
+);
+
+/* Information like first and last name, email address, phone number
+    will be filled automatically in case of logged in client - user account
+    quest has to fill it manually
+*/
+CREATE TABLE enrollments (
+    id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
+    f_name VARCHAR(255) NOT NULL,
+    l_name VARCHAR(255) NOT NULL,
+    phone_number CHAR(32), /* phone number is not necessary*/
+    email VARCHAR(255) NOT NULL,
+
+    user_id INTEGER DEFAULT NULL,  /* NULL in case client is guest - does not have an account */
+    guide_id INTEGER NOT NULL,
+    tour_id INTEGER NOT NULL,
+
+    creation_date DATETIME NOT NULL DEFAULT NOW(),
+
+    /* user_id cannot reference id from users because user_id could be NULL */
+    FOREIGN KEY (guide_id) REFERENCES users(id),
+    FOREIGN KEY (tour_id) REFERENCES tours(id)
 );
 
 CREATE TABLE tour_images(

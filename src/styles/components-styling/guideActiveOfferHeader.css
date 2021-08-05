@@ -1,0 +1,31 @@
+.guideActiveOfferHeader{
+    background-color: orange;
+    border-bottom-right-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+    padding: 0.5em;
+}
+.guideActiveOfferHeader img{
+    width: 100%;
+    border-radius: 0.5em;
+    border: 10px solid rgb(34,34,34);
+}
+.guideActiveOfferHeader h1{
+    width: 100%;
+    text-align: left;
+    color: whitesmoke;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
+}
+.guideActiveOfferHeader p{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 0.5em 0;
+    padding: 0 0;
+}
+.guideActiveOfferHeader span{
+    color: #0456a0;
+    font-family: "Lora", sans-serif;
+    font-size: 1rem;
+}

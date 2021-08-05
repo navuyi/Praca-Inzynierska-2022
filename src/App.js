@@ -21,37 +21,40 @@ import Register from "./pages/Register";
 import Guide from "./pages/guide/Guide";
 import User from "./pages/user/User";
 import Messages from "./pages/messages/Messages";
-import GuideOfferDetails from "./pages/guide/GuideOfferDetails";
+import GuideActiveOffer from "./pages/guide/guide-active-offer/GuideActiveOffer";
+
 
 // Styles
 import './App.css';
-import './styles/navbarComponent.css';
+import './styles/components-styling/navbarComponent.css';
 import './styles/homeWelcomeView.css';
-import './styles/homeTourPanel.css';
-import './styles/home.css';
-import './styles/homeInfoPanel.css';
-import './styles/footer.css';
-import './styles/sideNavbar.css';
-import './styles/guideProfile.css';
-import './styles/socialLink.css';
-import './styles/guideNewTour.css';
-import './styles/guideOffers.css';
-import './styles/informations.css';
-import './styles/tours.css';
-import './styles/login.css';
-import './styles/register.css';
-import './styles/newMessage.css';
-import './styles/oldMessages.css';
-import './styles/sentMessages.css';
-import './styles/deletedMessages.css';
-import './styles/toursTourPanel.css';
-import './styles/tourDetails.css';
-import './styles/tourPanelLabel.css';
-import './styles/guideNewTourSuccess.css'
-import './styles/guideActiveOffers.css'
+import './styles/components-styling/homeTourPanel.css';
+import './styles/pages-styling/home.css';
+import './styles/components-styling/homeInfoPanel.css';
+import './styles/components-styling/footer.css';
+import './styles/components-styling/sideNavbar.css';
+import './styles/pages-styling/guideProfile.css';
+import './styles/components-styling/socialLink.css';
+import './styles/pages-styling/guideNewTour.css';
+import './styles/pages-styling/guideOffers.css';
+import './styles/pages-styling/informations.css';
+import './styles/pages-styling/tours.css';
+import './styles/pages-styling/login.css';
+import './styles/pages-styling/register.css';
+import './styles/pages-styling/newMessage.css';
+import './styles/pages-styling/oldMessages.css';
+import './styles/pages-styling/sentMessages.css';
+import './styles/pages-styling/deletedMessages.css';
+import './styles/components-styling/toursTourPanel.css';
+import './styles/pages-styling/tourDetails.css';
+import './styles/components-styling/tourPanelLabel.css';
+import './styles/pages-styling/guideNewTourSuccess.css'
+import './styles/pages-styling/guideActiveOffers.css'
+import "./styles/pages-styling/guideActiveOfferEnrollment.css"
+import "./styles/components-styling/guideActiveOfferHeader.css"
+import "./styles/pages-styling/guideActiveOfferMessages.css"
 
-
-import GuideNewTourSuccess from "./pages/guide/GuideNewTourSuccess";
+import GuideNewTourSuccess from "./pages/guide/guide-new-tour/GuideNewTourSuccess";
 
 
 function App() {
@@ -97,7 +100,7 @@ function App() {
         </Route>
 
 
-        <GuideOnlyRoute path="/account/guide/active-offer" component={GuideOfferDetails}/>
+        <GuideOnlyRoute path="/account/guide/active-offer" component={GuideActiveOffer}/>
         <GuideOnlyRoute path="/account/guide" component={Guide}/>
 
 

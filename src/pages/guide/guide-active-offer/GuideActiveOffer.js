@@ -1,20 +1,20 @@
-import NavbarComponent from "../../components/NavbarComponent";
-import Footer from "../../components/Footer";
+import NavbarComponent from "../../../components/NavbarComponent";
+import Footer from "../../../components/Footer";
 import {Col, Container, Row, Button} from "react-bootstrap";
-import SideNavbar from "../../components/SideNavbar";
-import SideNavbarLink from "../../components/SideNavbarLink";
+import SideNavbar from "../../../components/SideNavbar";
+import SideNavbarLink from "../../../components/SideNavbarLink";
 import {Route, Switch, useHistory} from "react-router-dom";
-import GuideOnlyRoute from "../../components/GuideOnlyRoute";
-import GuideNewTour from "./GuideNewTour";
-import GuideActiveOffers from "./GuideActiveOffers";
-import GuideClosedOffers from "./GuideClosedOffers";
-import GuideProfile from "./GuideProfile";
+import GuideOnlyRoute from "../../../components/GuideOnlyRoute";
+import GuideNewTour from "../guide-new-tour/GuideNewTour";
+import GuideActiveOffers from "../GuideActiveOffers";
+import GuideClosedOffers from "../GuideClosedOffers";
+import GuideProfile from "../GuideProfile";
 
-import GuideOfferDetailsEnrollment from "./GuideOfferDetailsEnrollment";
-import GuideOfferDetailsModification from "./GuideOfferDetailsModification";
-import GuideOfferDetailsMessages from "./GuideOfferDetailsMessages";
+import GuideActiveOfferEnrollment from "./GuideActiveOfferEnrollment";
+import GuideActiveOfferModification from "./GuideActiveOfferModification";
+import GuideActiveOfferMessages from "./GuideActiveOfferMessages";
 
-function GuideOfferDetails(props){
+function GuideActiveOffer(props){
     const history = useHistory()
 
     return(
@@ -41,9 +41,9 @@ function GuideOfferDetails(props){
                     </Col>
                     <Col lg={10} sm={12} style={{padding: "0"}} >
                         <Switch>
-                            <GuideOnlyRoute path={"/account/guide/active-offer/messages"} component={GuideOfferDetailsMessages} />
-                            <GuideOnlyRoute path={"/account/guide/active-offer/enrollment"} component={GuideOfferDetailsEnrollment} />
-                            <GuideOnlyRoute path={"/account/guide/active-offer/modification"} component={GuideOfferDetailsModification} />
+                            <GuideOnlyRoute path={"/account/guide/active-offer/messages"} component={GuideActiveOfferMessages} />
+                            <GuideOnlyRoute path={"/account/guide/active-offer/enrollment"} component={GuideActiveOfferEnrollment} />
+                            <GuideOnlyRoute path={"/account/guide/active-offer/modification"} component={GuideActiveOfferModification} />
                         </Switch>
                     </Col>
                 </Row>
@@ -53,4 +53,4 @@ function GuideOfferDetails(props){
     )
 }
 
-export default GuideOfferDetails
+export default GuideActiveOffer

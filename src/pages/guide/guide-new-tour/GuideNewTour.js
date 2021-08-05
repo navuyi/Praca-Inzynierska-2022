@@ -1,22 +1,22 @@
 import {Container, Row, Col, Form, Button, FormControl} from "react-bootstrap";
 import {useState, useEffect, Fragment} from 'react';
 import FormData from 'form-data';
-import GuideNewTourInputs from "../../components/GuideNewTour/GuideNewTourInputs";
-import GuideNewTourPlan from "../../components/GuideNewTour/GuideNewTourPlan";
-import GuideNewTourElectivesSelector from "../../components/GuideNewTour/GuideNewTourElectivesSelector";
-import GuideNewTourImageGallery from "../../components/GuideNewTour/GuideNewTourImageGallery";
-import GuideNewTourPriceList from "../../components/GuideNewTour/GuideNewTourPriceList";
-import GuideNewTourImportantInfo from "../../components/GuideNewTour/GuideNewTourImportantInfo";
-import Separator from "../../components/Separator";
-import SeparatorShort from "../../components/SeparatorShort";
+import GuideNewTourInputs from "../../../components/GuideNewTour/GuideNewTourInputs";
+import GuideNewTourPlan from "../../../components/GuideNewTour/GuideNewTourPlan";
+import GuideNewTourElectivesSelector from "../../../components/GuideNewTour/GuideNewTourElectivesSelector";
+import GuideNewTourImageGallery from "../../../components/GuideNewTour/GuideNewTourImageGallery";
+import GuideNewTourPriceList from "../../../components/GuideNewTour/GuideNewTourPriceList";
+import GuideNewTourImportantInfo from "../../../components/GuideNewTour/GuideNewTourImportantInfo";
+import Separator from "../../../components/Separator";
+import SeparatorShort from "../../../components/SeparatorShort";
 import {CircularProgress} from "@material-ui/core";
 
-import {create_tour} from "../../API_CALLS/create_tour";
+import {create_tour} from "../../../API_CALLS/create_tour";
 
 import {Alert} from "@material-ui/lab";
 import {useHistory} from "react-router-dom";
-import {refesh_token} from "../../API_CALLS/token_refresh";
-import {_logout} from "../../utils/_logout";
+import {refesh_token} from "../../../API_CALLS/token_refresh";
+import {_logout} from "../../../utils/_logout";
 
 // Create form data - it changes on every render
 const formData = new FormData();
