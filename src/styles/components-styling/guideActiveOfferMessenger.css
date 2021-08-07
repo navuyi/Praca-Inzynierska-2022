@@ -2,6 +2,11 @@
     margin-left: -15px;
     margin-right: -15px;
     background-color: whitesmoke;
+
+
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 .guideActiveOfferMessenger .messenger-header{
     margin: 1em 0;
@@ -21,4 +26,10 @@
 .guideActiveOfferMessenger .messenger-body{
     padding-left: 2em;
     padding-right: 2em;
+
+    display: flex;
+    flex-direction: column;
+
+    max-height: 600px;
+    overflow-y: auto;
 }

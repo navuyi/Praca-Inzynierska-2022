@@ -42,7 +42,7 @@ CREATE TABLE messages(
 
 CREATE TABLE message_threads(
     id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
-    hidden BOOLEAN NOT NULL DEFAULT FALSE,
+    hidden BOOLEAN NOT NULL DEFAULT FALSE, /* Set to TRUE when thread is one of the threads created to multiple clients*/
     sender_id INT NOT NULL,
     receiver_id INT NOT NULL,
     tour_id INT DEFAULT NULL,                       /* This field will be filled with tour_id if thread is connected with a tour - in most cases it will*/
