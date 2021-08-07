@@ -1,0 +1,33 @@
+.messageBox{
+    color: whitesmoke;
+    border-radius: 0.5em;
+    margin: 1em 0;
+}
+.messageBox h1{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    font-size: 1.5rem;
+
+    margin: 0 0;
+    padding: 0 0 ;
+}
+.messageBox p{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 0 0;
+    padding: 0 0;
+}
+
+
+.messageBox.left{
+    align-self: flex-start;
+    background-image: linear-gradient(to right, #222222, #424242);
+}
+
+
+.messageBox.right{
+    align-self: flex-end;
+    background-color: #222222;
+    background-image: linear-gradient(to left, #222222, #424242);
+}

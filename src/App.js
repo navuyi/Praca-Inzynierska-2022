@@ -53,6 +53,8 @@ import './styles/pages-styling/guideActiveOffers.css'
 import "./styles/pages-styling/guideActiveOfferEnrollment.css"
 import "./styles/components-styling/guideActiveOfferHeader.css"
 import "./styles/pages-styling/guideActiveOfferMessages.css"
+import "./styles/components-styling/messageBox.css"
+import "./styles/components-styling/guideActiveOfferMessenger.css"
 
 import GuideNewTourSuccess from "./pages/guide/guide-new-tour/GuideNewTourSuccess";
 

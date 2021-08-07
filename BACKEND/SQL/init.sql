@@ -30,19 +30,36 @@ CREATE TABLE users (
 
 CREATE TABLE messages(
     id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
-    tour_id INT DEFAULT NULL, /* This field will be filled with tour_id if message is connected with a tour*/
-    sender_id INT NOT NULL,
-    receiver_id INT NOT NULL,
-    topic varchar(255) NOT NULL DEFAULT '[Brak tematu]',
-    content varchar(4096) NOT NULL,
-    time DATETIME NOT NULL,
+    thread_id INT NOT NULL,
+    content TEXT NOT NULL,
+    creation_time DATETIME NOT NULL DEFAULT NOW(),
     was_read BOOLEAN NOT NULL DEFAULT 0,
     sender_deleted BOOLEAN NOT NULL DEFAULT 0,
     receiver_deleted BOOLEAN NOT NULL DEFAULT 0,
 
-    FOREIGN KEY (sender_id) REFERENCES users(id),
-    FOREIGN KEY (receiver_id REFERENCES users(id)
+    FOREIGN KEY (thread_id) REFERENCES message_threads(id)
 );
+
+CREATE TABLE message_threads(
+    id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
+    hidden BOOLEAN NOT NULL DEFAULT FALSE,
+    sender_id INT NOT NULL,
+    receiver_id INT NOT NULL,
+    tour_id INT DEFAULT NULL,                       /* This field will be filled with tour_id if thread is connected with a tour - in most cases it will*/
+    topic VARCHAR(1024) NOT NULL DEFAULT '[Brak tematu]',
+    creation_time DATETIME NOT NULL DEFAULT NOW(),
+
+
+    FOREIGN KEY (sender_id) REFERENCES users(id),
+    FOREIGN KEY (receiver_id REFERENCES users(id),
+    FOREIGN KEY (tour_id) REFERENCES tours(id)
+);
+
+CREATE TABLE messages_to_multiple(
+    id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
+    sender_id INT NOT NULL,
+
+)
 
 CREATE TABLE tours (
     id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
