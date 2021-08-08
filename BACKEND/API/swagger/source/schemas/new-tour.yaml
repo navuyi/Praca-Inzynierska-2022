@@ -1,0 +1,61 @@
+type: object
+properties:
+  tour_data:
+    type: object
+    properties:
+      guide_id:
+        type: integer
+      header:
+        type: string
+      description:
+        type: string
+      person_limit:
+        type: integer
+      price:
+        type: integer
+      start_date:
+        type: string
+      end_date:
+        type: string
+      tour_plan:
+        type: array
+        items:
+          type: string
+      tour_places:
+        type: array
+        items:
+          type: integer
+  electives:
+    type: object
+    properties:
+      imageGallery:
+        type: boolean
+      importantInfo:
+        type: boolean
+      priceList:
+        type: boolean
+  price_list:
+    type: array
+    items:
+      type: object
+      properties:
+        text:
+          type: string
+        variant:
+          type: boolean
+  important_info:
+    type: array
+    items:
+      type: string
+  main_image:
+    type: string
+    format: binary
+  images:
+    type: array
+    items:
+      type: string
+      format: binary
+required:
+  - tour_data
+  - electives
+  - main_image

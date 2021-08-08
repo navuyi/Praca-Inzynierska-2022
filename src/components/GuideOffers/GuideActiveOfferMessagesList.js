@@ -3,7 +3,7 @@ import {Container, Row, Col, Button, Table} from "react-bootstrap"
 import MessageBox from "../MessageBox";
 
 function GuideActiveOfferMessagesList(props){
-    const [dropdown, setDropdown] = useState(true)
+
 
     return(
         <React.Fragment>

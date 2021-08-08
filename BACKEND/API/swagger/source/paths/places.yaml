@@ -1,0 +1,29 @@
+get:
+  tags:
+    - Tour
+  summary: Returns array of objects with cities/towns in Poland
+  description: >
+    All cities and town in Poland are stored in the database. While creating new tour guide can select proper cities for his tour. Array of objects is returned
+    based on input sent in query. Number of returned items is limited.
+  parameters:
+    - in: query
+      name: place
+      schema:
+        type: string
+        example: "Tarnowskie Gó"
+      required: true
+      description: User input, may be incomplete
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                place:
+                  type: string

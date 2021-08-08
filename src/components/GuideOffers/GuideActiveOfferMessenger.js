@@ -4,6 +4,7 @@ import {Row, Col, Button, FormControl, Form} from "react-bootstrap"
 import MessageBox from "../MessageBox";
 
 function GuideActiveOfferMessenger(){
+
     return(
         <div className={"guideActiveOfferMessenger"}>
             <Row className={"d-flex flex-row justify-content-between align-items-center messenger-header"} >

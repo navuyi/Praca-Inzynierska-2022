@@ -1,0 +1,65 @@
+post:
+  tags:
+    - Authentication
+  summary: Register new account
+  description: This endpoint requires reCAPTCHA token for human verification. For testing purposes validation can be turned off in REST API config file.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            f_name:
+              type: string
+              example: Joe
+            l_name:
+              type: string
+              example: Doe
+            email:
+              type: string
+              example: joedoe@gmail.com
+            phone_number:
+              type: string
+              example: 666999666
+            password:
+              type: string
+              example: cisco123
+            password_repeat:
+              type: string
+              example: cisco123
+            token:
+              type: string
+              example: recaptcha-token-string
+  responses:
+    '201':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              msg:
+                type: string
+    '409':
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              msg:
+                type: string
+              payload:
+                type: object
+    '422':
+      description: Invalid data
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              msg:
+                type: string
+              payload:
+                type: object

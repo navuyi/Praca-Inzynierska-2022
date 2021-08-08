@@ -1,0 +1,43 @@
+post:
+  security:
+    - bearerAuth: []
+  tags:
+    - Tour
+  summary: Creates new tour
+  requestBody:
+    required: true
+    content:
+      multipart/form-data:
+        schema:
+          $ref: "../schemas/new-tour.yaml"
+  responses:
+    '201':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              msg:
+                type: string
+                example: "Done"
+    '422':
+      description: Not enough data
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              msg:
+                type: string
+                example: "Could not process data"
+    '500':
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              msg:
+                type: string
+                example: "Server error, try again"

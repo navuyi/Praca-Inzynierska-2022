@@ -48,18 +48,13 @@ CREATE TABLE message_threads(
     tour_id INT DEFAULT NULL,                       /* This field will be filled with tour_id if thread is connected with a tour - in most cases it will*/
     topic VARCHAR(1024) NOT NULL DEFAULT '[Brak tematu]',
     creation_time DATETIME NOT NULL DEFAULT NOW(),
-
+    sender_deleted BOOLEAN NOT NULL DEFAULT FALSE,
+    receiver_deleted BOOLEAN NOT NULL DEFAULT FALSE,
 
     FOREIGN KEY (sender_id) REFERENCES users(id),
-    FOREIGN KEY (receiver_id REFERENCES users(id),
+    FOREIGN KEY (receiver_id) REFERENCES users(id),
     FOREIGN KEY (tour_id) REFERENCES tours(id)
 );
-
-CREATE TABLE messages_to_multiple(
-    id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
-    sender_id INT NOT NULL,
-
-)
 
 CREATE TABLE tours (
     id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
