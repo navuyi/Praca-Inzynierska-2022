@@ -148,7 +148,7 @@ function Tours(){
                         </Row>
                     </Container>
                 </Col>
-                <Col lg={8} sm={12} style={{padding: "0"}} className={"d-flex  justify-content-center align-items-start"}>
+                <Col lg={10} sm={12} style={{padding: "0"}} className={"d-flex  justify-content-center align-items-start"}>
                         <Container style={{flexGrow: "1", height: "100%"}} className={"d-flex flex-column "}>
                             <Row className={"center-header d-flex justify-content-between align-items-center "}>
                                 <Col xl={3} >
@@ -199,9 +199,6 @@ function Tours(){
                                 <Pagination count={Math.ceil(toursFound/resultsConfig.results_per_page)} variant="outlined" color={"secondary"} page={resultsConfig.page} onChange={handlePage}/>
                             </div>
                         </Container>
-                </Col>
-                <Col lg={2} sm={12} style={{padding: "0"}} >
-
                 </Col>
             </Row>
         </Container>

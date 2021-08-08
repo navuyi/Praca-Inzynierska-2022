@@ -25,7 +25,8 @@ def new_message():
         "tour_id": tour_id,
         "topic": topic
     }
-    cursor().execute(f"INSERT INTO message_threads (sender_id, receiver_id, tour_id, topic) VALUES (%(sender_id)s, %(receiver_id)s, %(tour_id)s, %(topic)s)", insert)
+    cursor().execute(f"INSERT INTO message_threads (sender_id, receiver_id, tour_id{f',topic' if topic else ''}) VALUES "
+                     f"(%(sender_id)s, %(receiver_id)s, %(tour_id)s {f',%(topic)s' if topic else ''})", insert)  # Take note of commas placement! ! ! !
     thread_id = lastrowid()
 
     # Create first message in new thread

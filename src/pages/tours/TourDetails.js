@@ -22,7 +22,10 @@ import {useLocation} from "react-router-dom"
 import {parse} from "querystring";
 import TourImagesGallery from "../../components/TourImagesGallery";
 
+import TourDetailsMessenger from "../../components/Tours/TourDetailsMessenger";
+
 function TourDetails(){
+    const [msgVisible, setMsgVisible] = useState(false)
 
     const queryString = window.location.search
     const queryParams = parse(queryString)
@@ -116,9 +119,17 @@ function TourDetails(){
                                         text="Numer tel."
                                         value={tourData.guide_data.phone_number}
                                     />
-                                    <Button variant={"outline-light w-100 mt-4"}> Masz pytanie? Napisz wiadomość. </Button>
+                                    <Button variant={"outline-light w-100 mt-4"} onClick={() => {setMsgVisible(true)}}> Masz pytanie? Napisz wiadomość. </Button>
                                 </Col>
                             </Row>
+                            {
+                                msgVisible ?
+                                <TourDetailsMessenger
+                                    setMsgVisible={setMsgVisible}
+                                    guide_id={tourData.guide_data.id}
+                                    tour_id={tourData.general_data.id}
+                                /> : null
+                            }
                             <Separator />
                             {
                                 tourData.tour_plan ?

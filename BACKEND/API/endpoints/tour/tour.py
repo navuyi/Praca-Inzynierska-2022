@@ -16,7 +16,7 @@ def get_tour():
     tour_id = request.args["tour_id"]
 
     ## Get general tour data
-    cursor().execute(f"SELECT guide_id, header, description, start_date, end_date, price, person_limit FROM tours WHERE id = %s", (tour_id, ))
+    cursor().execute(f"SELECT id, guide_id, header, description, start_date, end_date, price, person_limit FROM tours WHERE id = %s", (tour_id, ))
     general_data = cursor().fetchone()
 
     if not general_data: # <-- offer with given tour_id does not exist
