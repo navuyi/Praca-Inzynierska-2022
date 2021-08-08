@@ -33,86 +33,11 @@ paths:
 
 
 # Message endpoints
-  "/api/messages/message/new":
-    post:
-      security:
-        - bearerAuth: []
-      tags:
-        - Messages
-      summary: Creates new message to one recipient
-      description: New message to only one recipient - creates new message thread and first message in that thread
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                tour_id:
-                  type: integer
-                  example: 1
-                sender_id:
-                  type: integer
-                  example: 1
-                receiver_id:
-                  type: integer
-                  example: 3
-                topic:
-                  type: string
-                  example: Sit voluptatem accusantium doloremque.
-                content:
-                  type: string
-                  example: Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
-      responses:
-        '201':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
+  "/api/messages/unicast/new":
+      $ref: "./paths/message-unicast-new.yaml"
 
-
-
-  "/api/messages/message/response":
-    post:
-      security:
-        - bearerAuth: []
-      tags:
-        - Messages
-      summary: Creates response message to an existing thread
-      description: Response message to existing thread - thread between two users
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                thread_id:
-                  type: integer
-                  example: 1
-                sender_id:
-                  type: integer
-                  example: 1
-                receiver_id:
-                  type: integer
-                  example: 3
-                content:
-                  type: string
-                  example: Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
-      responses:
-        '201':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
+  "/api/messages/unicast/response":
+      $ref: "./paths/message-unicast-response.yaml"
 
   "/api/guide/tours/active":
       $ref: "./paths/guide-active-tours.yaml"

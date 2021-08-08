@@ -1,0 +1,36 @@
+post:
+  security:
+    - bearerAuth: []
+  tags:
+    - Messages
+  summary: Creates new thread and message between two users
+  description: Creates new thread between guide and client and first message in that thread
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            tour_id:
+              type: integer
+              example: 1
+            receiver_id:
+              type: integer
+              example: 3
+            topic:
+              type: string
+              example: Sit voluptatem accusantium doloremque.
+            content:
+              type: string
+              example: Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
+  responses:
+    '201':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              msg:
+                type: string

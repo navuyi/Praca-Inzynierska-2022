@@ -91,6 +91,9 @@ def create_app(test_config=None):               # test_config - independent from
     from app.endpoints.guide.active_tours import bp as bp_active_tours
     from app.endpoints.guide.closed_tours import bp as bp_closed_tours
 
+    from app.endpoints.messages.message_unicast_new import bp as bp_unicast_new
+
+
     # Register blueprints
     app.register_blueprint(bp_authentication)
     app.register_blueprint(bp_new_tour)
@@ -108,5 +111,8 @@ def create_app(test_config=None):               # test_config - independent from
 
     app.register_blueprint(bp_active_tours)
     app.register_blueprint(bp_closed_tours)
+
+    app.register_blueprint(bp_unicast_new)
+
 
     return app
