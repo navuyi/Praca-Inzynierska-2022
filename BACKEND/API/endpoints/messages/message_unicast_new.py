@@ -31,9 +31,10 @@ def new_message():
     # Create first message in new thread
     insert = {
         "thread_id": thread_id,
-        "content": content
+        "sender_id": get_jwt_identity(),
+        "content": content,
     }
-    cursor().execute(f"INSERT INTO messages (thread_id, content) VALUES (%(thread_id)s, %(content)s)", insert)
+    cursor().execute(f"INSERT INTO messages (thread_id, sender_id, content) VALUES (%(thread_id)s, %(sender_id)s, %(content)s)", insert)
 
 
     response = jsonify(message="Message sent")

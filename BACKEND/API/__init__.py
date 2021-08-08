@@ -30,7 +30,7 @@ def create_app(test_config=None):               # test_config - independent from
     ### Flask JWT configuration ###
     app.config["JWT_SECRET_KEY"] = str("skenhgu37291nsufbs!@#%$sd1@3jfi2$2") # <-- NEEDS TO BE STRING, earlier it was uuid4() - was causing tokens invalid after service restart
     app.config["JWT_TOKEN_LOCATION"] = ["headers"]
-    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = datetime.timedelta(minutes=30)
+    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = datetime.timedelta(minutes=60)
     app.config["JWT_REFRESH_TOKEN_EXPIRES"] = datetime.timedelta(days=30)
     jwt = JWTManager(app)
 
@@ -92,7 +92,7 @@ def create_app(test_config=None):               # test_config - independent from
     from app.endpoints.guide.closed_tours import bp as bp_closed_tours
 
     from app.endpoints.messages.message_unicast_new import bp as bp_unicast_new
-
+    from app.endpoints.messages.message_unicast_response import bp as bp_unicast_response
 
     # Register blueprints
     app.register_blueprint(bp_authentication)
@@ -113,6 +113,6 @@ def create_app(test_config=None):               # test_config - independent from
     app.register_blueprint(bp_closed_tours)
 
     app.register_blueprint(bp_unicast_new)
-
+    app.register_blueprint(bp_unicast_response)
 
     return app
