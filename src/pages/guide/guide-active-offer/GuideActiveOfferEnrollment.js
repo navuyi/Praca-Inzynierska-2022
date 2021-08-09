@@ -1,10 +1,12 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import {Container, Row, Col, Button, Table} from "react-bootstrap"
 
 import GuideActiveOfferHeader from "../../../components/GuideOffers/GuideActiveOfferHeader";
 import GuideActiveOfferEnrollmentList from "../../../components/GuideOffers/GuideActiveOfferEnrollmentList";
 
-function GuideActiveOfferEnrollment(){
+function GuideActiveOfferEnrollment(props){
+
+
     const [clients, setClients] = useState(
         [
             {
@@ -35,7 +37,12 @@ function GuideActiveOfferEnrollment(){
             <Container className={"h-100"} >
                 {/*<-- This component returns its content in Row element */ }
                 <GuideActiveOfferHeader
-                   header="example header"
+                    header={props.general_data ? props.general_data.header : ""}
+                    price={props.general_data ? props.general_data.price : ""}
+                    person_limit={props.general_data ? props.general_data.person_limit : ""}
+                    start_date={props.general_data ? props.general_data.start_date : ""}
+                    end_date={props.general_data ? props.general_data.end_date : ""}
+                    image_url={props.image_url ? props.image_url : ""}
                 />
                 <Row className={"mt-5 d-flex flex-column"}>
                     <h1 className={"list-header"}> Lista zapisów </h1>

@@ -103,7 +103,7 @@ function App() {
         </Route>
 
 
-        <GuideOnlyRoute path="/account/guide/active-offer" component={GuideActiveOffer}/>
+        <GuideOnlyRoute path="/account/guide/active-offer/:tourID" component={GuideActiveOffer}/>
         <GuideOnlyRoute path="/account/guide" component={Guide}/>
 
 

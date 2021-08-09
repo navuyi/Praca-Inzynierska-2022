@@ -39,6 +39,62 @@ paths:
   "/api/messages/unicast/response":
       $ref: "./paths/message-unicast-response.yaml"
 
+  "/api/messages/guide/offer/threads":
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Messages
+      summary: Returns threads linked to a tour given by its ID
+      description: Returns list of threads linked to a given tour, ID in query params, guide ID is identified by access token
+      parameters:
+        - in: query
+          name: tour_id
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    thread_id:
+                      type: integer
+                    email:
+                      type: string
+                    f_name:
+                      type: string
+                    l_name:
+                      type: string
+                    topic:
+                      type: string
+                    creation_time:
+                      type: string
+                    creation_date:
+                      type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+
+  "/api/messages/threads/guide":
+
+  "/api/messages/threads/user":
+
+
+
   "/api/guide/tours/active":
       $ref: "./paths/guide-active-tours.yaml"
 

@@ -10,12 +10,38 @@ import GuideActiveOffers from "../GuideActiveOffers";
 import GuideClosedOffers from "../GuideClosedOffers";
 import GuideProfile from "../GuideProfile";
 
+import axios from "axios";
+
 import GuideActiveOfferEnrollment from "./GuideActiveOfferEnrollment";
 import GuideActiveOfferModification from "./GuideActiveOfferModification";
 import GuideActiveOfferMessages from "./GuideActiveOfferMessages";
 
+import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom"
+import {API_PREFIX} from "../../../config";
+
 function GuideActiveOffer(props){
+    const [tourData, setTourData] = useState({})
     const history = useHistory()
+    const {tourID} = useParams()
+
+    useEffect(() => {
+        const url = API_PREFIX+"/tour/tour"
+        const config = {
+            params: {
+                tour_id: tourID
+            }
+        }
+        axios.get(url, config)
+            .then(res => {
+                console.log(res.data)
+                setTourData(res.data)
+            })
+            .then(err => {
+                console.log(err)
+            })
+    }, [])
+
 
     return(
         <div className={"guideOfferDetails"}>
@@ -27,23 +53,39 @@ function GuideActiveOffer(props){
                             <Button onClick={()=>history.push("/account/guide/active-offers")} className={"mb-3 w-100 p-3"} variant={"dark"}> Powrót do listy </Button>
                             <SideNavbarLink
                                 name="Zapisy"
-                                path="/account/guide/active-offer/enrollment"
+                                path={`/account/guide/active-offer/${tourID}/enrollment`}
                             />
                             <SideNavbarLink
                                 name="Wiadomości"
-                                path="/account/guide/active-offer/messages"
+                                path={`/account/guide/active-offer/${tourID}/messages`}
                             />
                             <SideNavbarLink
                                 name="Modyfikacja oferty"
-                                path="/account/guide/active-offer/modification"
+                                path={`/account/guide/active-offer/${tourID}/modification`}
                             />
                         </SideNavbar>
                     </Col>
                     <Col lg={10} sm={12} style={{padding: "0"}} >
                         <Switch>
-                            <GuideOnlyRoute path={"/account/guide/active-offer/messages"} component={GuideActiveOfferMessages} />
-                            <GuideOnlyRoute path={"/account/guide/active-offer/enrollment"} component={GuideActiveOfferEnrollment} />
-                            <GuideOnlyRoute path={"/account/guide/active-offer/modification"} component={GuideActiveOfferModification} />
+                            <GuideOnlyRoute
+                                path={"/account/guide/active-offer/:tourID/messages"}
+                                component={GuideActiveOfferMessages}
+                                general_data={tourData.general_data}
+                                image_url={tourData.image_url}
+                                image_url={tourData.image_url}
+                            />
+
+                            <GuideOnlyRoute
+                                path={"/account/guide/active-offer/:tourID/enrollment"}
+                                component={GuideActiveOfferEnrollment}
+                                general_data={tourData.general_data}
+                                image_url={tourData.image_url}
+                            />
+
+                            <GuideOnlyRoute
+                                path={"/account/guide/active-offer/:tourID/modification"}
+                                component={GuideActiveOfferModification}
+                            />
                         </Switch>
                     </Col>
                 </Row>
