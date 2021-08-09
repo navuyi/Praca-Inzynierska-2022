@@ -19,34 +19,19 @@ function GuideActiveOfferMessagesList(props){
                 </tr>
                 </thead>
                 <tbody>
-                    <tr  style={{cursor: "pointer"}}>
-                        <td>1</td>
-                        <td> Joe Doe </td>
-                        <td> joedoe@gmai.com </td>
-                        <td> Voluptatem accusantium doloremque </td>
-                        <td>09.08.2021</td>
-                    </tr>
-                    <tr  style={{cursor: "pointer"}}>
-                        <td>1</td>
-                        <td> Joe Doe </td>
-                        <td> joedoe@gmai.com </td>
-                        <td> Voluptatem accusantium doloremque </td>
-                        <td>09.08.2021</td>
-                    </tr>
-                    <tr  style={{cursor: "pointer"}}>
-                        <td>1</td>
-                        <td> Joe Doe </td>
-                        <td> joedoe@gmai.com </td>
-                        <td> Voluptatem accusantium doloremque </td>
-                        <td>09.08.2021</td>
-                    </tr>
-                    <tr  style={{cursor: "pointer"}}>
-                        <td>1</td>
-                        <td> Joe Doe </td>
-                        <td> joedoe@gmai.com </td>
-                        <td> Voluptatem accusantium doloremque </td>
-                        <td>09.08.2021</td>
-                    </tr>
+                {
+                    props.threads ? props.threads.map((thread, index) => {
+                       return(
+                           <tr  style={{cursor: "pointer"}} key={index}>
+                               <td>1</td>
+                               <td> {`${thread.f_name} ${thread.l_name}`} </td>
+                               <td> {thread.email} </td>
+                               <td> {thread.topic} </td>
+                               <td>{thread.creation_date}</td>
+                           </tr>
+                       )
+                    }) : null
+                }
                 </tbody>
             </Table>
         </Row>

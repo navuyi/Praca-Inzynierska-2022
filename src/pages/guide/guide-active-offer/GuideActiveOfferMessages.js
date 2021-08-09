@@ -4,15 +4,15 @@ import GuideActiveOfferHeader from "../../../components/GuideOffers/GuideActiveO
 import GuideActiveOfferMessagesList from "../../../components/GuideOffers/GuideActiveOfferMessagesList";
 import GuideActiveOfferMessenger from "../../../components/GuideOffers/GuideActiveOfferMessenger";
 import axios from "axios";
-import {useParams} from "react-router-dom"
+import {useHistory, useParams} from "react-router-dom"
 import {API_PREFIX} from "../../../config";
-
+import {refesh_token} from "../../../API_CALLS/token_refresh";
 
 
 function GuideActiveOfferMessages(props){
     const [msgVisible, setMsgVisible] = useState(true)
     const {tourID} = useParams()
-
+    const history = useHistory()
 
     const [threads, setThreads] = useState()
 
@@ -20,14 +20,32 @@ function GuideActiveOfferMessages(props){
         fetchThreads()
     }, [])
 
-
     function fetchThreads(){
         const url = API_PREFIX+"/messages/guide/offer/threads"
-        const token = localStorage.getItem("access_token")
-        const params = {
-            tour_id: tourID
+        const access_token = localStorage.getItem("access_token")
+        const config = {
+            params: {
+                tour_id: tourID
+            },
+            headers:{
+                Authorization: `Bearer ${access_token}`
+            }
         }
-        console.log(params)
+        axios.get(url, config)
+            .then(res => {
+                setThreads(res.data)
+            })
+            .catch(err => {
+                if(err.response.status === 401){
+                    refesh_token().then(res => {
+                            localStorage.setItem("access_token", res.data.access_token)
+                            fetchThreads()
+                        })
+                        .catch(err => {
+                            history.push("/login")
+                        })
+                }
+            })
     }
 
     return(
@@ -45,7 +63,7 @@ function GuideActiveOfferMessages(props){
                     <h1 className={"list-header"}> Wiadomości </h1>
                 </Row>
                 <GuideActiveOfferMessagesList
-
+                    threads={threads}
                 />
                 {
                     msgVisible ?
