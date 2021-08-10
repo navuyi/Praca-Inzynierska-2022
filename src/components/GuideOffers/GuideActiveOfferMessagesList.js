@@ -51,6 +51,16 @@ function GuideActiveOfferMessagesList(props){
         console.log(e.target.id)
         props.setThreadId(e.target.id)
         props.setMsgVisible(true)
+
+        // Find chosen thread
+        const thread = threads.find(thread => thread.thread_id == e.target.id)
+
+        // Interlocutor first and last name
+        props.setInterlocutor(thread.f_name + " " + thread.l_name)
+
+        // Thread topic and sent date
+        props.setSentDate(thread.creation_date)
+        props.setTopic(thread.topic)
     }
 
     return(

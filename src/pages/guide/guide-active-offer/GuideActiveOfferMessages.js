@@ -12,6 +12,9 @@ import {refesh_token} from "../../../API_CALLS/token_refresh";
 function GuideActiveOfferMessages(props){
     const [msgVisible, setMsgVisible] = useState(false)
     const [threadId, setThreadId] = useState()
+    const [interlocutor, setInterlocutor] = useState("")
+    const [topic, setTopic] = useState("")
+    const [sentDate, setSentDate] = useState("")
     const {tourID} = useParams()
 
     useEffect(()=>{
@@ -36,12 +39,19 @@ function GuideActiveOfferMessages(props){
                 <GuideActiveOfferMessagesList
                     setThreadId={setThreadId}
                     setMsgVisible={setMsgVisible}
+
+                    setInterlocutor={setInterlocutor}
+                    setSentDate={setSentDate}
+                    setTopic={setTopic}
                 />
                 {
                     msgVisible ?
                         <GuideActiveOfferMessenger
+                            interlocutor={interlocutor}
                             setMsgVisible={setMsgVisible}
                             threadId={threadId}
+                            topic={topic}
+                            sentDate={sentDate}
                         />  : null
                 }
 

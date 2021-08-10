@@ -9,9 +9,9 @@ function GuideActiveOfferMessenger(props){
     return(
         <div className={"guideActiveOfferMessenger"}>
             <Row className={"d-flex flex-row justify-content-between align-items-center messenger-header"} >
-                <p> Nadawca: Joe Doe</p>
-                <p> Tytuł: Pytanie odnośnie zakończenia wycieczki</p>
-                <p> Nadano: 03/08/2021</p>
+                <p> Nadawca: {props.interlocutor}</p>
+                <p> Tytuł: {props.topic}</p>
+                <p> Nadano: {props.sentDate}</p>
                 <CloseIcon fontSize={"large"} className={"messenger-close-icon"} onClick={()=>{props.setMsgVisible(false)}}/>
             </Row>
             <div className={"messenger-body"} >

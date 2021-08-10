@@ -94,6 +94,7 @@ def create_app(test_config=None):               # test_config - independent from
     from app.endpoints.messages.message_unicast_new import bp as bp_unicast_new
     from app.endpoints.messages.message_unicast_response import bp as bp_unicast_response
     from app.endpoints.messages.message_guide_offer_threads import bp as bp_msg_guide_offer_threads
+    from app.endpoints.messages.message_thread_messages import bp as bp_thread_messages
 
     # Register blueprints
     app.register_blueprint(bp_authentication)
@@ -116,5 +117,6 @@ def create_app(test_config=None):               # test_config - independent from
     app.register_blueprint(bp_unicast_new)
     app.register_blueprint(bp_unicast_response)
     app.register_blueprint(bp_msg_guide_offer_threads)
+    app.register_blueprint(bp_thread_messages)
 
     return app

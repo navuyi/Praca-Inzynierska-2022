@@ -40,55 +40,32 @@ paths:
       $ref: "./paths/message-unicast-response.yaml"
 
   "/api/messages/guide/offer/threads":
+    $ref: "./paths/messages-guide-offer-threads.yaml"
+
+  "/api/messages/thread/messages":
     get:
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       tags:
         - Messages
-      summary: Returns threads linked to a tour given by its ID
-      description: Returns list of threads linked to a given tour, ID in query params, guide ID is identified by access token
+      summary: Returns limited amout of messages in thread
       parameters:
         - in: query
-          name: tour_id
+          name: thread_id
           required: true
           schema:
             type: integer
-            example: 1
+          description: ID of the thread fetched messges belong to
+        - in: query
+          name: offset
+          required: true
+          schema:
+            type: integer
+            default: 0
+          description: Describes number of messages already loaded
       responses:
         '200':
           description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    thread_id:
-                      type: integer
-                    email:
-                      type: string
-                    f_name:
-                      type: string
-                    l_name:
-                      type: string
-                    topic:
-                      type: string
-                    creation_time:
-                      type: string
-                    creation_date:
-                      type: string
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-
-
   "/api/messages/threads/guide":
 
   "/api/messages/threads/user":
