@@ -14,19 +14,16 @@ function GuideActiveOfferHeader(props){
                     </Col>
                 </Row>
                 <Row className={"d-flex flex-row align-items-start pl-xl-3 pt-xl-5"}>
-                    <Col xl={6}>
+                    <Col xl={8}>
                         <p> Zapisanych: <span>xx/{props.person_limit}</span> </p>
                         <p> Cena: <span>{props.price}</span></p>
                         <p> Czas trwania: od <span>{props.start_date}</span> do <span>{props.end_date}</span></p>
-                    </Col>
-                    <Col xl={6} >
-                        <Button className={"w-100"} variant={"danger"}> Zakończ zapisy </Button>
                     </Col>
                 </Row>
             </Col>
             <Col xl={5}>
                 <Row>
-                    <img src={props.image_url} alt="" />
+                    <img src={props.image_url} alt="" width={100}/>
                 </Row>
             </Col>
         </Row>

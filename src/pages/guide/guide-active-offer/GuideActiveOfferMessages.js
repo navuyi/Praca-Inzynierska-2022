@@ -10,47 +10,18 @@ import {refesh_token} from "../../../API_CALLS/token_refresh";
 
 
 function GuideActiveOfferMessages(props){
-    const [msgVisible, setMsgVisible] = useState(true)
+    const [msgVisible, setMsgVisible] = useState(false)
+    const [threadId, setThreadId] = useState()
     const {tourID} = useParams()
-    const history = useHistory()
 
-    const [threads, setThreads] = useState()
-
-    useEffect(() => {
-        fetchThreads()
-    }, [])
-
-    function fetchThreads(){
-        const url = API_PREFIX+"/messages/guide/offer/threads"
-        const access_token = localStorage.getItem("access_token")
-        const config = {
-            params: {
-                tour_id: tourID
-            },
-            headers:{
-                Authorization: `Bearer ${access_token}`
-            }
-        }
-        axios.get(url, config)
-            .then(res => {
-                setThreads(res.data)
-            })
-            .catch(err => {
-                if(err.response.status === 401){
-                    refesh_token().then(res => {
-                            localStorage.setItem("access_token", res.data.access_token)
-                            fetchThreads()
-                        })
-                        .catch(err => {
-                            history.push("/login")
-                        })
-                }
-            })
-    }
+    useEffect(()=>{
+        console.log(`Thread ID ${threadId}`)
+        console.log(msgVisible)
+    },[threadId, msgVisible])
 
     return(
         <div className={"guideActiveOfferMessages "}>
-            <Container>
+            <Container className={"mb-5"}>
                 <GuideActiveOfferHeader
                     header={props.general_data ? props.general_data.header : ""}
                     price={props.general_data ? props.general_data.price : ""}
@@ -63,12 +34,14 @@ function GuideActiveOfferMessages(props){
                     <h1 className={"list-header"}> Wiadomości </h1>
                 </Row>
                 <GuideActiveOfferMessagesList
-                    threads={threads}
+                    setThreadId={setThreadId}
+                    setMsgVisible={setMsgVisible}
                 />
                 {
                     msgVisible ?
                         <GuideActiveOfferMessenger
-
+                            setMsgVisible={setMsgVisible}
+                            threadId={threadId}
                         />  : null
                 }
 

@@ -2,17 +2,20 @@
     background-color: orange;
     border-bottom-right-radius: 0.5em;
     border-bottom-left-radius: 0.5em;
-    padding: 0.5em;
+    padding: 1em;
+    padding-top: 3em;
 }
 .guideActiveOfferHeader img{
     width: 100%;
     border-radius: 0.5em;
-    border: 10px solid rgb(34,34,34);
+    box-shadow: 0 0 10px 5px #222222;
+    max-height: 350px;
+    object-fit: cover;
 }
 .guideActiveOfferHeader h1{
     width: 100%;
     text-align: left;
-    color: whitesmoke;
+    color: #222222;
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
     font-size: 2rem;
@@ -20,8 +23,8 @@
 .guideActiveOfferHeader p{
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
-    font-size: 1.1rem;
-    margin: 0.5em 0;
+    font-size: 1.3rem;
+    margin: 0.7em 0;
     padding: 0 0;
 }
 .guideActiveOfferHeader span{

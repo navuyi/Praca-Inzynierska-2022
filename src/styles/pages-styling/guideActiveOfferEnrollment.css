@@ -29,3 +29,11 @@
     margin: 0;
     padding: 0;
 }
+
+
+@media (max-width: 900px) {
+    .guideActiveOfferEnrollment .list-header{
+        border-radius: unset;
+    }
+
+}

@@ -2,8 +2,9 @@ import React from "react"
 import {Row, Col, Button, FormControl, Form} from "react-bootstrap"
 
 import MessageBox from "../MessageBox";
+import CloseIcon from '@material-ui/icons/Close';
 
-function GuideActiveOfferMessenger(){
+function GuideActiveOfferMessenger(props){
 
     return(
         <div className={"guideActiveOfferMessenger"}>
@@ -11,6 +12,7 @@ function GuideActiveOfferMessenger(){
                 <p> Nadawca: Joe Doe</p>
                 <p> Tytuł: Pytanie odnośnie zakończenia wycieczki</p>
                 <p> Nadano: 03/08/2021</p>
+                <CloseIcon fontSize={"large"} className={"messenger-close-icon"} onClick={()=>{props.setMsgVisible(false)}}/>
             </Row>
             <div className={"messenger-body"} >
                     <Button variant={"warning"}> Więcej </Button>
