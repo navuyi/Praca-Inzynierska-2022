@@ -1,7 +1,7 @@
 .guideActiveOfferMessenger {
     margin-left: -15px;
     margin-right: -15px;
-    background-color: whitesmoke;
+
 
 
     display: flex;
@@ -9,7 +9,8 @@
     flex-grow: 1;
 }
 .guideActiveOfferMessenger .messenger-header{
-    margin: 1em 0;
+    margin: 0em 0;
+    margin-top: 3em;
 
     background-image: linear-gradient(15deg, #222222, #222222);
     color: whitesmoke;
@@ -33,12 +34,22 @@
 .guideActiveOfferMessenger .messenger-body{
     padding-left: 2em;
     padding-right: 2em;
-
+    background-color: whitesmoke;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-    max-height: 600px;
+    max-height: 800px;
+    min-height: 300px;
     overflow-y: auto;
+}
+
+.guideActiveOfferMessenger .message-input-box{
+    margin: 0;
+    margin-top: 3em;
+    background-color: whitesmoke;
+    padding: 2em;
 }
 
 
