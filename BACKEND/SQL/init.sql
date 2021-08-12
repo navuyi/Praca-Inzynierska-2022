@@ -32,13 +32,15 @@ CREATE TABLE messages(
     id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
     thread_id INT NOT NULL,
     sender_id INT NOT NULL,
+    receiver_id INT NOT NULL,
     content TEXT NOT NULL,
-    creation_time DATETIME NOT NULL DEFAULT NOW(),
+    creation_date DATETIME NOT NULL DEFAULT NOW(),
     was_read BOOLEAN NOT NULL DEFAULT 0,
     sender_deleted BOOLEAN NOT NULL DEFAULT 0,
     receiver_deleted BOOLEAN NOT NULL DEFAULT 0,
 
     FOREIGN KEY (sender_id) REFERENCES users(id),
+    FOREIGN KEY (receiver_id) REFERENCES users(id),
     FOREIGN KEY (thread_id) REFERENCES message_threads(id)
 );
 

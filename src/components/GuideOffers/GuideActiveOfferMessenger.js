@@ -1,10 +1,40 @@
-import React from "react"
+import React, {useEffect, useState} from "react"
 import {Row, Col, Button, FormControl, Form} from "react-bootstrap"
 
 import MessageBox from "../MessageBox";
 import CloseIcon from '@material-ui/icons/Close';
+import get_thread_messages from "../../API_CALLS/get_thread_messages";
+import {refesh_token} from "../../API_CALLS/token_refresh";
+import {useHistory} from "react-router-dom";
 
 function GuideActiveOfferMessenger(props){
+    const history = useHistory()
+    const [msgOffset, setMsgOffset] = useState(0)
+    const [messages, setMessages] = useState([])
+
+    useEffect(() => {
+        fetchMessages(msgOffset)
+    }, [])
+
+    function fetchMessages(){
+       get_thread_messages(props.threadId, msgOffset)
+           .then(res => {
+               console.log(res.data)
+               setMessages(res.data)
+           })
+           .catch(err => {
+               console.log(err.response)
+               if(err.response.status === 401){
+                   refesh_token().then(res => {
+                       localStorage.setItem("access_token", res.data.access_token)
+                       fetchMessages()
+                   })
+                       .catch(err => {
+                           history.push("/login")
+                       })
+               }
+           })
+    }
 
     return(
         <div className={"guideActiveOfferMessenger"}>
@@ -15,31 +45,20 @@ function GuideActiveOfferMessenger(props){
                 <CloseIcon fontSize={"large"} className={"messenger-close-icon"} onClick={()=>{props.setMsgVisible(false)}}/>
             </Row>
             <div className={"messenger-body"} >
-                    <Button variant={"warning"}> Więcej </Button>
-                    <MessageBox
-                        side={"left"}
-                        sender={"Joe doe"}
-                        send_time={"03/08/2021"}
-                        content={"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet"}
-                    />
-                    <MessageBox
-                        side={"right"}
-                        sender={"Ty"}
-                        send_time={"09/08/2021"}
-                        content={"Voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae"}
-                    />
-                    <MessageBox
-                        side={"right"}
-                        sender={"Ty"}
-                        send_time={"09/08/2021"}
-                        content={"Veritatis et quasi architecto beatae"}
-                    />
-                    <MessageBox
-                        side={"left"}
-                        sender={"Joe Doe"}
-                        send_time={"10/08/2021"}
-                        content={"Ab illo inventore veritatis et quasi architecto beatae"}
-                    />
+                <Button variant={"warning"}> Więcej </Button>
+                {
+                    messages.map((msg, index) => {
+                        return (
+                            <MessageBox
+                                side={msg.side}
+                                sender={props.interlocutor}
+                                send_time={msg.send_time}
+                                content={msg.content}
+                            />
+                        )
+                    })
+                }
+
             </div>
             <Row className={" m-0 mt-5"}>
                 <FormControl

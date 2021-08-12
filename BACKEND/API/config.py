@@ -27,3 +27,6 @@ TOUR_IMAGES_LIMIT = 20
 # ReCAPTCHA
 RECAPTCHA_ENABLED = True    # Enable/disable reCAPTCHA verification
 RECAPTCHA_SECRET_KEY = "6LcQltwbAAAAALw8n8WyiflolEo-Bc_Sg9dxrWBE"
+
+# Thread message return limit
+MESSAGES_LIMIT = 10

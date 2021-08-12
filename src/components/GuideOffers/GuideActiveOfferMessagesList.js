@@ -66,49 +66,44 @@ function GuideActiveOfferMessagesList(props){
     return(
         <React.Fragment>
             {
-               threads && threads.length>0 ?
-                    <React.Fragment>
-                        {
-                            fetching ?
-                            <Row className={"d-flex justify-content-center align-items-center loading-circle-container"}>
-                                    <CircularProgress size={100}/>
-                            </Row> :
-                            <Row className={"thread-list"}>
-                            <Table striped bordered hover responsive={"sm"}  className={"mb-0 w-100"}  >
-                                <thead>
-                                <tr >
-                                    <th>#</th>
-                                    <th>Nadawca</th>
-                                    <th> Email </th>
-                                    <th>Tytuł</th>
-                                    <th>Data</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {
-                                   threads.map((thread, index) => {
-                                        return(
-                                            <tr  style={{cursor: "pointer"}} key={index}  >
-                                                <td id={thread.thread_id} onClick={handleThreadChange}>{index+1}</td>
-                                                <td id={thread.thread_id} onClick={handleThreadChange}> {`${thread.f_name} ${thread.l_name}`} </td>
-                                                <td id={thread.thread_id} onClick={handleThreadChange}> {thread.email} </td>
-                                                <td id={thread.thread_id} onClick={handleThreadChange}> {thread.topic} </td>
-                                                <td id={thread.thread_id} onClick={handleThreadChange}>{thread.creation_date}</td>
-                                            </tr>
-                                        )
-                                    })
-                                }
-                                </tbody>
-                            </Table>
-                        </Row>}
-                    </React.Fragment> :
+                fetching ?
+                <Row className={"d-flex justify-content-center align-items-center loading-circle-container"}>
+                    <CircularProgress size={100}/>
+                </Row> :
+                threads && threads.length > 0 ?
+                    <Row className={"thread-list"}>
+                        <Table striped bordered hover responsive={"sm"}  className={"mb-0 w-100"}  >
+                            <thead>
+                            <tr >
+                                <th>#</th>
+                                <th>Nadawca</th>
+                                <th> Email </th>
+                                <th>Tytuł</th>
+                                <th>Data</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {
+                                threads.map((thread, index) => {
+                                    return(
+                                        <tr  style={{cursor: "pointer"}} key={index}  >
+                                            <td id={thread.thread_id} onClick={handleThreadChange}>{index+1}</td>
+                                            <td id={thread.thread_id} onClick={handleThreadChange}> {`${thread.f_name} ${thread.l_name}`} </td>
+                                            <td id={thread.thread_id} onClick={handleThreadChange}> {thread.email} </td>
+                                            <td id={thread.thread_id} onClick={handleThreadChange}> {thread.topic} </td>
+                                            <td id={thread.thread_id} onClick={handleThreadChange}>{thread.creation_date}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                            </tbody>
+                        </Table>
+                    </Row> :
                     <Row className={"d-flex flex-column justify-content-center align-items-center threads-not-found"}>
                         <img src={image} alt={""} width={100}/>
-                        <h1> Brak konwersacji dla tej wycieczki </h1>
+                        <h1> Brak konwersacji dla tej oferty </h1>
                     </Row>
-            }
-
-
+                }
         </React.Fragment>
     )
 }

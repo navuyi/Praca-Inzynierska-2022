@@ -18,6 +18,9 @@ post:
             content:
               type: string
               example: Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
+            receiver_id:
+              type: integer
+              example: 2
   responses:
     '201':
       description: OK

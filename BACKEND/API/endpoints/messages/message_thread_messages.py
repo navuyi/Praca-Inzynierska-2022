@@ -15,8 +15,9 @@ def get_thread_messages():
 
     offset = request.args["offset"]
     thread_id = request.args["thread_id"]
+    msg_limit = current_app.config["MESSAGES_LIMIT"]
 
-    cursor().execute(f"SELECT * FROM messages WHERE thread_id=%s", (thread_id, ))
+    cursor().execute(f"SELECT * FROM messages WHERE thread_id=%s ORDER BY id DESC LIMIT {msg_limit} OFFSET {offset}", (thread_id, ))
     messages = cursor().fetchall()
 
     # Define my side of conversation
@@ -25,6 +26,7 @@ def get_thread_messages():
     #thread_sender = sides["sender_id"]
     #thread_receiver = sides["receiver_id"]
 
+    converstaion = []
     for message in messages:
         # No checking for message deleted by sender/receiver for now
         msg = {
@@ -37,7 +39,14 @@ def get_thread_messages():
 
         # Define interlocutor ID
         sender_id = int(message["sender_id"])
-        #TODO Add receiver_id column to messages table (so it contains sender/receiver ID information)
+        receiver_id = int(message["receiver_id"])
 
+        if int(my_id) == sender_id:
+            msg["side"] = "right"
+        elif int(my_id) == receiver_id:
+            msg["side"] = "left"
 
-    return jsonify(messages), 201
+        converstaion.append(msg)
+
+    response = jsonify(converstaion)
+    return jsonify(converstaion), 201
