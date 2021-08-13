@@ -19,15 +19,20 @@
     padding: 0 0;
 }
 
-
+/* outer, message box container, manages left/right layout*/
+.message-box-container.left{
+    display: flex;
+    justify-content: flex-start;
+}
+.message-box-container.right{
+    display: flex;
+    justify-content: flex-end;
+}
+/* message box, defines looks */
 .messageBox.left{
-    align-self: flex-start;
     background-image: linear-gradient(to right, #222222, #424242);
 }
-
-
 .messageBox.right{
-    align-self: flex-end;
     background-color: #222222;
     background-image: linear-gradient(to left, #222222, #424242);
 }

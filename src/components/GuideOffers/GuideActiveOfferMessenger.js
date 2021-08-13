@@ -83,11 +83,15 @@ function GuideActiveOfferMessenger(props){
                 <p> Nadano: {props.sentDate}</p>
                 <CloseIcon fontSize={"large"} className={"messenger-close-icon"} onClick={()=>{props.setMsgVisible(false)}}/>
             </Row>
+
             <div className={"messenger-body"} >
                 {
-                    fetching ? <CircularProgress  size={100} /> :
+                    fetching ?
+                        <Row className={"d-flex justify-content-center align-items-center"} style={{minHeight: "300px"}}>
+                            <CircularProgress  size={100} />
+                        </Row>
+                         :
                         <React.Fragment>
-                            <Button variant={"warning"} className={"m-3 w-50 align-self-center"}> Więcej </Button>
                             {
                                 messages.map((msg, index) => {
                                     let sender = ""
@@ -99,18 +103,18 @@ function GuideActiveOfferMessenger(props){
                                     }
                                 return (
                                 <MessageBox key={index}
-                                side={msg.side}
-                                sender={sender}
-                                send_time={`${msg.creation_date} ${msg.creation_time}`}
-                                content={msg.content}
+                                    side={msg.side}
+                                    sender={sender}
+                                    send_time={`${msg.creation_date} ${msg.creation_time}`}
+                                    content={msg.content}
                                 />
                                 )
                             })
                             }
                         </React.Fragment>
                 }
-
             </div>
+
             <Row className={"message-input-box d-flex flex-column justify-content-center align-items-center w-100"}>
                 <FormControl
                     as='textarea'
@@ -120,7 +124,7 @@ function GuideActiveOfferMessenger(props){
                     value={response}
                     onChange={handleChange}
                 />
-                <Button className={"w-75 mt-5"} variant={"success"} onClick={sendResponse}> Wyślij </Button>
+                <Button className={"w-75 mt-5"} variant={"info"} onClick={sendResponse}> Wyślij </Button>
             </Row>
         </div>
     )
