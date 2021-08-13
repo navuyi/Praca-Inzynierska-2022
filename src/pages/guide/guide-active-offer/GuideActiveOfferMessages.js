@@ -3,10 +3,8 @@ import {Container, Row, Col, Button, Form} from "react-bootstrap"
 import GuideActiveOfferHeader from "../../../components/GuideOffers/GuideActiveOfferHeader";
 import GuideActiveOfferMessagesList from "../../../components/GuideOffers/GuideActiveOfferMessagesList";
 import GuideActiveOfferMessenger from "../../../components/GuideOffers/GuideActiveOfferMessenger";
-import axios from "axios";
 import {useHistory, useParams} from "react-router-dom"
-import {API_PREFIX} from "../../../config";
-import {refesh_token} from "../../../API_CALLS/token_refresh";
+
 
 
 function GuideActiveOfferMessages(props){
@@ -16,6 +14,7 @@ function GuideActiveOfferMessages(props){
     const [topic, setTopic] = useState("")
     const [sentDate, setSentDate] = useState("")
     const {tourID} = useParams()
+    const [interlocutorID, setInterlocutorID] = useState()
 
     useEffect(()=>{
         console.log(`Thread ID ${threadId}`)
@@ -43,6 +42,7 @@ function GuideActiveOfferMessages(props){
                     setInterlocutor={setInterlocutor}
                     setSentDate={setSentDate}
                     setTopic={setTopic}
+                    setInterlocutorID={setInterlocutorID}
                 />
                 {
                     msgVisible ?
@@ -52,6 +52,7 @@ function GuideActiveOfferMessages(props){
                             threadId={threadId}
                             topic={topic}
                             sentDate={sentDate}
+                            interlocutorID={interlocutorID}
                         />  : null
                 }
 

@@ -7,6 +7,8 @@ import get_thread_messages from "../../API_CALLS/get_thread_messages";
 import {refesh_token} from "../../API_CALLS/token_refresh";
 import {useHistory} from "react-router-dom";
 import {CircularProgress} from "@material-ui/core";
+import isEmptyString from "../../utils/isEmptyString";
+import send_response_message from "../../API_CALLS/send_response_message";
 
 function GuideActiveOfferMessenger(props){
     const history = useHistory()
@@ -14,9 +16,16 @@ function GuideActiveOfferMessenger(props){
     const [messages, setMessages] = useState([])
     const [fetching, setFetching] = useState(false)
 
+    const [response, setResponse] = useState("")
+
     useEffect(() => {
         fetchMessages(msgOffset)
+        console.log(props)
     }, [])
+    useEffect(() => {
+        fetchMessages(msgOffset)
+
+    }, [props.threadId])
 
     function fetchMessages(){
         setFetching(true)
@@ -31,13 +40,39 @@ function GuideActiveOfferMessenger(props){
                if(err.response.status === 401){
                    refesh_token().then(res => {
                        localStorage.setItem("access_token", res.data.access_token)
-                       fetchMessages()
+                       fetchMessages(msgOffset)
                    })
                        .catch(err => {
                            history.push("/login")
                        })
                }
            })
+    }
+
+    function sendResponse(){
+        if(isEmptyString(response)){
+            return
+        }
+        send_response_message(props.threadId, props.interlocutorID, response)
+            .then(res => {
+                console.log(res)
+                setResponse("")
+                fetchMessages()
+            })
+            .catch(err => {
+                console.log(err.response)
+                if(err.response.status === 401){
+                    refesh_token().then(res => {
+                        localStorage.setItem("access_token", res.data.access_token)
+                    }).catch(err => {
+                        history.push("/login")
+                    })
+                }
+            })
+    }
+
+    function handleChange(e){
+        setResponse(e.target.value)
     }
 
     return(
@@ -55,10 +90,17 @@ function GuideActiveOfferMessenger(props){
                             <Button variant={"warning"} className={"m-3 w-50 align-self-center"}> Więcej </Button>
                             {
                                 messages.map((msg, index) => {
+                                    let sender = ""
+                                    if(msg.side === "left"){
+                                        sender = props.interlocutor
+                                    }
+                                    else if(msg.side === "right"){
+                                        sender = "Ty"
+                                    }
                                 return (
                                 <MessageBox key={index}
                                 side={msg.side}
-                                sender={props.interlocutor}
+                                sender={sender}
                                 send_time={`${msg.creation_date} ${msg.creation_time}`}
                                 content={msg.content}
                                 />
@@ -75,8 +117,10 @@ function GuideActiveOfferMessenger(props){
                     rows={5}
                     placeholder={"Napisz coś"}
                     className={"w-75 align-self-center"}
+                    value={response}
+                    onChange={handleChange}
                 />
-                <Button className={"w-75 mt-5"} variant={"success"}> Wyślij </Button>
+                <Button className={"w-75 mt-5"} variant={"success"} onClick={sendResponse}> Wyślij </Button>
             </Row>
         </div>
     )

@@ -58,6 +58,9 @@ function GuideActiveOfferMessagesList(props){
         // Interlocutor first and last name
         props.setInterlocutor(thread.f_name + " " + thread.l_name)
 
+        // Set thread sender/receiver ID
+        props.setInterlocutorID(thread.interlocutor_id)
+
         // Thread topic and sent date
         props.setSentDate(thread.creation_date)
         props.setTopic(thread.topic)

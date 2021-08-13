@@ -30,13 +30,16 @@ def get_thread_messages():
     converstaion = []
     for message in messages:
         # No checking for message deleted by sender/receiver for now
+
         msg = {
             "id": message["id"],
             "content": message["content"],
             "creation_date": message['creation_date'].strftime("%d/%m/%Y"),
-            "creation_time": message['creation_date'].strftime("%H:%m"),
+            "creation_time": message['creation_date'].strftime("%H:%M"),
             "was_read": message["was_read"],
         }
+        print(msg["creation_date"])
+        print(msg['creation_time'])
 
         # Define interlocutor ID
         sender_id = int(message["sender_id"])

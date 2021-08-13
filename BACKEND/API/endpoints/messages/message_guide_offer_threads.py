@@ -49,9 +49,12 @@ def get_guide_offer_threads():
             cursor().execute(f"SELECT f_name, l_name, email FROM users WHERE id=%s", (interlocutor_id, ))
             interlocutor_data = cursor().fetchall()[0]
 
+            data["interlocutor_id"] = interlocutor_id
             data["email"] = interlocutor_data["email"]
             data["f_name"] = interlocutor_data["f_name"]
             data["l_name"] = interlocutor_data["l_name"]
+
+
 
             response.append(data)
 
