@@ -1,0 +1,43 @@
+get:
+  security:
+    - bearerAuth: [ ]
+  tags:
+    - Messages
+  summary: Returns limited amout of messages in thread
+  parameters:
+    - in: query
+      name: thread_id
+      required: true
+      schema:
+        type: integer
+      description: ID of the thread fetched messges belong to
+    - in: query
+      name: offset
+      required: true
+      schema:
+        type: integer
+        default: 0
+      description: Describes number of messages already loaded
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                content:
+                  type: string
+                creation_date:
+                  type: string
+                creation_time:
+                  type: string
+                id:
+                  type: integer
+                side:
+                  type: string
+                  description: left/right - defines side of messages display
+                was_read:
+                  type: integer

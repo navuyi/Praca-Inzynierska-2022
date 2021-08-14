@@ -36,4 +36,13 @@
 }
 .messages .thread-list td{
     vertical-align: middle;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+}
+.messages .thread-list button{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+    color: whitesmoke;
 }

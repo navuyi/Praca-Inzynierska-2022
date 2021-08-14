@@ -24,11 +24,19 @@ function User(){
                                 name="Zapisy na wycieczki"
                                 path="/account/user/enrollments"
                             />
+                            <SideNavbarLink
+                                name="Historia wycieczek"
+                                path="/account/user/asdasd"
+                            />
+                            <SideNavbarLink
+                                name="Zapisy na wycieczki"
+                                path="/account/user/asdadad"
+                            />
                         </SideNavbar>
                     </Col>
                     <Col lg={10} sm={12} style={{padding: "0"}} >
                         <Switch>
-                            <ProtectedRoute path={"/account/user/enrollments"} component={UserEnrollments} />
+                            <ProtectedRoute exact path={"/account/user/enrollments"} component={UserEnrollments} />
                         </Switch>
                     </Col>
                 </Row>

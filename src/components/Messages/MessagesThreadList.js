@@ -3,7 +3,7 @@ import {Row, Col, Container, Button, Table} from "react-bootstrap"
 
 
 
-function UserThreadList(){
+function MessagesThreadList(){
     return(
         <React.Fragment>
             <Row className={"thread-list"}>
@@ -34,4 +34,4 @@ function UserThreadList(){
     )
 }
 
-export default UserThreadList
+export default MessagesThreadList

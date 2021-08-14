@@ -43,51 +43,44 @@ paths:
     $ref: "./paths/messages-guide-offer-threads.yaml"
 
   "/api/messages/thread/messages":
+    $ref: "./paths/messages-thread-messages.yaml"
+
+  "/api/messages/general/threads":
     get:
       security:
         - bearerAuth: [ ]
       tags:
         - Messages
-      summary: Returns limited amout of messages in thread
-      parameters:
-        - in: query
-          name: thread_id
-          required: true
-          schema:
-            type: integer
-          description: ID of the thread fetched messges belong to
-        - in: query
-          name: offset
-          required: true
-          schema:
-            type: integer
-            default: 0
-          description: Describes number of messages already loaded
+      summary: Returns message threads where other side of the conversation is Guide
+      description: Returns only threads where other side of conversation is Guide. Endpoints reached by Users and Guides
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    content:
-                      type: string
-                    creation_date:
-                      type: string
-                    creation_time:
-                      type: string
-                    id:
-                      type: integer
-                    side:
-                      type: string
-                      description: left/right - defines side of messages display
-                    was_read:
-                      type: integer
-
-
+         description: OK
+         content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  thread_id:
+                    type: integer
+                  tour_id:
+                    type: integer
+                  tour_header:
+                    type: string
+                  creation_time:
+                    type: string
+                  creation_date:
+                    type: string
+                  topic:
+                    type: string
+                  interlocutor_fname:
+                    type: string
+                  interlocutor_lname:
+                    type: string
+                  interlocutor_email:
+                    type: string
   "/api/messages/threads/guide":
 
   "/api/messages/threads/user":
