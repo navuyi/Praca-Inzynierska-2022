@@ -1,19 +1,14 @@
-
 // Components
 import NavbarComponent from "../../components/NavbarComponent";
 import Footer from "../../components/Footer";
 import SideNavbar from "../../components/SideNavbar";
-import SideNavbarLink from "../../components/SideNavbarLink";
 import {Button, Col, Container, Row} from "react-bootstrap";
-import {Route, Switch} from "react-router-dom";
-import NewMessage from "./NewMessage";
-import OldMessages from "./OldMessages";
-import SentMessages from "./SentMessages";
-import DeletedMessages from "./DeletedMessages";
+
 // Dependencies
-import Select from "react-select";
+
 import MessagesThreadList from "../../components/Messages/MessagesThreadList";
 import React, {useState} from "react";
+import Messenger from "../../components/Messenger";
 
 
 function Messages(){
@@ -21,6 +16,12 @@ function Messages(){
         active: true,
         deleted: false
     })
+    const [msgVisible, setMsgVisible] = useState(false)
+    const [threadId, setThreadId] = useState()
+    const [interlocutorID, setInterlocutorID] = useState()
+    const [interlocutor, setInterlocutor] = useState("")
+    const [topic, setTopic] = useState("")
+    const [sentDate, setSentDate] = useState("")
 
     return(
         <div className="messages">
@@ -38,7 +39,27 @@ function Messages(){
                             <Row className={"thread-list-header d-flex justify-content-center mt-5"}>
                                 <h1> {threadType.active ? "Aktywne wątki " : null}  {threadType.deleted ? "Usunięte wątki" : null}</h1>
                             </Row>
-                            <MessagesThreadList />
+                            <MessagesThreadList
+                                setThreadId={setThreadId}
+                                setMsgVisible={setMsgVisible}
+                                setInterlocutor={setInterlocutor}
+                                setSentDate={setSentDate}
+                                setTopic={setTopic}
+                                setInterlocutorID={setInterlocutorID}
+                            />
+                            {
+                                msgVisible ?
+                                    <Messenger
+                                        interlocutor={interlocutor}
+                                        setMsgVisible={setMsgVisible}
+                                        thread_id={threadId}
+                                        topic={topic}
+                                        sentDate={sentDate}
+                                        interlocutor_id={interlocutorID}
+                                    /> :
+                                    null
+                            }
+
                         </Container>
                     </Col>
                 </Row>

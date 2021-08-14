@@ -3,8 +3,8 @@ import {Container, Row, Col, Button, Form} from "react-bootstrap"
 import GuideActiveOfferHeader from "../../../components/GuideOffers/GuideActiveOfferHeader";
 import GuideActiveOfferMessagesList from "../../../components/GuideOffers/GuideActiveOfferMessagesList";
 import GuideActiveOfferMessenger from "../../../components/GuideOffers/GuideActiveOfferMessenger";
-import {useHistory, useParams} from "react-router-dom"
-
+import {useParams} from "react-router-dom"
+import Messenger from "../../../components/Messenger";
 
 
 function GuideActiveOfferMessages(props){
@@ -46,13 +46,13 @@ function GuideActiveOfferMessages(props){
                 />
                 {
                     msgVisible ?
-                        <GuideActiveOfferMessenger
+                        <Messenger
                             interlocutor={interlocutor}
                             setMsgVisible={setMsgVisible}
-                            threadId={threadId}
+                            thread_id={threadId}
                             topic={topic}
                             sentDate={sentDate}
-                            interlocutorID={interlocutorID}
+                            interlocutor_id={interlocutorID}
                         />  : null
                 }
 

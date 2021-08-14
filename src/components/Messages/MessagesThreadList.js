@@ -5,11 +5,11 @@ import {refesh_token} from "../../API_CALLS/api_authentication_token_refresh";
 import {CircularProgress} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 import {limitText} from "../../utils/limitText";
-import image from "../../images/icons/not_found.svg"
+
 import NotFoundIndicator from "../NotFoundIndicator";
 
 
-function MessagesThreadList(){
+function MessagesThreadList(props){
     const history = useHistory()
     const [threads, setThreads] = useState([])
     const [loading, setLoading] = useState(false)
@@ -43,6 +43,23 @@ function MessagesThreadList(){
         history.push(`/tours/tour?id=${e.target.id}`)
     }
 
+    function handleThreadChange(e){
+        props.setThreadId(e.target.id)
+        props.setMsgVisible(true)
+        // Find chosen thread
+        const thread = threads.find(thread => thread.thread_id == e.target.id)
+
+        // Interlocutor first and last name
+        props.setInterlocutor(thread.interlocutor_fname + " " + thread.interlocutor_lname)
+
+        // Set thread sender/receiver ID
+        props.setInterlocutorID(thread.interlocutor_id)
+
+        // Thread topic and sent date
+        props.setSentDate(thread.creation_date)
+        props.setTopic(thread.topic)
+    }
+
     return(
         <React.Fragment>
 
@@ -68,13 +85,13 @@ function MessagesThreadList(){
                             {
                                 threads.map((thread, index) => {
                                     return(
-                                        <tr>
-                                            <td id={""} > {index+1} </td>
-                                            <td id={""} > {`${thread.interlocutor_fname} ${thread.interlocutor_lname}`} </td>
-                                            <td id={""} > {thread.interlocutor_email} </td>
-                                            <td id={""} > {limitText(thread.topic, 30)} </td>
-                                            <td id={""} > <Button id={thread.tour_id} className={"w-100"} variant={'dark'} onClick={navigateTourDetails}> {limitText(thread.tour_header, 20)} </Button> </td>
-                                            <td id={""} > {thread.creation_date} </td>
+                                        <tr key={index}>
+                                            <td onClick={handleThreadChange} id={thread.thread_id} > {index+1} </td>
+                                            <td onClick={handleThreadChange} id={thread.thread_id} > {`${thread.interlocutor_fname} ${thread.interlocutor_lname}`} </td>
+                                            <td onClick={handleThreadChange} id={thread.thread_id} > {thread.interlocutor_email} </td>
+                                            <td onClick={handleThreadChange} id={thread.thread_id} > {limitText(thread.topic, 30)} </td>
+                                            <td > <Button id={thread.tour_id} className={"w-100"} variant={'dark'} onClick={navigateTourDetails}> {limitText(thread.tour_header, 20)} </Button> </td>
+                                            <td onClick={handleThreadChange} id={thread.thread_id} > {thread.creation_date} </td>
                                         </tr>
                                     )
                                 })
