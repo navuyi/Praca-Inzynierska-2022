@@ -22,5 +22,11 @@ export function _login(access_token, refresh_token, user_id, is_guide, dispatch,
     dispatch(login("LOGIN"))
 
     // Push to after login landing page <-- for now /account/user
-    history.push("/account/user")
+    if(is_guide == 0){
+        history.push("/account/user/enrollments")
+    }
+    else if(is_guide == 1){
+        history.push("/account/guide/new-tour")
+    }
+
 }

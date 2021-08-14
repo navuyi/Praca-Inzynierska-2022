@@ -4,7 +4,7 @@ import NavbarComponent from "../../components/NavbarComponent";
 import Footer from "../../components/Footer";
 import SideNavbar from "../../components/SideNavbar";
 import SideNavbarLink from "../../components/SideNavbarLink";
-import {Col, Container, Row} from "react-bootstrap";
+import {Button, Col, Container, Row} from "react-bootstrap";
 import {Route, Switch} from "react-router-dom";
 import NewMessage from "./NewMessage";
 import OldMessages from "./OldMessages";
@@ -12,49 +12,34 @@ import SentMessages from "./SentMessages";
 import DeletedMessages from "./DeletedMessages";
 // Dependencies
 import Select from "react-select";
+import UserThreadList from "../../components/User/UserThreadList";
+import React, {useState} from "react";
+
 
 function Messages(){
+    const [threadType, setThreadType] = useState({
+        active: true,
+        deleted: false
+    })
 
     return(
         <div className="messages">
             <NavbarComponent />
-            <Container fluid style={{marginTop: "0em"}}>
-                <Row>
+            <Container fluid className={"h-100"} style={{marginTop: "0em", top: "0", flexGrow: "1"}}>
+                <Row style={{minHeight: "75vh"}}>
                     <Col lg={2} sm={12} style={{padding: "0", backgroundColor: "orange"}}>
                         <SideNavbar title="Wiadomości">
-                            <SideNavbarLink
-                                name="Nowa wiadomość"
-                                path="/account/messages/new_message"
-                            />
-                            <SideNavbarLink
-                                name="Odebrane"
-                                path="/account/messages/old_messages"
-                            />
-                            <SideNavbarLink
-                                name="Wysłane"
-                                path="/account/messages/sent_messages"
-                            />
-                            <SideNavbarLink
-                                name="Usunięte"
-                                path="/account/messages/deleted_messages"
-                            />
+                            <Button className={"w-100 mt-2 p-3"} variant={threadType.active ? "dark" : "light"} onClick={()=>setThreadType({active: true, deleted: false})}> Aktywne konwersacje </Button>
+                            <Button className={"w-100 mt-2 p-3"} variant={threadType.deleted ? "dark" : "light"} onClick={()=>setThreadType({active: false, deleted: true})}> Usunięte konwersacje </Button>
                         </SideNavbar>
                     </Col>
                     <Col lg={10} sm={12} style={{padding: "0"}} >
-                        <Switch>
-                            <Route exact path="/account/messages/new_message">
-                                <NewMessage />
-                            </Route>
-                            <Route exact path="/account/messages/old_messages">
-                                <OldMessages />
-                            </Route>
-                            <Route exact path="/account/messages/sent_messages">
-                                <SentMessages />
-                            </Route>
-                            <Route exact path="/account/messages/deleted_messages">
-                                <DeletedMessages />
-                            </Route>
-                        </Switch>
+                        <Container className={"h-100"} style={{marginTop: "0em", top: "0", flexGrow: "1"}}>
+                            <Row className={"thread-list-header d-flex justify-content-center mt-5"}>
+                                <h1> {threadType.active ? "Aktywne wątki " : null}  {threadType.deleted ? "Usunięte wątki" : null}</h1>
+                            </Row>
+                            <UserThreadList />
+                        </Container>
                     </Col>
                 </Row>
             </Container>

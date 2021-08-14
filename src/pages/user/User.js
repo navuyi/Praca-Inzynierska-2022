@@ -1,15 +1,39 @@
 // Components
 import NavbarComponent from "../../components/NavbarComponent";
 import Footer from "../../components/Footer";
+import {Col, Container, Row} from "react-bootstrap";
+import SideNavbar from "../../components/SideNavbar";
+import SideNavbarLink from "../../components/SideNavbarLink";
+import {Switch} from "react-router-dom";
+
+import UserEnrollments from "./UserEnrollments";
+import ProtectedRoute from "../../components/ProtectedRoute";
 
 // Dependencies
 
 
 function User(){
     return(
-        <div className="user">
+        <div className="user" >
             <NavbarComponent />
-            Użytkownik
+            <Container fluid className={"h-100"} style={{marginTop: "0em", top: "0", flexGrow: "1"}}>
+                <Row style={{minHeight: "75vh"}}>
+                    <Col lg={2} sm={12} style={{padding: "0", backgroundColor: "orange"}}>
+                        <SideNavbar title="Panel użytkownika">
+                            <SideNavbarLink
+                                name="Zapisy na wycieczki"
+                                path="/account/user/enrollments"
+                            />
+                        </SideNavbar>
+                    </Col>
+                    <Col lg={10} sm={12} style={{padding: "0"}} >
+                        <Switch>
+                            <ProtectedRoute path={"/account/user/enrollments"} component={UserEnrollments} />
+                        </Switch>
+                    </Col>
+                </Row>
+            </Container>
+            <Footer />
         </div>
     )
 }

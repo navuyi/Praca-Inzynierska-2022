@@ -41,10 +41,9 @@ import './styles/pages-styling/informations.css';
 import './styles/pages-styling/tours.css';
 import './styles/pages-styling/login.css';
 import './styles/pages-styling/register.css';
-import './styles/pages-styling/newMessage.css';
-import './styles/pages-styling/oldMessages.css';
-import './styles/pages-styling/sentMessages.css';
-import './styles/pages-styling/deletedMessages.css';
+import './styles/pages-styling/messages.css'
+
+
 import './styles/components-styling/toursTourPanel.css';
 import './styles/pages-styling/tourDetails.css';
 import './styles/components-styling/tourPanelLabel.css';
