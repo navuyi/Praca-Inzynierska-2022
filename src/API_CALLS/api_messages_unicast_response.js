@@ -2,7 +2,7 @@ import axios from "axios";
 import {API_PREFIX} from "../config";
 
 
-export default function send_response_message(thread_id, receiver_id, content){
+export default function api_messages_unicast_response(thread_id, receiver_id, content){
     const url = API_PREFIX + "/messages/unicast/response"
     const data = {
         thread_id: thread_id,

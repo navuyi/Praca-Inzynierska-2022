@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const create_tour = (data) => {
+export const api_tour_new_tour = (data) => {
     const url = "http://167.99.143.194/api/tour/new_tour";
     const access_token = localStorage.getItem("access_token")
 

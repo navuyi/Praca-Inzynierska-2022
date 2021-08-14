@@ -1,7 +1,7 @@
 import {API_PREFIX} from "../config";
 import axios from "axios";
 
-export default function message_unicast_new(content, tour_id, receiver_id, topic){
+export default function api_messages_unicast_new(content, tour_id, receiver_id, topic){
     const url = API_PREFIX + "/messages/unicast/new"
     const access_token = localStorage.getItem("access_token")
     const config = {

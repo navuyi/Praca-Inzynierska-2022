@@ -3,8 +3,8 @@ import {Col, Row, Form, Button} from "react-bootstrap"
 import Separator from "../Separator";
 import SeparatorShort from "../SeparatorShort";
 import isEmptyString from "../../utils/isEmptyString";
-import message_unicast_new from "../../API_CALLS/message_unicast_new";
-import {refesh_token} from "../../API_CALLS/token_refresh";
+import api_messages_unicast_new from "../../API_CALLS/api_messages_unicast_new";
+import {refesh_token} from "../../API_CALLS/api_authentication_token_refresh";
 import {CircularProgress} from "@material-ui/core";
 
 import img from "../../images/icons/success.svg"
@@ -20,7 +20,7 @@ function TourDetailsMessenger(props){
             return 1
         }
         setSending(true)
-        message_unicast_new(content, props.tour_id, props.guide_id, topic)
+        api_messages_unicast_new(content, props.tour_id, props.guide_id, topic)
             .then(res => {
                 setSending(false)
                 setMsgSent(true)

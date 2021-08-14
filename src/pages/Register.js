@@ -1,7 +1,7 @@
 import {Container, Row, Col} from "react-bootstrap";
 import {Form, Button} from "react-bootstrap";
 
-import {register_account} from '../API_CALLS/register_account'
+import {api_authentication_register} from '../API_CALLS/api_authentication_register'
 
 import {useEffect, useRef, useState} from "react";
 import {useHistory} from 'react-router-dom'
@@ -56,7 +56,7 @@ function Register(){
         // Register acount
         const data = {...credentials, token: token}
         console.log(data)
-        register_account(data)
+        api_authentication_register(data)
         .then(res=>{
             if(res.status == 201){
                 setRedirect(true)

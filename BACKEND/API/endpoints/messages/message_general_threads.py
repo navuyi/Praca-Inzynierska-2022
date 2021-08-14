@@ -15,23 +15,59 @@ def get_general_threads():
     cursor().execute(f"SELECT is_guide FROM users WHERE id=%s", (my_id, ))
     is_guide = cursor().fetchone()["is_guide"]
 
-    cursor().execute(f"SELECT * FROM message_threads WHERE sender_id = %s OR receiver_id = %s", (my_id, my_id))
+    cursor().execute(f"SELECT id, tour_id, creation_date, topic, sender_deleted, sender_id, receiver_deleted, receiver_id FROM message_threads WHERE sender_id = %s OR receiver_id = %s", (my_id, my_id))
     threads = cursor().fetchall()
 
+    # Get applicable threads
     response_threads = []
     for index, thread in enumerate(threads):
-        # Define interlocutor ID and role - either sender or receiver
         sender_id = int(thread["sender_id"])
         receiver_id = int(thread["receiver_id"])
-        print(index)
+        # In case of being guide allow only conversations with another guide and only if we started the conversation
+        # The other guide will see this thread under his offer's messages
         if(is_guide == 1):
             # Check if both sides of conversation are guides
             cursor().execute(f"SELECT is_guide FROM users WHERE id=%s OR id=%s", (sender_id, receiver_id))
             arr = cursor().fetchall()
-            if int(arr[0]["is_guide"]) == 1 and int(arr[1]["is_guide"]) == 1:
+            if int(arr[0]["is_guide"]) == 1 and int(arr[1]["is_guide"]) == 1 and sender_id == int(my_id):
                 response_threads.append(thread)
         else:
             response_threads.append(thread)
 
+    response = []
+    for thread in response_threads:
 
-    return jsonify(response_threads), 201
+        thr = {}
+
+        # Define interlocutor
+        sender_id = int(thread["sender_id"])
+        receiver_id = int(thread["receiver_id"])
+
+        if int(my_id) == sender_id:
+            interlocutor_id = receiver_id
+        elif int(my_id) == receiver_id:
+            interlocutor_id = sender_id
+
+        # Get interlocutor data
+        cursor().execute(f"SELECT id, f_name, l_name, email FROM users WHERE id=%s", (interlocutor_id, ))
+        data = cursor().fetchone()
+        thr["interlocutor_id"] = data["id"]
+        thr["interlocutor_fname"] = data["f_name"]
+        thr["interlocutor_lname"] = data["l_name"]
+        thr["interlocutor_email"] = data["email"]
+
+        # Select needed information
+        thr["thread_id"] = thread["id"]
+        thr["tour_id"] = thread["tour_id"]
+        thr["creation_time"] = thread["creation_date"].strftime("%H:%M")
+        thr["creation_date"] = thread["creation_date"].strftime("%d/%m/%Y")
+        thr["topic"] = thread["topic"]
+
+        # Get tour information
+        cursor().execute(f"SELECT header FROM tours WHERE id=%s", (thread["tour_id"], ))
+        header = cursor().fetchone()["header"]
+        thr["tour_header"] = header
+
+        response.append(thr)
+
+    return jsonify(response), 201

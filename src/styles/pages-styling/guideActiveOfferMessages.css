@@ -19,16 +19,7 @@
     min-height: 250px;
 }
 
-.guideActiveOfferMessages .threads-not-found {
-    border: 5px solid #222222;
-    padding: 3em 0;
-}
-.guideActiveOfferMessages .threads-not-found h1{
-    font-family: 'Source Sans Pro', sans-serif;
-    font-weight: bold;
-    font-size: 2.2rem;
-    margin-top: 1em;
-}
+
 
 .guideActiveOfferMessages .table-responsive-sm{
     width: 100%;

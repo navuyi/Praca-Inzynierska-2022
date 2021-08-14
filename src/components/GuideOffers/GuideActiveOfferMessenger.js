@@ -3,12 +3,12 @@ import {Row, Col, Button, FormControl, Form} from "react-bootstrap"
 
 import MessageBox from "../MessageBox";
 import CloseIcon from '@material-ui/icons/Close';
-import get_thread_messages from "../../API_CALLS/get_thread_messages";
-import {refesh_token} from "../../API_CALLS/token_refresh";
+import api_messages_thread_messages from "../../API_CALLS/api_messages_thread_messages";
+import {refesh_token} from "../../API_CALLS/api_authentication_token_refresh";
 import {useHistory} from "react-router-dom";
 import {CircularProgress} from "@material-ui/core";
 import isEmptyString from "../../utils/isEmptyString";
-import send_response_message from "../../API_CALLS/send_response_message";
+import api_messages_unicast_response from "../../API_CALLS/api_messages_unicast_response";
 
 function GuideActiveOfferMessenger(props){
     const history = useHistory()
@@ -29,7 +29,7 @@ function GuideActiveOfferMessenger(props){
 
     function fetchMessages(){
         setFetching(true)
-       get_thread_messages(props.threadId, msgOffset)
+       api_messages_thread_messages(props.threadId, msgOffset)
            .then(res => {
                console.log(res.data)
                setMessages(res.data)
@@ -53,7 +53,7 @@ function GuideActiveOfferMessenger(props){
         if(isEmptyString(response)){
             return
         }
-        send_response_message(props.threadId, props.interlocutorID, response)
+        api_messages_unicast_response(props.threadId, props.interlocutorID, response)
             .then(res => {
                 console.log(res)
                 setResponse("")

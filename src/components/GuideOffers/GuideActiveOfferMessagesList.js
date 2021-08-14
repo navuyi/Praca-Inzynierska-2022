@@ -5,8 +5,8 @@ import {useHistory, useParams} from "react-router-dom";
 import {CircularProgress} from "@material-ui/core";
 import {API_PREFIX} from "../../config";
 import axios from "axios";
-import {refesh_token} from "../../API_CALLS/token_refresh";
-
+import {refesh_token} from "../../API_CALLS/api_authentication_token_refresh";
+import NotFoundIndicator from "../NotFoundIndicator";
 function GuideActiveOfferMessagesList(props){
     const {tourID} = useParams()
     const history = useHistory()
@@ -102,10 +102,9 @@ function GuideActiveOfferMessagesList(props){
                             </tbody>
                         </Table>
                     </Row> :
-                    <Row className={"d-flex flex-column justify-content-center align-items-center threads-not-found"}>
-                        <img src={image} alt={""} width={100}/>
-                        <h1> Brak konwersacji dla tej oferty </h1>
-                    </Row>
+                    <NotFoundIndicator
+                        message={"Brak konwersacji dla tej oferty"}
+                    />
                 }
         </React.Fragment>
     )

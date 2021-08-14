@@ -34,15 +34,29 @@
 .messages .thread-list .table-responsive-sm{
     width: 100%;
 }
+
+
+
 .messages .thread-list td{
     vertical-align: middle;
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
     font-size: 1rem;
+
+    cursor: pointer;
 }
 .messages .thread-list button{
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
     font-size: 1rem;
     color: whitesmoke;
+}
+
+.messages .thread-list .loading-box{
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 5px solid #222222;
 }

@@ -3,7 +3,7 @@ import {Container, Row, Col, Button, Form} from "react-bootstrap"
 import GuideActiveOfferPanel from "../../components/GuideOffers/GuideActiveOfferPanel";
 import axios from "axios";
 import {API_PREFIX} from "../../config";
-import {refesh_token} from "../../API_CALLS/token_refresh";
+import {refesh_token} from "../../API_CALLS/api_authentication_token_refresh";
 import {CircularProgress} from "@material-ui/core";
 
 function GuideActiveOffers(){

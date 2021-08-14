@@ -55,7 +55,7 @@ import "./styles/pages-styling/guideActiveOfferMessages.css"
 import "./styles/components-styling/messageBox.css"
 import "./styles/components-styling/guideActiveOfferMessenger.css"
 import "./styles/components-styling/tourDetailsMessenger.css"
-
+import "./styles/components-styling/notFoundIndicator.css"
 import GuideNewTourSuccess from "./pages/guide/guide-new-tour/GuideNewTourSuccess";
 
 

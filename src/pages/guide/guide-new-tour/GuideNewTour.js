@@ -11,11 +11,11 @@ import Separator from "../../../components/Separator";
 import SeparatorShort from "../../../components/SeparatorShort";
 import {CircularProgress} from "@material-ui/core";
 
-import {create_tour} from "../../../API_CALLS/create_tour";
+import {api_tour_new_tour} from "../../../API_CALLS/api_tour_new_tour";
 
 import {Alert} from "@material-ui/lab";
 import {useHistory} from "react-router-dom";
-import {refesh_token} from "../../../API_CALLS/token_refresh";
+import {refesh_token} from "../../../API_CALLS/api_authentication_token_refresh";
 import {_logout} from "../../../utils/_logout";
 
 // Create form data - it changes on every render
@@ -95,7 +95,7 @@ function GuideNewTour(){
         console.log(priceList);
         console.log(importantInfo);
 
-        create_tour(formData)
+        api_tour_new_tour(formData)
             .then(res=>{
                 const data = res.data;
                 // Redirect to success page

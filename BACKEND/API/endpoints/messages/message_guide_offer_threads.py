@@ -33,7 +33,7 @@ def get_guide_offer_threads():
                 "thread_id": thread["id"],
                 "topic": thread["topic"],
                 "creation_date": thread["creation_date"].strftime("%d/%m/%Y"),    # <-- format date
-                "creation_time": thread['creation_date'].strftime("%H:%m")
+                "creation_time": thread['creation_date'].strftime("%H:%M")
             }
 
             # Define interlocutor ID

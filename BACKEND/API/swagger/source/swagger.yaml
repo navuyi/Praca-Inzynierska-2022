@@ -75,6 +75,8 @@ paths:
                     type: string
                   topic:
                     type: string
+                  interlocutor_id:
+                    type: integer
                   interlocutor_fname:
                     type: string
                   interlocutor_lname:
