@@ -1,13 +1,16 @@
-html{
+html {
     font-size: 16px;
 }
-#root{
+
+#root {
     min-height: 100vh;
 }
-body{
+
+body {
     margin: 0;
     overflow-x: hidden;
 }
-a{
+
+a {
     text-decoration: none;
 }

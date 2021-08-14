@@ -1,9 +1,9 @@
-import {Row, FormControl, FormGroup, Col, Form, Button} from "react-bootstrap";
-import TourPlacesSelect from "../TourPlacesSelect";
-import Separator from "../Separator";
+import {Button, Col, Form, FormControl, Row} from "react-bootstrap";
+import TourPlacesSelect from "../ReusableComponents/TourPlacesSelect";
+import Separator from "../ReusableComponents/Separator";
 import React from "react"
 
-function GuideNewTourInputs(props){
+function GuideNewTourInputs(props) {
 
     const handleMainImageChange = (e) => {
         // Set image to display
@@ -12,7 +12,7 @@ function GuideNewTourInputs(props){
         // Add image to FormData
         props.formData.set('main_image', e.target.files[0], e.target.files[0].name);
     }
-    return(
+    return (
         <React.Fragment>
             <Row className={"d-flex justify-content-center"}>
                 <Col xl={8} lg={8}>
@@ -42,13 +42,15 @@ function GuideNewTourInputs(props){
                     />
                 </Col>
             </Row>
-            <Separator />
+            <Separator/>
             <Row className={"d-flex justify-content-center"}>
                 <h2 style={{textAlign: "center", color: "#222222"}}> Zdjęcie główne </h2>
             </Row>
             <Row className={"d-flex justify-content-center align-items-center flex-column "}>
                 <Col xl={6} lg={6} className={"d-flex justify-content-center"}>
-                    <Button variant={"outline-primary"} className={"w-100"} onClick={()=>{document.getElementById("main-img-input").click()}}> Dodaj zdjęcie główne</Button>
+                    <Button variant={"outline-primary"} className={"w-100"} onClick={() => {
+                        document.getElementById("main-img-input").click()
+                    }}> Dodaj zdjęcie główne</Button>
                     <input
                         type="file"
                         onChange={handleMainImageChange}
@@ -59,10 +61,11 @@ function GuideNewTourInputs(props){
                     />
                 </Col>
                 <Col xl={6} lg={6}>
-                    <img src={props.mainUrl} alt={""} style={{maxWidth: "100%", marginTop: "1em", borderRadius: "0.5em"}}/>
+                    <img src={props.mainUrl} alt={""}
+                         style={{maxWidth: "100%", marginTop: "1em", borderRadius: "0.5em"}}/>
                 </Col>
             </Row>
-            <Separator />
+            <Separator/>
             <Row className={"d-flex justify-content-center"}>
                 <h2 style={{textAlign: "center", color: "#222222"}}> Dane szczegółowe </h2>
             </Row>

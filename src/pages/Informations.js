@@ -1,15 +1,15 @@
-import NavbarComponent from "../components/NavbarComponent";
-import Footer from "../components/Footer";
+import NavbarComponent from "../components/ReusableComponents/NavbarComponent";
+import Footer from "../components/ReusableComponents/Footer";
 import React from "react";
-import {Container, Row, Col} from "react-bootstrap"
+import {Container} from "react-bootstrap"
 
-function Informations(){
-    return(
+function Informations() {
+    return (
         <div className="informations">
-            <NavbarComponent />
+            <NavbarComponent/>
             <Container fluid className={"h-100"} style={{marginTop: "0em", top: "0", flexGrow: "1"}}>
             </Container>
-            <Footer />
+            <Footer/>
         </div>
     )
 }

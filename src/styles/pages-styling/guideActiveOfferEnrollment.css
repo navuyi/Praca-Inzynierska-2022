@@ -1,7 +1,8 @@
-.guideActiveOfferEnrollment{
+.guideActiveOfferEnrollment {
     height: 100%;
 }
-.guideActiveOfferEnrollment .list-header{
+
+.guideActiveOfferEnrollment .list-header {
     width: 100%;
     text-align: center;
     font-family: 'Source Sans Pro', sans-serif;
@@ -15,14 +16,16 @@
     border-top-right-radius: 0.5em;
 }
 
-.guideActiveOfferEnrollment svg{
+.guideActiveOfferEnrollment svg {
     transform: scale(1.2);
     margin-right: 0.5em;
 }
-.guideActiveOfferEnrollment textarea{
+
+.guideActiveOfferEnrollment textarea {
     resize: none;
 }
-.guideActiveOfferEnrollment p{
+
+.guideActiveOfferEnrollment p {
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
     font-size: 1.1rem;
@@ -32,7 +35,7 @@
 
 
 @media (max-width: 900px) {
-    .guideActiveOfferEnrollment .list-header{
+    .guideActiveOfferEnrollment .list-header {
         border-radius: unset;
     }
 

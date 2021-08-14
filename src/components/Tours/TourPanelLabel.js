@@ -1,8 +1,8 @@
 import React from "react";
-import {Row, Col} from "react-bootstrap"
+import {Col, Row} from "react-bootstrap"
 
 const TourPanelLabel = (props) => {
-    return(
+    return (
         <Row className={"tour-panel-label d-flex align-items-center justify-content-start w-100 flex-sm-row flex-row"}>
             <Col xl={5} xs={5} sm={5} md={5} className={"d-flex flex-row align-items-center"}>
                 {props.image}  <p> {props.text} </p>

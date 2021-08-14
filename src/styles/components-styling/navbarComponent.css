@@ -1,5 +1,5 @@
-.navbarComponent{
-    background-color: rgb(34,34,34);
+.navbarComponent {
+    background-color: rgb(34, 34, 34);
     min-height: 3rem;
     justify-content: center;
     align-self: center;
@@ -7,26 +7,29 @@
     flex-direction: row;
     width: 100%;
 }
-.navbarComponent a{
+
+.navbarComponent a {
     outline: none;
     text-decoration: none;
     color: whitesmoke;
     font-size: 1.1rem;
 }
 
-.navbarComponent .white{
+.navbarComponent .white {
     color: whitesmoke;
 }
-.navbarComponent .black{
+
+.navbarComponent .black {
     color: black;
 }
-.navbarComponent a:hover span{
+
+.navbarComponent a:hover span {
     color: dodgerblue;
 }
 
 @media (max-width: 900px) {
 
-    .navbarComponent .black:active{
+    .navbarComponent .black:active {
         color: black;
     }
 }

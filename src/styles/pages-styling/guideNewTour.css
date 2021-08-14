@@ -1,9 +1,10 @@
-.guideNewTour .cont{
+.guideNewTour .cont {
     border-radius: 0.5em;
     background-image: linear-gradient(white, #f8f8f8, white);
     margin-bottom: 10em;
 }
-.guideNewTour h1{
+
+.guideNewTour h1 {
     font-size: 3rem;
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
@@ -18,37 +19,43 @@
     color: whitesmoke;
     text-shadow: -1px -1px black;
 }
-.guideNewTour h2{
+
+.guideNewTour h2 {
     font-size: 1.5rem;
     margin-bottom: 0.5em;
 }
-.guideNewTour h3{
+
+.guideNewTour h3 {
     font-size: 1.5rem;
     margin: 0.5em auto;
 }
-.guideNewTour .inputGroup{
+
+.guideNewTour .inputGroup {
     margin: 0.7em 0;
 }
-.guideNewTour .inputGroup p{
+
+.guideNewTour .inputGroup p {
     margin: 0.1em 0;
     padding: 0;
     font-size: 1.2rem;
 }
 
-.guideNewTour .inputGroup input[type=number]{
+.guideNewTour .inputGroup input[type=number] {
     -webkit-appearance: textfield;
     -moz-appearance: textfield;
 }
-.guideNewTour .inputGroup input[type=file]{
+
+.guideNewTour .inputGroup input[type=file] {
     width: 100%;
 }
 
-.guideNewTour #plan-input-header{
+.guideNewTour #plan-input-header {
     margin: 0;
     margin-top: 3rem;
     text-align: center;
 }
-.guideNewTour .table-container{
+
+.guideNewTour .table-container {
     width: 100%;
     border: 2px solid #d4d3d3;
     border-radius: 5px;
@@ -57,7 +64,8 @@
     overflow-y: auto;
     overflow-x: hidden;
 }
-.guideNewTour .table-container .table-container-text{
+
+.guideNewTour .table-container .table-container-text {
     width: 100%;
     height: 100%;
     display: flex;
@@ -67,19 +75,22 @@
     font-weight: bold;
     color: #222222;
 }
-.guideNewTour .table-container .plan-row{
+
+.guideNewTour .table-container .plan-row {
     cursor: pointer;
     user-select: none;
     border-radius: 0.5em;
 }
-.guideNewTour .table-container .plan-row:hover{
+
+.guideNewTour .table-container .plan-row:hover {
     background-color: rgba(1, 110, 210, 0.5);
 }
-.guideNewTour .table-container .plan-row-button{
+
+.guideNewTour .table-container .plan-row-button {
     width: 30%;
 }
 
-.guideNewTour .price-list{
+.guideNewTour .price-list {
     width: 100%;
     height: 100%;
     max-height: 150px;
@@ -88,7 +99,8 @@
 
     overflow-y: auto;
 }
-.guideNewTour .price-list .price-list-element{
+
+.guideNewTour .price-list .price-list-element {
     color: whitesmoke;
     text-shadow: -1px -0.5px black;
     padding: 0.3em 1em;
@@ -100,11 +112,12 @@
     cursor: pointer;
     border-bottom: 1px solid black;
 }
-.guideNewTour .price-list .price-list-element:hover{
-    background-color: rgb(34,34,34) !important;
+
+.guideNewTour .price-list .price-list-element:hover {
+    background-color: rgb(34, 34, 34) !important;
 }
 
-.guideNewTour .image-list{
+.guideNewTour .image-list {
     max-height: 250px;
     border-radius: 0.5em;
     border: solid 1px lightgrey;
@@ -112,7 +125,8 @@
     overflow-x: hidden;
     background-color: #e8e8e8;
 }
-.guideNewTour .image-list .image-list-element{
+
+.guideNewTour .image-list .image-list-element {
     width: 100%;
 
     max-width: 100%;
@@ -127,11 +141,12 @@
     user-select: none;
 
 }
-.guideNewTour .image-list .image-list-element:hover{
+
+.guideNewTour .image-list .image-list-element:hover {
     background-image: linear-gradient(15deg, red, darkred);
 }
 
-.guideNewTour .upload-indicator{
+.guideNewTour .upload-indicator {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -145,7 +160,8 @@
     transform: translateY(-50%);
      */
 }
-.guideNewTour .upload-indicator p{
+
+.guideNewTour .upload-indicator p {
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
     color: #222222;
@@ -153,35 +169,37 @@
 }
 
 
-
 @media (max-width: 900px) {
-    .guideNewTour .cont{
+    .guideNewTour .cont {
         background-color: #ffffff;
         border-radius: unset;
         box-shadow: unset;
     }
 
-    .guideNewTour h1{
+    .guideNewTour h1 {
         font-size: 2.5rem;
         font-family: 'Lora', sans-serif;
         font-weight: 400;
         border-radius: unset;
     }
-    .guideNewTour h2{
+
+    .guideNewTour h2 {
         font-size: 1.5rem;
     }
 
-    .guideNewTour .inputGroup{
+    .guideNewTour .inputGroup {
         margin: 0.7em 0;
     }
-    .guideNewTour .inputGroup p{
+
+    .guideNewTour .inputGroup p {
         margin: 0.1em 0;
         padding: 0;
         font-size: 1.2rem;
     }
-    .guideNewTour .inputGroup input{
+
+    .guideNewTour .inputGroup input {
         border-radius: 0.5em;
-        border:none;
+        border: none;
         outline: none;
 
         font-size: 1.1rem;
@@ -189,17 +207,20 @@
 
         width: 100%;
         background-color: #dadada;
-        border: 2px solid rgba(1,1,1,0);
+        border: 2px solid rgba(1, 1, 1, 0);
     }
-    .guideNewTour .inputGroup input:focus{
+
+    .guideNewTour .inputGroup input:focus {
         background-color: whitesmoke;
         border-color: #187bcd;
     }
-    .guideNewTour .inputGroup input[type=number]{
+
+    .guideNewTour .inputGroup input[type=number] {
         -webkit-appearance: textfield;
         -moz-appearance: textfield;
     }
-    .guideNewTour .inputGroup input[type=file]{
+
+    .guideNewTour .inputGroup input[type=file] {
         width: 100%;
     }
 }

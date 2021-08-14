@@ -1,7 +1,7 @@
 import React from "react"
 
 
-function TourImportantInfo(props){
+function TourImportantInfo(props) {
 
 
     const fontStyle = {
@@ -21,12 +21,12 @@ function TourImportantInfo(props){
         margin: "0.1em 0",
         width: "100%"
     }
-    return(
+    return (
         <React.Fragment>
             <h3 style={fontStyle}> Ważne informacje </h3>
             {
                 props.important_info.map((info, index) => {
-                    return(
+                    return (
                         <div style={style} key={index}>
                             {info.description}
                         </div>

@@ -1,16 +1,16 @@
-import {Container, Row, Col} from "react-bootstrap";
-import {Form, Button} from "react-bootstrap";
+import {Button, Container, Form, Row} from "react-bootstrap";
 
 import {api_authentication_register} from '../API_CALLS/api_authentication_register'
 
-import {useEffect, useRef, useState} from "react";
+import {useState} from "react";
 import {useHistory} from 'react-router-dom'
-import NavbarComponent from "../components/NavbarComponent";
-import Footer from "../components/Footer";
+import NavbarComponent from "../components/ReusableComponents/NavbarComponent";
+import Footer from "../components/ReusableComponents/Footer";
 import {CircularProgress} from "@material-ui/core";
 import ReCAPTCHA from "react-google-recaptcha";
 import {RECAPTCHA_PUBLIC_KEY} from "../config";
-function Register(){
+
+function Register() {
     const [token, setToken] = useState("")
 
     const history = useHistory();
@@ -25,11 +25,11 @@ function Register(){
     const [info_popup, setInfoPopup] = useState("");
     const [credentials, setCredentials] = useState(empty_credentials);
     const [redirect, setRedirect] = useState(false)
-    const handleChange = e =>{
+    const handleChange = e => {
         // Check if phone_number input is a number
-        if(e.target.id == "phone_number"){
+        if (e.target.id == "phone_number") {
             const input = e.target.value;
-            if(isNaN(input)){
+            if (isNaN(input)) {
                 setInfoPopup("Numer telefonu może zawierać tylko cyfry");
                 return;
             }
@@ -40,12 +40,11 @@ function Register(){
     }
 
 
-
-    const handleSubmit = e =>{
+    const handleSubmit = e => {
         e.preventDefault();
 
         // Check if passwords are the same
-        if(credentials.password != credentials.password_repeat){
+        if (credentials.password != credentials.password_repeat) {
             setInfoPopup("Hasła muszą być takie same.")
             return;
         }
@@ -57,32 +56,33 @@ function Register(){
         const data = {...credentials, token: token}
         console.log(data)
         api_authentication_register(data)
-        .then(res=>{
-            if(res.status == 201){
-                setRedirect(true)
-                setInfoPopup(res.data.message);
+            .then(res => {
+                if (res.status == 201) {
+                    setRedirect(true)
+                    setInfoPopup(res.data.message);
 
-                // Clear input fields and schedule redirect
-                setCredentials(empty_credentials);
-                setTimeout(()=>{
-                    history.push("/login")
-                }, 2000)
-            }
-        })
-        .catch(err=>{
-            setInfoPopup(err.response.data.message)
-        })
+                    // Clear input fields and schedule redirect
+                    setCredentials(empty_credentials);
+                    setTimeout(() => {
+                        history.push("/login")
+                    }, 2000)
+                }
+            })
+            .catch(err => {
+                setInfoPopup(err.response.data.message)
+            })
 
     }
 
-    return(
+    return (
         <div className="register">
-            <NavbarComponent />
-                <Container className={"cont col-xl-4 col-lg-6 d-flex flex-column align-items-center"} style={{flexGrow: "1"}}>
-                    <Row className={"d-flex justify-content-center"}>
-                        <h1>Formularz rejestracyjny</h1>
-                    </Row>
-                    <Form className={"col-xl-6 col-10 col-lg-10 col-md-6"} onSubmit={handleSubmit}>
+            <NavbarComponent/>
+            <Container className={"cont col-xl-4 col-lg-6 d-flex flex-column align-items-center"}
+                       style={{flexGrow: "1"}}>
+                <Row className={"d-flex justify-content-center"}>
+                    <h1>Formularz rejestracyjny</h1>
+                </Row>
+                <Form className={"col-xl-6 col-10 col-lg-10 col-md-6"} onSubmit={handleSubmit}>
                     <Row className={"d-flex flex-column"}>
                         <Form.Label> Imię </Form.Label>
                         <Form.Control
@@ -147,22 +147,25 @@ function Register(){
                         <ReCAPTCHA
                             sitekey={RECAPTCHA_PUBLIC_KEY}
                             size={"normal"}
-                            onChange={(value)=>{setToken(value);}}
+                            onChange={(value) => {
+                                setToken(value);
+                            }}
                         />
                     </Row>
                     {
                         token ?
                             <Row className={"d-flex justify-content-center"}>
-                            <Button type="submit" size={"lg"} className={"mt-5 mb-2 w-100"} variant={"outline-dark"}> Zarejestruj </Button>
-                            <p>{info_popup}</p>
-                        </Row> : null
+                                <Button type="submit" size={"lg"} className={"mt-5 mb-2 w-100"}
+                                        variant={"outline-dark"}> Zarejestruj </Button>
+                                <p>{info_popup}</p>
+                            </Row> : null
                     }
                     <Row className={"d-flex justify-content-center align-items-center"}>
-                        {redirect ? <CircularProgress /> : null}
+                        {redirect ? <CircularProgress/> : null}
                     </Row>
-                    </Form>
-                </Container>
-            <Footer />
+                </Form>
+            </Container>
+            <Footer/>
         </div>
     )
 }

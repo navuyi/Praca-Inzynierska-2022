@@ -1,6 +1,5 @@
-import React from "react";
-import {Row, Col, Form, Carousel, Button, Container} from "react-bootstrap";
-import {useState} from "react";
+import React, {useState} from "react";
+import {Button, Col, Row} from "react-bootstrap";
 
 
 export default function GuideNewTourImageGallery(props) {
@@ -9,13 +8,13 @@ export default function GuideNewTourImageGallery(props) {
     function handleChange(e) {
         const tmp_images = [...images];
         const file_list = e.target.files;
-        for(let file of file_list){
+        for (let file of file_list) {
             const image = {
                 name: file.name,
                 url: URL.createObjectURL(file)
             }
             // Check if image with given name was already uploaded
-            if(images.filter(e => e.name === image.name).length === 0){
+            if (images.filter(e => e.name === image.name).length === 0) {
                 // Add image to temporary array
                 tmp_images.push(image)
                 // Add files to formData - for upload to database
@@ -24,7 +23,8 @@ export default function GuideNewTourImageGallery(props) {
         }
         setImages(tmp_images);
     }
-    function handleDelete(e){
+
+    function handleDelete(e) {
         const index = e.target.getAttribute("index");
         const tmp_images = [...images];
         // Delete from array - display
@@ -44,7 +44,9 @@ export default function GuideNewTourImageGallery(props) {
             </Row>
             <Row className={"d-flex flex-column align-items-center justify-content-around mt-2"}>
                 <Col xl={6} className={"d-flex align-items-center justify-content-between flex-column"}>
-                    <Button className={"btn-success w-100"} onClick={()=>{document.getElementById("pg-input").click()}}> Dodaj zdjęcia </Button>
+                    <Button className={"btn-success w-100"} onClick={() => {
+                        document.getElementById("pg-input").click()
+                    }}> Dodaj zdjęcia </Button>
                     <input
                         id="pg-input"
                         type="file"
@@ -58,8 +60,9 @@ export default function GuideNewTourImageGallery(props) {
                     <div className={"image-list"}>
                         {
                             images.map((image, index) => {
-                                return(
-                                    <div key={index} index={index} className={"image-list-element"} onDoubleClick={handleDelete}> {image.name} </div>
+                                return (
+                                    <div key={index} index={index} className={"image-list-element"}
+                                         onDoubleClick={handleDelete}> {image.name} </div>
                                 )
                             })
                         }

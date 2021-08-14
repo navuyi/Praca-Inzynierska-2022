@@ -1,8 +1,7 @@
 import React from "react";
-import {Container, Row, Col} from "react-bootstrap";
 
-function HomeTourPanel(props){
-    return(
+function HomeTourPanel(props) {
+    return (
         <div className="homeTourPanel">
             <img src={props.image} alt={""}/>
             <h1> {props.title}</h1>

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 const mapToValueLabel = (data) => {
-    return data.map((item)=>({
+    return data.map((item) => ({
         value: item.id, label: item.place
     }))
 }
@@ -25,11 +25,11 @@ const fetchTourPlaces = (inputValue, callback) => {
 }
 
 
-function TourPlacesSelect(props){
+function TourPlacesSelect(props) {
 
     const handleChange = (selectedOptions) => {
         const tmp_places = [];
-        selectedOptions.map((item)=>{
+        selectedOptions.map((item) => {
             tmp_places.push(item.value);
         })
 
@@ -37,14 +37,14 @@ function TourPlacesSelect(props){
         props.setTourData(update);
     }
     const style = props.style;
-    return(
+    return (
         <AsyncSelect
             placeholder="Miejscowość"
             isMulti
             loadOptions={fetchTourPlaces}
-            onChange = {handleChange}
+            onChange={handleChange}
             required
-            style = {style}
+            style={style}
         />
     )
 }

@@ -1,14 +1,14 @@
 import React from "react";
 import {Slider} from "@material-ui/core";
 
-function ToursPriceSlider(props){
+function ToursPriceSlider(props) {
 
-    function handleChange(e, newValue){
+    function handleChange(e, newValue) {
         const update = {...props.filterData, tour_price: newValue}
         props.setFilterData(update)
     }
 
-    return(
+    return (
         <Slider
             id="tour-price"
             min={20}

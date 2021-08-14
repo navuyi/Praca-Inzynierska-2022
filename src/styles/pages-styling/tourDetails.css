@@ -1,45 +1,49 @@
-.tourDetails{
+.tourDetails {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
-.tourDetails .details-body{
+
+.tourDetails .details-body {
 
 }
-.tourDetails h1{
+
+.tourDetails h1 {
     text-align: center;
     width: 100%;
-    color: rgb(34,34,34);
+    color: rgb(34, 34, 34);
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
     margin: 0 0;
 }
-.tourDetails .description{
+
+.tourDetails .description {
     text-align: center;
     font-size: 1.1rem;
     font-weight: 600;
     font-family: 'Source Sans Pro', sans-serif;
 }
-.tourDetails .details-main-img{
+
+.tourDetails .details-main-img {
     border-radius: 1em;
     max-width: 90%;
     margin-top: 3em;
     max-height: 80vh;
 }
 
-.tourDetails .info-panel{
+.tourDetails .info-panel {
     width: 100%;
     padding-top: 2em;
     padding-bottom: 2em;
-    background-image: linear-gradient(15deg, rgb(34,34,34), rgb(73, 73, 73));
+    background-image: linear-gradient(15deg, rgb(34, 34, 34), rgb(73, 73, 73));
     border-radius: 1em;
 }
 
-.tourDetails h2{
+.tourDetails h2 {
 
-    color: rgb(34,34,34);
+    color: rgb(34, 34, 34);
     width: 100%;
     text-align: center;
     padding: 0.5em 0;
@@ -47,17 +51,18 @@
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 1000;
 }
-.tourDetails h3{
+
+.tourDetails h3 {
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
-    color: rgb(34,34,34);
+    color: rgb(34, 34, 34);
 }
 
-.tourDetails .tour-plan-point{
+.tourDetails .tour-plan-point {
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 1.1rem;
     font-weight: bold;
-    color:whitesmoke;
+    color: whitesmoke;
 
     width: 100%;
     filter: opacity(0.9);
@@ -69,7 +74,7 @@
     border-radius: 0.5em;
 }
 
- .image-gallery {
+.image-gallery {
     width: 100% !important;
     min-width: 100%;
 

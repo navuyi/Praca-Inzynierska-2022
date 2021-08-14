@@ -1,8 +1,7 @@
 import React from "react"
-import {Container, Row, Col, Button} from "react-bootstrap"
 
-function GuideClosedOffers(){
-    return(
+function GuideClosedOffers() {
+    return (
         <div className="guideOffers">
             Przegląd nieaktywnych ofert/wycieczek
         </div>

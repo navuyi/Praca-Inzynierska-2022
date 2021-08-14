@@ -1,4 +1,4 @@
-.homeWelcomeView{
+.homeWelcomeView {
     background-image: linear-gradient(15deg, #f5ad3f, #f9d857);
     padding: 5em 0;
 
@@ -9,39 +9,46 @@
 
     font-family: 'Lora', sans-serif;
 }
-.homeWelcomeView img{
+
+.homeWelcomeView img {
     border-radius: 50%;
     width: 30%;
     margin: 0 5em;
 }
-.homeWelcomeView .header-container{
+
+.homeWelcomeView .header-container {
 
 }
-.homeWelcomeView .header-container h1{
+
+.homeWelcomeView .header-container h1 {
     color: whitesmoke;
     font-weight: 600;
     text-shadow: -1px -1px black;
 }
-.homeWelcomeView .header-container p{
+
+.homeWelcomeView .header-container p {
     color: whitesmoke;
     font-size: 1.2rem;
     font-weight: 300;
     text-shadow: -1px -1px black;
 }
-.homeWelcomeView form{
+
+.homeWelcomeView form {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.homeWelcomeView input{
+
+.homeWelcomeView input {
     width: 70%;
     padding: 0.5em 1em;
     border: none;
     border-radius: 0.5em;
     outline: none;
 }
-.homeWelcomeView button{
+
+.homeWelcomeView button {
     border: none;
     outline: none;
     height: 40px;
@@ -52,16 +59,18 @@
     padding: 0 1em;
     box-sizing: border-box;
 }
-.homeWelcomeView button:hover{
-    background-color: rgb(34,34,34);
+
+.homeWelcomeView button:hover {
+    background-color: rgb(34, 34, 34);
     color: whitesmoke;
 }
-.homeWelcomeView button:active{
+
+.homeWelcomeView button:active {
     box-shadow: 0px 0px 10px 5px whitesmoke;
 }
 
-@media (max-width: 900px){
-    .homeWelcomeView{
+@media (max-width: 900px) {
+    .homeWelcomeView {
         background-image: linear-gradient(15deg, #f5ad3f, #f9d857);
         padding: 0em 0;
 
@@ -72,44 +81,51 @@
 
         font-family: 'Lora', sans-serif;
     }
-    .homeWelcomeView img{
+
+    .homeWelcomeView img {
         border-radius: 50%;
         width: 70%;
 
         margin: 2em 0;
     }
-    .homeWelcomeView .header-container{
+
+    .homeWelcomeView .header-container {
         width: 90%;
         margin-bottom: 2em;
     }
-    .homeWelcomeView .header-container h1{
+
+    .homeWelcomeView .header-container h1 {
         color: whitesmoke;
         font-size: 1.2rem;
         text-align: center;
         font-weight: 600;
         text-shadow: -1px -1px black;
     }
-    .homeWelcomeView .header-container p{
+
+    .homeWelcomeView .header-container p {
         color: whitesmoke;
         font-size: 1rem;
         text-align: center;
         font-weight: 300;
         text-shadow: -1px -1px black;
     }
-    .homeWelcomeView form{
+
+    .homeWelcomeView form {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
-    .homeWelcomeView input{
+
+    .homeWelcomeView input {
         width: 70%;
         padding: 0.5em 1em;
         border: none;
         border-radius: 0.5em;
         outline: none;
     }
-    .homeWelcomeView button{
+
+    .homeWelcomeView button {
         border: none;
         outline: none;
         height: 40px;

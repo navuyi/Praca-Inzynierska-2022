@@ -1,12 +1,8 @@
-
 // Dependencies
-import {Container, Row, Col, ListGroup} from "react-bootstrap";
-import {Link, Route, Switch} from 'react-router-dom';
-import GuideNewTour from "../pages/guide/guide-new-tour/GuideNewTour";
-import GuideActiveOffers from "../pages/guide/GuideActiveOffers";
+import {Container, ListGroup, Row} from "react-bootstrap";
 
-function SideNavbar(props){
-    return(
+function SideNavbar(props) {
+    return (
         <Container fluid className="sideNavbar">
             <Row style={{margin: "0 0"}} className="sideNavbar-col">
                 <h1> {props.title} </h1>

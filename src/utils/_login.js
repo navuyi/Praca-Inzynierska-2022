@@ -1,7 +1,6 @@
-import {set_as_guide, set_as_user, set_user_id} from "../redux/actions";
-import {login} from "../redux/actions";
+import {login, set_as_guide, set_as_user, set_user_id} from "../redux/actions";
 
-export function _login(access_token, refresh_token, user_id, is_guide, dispatch, history){
+export function _login(access_token, refresh_token, user_id, is_guide, dispatch, history) {
     localStorage.setItem("access_token", access_token)
     localStorage.setItem("refresh_token", refresh_token)
     localStorage.setItem("is_guide", is_guide)
@@ -9,10 +8,9 @@ export function _login(access_token, refresh_token, user_id, is_guide, dispatch,
 
 
     // Set user status
-    if(is_guide == 1){
+    if (is_guide == 1) {
         dispatch(set_as_guide("SET_AS_GUIDE"))
-    }
-    else if(is_guide == 0){
+    } else if (is_guide == 0) {
         dispatch(set_as_user("SET_AS_USER"))
     }
     // Set user ID
@@ -22,10 +20,9 @@ export function _login(access_token, refresh_token, user_id, is_guide, dispatch,
     dispatch(login("LOGIN"))
 
     // Push to after login landing page <-- for now /account/user
-    if(is_guide == 0){
+    if (is_guide == 0) {
         history.push("/account/user/enrollments")
-    }
-    else if(is_guide == 1){
+    } else if (is_guide == 1) {
         history.push("/account/guide/new-tour")
     }
 

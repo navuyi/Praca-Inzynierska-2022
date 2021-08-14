@@ -1,7 +1,5 @@
 import React, {useState} from "react"
-import {Col, Row, Form, Button} from "react-bootstrap"
-import Separator from "../Separator";
-import SeparatorShort from "../SeparatorShort";
+import {Button, Col, Form, Row} from "react-bootstrap"
 import isEmptyString from "../../utils/isEmptyString";
 import api_messages_unicast_new from "../../API_CALLS/api_messages_unicast_new";
 import {refesh_token} from "../../API_CALLS/api_authentication_token_refresh";
@@ -9,14 +7,15 @@ import {CircularProgress} from "@material-ui/core";
 
 import img from "../../images/icons/success.svg"
 
-function TourDetailsMessenger(props){
+function TourDetailsMessenger(props) {
     const [content, setContent] = useState("")
     const [topic, setTopic] = useState("")
     const [sending, setSending] = useState(false)
     const [msgSent, setMsgSent] = useState(false)
-    function handleSend(){
+
+    function handleSend() {
         // Check if message content is not empty
-        if(isEmptyString(content) === true){
+        if (isEmptyString(content) === true) {
             return 1
         }
         setSending(true)
@@ -27,9 +26,9 @@ function TourDetailsMessenger(props){
                 console.log(res)
             })
             .catch(err => {
-                if(err.response.status === 401){
+                if (err.response.status === 401) {
                     refesh_token()
-                        .then(res =>{
+                        .then(res => {
                             localStorage.setItem("access_token", res.data.access_token)
                             handleSend()
                         })
@@ -41,7 +40,7 @@ function TourDetailsMessenger(props){
             })
     }
 
-    return(
+    return (
         <Row className={"tourDetailsMessenger col-xl-8 col-12"} id={"tour-details-messenger"}>
             <Col>
                 {
@@ -51,39 +50,47 @@ function TourDetailsMessenger(props){
                             <h1>Wiadomość została przesłana pomyślnie</h1>
                         </Row>
                         :
-                    <React.Fragment>
-                    {
-                        sending ?
-                            <Row className={"d-flex justify-content-center align-items-center"}>
-                                <CircularProgress size={80} style={{margin: "8em 0"}}/>
-                            </Row> :
-                            <React.Fragment>
-                                <Row>
-                                    <h1>Wiadomość do przewodnika</h1>
-                                </Row>
-                                <Row>
-                                    <Form.Control
-                                        as="input"
-                                        placeholder="Tytuł wiadomości"
-                                        value={topic}
-                                        onChange={(e) => {setTopic(e.target.value)}}
-                                    />
-                                </Row>
-                                <Row className={"mt-4"}>
-                                    <Form.Control
-                                        as="textarea"
-                                        rows={10}
-                                        value={content}
-                                        placeholder={"Treść wiadomości"}
-                                        onChange={(e)=>{setContent(e.target.value)}}
-                                    />
-                                </Row>
-                                <Row className={"d-flex flex-row justify-content-between align-items-center mt-2"}>
-                                    <Button  variant={"danger"} onClick={()=>{props.setMsgVisible(false)}} style={{width: "45%"}}> Zamknij </Button>
-                                    <Button  variant={"success"} onClick={handleSend} style={{width: "45%"}}> Wyślij </Button>
-                                </Row>
-                            </React.Fragment>
-                    }</React.Fragment>
+                        <React.Fragment>
+                            {
+                                sending ?
+                                    <Row className={"d-flex justify-content-center align-items-center"}>
+                                        <CircularProgress size={80} style={{margin: "8em 0"}}/>
+                                    </Row> :
+                                    <React.Fragment>
+                                        <Row>
+                                            <h1>Wiadomość do przewodnika</h1>
+                                        </Row>
+                                        <Row>
+                                            <Form.Control
+                                                as="input"
+                                                placeholder="Tytuł wiadomości"
+                                                value={topic}
+                                                onChange={(e) => {
+                                                    setTopic(e.target.value)
+                                                }}
+                                            />
+                                        </Row>
+                                        <Row className={"mt-4"}>
+                                            <Form.Control
+                                                as="textarea"
+                                                rows={10}
+                                                value={content}
+                                                placeholder={"Treść wiadomości"}
+                                                onChange={(e) => {
+                                                    setContent(e.target.value)
+                                                }}
+                                            />
+                                        </Row>
+                                        <Row
+                                            className={"d-flex flex-row justify-content-between align-items-center mt-2"}>
+                                            <Button variant={"danger"} onClick={() => {
+                                                props.setMsgVisible(false)
+                                            }} style={{width: "45%"}}> Zamknij </Button>
+                                            <Button variant={"success"} onClick={handleSend}
+                                                    style={{width: "45%"}}> Wyślij </Button>
+                                        </Row>
+                                    </React.Fragment>
+                            }</React.Fragment>
                 }
             </Col>
         </Row>

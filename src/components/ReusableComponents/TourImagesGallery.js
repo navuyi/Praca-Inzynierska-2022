@@ -1,8 +1,8 @@
-import React, {useEffect} from "react";
+import React from "react";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css"
 
-function TourImagesGallery(props){
+function TourImagesGallery(props) {
 
     let images = []
     props.urls.map((url) => {
@@ -12,13 +12,10 @@ function TourImagesGallery(props){
         })
     })
 
-
-
-    return(
+    return (
         <React.Fragment>
             <ImageGallery
                 items={images}
-
             />
         </React.Fragment>
     )

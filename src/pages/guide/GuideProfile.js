@@ -1,6 +1,5 @@
-
 // Dependencies
-import {Container, Row, Col, Form, Dropdown, DropdownButton, FormControl, InputGroup, Button} from "react-bootstrap";
+import {Button, Col, Container, Dropdown, DropdownButton, Form, FormControl, InputGroup, Row} from "react-bootstrap";
 import {useState} from "react";
 
 // Images
@@ -9,8 +8,7 @@ import person from '../../images/icons/person.png';
 import phone from '../../images/icons/phone.png';
 
 
-
-function GuideProfile(props){
+function GuideProfile(props) {
     const socialsInit = {
         "facebook": false,
         "instagram": false,
@@ -18,10 +16,11 @@ function GuideProfile(props){
         "linkedin": false
     };
     const [socials, setSocials] = useState(socialsInit);
-    function handleSocialAdd(e){
+
+    function handleSocialAdd(e) {
         let clicked = (e.target.value).toString();
         console.log(socials);
-        switch (clicked){
+        switch (clicked) {
             case "facebook":
                 setSocials(prevState => ({
                     ...prevState,
@@ -48,10 +47,11 @@ function GuideProfile(props){
                 break;
         }
     }
-    function handleSocialDelete(e){
+
+    function handleSocialDelete(e) {
         let clicked = (e.target.value).toString();
         console.log(e.target.value);
-        switch (clicked){
+        switch (clicked) {
             case "facebook":
                 setSocials(prevState => ({
                     ...prevState,
@@ -79,10 +79,10 @@ function GuideProfile(props){
         }
     }
 
-    return(
+    return (
         <div className={"guideProfile"}>
             <Container className="mt-lg-5 cont">
-                <Row  className={"flex flex-column align-items-center"} >
+                <Row className={"flex flex-column align-items-center"}>
                     <Col lg={4} className={"d-flex flex-column align-items-center justify-content-center"}>
                         <img src={person} alt="" className="profile-img"/>
                     </Col>
@@ -105,34 +105,39 @@ function GuideProfile(props){
                         </div>
                     </Col>
                 </Row>
-                <Row lg={12}  className={"d-flex flex-column align-items-center"} style={{margin: "5em 0"}} >
+                <Row lg={12} className={"d-flex flex-column align-items-center"} style={{margin: "5em 0"}}>
                     <Col lg={8}>
-                        <Form.Group controlId="exampleForm.ControlTextarea1" >
+                        <Form.Group controlId="exampleForm.ControlTextarea1">
                             <h4> Dodaj swój opis </h4>
-                            <Form.Control as="textarea" rows={12} className={"p-lg-3"} style={{borderRadius: "1em"}} />
+                            <Form.Control as="textarea" rows={12} className={"p-lg-3"} style={{borderRadius: "1em"}}/>
                         </Form.Group>
                     </Col>
                     <Col lg={8} className={"d-lg-flex justify-content-lg-between mt-lg-5"}>
                         <h4> Serwisy społecznościowe </h4>
                         <DropdownButton id="dropdown-item-button" title="Dodaj odnośnik">
-                            <Dropdown.Item as="button" onClick={handleSocialAdd} value="facebook">Facebook</Dropdown.Item>
-                            <Dropdown.Item as="button" onClick={handleSocialAdd} value="instagram">Instagram</Dropdown.Item>
+                            <Dropdown.Item as="button" onClick={handleSocialAdd}
+                                           value="facebook">Facebook</Dropdown.Item>
+                            <Dropdown.Item as="button" onClick={handleSocialAdd}
+                                           value="instagram">Instagram</Dropdown.Item>
                             <Dropdown.Item as="button" onClick={handleSocialAdd} value="twitter">Twitter</Dropdown.Item>
-                            <Dropdown.Item as="button" onClick={handleSocialAdd} value="linkedin">LinkedIn</Dropdown.Item>
+                            <Dropdown.Item as="button" onClick={handleSocialAdd}
+                                           value="linkedin">LinkedIn</Dropdown.Item>
                         </DropdownButton>
                     </Col>
                     <Col className={"d-lg-flex flex-lg-column mt-5"} sm={12} lg={7}>
                         {
-                            Object.entries(socials).map((item)=> {
-                                if(item[1]) {
+                            Object.entries(socials).map((item) => {
+                                if (item[1]) {
                                     return (
                                         <InputGroup className="mb-3">
                                             <InputGroup.Prepend>
-                                                <Button className={"btn btn-dark"} disabled style={{width: "125px"}}>{item[0]}</Button>
+                                                <Button className={"btn btn-dark"} disabled
+                                                        style={{width: "125px"}}>{item[0]}</Button>
                                             </InputGroup.Prepend>
                                             <FormControl aria-describedby="basic-addon1" className={"pl-3"}/>
                                             <InputGroup.Append>
-                                                <Button variant="outline-secondary" as={"button"} onClick={handleSocialDelete} value={item[0]}>Usuń</Button>
+                                                <Button variant="outline-secondary" as={"button"}
+                                                        onClick={handleSocialDelete} value={item[0]}>Usuń</Button>
                                             </InputGroup.Append>
                                         </InputGroup>
                                     )

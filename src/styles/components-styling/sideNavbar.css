@@ -1,4 +1,4 @@
-.sideNavbar{
+.sideNavbar {
     border-top-right-radius: 0em;
     border-bottom-right-radius: 0em;
 
@@ -14,7 +14,8 @@
     top: 10%;
     padding: 5em 1em;
 }
-.sideNavbar h1{
+
+.sideNavbar h1 {
     font-size: 2rem;
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
@@ -32,14 +33,13 @@
     color: whitesmoke;
 
 
-
-    background-color: rgb(34,34,34) !important;
-    border-color: rgb(34,34,34) !important;
+    background-color: rgb(34, 34, 34) !important;
+    border-color: rgb(34, 34, 34) !important;
     outline: none !important;
 }
 
-@media (max-width: 900px){
-    .sideNavbar{
+@media (max-width: 900px) {
+    .sideNavbar {
         margin: 0em 0;
         padding: 4em;
 
@@ -51,7 +51,8 @@
         position: static;
         top: unset;
     }
-    .sideNavbar h1{
+
+    .sideNavbar h1 {
         font-size: 1.6rem;
         font-family: 'Lora', sans-serif;
         font-weight: 600;

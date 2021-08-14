@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import {Row, Col, Button, Form} from "react-bootstrap";
+import {Button, Col, Form, Row} from "react-bootstrap";
 import isEmptyString from "../../utils/isEmptyString";
 
-export default function GuideNewTourImportantInfo(props){
+export default function GuideNewTourImportantInfo(props) {
 
     const [editMode, setEditMode] = useState(false);
     const [idToEdit, setIdToEdit] = useState(-1);
@@ -21,7 +21,7 @@ export default function GuideNewTourImportantInfo(props){
             props.setImportantInfo(tmp_info);
             setInfoInput("");
         } else if (editMode === true) {
-            if (infoInput.length != 0) {
+            if (infoInput.length !== 0) {
                 // Modify selected point
                 const tmp_info = [...props.importantInfo];
                 tmp_info[idToEdit] = infoInput;
@@ -50,7 +50,7 @@ export default function GuideNewTourImportantInfo(props){
         setInfoInput(inputToEdit);
     }
 
-    return(
+    return (
         <React.Fragment>
             <Row>
                 <Col>
@@ -72,7 +72,9 @@ export default function GuideNewTourImportantInfo(props){
                 <Col lg={8} className={"d-flex justify-content-center mt-5 mt-sm-5 mt-md-5 mt-lg-0 mt-xl-0"}>
                     <div className={"table-container"}>
                         {
-                            props.importantInfo.length == 0 ? <div className={"table-container-text"}>  Tutaj pojawią się dodane przez Ciebie pozycje </div> : null
+                            props.importantInfo.length === 0 ?
+                                <div className={"table-container-text"}> Tutaj pojawią się dodane przez Ciebie
+                                    pozycje </div> : null
                         }
                         {
                             props.importantInfo.map((point, index) => {

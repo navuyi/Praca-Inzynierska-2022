@@ -2,7 +2,8 @@
     border: 5px solid #222222;
     padding: 3em 0;
 }
-.notFoundIndicator h1{
+
+.notFoundIndicator h1 {
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
     font-size: 2.2rem;

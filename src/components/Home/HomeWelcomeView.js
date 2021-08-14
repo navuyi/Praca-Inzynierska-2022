@@ -1,24 +1,22 @@
-
 // Dependencies
-import {Container, Row, Col} from "react-bootstrap";
 import {useState} from "react";
 
 // Images
 import image from '../../images/home/rounded.png';
 
 
-function HomeWelcomeView(){
+function HomeWelcomeView() {
 
     const [search, setSearch] = useState("");
-    const handleSubmit = (e) =>{
+    const handleSubmit = (e) => {
         e.preventDefault();
         setSearch("");
     }
-    const onChange = (e) =>{
+    const onChange = (e) => {
         setSearch(e.target.value);
     }
 
-    return(
+    return (
         <div className="homeWelcomeView">
             <div className="header-container">
                 <h1> Wyjazdy czekają na Ciebie!</h1>
@@ -29,10 +27,10 @@ function HomeWelcomeView(){
                         value={search}
                         onChange={onChange}
                     />
-                    <button> Szukaj </button>
+                    <button> Szukaj</button>
                 </form>
             </div>
-            <img src={image} alt={""} />
+            <img src={image} alt={""}/>
         </div>
     )
 }

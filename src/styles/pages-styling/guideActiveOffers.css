@@ -1,15 +1,17 @@
-.guideActiveOffers{
+.guideActiveOffers {
 
     height: 100%;
 }
-.guideActiveOffers .header-tab{
+
+.guideActiveOffers .header-tab {
     background-color: orange;
     padding: 1em 0;
 
     border-bottom-left-radius: 0.5em;
     border-bottom-right-radius: 0.5em;
 }
-.guideActiveOffers .header-tab label{
+
+.guideActiveOffers .header-tab label {
     color: #222222;
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
@@ -17,7 +19,7 @@
     margin: 0 0;
 }
 
-.guideActiveOffers .guide-active-tour-panel{
+.guideActiveOffers .guide-active-tour-panel {
     background-color: #222222;
     margin: 0.5em 0;
     padding: 1em 1em;
@@ -27,12 +29,13 @@
     transition-duration: 0.4s;
     cursor: pointer;
 }
-.guideActiveOffers .guide-active-tour-panel:hover{
+
+.guideActiveOffers .guide-active-tour-panel:hover {
     background-color: dodgerblue;
 
 }
 
-.guideActiveOffers .guide-active-tour-panel h1{
+.guideActiveOffers .guide-active-tour-panel h1 {
     color: whitesmoke;
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
@@ -40,12 +43,14 @@
     margin: auto;
     font-size: 2rem;
 }
-.guideActiveOffers .guide-active-tour-panel img{
+
+.guideActiveOffers .guide-active-tour-panel img {
     border-radius: 0.5em;
     max-height: 350px;
     object-fit: cover;
 }
-.guideActiveOffers .guide-active-tour-panel p{
+
+.guideActiveOffers .guide-active-tour-panel p {
     color: whitesmoke;
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
@@ -53,7 +58,8 @@
     margin: 0 0;
     padding: 0 0;
 }
-.guideActiveOffers .guide-active-tour-panel span{
+
+.guideActiveOffers .guide-active-tour-panel span {
     color: orange;
     font-weight: 1200;
     font-size: 1.150rem;

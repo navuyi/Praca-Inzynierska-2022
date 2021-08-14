@@ -1,11 +1,12 @@
-.messages{
+.messages {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 
     align-items: center;
 }
-.messages .control-panel{
+
+.messages .control-panel {
     background-color: orange;
     padding: 1em 0;
     border-bottom-left-radius: 0.5em;
@@ -14,14 +15,15 @@
     display: flex;
 }
 
-.messages .thread-list-header{
+.messages .thread-list-header {
     background-color: #222222;
     border-top-left-radius: 0.5em;
     border-top-right-radius: 0.5em;
 
     padding: 0.5em 0;
 }
-.messages .thread-list-header h1{
+
+.messages .thread-list-header h1 {
     color: whitesmoke;
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
@@ -31,13 +33,12 @@
     padding: 0;
 }
 
-.messages .thread-list .table-responsive-sm{
+.messages .thread-list .table-responsive-sm {
     width: 100%;
 }
 
 
-
-.messages .thread-list td{
+.messages .thread-list td {
     vertical-align: middle;
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
@@ -45,14 +46,15 @@
 
     cursor: pointer;
 }
-.messages .thread-list button{
+
+.messages .thread-list button {
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
     font-size: 1rem;
     color: whitesmoke;
 }
 
-.messages .loading-box{
+.messages .loading-box {
     min-height: 300px;
     display: flex;
     justify-content: center;

@@ -1,7 +1,7 @@
 import {logout, set_as_user, set_user_id} from "../redux/actions";
 
 
-export function _logout(dispatch){
+export function _logout(dispatch) {
     // Clear local storage
     localStorage.removeItem("access_token")
     localStorage.removeItem("refresh_token")

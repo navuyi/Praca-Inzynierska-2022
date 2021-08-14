@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from "react";
-import {Container, Row, Col, Button, Form} from "react-bootstrap"
+import {Container, Row} from "react-bootstrap"
 import GuideActiveOfferHeader from "../../../components/GuideOffers/GuideActiveOfferHeader";
-import GuideActiveOfferMessagesList from "../../../components/GuideOffers/GuideActiveOfferMessagesList";
-import GuideActiveOfferMessenger from "../../../components/GuideOffers/GuideActiveOfferMessenger";
+import GuideActiveOfferThreadList from "../../../components/GuideOffers/GuideActiveOfferThreadList";
 import {useParams} from "react-router-dom"
-import Messenger from "../../../components/Messenger";
+import Messenger from "../../../components/ReusableComponents/Messenger";
 
 
-function GuideActiveOfferMessages(props){
+function GuideActiveOfferMessages(props) {
     const [msgVisible, setMsgVisible] = useState(false)
     const [threadId, setThreadId] = useState()
     const [interlocutor, setInterlocutor] = useState("")
@@ -16,12 +15,12 @@ function GuideActiveOfferMessages(props){
     const {tourID} = useParams()
     const [interlocutorID, setInterlocutorID] = useState()
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(`Thread ID ${threadId}`)
         console.log(msgVisible)
-    },[threadId, msgVisible])
+    }, [threadId, msgVisible])
 
-    return(
+    return (
         <div className={"guideActiveOfferMessages "}>
             <Container className={"mb-5"}>
                 <GuideActiveOfferHeader
@@ -35,7 +34,7 @@ function GuideActiveOfferMessages(props){
                 <Row className={"mt-5 d-flex flex-column"}>
                     <h1 className={"list-header"}> Wiadomości </h1>
                 </Row>
-                <GuideActiveOfferMessagesList
+                <GuideActiveOfferThreadList
                     setThreadId={setThreadId}
                     setMsgVisible={setMsgVisible}
 
@@ -53,7 +52,7 @@ function GuideActiveOfferMessages(props){
                             topic={topic}
                             sentDate={sentDate}
                             interlocutor_id={interlocutorID}
-                        />  : null
+                        /> : null
                 }
 
             </Container>

@@ -2,7 +2,7 @@ import {API_PREFIX} from "../config";
 import axios from "axios";
 
 
-export default function api_messages_thread_messages(thread_id, offset){
+export default function api_messages_thread_messages(thread_id, offset) {
     const url = API_PREFIX + "/messages/thread/messages"
     const access_token = localStorage.getItem("access_token")
     const config = {

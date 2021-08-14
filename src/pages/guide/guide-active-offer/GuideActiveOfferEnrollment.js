@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from "react"
-import {Container, Row, Col, Button, Table} from "react-bootstrap"
+import React, {useState} from "react"
+import {Container, Row} from "react-bootstrap"
 
 import GuideActiveOfferHeader from "../../../components/GuideOffers/GuideActiveOfferHeader";
 import GuideActiveOfferEnrollmentList from "../../../components/GuideOffers/GuideActiveOfferEnrollmentList";
 
-function GuideActiveOfferEnrollment(props){
+function GuideActiveOfferEnrollment(props) {
 
 
     const [clients, setClients] = useState(
@@ -31,11 +31,11 @@ function GuideActiveOfferEnrollment(props){
                 is_user: true
             },
 
-    ])
-    return(
+        ])
+    return (
         <div className={"guideActiveOfferEnrollment"}>
-            <Container className={"h-100"} >
-                {/*<-- This component returns its content in Row element */ }
+            <Container className={"h-100"}>
+                {/*<-- This component returns its content in Row element */}
                 <GuideActiveOfferHeader
                     header={props.general_data ? props.general_data.header : ""}
                     price={props.general_data ? props.general_data.price : ""}

@@ -5,7 +5,7 @@ export const refesh_token = async () => {
     const url = API_PREFIX + "/authentication/token/refresh"
     const refresh_token = localStorage.getItem("refresh_token")
     const config = {
-        headers:{
+        headers: {
             Authorization: `Bearer ${refresh_token}`
         }
     }

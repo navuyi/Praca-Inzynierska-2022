@@ -1,10 +1,9 @@
-
 // Components
-import NavbarComponent from "../../components/NavbarComponent";
-import Footer from "../../components/Footer";
-import SideNavbar from "../../components/SideNavbar";
-import SideNavbarLink from "../../components/SideNavbarLink";
-import GuideOnlyRoute from "../../components/GuideOnlyRoute";
+import NavbarComponent from "../../components/ReusableComponents/NavbarComponent";
+import Footer from "../../components/ReusableComponents/Footer";
+import SideNavbar from "../../components/ReusableComponents/SideNavbar";
+import SideNavbarLink from "../../components/ReusableComponents/SideNavbarLink";
+import GuideOnlyRoute from "../../components/UtilityComponents/GuideOnlyRoute";
 
 // Subpages
 import GuideNewTour from "./guide-new-tour/GuideNewTour";
@@ -13,17 +12,13 @@ import GuideProfile from "./GuideProfile";
 import GuideClosedOffers from "./GuideClosedOffers";
 
 // Dependencies
-import {Container, Row, Col} from "react-bootstrap";
-import {Switch, Route} from 'react-router-dom';
-import GuideActiveOffer from "./guide-active-offer/GuideActiveOffer";
-import GuideActiveOfferMessages from "./guide-active-offer/GuideActiveOfferMessages";
-import GuideActiveOfferEnrollment from "./guide-active-offer/GuideActiveOfferEnrollment";
-import GuideActiveOfferModification from "./guide-active-offer/GuideActiveOfferModification";
+import {Col, Container, Row} from "react-bootstrap";
+import {Switch} from 'react-router-dom';
 
 
-function Guide(){
+function Guide() {
 
-    const style={
+    const style = {
         position: "relative",
         minHeight: "100vh",
         display: "flex",
@@ -32,9 +27,9 @@ function Guide(){
 
     }
 
-    return(
+    return (
         <div className="guide" style={style}>
-            <NavbarComponent />
+            <NavbarComponent/>
             <Container fluid className={"h-100"} style={{marginTop: "0em", top: "0", flexGrow: "1"}}>
                 <Row style={{minHeight: "75vh"}}>
                     <Col lg={2} sm={12} style={{padding: "0", backgroundColor: "orange"}}>
@@ -57,17 +52,17 @@ function Guide(){
                             />
                         </SideNavbar>
                     </Col>
-                    <Col lg={10} sm={12} style={{padding: "0"}} >
+                    <Col lg={10} sm={12} style={{padding: "0"}}>
                         <Switch>
-                            <GuideOnlyRoute exact path="/account/guide/new-tour" component={GuideNewTour} />
-                            <GuideOnlyRoute exact path="/account/guide/active-offers" component={GuideActiveOffers} />
-                            <GuideOnlyRoute exact path="/account/guide/closed-offers" component={GuideClosedOffers} />
-                            <GuideOnlyRoute exact path="/account/guide/profile" component={GuideProfile} />
+                            <GuideOnlyRoute exact path="/account/guide/new-tour" component={GuideNewTour}/>
+                            <GuideOnlyRoute exact path="/account/guide/active-offers" component={GuideActiveOffers}/>
+                            <GuideOnlyRoute exact path="/account/guide/closed-offers" component={GuideClosedOffers}/>
+                            <GuideOnlyRoute exact path="/account/guide/profile" component={GuideProfile}/>
                         </Switch>
                     </Col>
                 </Row>
             </Container>
-            <Footer />
+            <Footer/>
         </div>
     )
 }

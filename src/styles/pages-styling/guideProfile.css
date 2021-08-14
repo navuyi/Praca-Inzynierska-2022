@@ -1,28 +1,32 @@
-.guideProfile .cont{
+.guideProfile .cont {
     border-radius: 2em;
 
     background-color: rgba(186, 186, 186, 0.4);
     padding: 2em 0;
 }
-.guideProfile .profile-img{
+
+.guideProfile .profile-img {
     width: 60%;
     border-radius: 50%;
 
     border: 1px solid #505050;
 }
-.guideProfile .header-container{
+
+.guideProfile .header-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.guideProfile h1{
+
+.guideProfile h1 {
     color: black;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 2.5rem;
 }
-.guideProfile .info-container{
+
+.guideProfile .info-container {
     border: 1px solid black;
     position: relative;
     width: 50%;
@@ -34,15 +38,16 @@
     background-color: whitesmoke;
 }
 
-.guideProfile .info-icon{
+.guideProfile .info-icon {
     position: absolute;
     width: 40px;
 }
-.guideProfile .info-container input{
+
+.guideProfile .info-container input {
     height: 40px;
     width: 100%;
     padding-left: 25%;
-    border:none;
+    border: none;
     outline: none;
     font-size: 1.2rem;
 
@@ -50,31 +55,35 @@
 }
 
 @media (max-width: 900px) {
-    .guideProfile{
+    .guideProfile {
         border-radius: 2em;
         padding: 2em 2em;
         margin: 5em 0;
         background-color: rgb(212, 212, 212);
     }
-    .guideProfile .profile-img{
+
+    .guideProfile .profile-img {
         width: 30%;
         border-radius: 50%;
         margin-bottom: 2em;
         border: 2px solid #d36903;
     }
-    .guideProfile .header-container{
+
+    .guideProfile .header-container {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
-    .guideProfile h1{
+
+    .guideProfile h1 {
         color: black;
         font-family: 'Roboto', sans-serif;
         font-weight: 400;
         font-size: 3rem;
     }
-    .guideProfile .info-container{
+
+    .guideProfile .info-container {
         border: 1px solid black;
         position: relative;
         width: 90%;
@@ -83,15 +92,17 @@
         padding: 5px 5px;
         margin: 0.5em;
     }
-    .guideProfile .info-icon{
+
+    .guideProfile .info-icon {
         position: absolute;
         width: 40px;
     }
-    .guideProfile .info-container input{
+
+    .guideProfile .info-container input {
         height: 40px;
         width: 100%;
         padding-left: 25%;
-        border:none;
+        border: none;
         outline: none;
         font-size: 1.2rem;
         background-color: inherit;

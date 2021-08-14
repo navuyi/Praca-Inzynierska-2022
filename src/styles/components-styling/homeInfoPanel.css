@@ -1,4 +1,4 @@
-.homeInfoPanel{
+.homeInfoPanel {
     background-image: linear-gradient(15deg, #df963c, #fbd75c);
     width: 40%;
     margin-bottom: 4em;
@@ -6,28 +6,31 @@
     box-sizing: border-box;
 
 }
-.homeInfoPanel img{
+
+.homeInfoPanel img {
     width: 60%;
     display: block;
 
     margin: 0 auto;
     border-radius: 50%;
 }
-.homeInfoPanel h1{
+
+.homeInfoPanel h1 {
     font-size: 2rem;
     color: blanchedalmond;
     text-shadow: -1px -1px black;
     text-align: center;
 }
-.homeInfoPanel p{
+
+.homeInfoPanel p {
     font-size: 1.3rem;
     color: blanchedalmond;
     text-shadow: -1px -1px black;
     text-align: center;
 }
 
-@media (max-width: 900px){
-    .homeInfoPanel{
+@media (max-width: 900px) {
+    .homeInfoPanel {
         background-image: linear-gradient(15deg, #df963c, #fbd75c);
         width: 100%;
         margin-bottom: 4em;
@@ -35,20 +38,23 @@
         box-sizing: border-box;
 
     }
-    .homeInfoPanel img{
+
+    .homeInfoPanel img {
         width: 80%;
         display: block;
 
         margin: 0 auto;
         border-radius: 50%;
     }
-    .homeInfoPanel h1{
+
+    .homeInfoPanel h1 {
         font-size: 2.2rem;
         color: blanchedalmond;
         text-shadow: -1px -1px black;
         text-align: center;
     }
-    .homeInfoPanel p{
+
+    .homeInfoPanel p {
         font-size: 1.4rem;
         color: blanchedalmond;
         text-shadow: -1px -1px black;

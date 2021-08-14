@@ -1,6 +1,5 @@
-
-function Account(){
-    return(
+function Account() {
+    return (
         <div className="account">
             Account
         </div>

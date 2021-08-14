@@ -1,4 +1,4 @@
-.guideNewTourSuccess{
+.guideNewTourSuccess {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -7,35 +7,38 @@
 
 
 }
-.guideNewTourSuccess h1{
+
+.guideNewTourSuccess h1 {
     width: 100%;
     text-align: center;
     font-weight: bold;
     font-family: 'Source Sans Pro', sans-serif;
-    color: rgb(34,34,34);
+    color: rgb(34, 34, 34);
 }
-.guideNewTourSuccess h2{
+
+.guideNewTourSuccess h2 {
     width: 100%;
     font-size: 1.3rem;
     text-align: center;
     font-weight: bold;
     font-family: 'Source Sans Pro', sans-serif;
-    color: rgb(34,34,34);
+    color: rgb(34, 34, 34);
 }
-.guideNewTourSuccess h3{
+
+.guideNewTourSuccess h3 {
     width: 100%;
     font-size: 1.5rem;
     text-align: center;
     font-weight: bold;
     font-family: 'Source Sans Pro', sans-serif;
-    color: rgb(34,34,34);
+    color: rgb(34, 34, 34);
 }
 
-.guideNewTourSuccess button{
+.guideNewTourSuccess button {
     width: 100%;
     font-weight: bold;
     font-family: 'Source Sans Pro', sans-serif;
-    color: rgb(34,34,34);
+    color: rgb(34, 34, 34);
     margin: 1em 0;
     font-size: 1.3rem;
 }

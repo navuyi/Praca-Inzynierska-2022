@@ -1,12 +1,10 @@
 // Dependencies
-import {Switch, Route} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
-import ProtectedRoute from "./components/ProtectedRoute";
-import GuideOnlyRoute from "./components/GuideOnlyRoute";
+import {Route, Switch} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
+import ProtectedRoute from "./components/UtilityComponents/ProtectedRoute";
+import GuideOnlyRoute from "./components/UtilityComponents/GuideOnlyRoute";
 import {useEffect, useState} from "react";
-import {set_as_guide} from "./redux/actions";
-import {set_as_user} from "./redux/actions";
-import {login} from "./redux/actions";
+import {login, set_as_guide, set_as_user} from "./redux/actions";
 import {CircularProgress} from "@material-ui/core";
 
 // Pages
@@ -66,11 +64,11 @@ function App() {
     useEffect(() => {
         const access_token = localStorage.getItem("access_token")
         const is_guide = localStorage.getItem("is_guide")
-        if(access_token){
+        if (access_token) {
             dispatch(login("LOGIN"))
-            if(is_guide == 1){
+            if (parseInt(is_guide) === 1) {
                 dispatch(set_as_guide("SET_AS_GUIDE"))
-            }else if(is_guide==0){
+            } else if (parseInt(is_guide) === 0) {
                 dispatch(set_as_user("SET_AS_USER"))
             }
         }
@@ -82,46 +80,46 @@ function App() {
         height: "5vw",
         top: "45vh",
         left: "48vw",
-        position:"absolute",
+        position: "absolute",
     }
 
     return (
-    loading ? <CircularProgress style={style}/> :
-    <Switch>
-        <Route exact path="/">
-            <Home />
-        </Route>
-        <Route path="/information">
-            <Information />
-        </Route>
-        <Route exact path="/tours">
-            <Tours />
-        </Route>
-        <Route exact path={"/tours/tour"}>
-            <TourDetails />
-        </Route>
+        loading ? <CircularProgress style={style}/> :
+            <Switch>
+                <Route exact path="/">
+                    <Home/>
+                </Route>
+                <Route path="/information">
+                    <Information/>
+                </Route>
+                <Route exact path="/tours">
+                    <Tours/>
+                </Route>
+                <Route exact path={"/tours/tour"}>
+                    <TourDetails/>
+                </Route>
 
 
-        <GuideOnlyRoute path="/account/guide/active-offer/:tourID" component={GuideActiveOffer}/>
-        <GuideOnlyRoute path="/account/guide" component={Guide}/>
+                <GuideOnlyRoute path="/account/guide/active-offer/:tourID" component={GuideActiveOffer}/>
+                <GuideOnlyRoute path="/account/guide" component={Guide}/>
 
 
-        <ProtectedRoute exact path="/account" component={Account}/>
-        <ProtectedRoute path="/account/user" component={User} />
-        <ProtectedRoute path="/account/messages" component={Messages}/>
+                <ProtectedRoute exact path="/account" component={Account}/>
+                <ProtectedRoute path="/account/user" component={User}/>
+                <ProtectedRoute path="/account/messages" component={Messages}/>
 
-        <Route exact path={"/new-tour-success"}>
-            <GuideNewTourSuccess />
-        </Route>
+                <Route exact path={"/new-tour-success"}>
+                    <GuideNewTourSuccess/>
+                </Route>
 
-        <Route path="/login">
-            <Login />
-        </Route>
-        <Route path="/register">
-            <Register/>
-        </Route>
-    </Switch>
-  );
+                <Route path="/login">
+                    <Login/>
+                </Route>
+                <Route path="/register">
+                    <Register/>
+                </Route>
+            </Switch>
+    );
 }
 
 export default App;

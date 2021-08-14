@@ -1,70 +1,80 @@
-.homeTourPanel{
+.homeTourPanel {
     height: 100%;
     padding: 1em 1em;
 
     transition-duration: 1.2s;
     cursor: pointer;
 }
-.homeTourPanel img{
+
+.homeTourPanel img {
     width: 100%;
     border-radius: 50%;
     transition-duration: 0.5s;
 }
-.homeTourPanel h1{
+
+.homeTourPanel h1 {
     text-align: center;
     font-size: 2rem;
     font-family: 'Lora', sans-serif;
     font-weight: 300;
-    color: whitesmoke; text-shadow: -1px -1px black;
+    color: whitesmoke;
+    text-shadow: -1px -1px black;
 
     margin: 0;
     margin: 0.5em 0;
 }
-.homeTourPanel p{
+
+.homeTourPanel p {
     color: whitesmoke;
     font-size: 1.1rem;
     text-shadow: -1px -1px black;
 }
 
-.homeTourPanel:hover img{
+.homeTourPanel:hover img {
     border-radius: 2em;
 }
-.homeTourPanel:hover{
+
+.homeTourPanel:hover {
     background-color: dodgerblue;
 }
 
 
 @media (max-width: 900px) {
-    .homeTourPanel{
+    .homeTourPanel {
         height: 100%;
 
         transition-duration: 1.2s;
     }
-    .homeTourPanel img{
+
+    .homeTourPanel img {
         width: 100%;
         border-radius: 2em;
         transition-duration: 0.5s;
     }
-    .homeTourPanel h1{
+
+    .homeTourPanel h1 {
         text-align: center;
         font-size: 2rem;
         font-family: 'Lora', sans-serif;
         font-weight: 300;
-        color: whitesmoke; text-shadow: -1px -1px black;
+        color: whitesmoke;
+        text-shadow: -1px -1px black;
 
         margin: 0;
         margin: 0.5em 0;
     }
-    .homeTourPanel p{
+
+    .homeTourPanel p {
         color: whitesmoke;
         font-size: 1.1rem;
         text-shadow: -1px -1px black;
     }
 
-    .homeTourPanel:hover img{
+    .homeTourPanel:hover img {
         border-radius: unset;
     }
-    .homeTourPanel:hover{
+
+    .homeTourPanel:hover {
         background-color: unset;
     }
 }

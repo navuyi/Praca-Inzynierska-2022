@@ -1,10 +1,9 @@
-import React, {useEffect} from "react";
+import React from "react";
 
-function GuideActiveOfferModification(props){
+function GuideActiveOfferModification(props) {
 
 
-
-    return(
+    return (
         <div className={"guideOfferDetailsModification"}>
             Modification
         </div>

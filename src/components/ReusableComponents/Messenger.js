@@ -1,18 +1,17 @@
 import React, {useEffect, useState} from "react"
-import {Row, Col, Button, FormControl, Form} from "react-bootstrap"
-
-
+import {Button, FormControl, Row} from "react-bootstrap"
 import CloseIcon from '@material-ui/icons/Close';
-import api_messages_thread_messages from "../API_CALLS/api_messages_thread_messages";
-import {refesh_token} from "../API_CALLS/api_authentication_token_refresh";
+import api_messages_thread_messages from "../../API_CALLS/api_messages_thread_messages";
+import {refesh_token} from "../../API_CALLS/api_authentication_token_refresh";
 import {useHistory} from "react-router-dom";
 import {CircularProgress} from "@material-ui/core";
-import isEmptyString from "../utils/isEmptyString";
-import api_messages_unicast_response from "../API_CALLS/api_messages_unicast_response";
+import isEmptyString from "../../utils/isEmptyString";
+import api_messages_unicast_response from "../../API_CALLS/api_messages_unicast_response";
 import MessageBox from "./MessageBox";
-import {limitText} from "../utils/limitText";
+import {limitText} from "../../utils/limitText";
 
-function Messenger(props){
+
+function Messenger(props) {
     const history = useHistory()
     const [msgOffset, setMsgOffset] = useState(0)
     const [messages, setMessages] = useState([])
@@ -21,14 +20,13 @@ function Messenger(props){
 
     useEffect(() => {
         fetchMessages(msgOffset)
-        console.log(props)
     }, [])
     useEffect(() => {
         fetchMessages(msgOffset)
 
     }, [props.thread_id])
 
-    function fetchMessages(){
+    function fetchMessages() {
         setFetching(true)
         api_messages_thread_messages(props.thread_id, msgOffset)
             .then(res => {
@@ -38,7 +36,7 @@ function Messenger(props){
             })
             .catch(err => {
                 console.log(err.response)
-                if(err.response.status === 401){
+                if (err.response.status === 401) {
                     refesh_token().then(res => {
                         localStorage.setItem("access_token", res.data.access_token)
                         fetchMessages(msgOffset)
@@ -50,8 +48,8 @@ function Messenger(props){
             })
     }
 
-    function sendResponse(){
-        if(isEmptyString(response)){
+    function sendResponse() {
+        if (isEmptyString(response)) {
             return
         }
         api_messages_unicast_response(props.thread_id, props.interlocutor_id, response)
@@ -62,7 +60,7 @@ function Messenger(props){
             })
             .catch(err => {
                 console.log(err.response)
-                if(err.response.status === 401){
+                if (err.response.status === 401) {
                     refesh_token().then(res => {
                         localStorage.setItem("access_token", res.data.access_token)
                     }).catch(err => {
@@ -72,34 +70,36 @@ function Messenger(props){
             })
     }
 
-    function handleChange(e){
+    function handleChange(e) {
         setResponse(e.target.value)
     }
 
-    return(
+    return (
         <div className={"messenger"}>
-            <Row className={"d-flex flex-row justify-content-between align-items-center messenger-header"} >
+            <Row className={"d-flex flex-row justify-content-between align-items-center messenger-header"}>
                 <p> Rozmówca: {props.interlocutor}</p>
                 <p> Tytuł: {limitText(props.topic, 30)}</p>
                 <p> Nadano: {props.sentDate}</p>
-                <CloseIcon fontSize={"large"} className={"messenger-close-icon"} onClick={()=>{props.setMsgVisible(false)}}/>
+                <CloseIcon fontSize={"large"} className={"messenger-close-icon"} onClick={() => {
+                    props.setMsgVisible(false)
+                }}/>
             </Row>
 
-            <div className={"messenger-body"} >
+            <div className={"messenger-body"}>
                 {
                     fetching ?
-                        <Row className={"d-flex justify-content-center align-items-center"} style={{minHeight: "300px"}}>
-                            <CircularProgress  size={100} />
+                        <Row className={"d-flex justify-content-center align-items-center"}
+                             style={{minHeight: "300px"}}>
+                            <CircularProgress size={100}/>
                         </Row>
                         :
                         <React.Fragment>
                             {
                                 messages.map((msg, index) => {
                                     let sender = ""
-                                    if(msg.side === "left"){
+                                    if (msg.side === "left") {
                                         sender = props.interlocutor
-                                    }
-                                    else if(msg.side === "right"){
+                                    } else if (msg.side === "right") {
                                         sender = "Ty"
                                     }
                                     return (
@@ -115,7 +115,6 @@ function Messenger(props){
                         </React.Fragment>
                 }
             </div>
-
             <Row className={"message-input-box d-flex flex-column justify-content-center align-items-center w-100"}>
                 <FormControl
                     as='textarea'
@@ -131,4 +130,4 @@ function Messenger(props){
     )
 }
 
-export default  Messenger
+export default Messenger

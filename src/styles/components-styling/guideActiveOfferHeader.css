@@ -1,18 +1,20 @@
-.guideActiveOfferHeader{
+.guideActiveOfferHeader {
     background-color: orange;
     border-bottom-right-radius: 0.5em;
     border-bottom-left-radius: 0.5em;
     padding: 1em;
     padding-top: 3em;
 }
-.guideActiveOfferHeader img{
+
+.guideActiveOfferHeader img {
     width: 100%;
     border-radius: 0.5em;
     box-shadow: 0 0 10px 5px #222222;
     max-height: 350px;
     object-fit: cover;
 }
-.guideActiveOfferHeader h1{
+
+.guideActiveOfferHeader h1 {
     width: 100%;
     text-align: left;
     color: #222222;
@@ -20,14 +22,16 @@
     font-weight: bold;
     font-size: 2rem;
 }
-.guideActiveOfferHeader p{
+
+.guideActiveOfferHeader p {
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
     font-size: 1.3rem;
     margin: 0.7em 0;
     padding: 0 0;
 }
-.guideActiveOfferHeader span{
+
+.guideActiveOfferHeader span {
     color: #0456a0;
     font-family: "Lora", sans-serif;
     font-size: 1rem;

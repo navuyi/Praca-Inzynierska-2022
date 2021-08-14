@@ -1,21 +1,19 @@
-
 import React, {useEffect, useState} from "react";
 
-import NavbarComponent from "../../components/NavbarComponent";
-import Footer from "../../components/Footer";
-import {Row, Col, Container, Button, FormControl, Dropdown, DropdownButton, FormGroup} from "react-bootstrap"
+import NavbarComponent from "../../components/ReusableComponents/NavbarComponent";
+import Footer from "../../components/ReusableComponents/Footer";
+import {Button, Col, Container, FormControl, Row} from "react-bootstrap"
 import {Pagination} from "@material-ui/lab";
 import {CircularProgress} from "@material-ui/core";
 
-import TourPlacesSelect from "../../components/TourPlacesSelect";
+import TourPlacesSelect from "../../components/ReusableComponents/TourPlacesSelect";
 
 import ToursPriceSlider from "../../components/Tours/ToursPriceSlider";
 import ToursTourPanel from "../../components/Tours/ToursTourPanel";
 import {useHistory} from "react-router-dom";
-import {stringify} from "querystring"
 import axios from "axios";
 
-function Tours(){
+function Tours() {
     const history = useHistory();
     const [loading, setLoading] = useState(true)
     const [tourData, setTourData] = useState([])
@@ -23,7 +21,7 @@ function Tours(){
     const [filterData, setFilterData] = useState({
         tour_price: [20, 900],
         tour_places: [],
-        tour_date: ["",""]
+        tour_date: ["", ""]
     })
     const [resultsConfig, setResultsConfig] = useState({
         results_per_page: 5,
@@ -31,45 +29,44 @@ function Tours(){
         page: 1
     })
 
-    function handleChange(e, value){
-        if(e.target.id === "start_date"){
+    function handleChange(e, value) {
+        if (e.target.id === "start_date") {
             const tmp_date = filterData.tour_date;
             tmp_date[0] = e.target.value;
             const update = {...filterData, tour_date: tmp_date}
             setFilterData(update)
-        }else if(e.target.id === "end_date"){
+        } else if (e.target.id === "end_date") {
             const tmp_date = filterData.tour_date;
             tmp_date[1] = e.target.value;
             const update = {...filterData, tour_date: tmp_date}
             setFilterData(update)
-        }
-        else if(e.target.id === "sort-select"){
+        } else if (e.target.id === "sort-select") {
             const update = {...resultsConfig, sort_by: e.target.value, page: 1}
             setResultsConfig(update)
-        }
-        else if(e.target.id === "results-per-page-select"){
+        } else if (e.target.id === "results-per-page-select") {
             const update = {...resultsConfig, results_per_page: e.target.value, page: 1}
             setResultsConfig(update)
         }
     }
-    function handlePage(e, value){
-        if(value === resultsConfig.page){
+
+    function handlePage(e, value) {
+        if (value === resultsConfig.page) {
             return
         }
         const update = {...resultsConfig, page: value}
         setResultsConfig(update)
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         //console.log(stringify(filterData))
         fetchData()
     }, [resultsConfig])
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchData()
     }, []);
 
-    function fetchData(){
+    function fetchData() {
         setTourData([])
         setLoading(true)
         const url = "http://167.99.143.194/api/tour/tours"
@@ -92,88 +89,89 @@ function Tours(){
     }
 
 
-
-
-
-
-
-    return(
-    <div className="tours">
-        <NavbarComponent />
-        <Container fluid className={"h-100"} style={{marginTop: "0em", top: "0", flexGrow: "1"}}>
-            <Row style={{minHeight: "75vh"}}>
-                <Col lg={2} sm={12} style={{backgroundColor: "orange", padding: "0"}}>
-                    <Container style={{position: "sticky", top: "3rem", padding: "2rem 0"}}>
-                        <Row style={{margin: "0 0"}}>
-                            <div className={"tours-filters-container"}>
-                                <h1> Filtry </h1>
-                                <div className={"tours-filters-element"}>
-                                  <label> Miejsce </label>
-                                  <TourPlacesSelect
-                                    tourData={filterData}
-                                    setTourData={setFilterData}
-                                  />
-                                </div>
-                                <div className={"tours-filters-element"}>
-                                    <label> Przedział cenowy </label>
-                                    <ToursPriceSlider
-                                        filterData={filterData}
-                                        setFilterData={setFilterData}
-                                    />
-                                    <div className={"price-indicator"}>
-                                        <Button variant={"light"}> {filterData.tour_price[0]} </Button>
-                                        <Button variant={"light"}> {filterData.tour_price[1]} </Button>
+    return (
+        <div className="tours">
+            <NavbarComponent/>
+            <Container fluid className={"h-100"} style={{marginTop: "0em", top: "0", flexGrow: "1"}}>
+                <Row style={{minHeight: "75vh"}}>
+                    <Col lg={2} sm={12} style={{backgroundColor: "orange", padding: "0"}}>
+                        <Container style={{position: "sticky", top: "3rem", padding: "2rem 0"}}>
+                            <Row style={{margin: "0 0"}}>
+                                <div className={"tours-filters-container"}>
+                                    <h1> Filtry </h1>
+                                    <div className={"tours-filters-element"}>
+                                        <label> Miejsce </label>
+                                        <TourPlacesSelect
+                                            tourData={filterData}
+                                            setTourData={setFilterData}
+                                        />
                                     </div>
+                                    <div className={"tours-filters-element"}>
+                                        <label> Przedział cenowy </label>
+                                        <ToursPriceSlider
+                                            filterData={filterData}
+                                            setFilterData={setFilterData}
+                                        />
+                                        <div className={"price-indicator"}>
+                                            <Button variant={"light"}> {filterData.tour_price[0]} </Button>
+                                            <Button variant={"light"}> {filterData.tour_price[1]} </Button>
+                                        </div>
+                                    </div>
+                                    <div className={"tours-filters-element"}>
+                                        <label> Data początkowa </label>
+                                        <FormControl
+                                            id="start_date"
+                                            type="date"
+                                            value={filterData.tour_date[0]}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div className={"tours-filters-element"}>
+                                        <label> Data końcowa </label>
+                                        <FormControl
+                                            id="end_date"
+                                            type="date"
+                                            value={filterData.tour_date[1]}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <Button className={"w-100"} variant={"outline-light"}
+                                            onClick={fetchData}> Szukaj </Button>
                                 </div>
-                                <div className={"tours-filters-element"}>
-                                    <label> Data początkowa </label>
-                                    <FormControl
-                                        id="start_date"
-                                        type="date"
-                                        value={filterData.tour_date[0]}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                                <div className={"tours-filters-element"}>
-                                    <label> Data końcowa </label>
-                                    <FormControl
-                                        id="end_date"
-                                        type="date"
-                                        value={filterData.tour_date[1]}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                                <Button className={"w-100"} variant={"outline-light"} onClick={fetchData}> Szukaj </Button>
-                            </div>
-                        </Row>
-                    </Container>
-                </Col>
-                <Col lg={10} sm={12} style={{padding: "0"}} className={"d-flex  justify-content-center align-items-start"}>
+                            </Row>
+                        </Container>
+                    </Col>
+                    <Col lg={10} sm={12} style={{padding: "0"}}
+                         className={"d-flex  justify-content-center align-items-start"}>
                         <Container style={{flexGrow: "1", height: "100%"}} className={"d-flex flex-column "}>
                             <Row className={"center-header d-flex justify-content-between align-items-center "}>
-                                <Col xl={3} >
+                                <Col xl={3}>
                                     <p> Wyszukano ofert: <span> {toursFound} </span></p>
                                 </Col>
-                                <Col xl={5}  className={"header-sort d-flex flex-row align-items-start justify-content-xl-center align-items-xl-center mt-3 mt-xl-0"}>
+                                <Col xl={5}
+                                     className={"header-sort d-flex flex-row align-items-start justify-content-xl-center align-items-xl-center mt-3 mt-xl-0"}>
                                     <label> Wyników na stronę </label>
-                                    <FormControl as={"select"}  className={"w-25"} onChange={handleChange} id="results-per-page-select" value={resultsConfig.results_per_page}>
-                                        <option value={5}> 5 </option>
-                                        <option value={10}> 10 </option>
-                                        <option value={50}> 50 </option>
-                                        <option value={100}> 100 </option>
+                                    <FormControl as={"select"} className={"w-25"} onChange={handleChange}
+                                                 id="results-per-page-select" value={resultsConfig.results_per_page}>
+                                        <option value={5}> 5</option>
+                                        <option value={10}> 10</option>
+                                        <option value={50}> 50</option>
+                                        <option value={100}> 100</option>
                                     </FormControl>
                                 </Col>
-                                <Col xl={4}  className={" header-sort d-flex flex-row align-items-start justify-content-xl-center align-items-xl-center mt-3 mt-xl-0"}>
+                                <Col xl={4}
+                                     className={" header-sort d-flex flex-row align-items-start justify-content-xl-center align-items-xl-center mt-3 mt-xl-0"}>
                                     <label> Sortowanie: </label>
-                                    <FormControl as={"select"}   className={"w-50"} onChange={handleChange} id="sort-select" value={resultsConfig.sort_by}>
-                                        <option value={"most_recent"}> Od najnowszych </option>
-                                        <option value={"price"}> Cena rosnąco </option>
-                                        <option value={"price_desc"}> Cena malejąco </option>
+                                    <FormControl as={"select"} className={"w-50"} onChange={handleChange}
+                                                 id="sort-select" value={resultsConfig.sort_by}>
+                                        <option value={"most_recent"}> Od najnowszych</option>
+                                        <option value={"price"}> Cena rosnąco</option>
+                                        <option value={"price_desc"}> Cena malejąco</option>
                                     </FormControl>
                                 </Col>
                             </Row>
                             <Row className={"center-body"} style={{flexGrow: "1"}}>
-                                { loading ? <CircularProgress  size={120}  color={"secondary"} /> : null}
+                                {loading ? <CircularProgress size={120} color={"secondary"}/> : null}
                                 {
                                     tourData.map((tour, index) => {
                                         return (
@@ -196,14 +194,17 @@ function Tours(){
                                 }
                             </Row>
                             <div className={"center-footer"}>
-                                <Pagination count={Math.ceil(toursFound/resultsConfig.results_per_page)} variant="outlined" color={"secondary"} page={resultsConfig.page} onChange={handlePage}/>
+                                <Pagination count={Math.ceil(toursFound / resultsConfig.results_per_page)}
+                                            variant="outlined" color={"secondary"} page={resultsConfig.page}
+                                            onChange={handlePage}/>
                             </div>
                         </Container>
-                </Col>
-            </Row>
-        </Container>
-        <Footer />
-    </div>
-)
+                    </Col>
+                </Row>
+            </Container>
+            <Footer/>
+        </div>
+    )
 }
+
 export default Tours;

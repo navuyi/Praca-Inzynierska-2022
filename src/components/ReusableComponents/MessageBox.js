@@ -2,9 +2,9 @@ import React from "react"
 import {Col, Row} from "react-bootstrap";
 
 
-function MessageBox(props){
+function MessageBox(props) {
 
-    return(
+    return (
         <div className={`message-box-container ${props.side}`}>
             <Col xl={5} xs={11} className={`messageBox ${props.side}`}>
                 <Row className={"pl-4 pr-4 pt-4 d-flex flex-row justify-content-between align-items-center"}>

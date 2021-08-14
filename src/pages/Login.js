@@ -1,57 +1,50 @@
 import {useHistory} from 'react-router-dom';
-import {Container, Row, Col, Button, Form} from "react-bootstrap";
+import {Button, Container, Form, Row} from "react-bootstrap";
 import isEmptyString from "../utils/isEmptyString";
-import person from '../images/icons/person.png';
-import padlock from '../images/icons/padlock.png';
 import {useState} from "react";
 import axios from "axios";
-import NavbarComponent from "../components/NavbarComponent";
-import Footer from "../components/Footer";
+import NavbarComponent from "../components/ReusableComponents/NavbarComponent";
+import Footer from "../components/ReusableComponents/Footer";
 import {API_PREFIX} from "../config";
 import {useDispatch} from "react-redux";
-
-import {set_as_user} from "../redux/actions";
-import {set_as_guide} from "../redux/actions";
-import {set_user_id} from "../redux/actions";
 import {_login} from "../utils/_login";
 
-function Login(){
+function Login() {
     const history = useHistory();
-    const dispatch  = useDispatch()
+    const dispatch = useDispatch()
 
     const [error, setError] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    function handleChange(e){
-        if(e.target.type === "email"){
+    function handleChange(e) {
+        if (e.target.type === "email") {
             setEmail(e.target.value)
-        }
-        else if(e.target.type === "password"){
+        } else if (e.target.type === "password") {
             setPassword(e.target.value)
         }
         setError("") // <-- Clear error after every email/password change
     }
 
-    function submit(e){
+    function submit(e) {
         e.preventDefault()
         // Check if email and password is provided
-        if(isEmptyString(email) === true){
+        if (isEmptyString(email) === true) {
             setError("Podaj adres email")
             return
         }
-        if(isEmptyString(password) === true){
+        if (isEmptyString(password) === true) {
             setError("Podaj hasło")
             return
         }
-        const url = API_PREFIX+"/authentication/login"
+        const url = API_PREFIX + "/authentication/login"
         const data = {
             email: email,
             password: password
         }
         axios.post(url, data)
             .then(res => {
-                if(res.status !== 200){
+                if (res.status !== 200) {
                     setError("Coś poszło nie tak. Spróbuj ponownie.")
                     return
                 }
@@ -60,7 +53,7 @@ function Login(){
             .catch(err => {
                 const code = err.response.status
                 console.log(code)
-                if(code==404 || code==401){
+                if (code == 404 || code == 401) {
                     console.log(err.response.data.message)
                     setError(err.response.data.message)
                 }
@@ -70,11 +63,11 @@ function Login(){
             })
     }
 
-    return(
+    return (
         <div className="login">
-            <NavbarComponent />
-            <Container  className={"cont col-xl-3 col-lg-5 col-md-8 d-flex flex-column align-items-center"}>
-                <Row className={"d-flex justify-content-lg-center"} >
+            <NavbarComponent/>
+            <Container className={"cont col-xl-3 col-lg-5 col-md-8 d-flex flex-column align-items-center"}>
+                <Row className={"d-flex justify-content-lg-center"}>
                     <h1>Logowanie</h1>
                 </Row>
                 <form onSubmit={submit}>
@@ -106,11 +99,13 @@ function Login(){
                 </form>
                 <Row className={"mt-4"}>
                     {
-                        error ? <p className={"error-msg"}> {error} </p> : <p> Nie masz konta? <span onClick={()=>history.push("/register")}> Zarejestruj się.</span></p>
+                        error ? <p className={"error-msg"}> {error} </p> :
+                            <p> Nie masz konta? <span onClick={() => history.push("/register")}> Zarejestruj się.</span>
+                            </p>
                     }
                 </Row>
             </Container>
-            <Footer />
+            <Footer/>
         </div>
     )
 }

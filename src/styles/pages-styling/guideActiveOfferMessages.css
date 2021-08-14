@@ -1,7 +1,8 @@
-.guideActiveOfferMessages{
+.guideActiveOfferMessages {
 
 }
-.guideActiveOfferMessages .list-header{
+
+.guideActiveOfferMessages .list-header {
     width: 100%;
     text-align: center;
     font-family: 'Source Sans Pro', sans-serif;
@@ -15,19 +16,18 @@
     border-top-right-radius: 0.5em;
 }
 
-.guideActiveOfferMessages .loading-circle-container{
+.guideActiveOfferMessages .loading-circle-container {
     min-height: 250px;
 }
 
 
-
-.guideActiveOfferMessages .table-responsive-sm{
+.guideActiveOfferMessages .table-responsive-sm {
     width: 100%;
 }
 
 @media (max-width: 900px) {
-    .guideActiveOfferMessages .list-header{
-      border-radius: unset;
-}
+    .guideActiveOfferMessages .list-header {
+        border-radius: unset;
+    }
 
 }

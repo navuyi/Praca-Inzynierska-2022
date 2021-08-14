@@ -4,7 +4,7 @@ import BlockIcon from '@material-ui/icons/Block';
 import CheckIcon from '@material-ui/icons/Check';
 
 
-function TourPriceList(props){
+function TourPriceList(props) {
 
     const list = [
         {text: "Zwiedzanie kościoła", variant: true},
@@ -47,14 +47,14 @@ function TourPriceList(props){
     let style;
     let icon;
 
-    return(
+    return (
         <React.Fragment>
             <h3 style={{width: "100%", textAlign: "center"}}> Cennik </h3>
             {
                 props.price_list.map((item, index) => {
-                    item.is_included ? style=styleSuccess : style=styleDanger
-                    item.is_included ? icon=<CheckIcon/> : icon=<BlockIcon/>
-                    return(
+                    item.is_included ? style = styleSuccess : style = styleDanger
+                    item.is_included ? icon = <CheckIcon/> : icon = <BlockIcon/>
+                    return (
                         <div style={style} key={index}>
                             {item.description}
                             {icon}
@@ -66,4 +66,4 @@ function TourPriceList(props){
     )
 }
 
-export default  TourPriceList
+export default TourPriceList

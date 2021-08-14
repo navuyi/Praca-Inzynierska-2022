@@ -7,11 +7,13 @@
 
     bottom: 0;
 }
-.footer img{
+
+.footer img {
     width: 40px;
     filter: invert(1);
 }
-.footer .wrapper{
+
+.footer .wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -19,7 +21,8 @@
 
     margin: 2em 0;
 }
-.footer .wrapper p{
+
+.footer .wrapper p {
     color: whitesmoke;
     margin: 0 2em;
 }
