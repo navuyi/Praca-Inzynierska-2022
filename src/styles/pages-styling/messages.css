@@ -15,6 +15,11 @@
     display: flex;
 }
 
+.messages .thread-list{
+    min-height: 300px;
+    border: 5px solid #222222;
+}
+
 .messages .thread-list-header {
     background-color: #222222;
     border-top-left-radius: 0.5em;
@@ -59,10 +64,9 @@
 }
 
 .messages .loading-box {
-    min-height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    min-height: 300px;
     border: 5px solid #222222;
 }

@@ -15,9 +15,8 @@ def get_thread_messages():
 
     offset = request.args["offset"]
     thread_id = request.args["thread_id"]
-    msg_limit = current_app.config["MESSAGES_LIMIT"]
-
-    statement = f"SELECT * FROM (SELECT * FROM messages WHERE thread_id=%s ORDER BY creation_date DESC LIMIT {msg_limit} OFFSET {offset}) as sub_query ORDER BY creation_date"
+    msg_limit = current_app.config["MESSAGES_LIMIT"] + int(offset)
+    statement = f"SELECT * FROM (SELECT * FROM messages WHERE thread_id=%s ORDER BY creation_date DESC LIMIT {msg_limit}) as sub_query ORDER BY creation_date"
     cursor().execute(statement, (thread_id, ))
     messages = cursor().fetchall()
 

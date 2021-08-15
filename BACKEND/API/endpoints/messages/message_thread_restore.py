@@ -3,11 +3,11 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.handlers import APIException
 from app.database.db import cursor, lastrowid
 
-bp = Blueprint("thread_delete", __name__, url_prefix="/messages")
+bp = Blueprint("thread_restore", __name__, url_prefix="/messages")
 
-@bp.route("/thread/delete", methods=["PATCH"])
+@bp.route("/thread/restore", methods=["PATCH"])
 @jwt_required()
-def delete_thread():
+def restore_thread():
     if "thread_id" not in request.json:
         raise APIException(msg="No thread ID provided", code=422)
 
@@ -20,9 +20,9 @@ def delete_thread():
     receiver_id = int(res["receiver_id"])
 
     if int(my_id) == sender_id:
-        cursor().execute(f"UPDATE message_threads SET sender_deleted=1 WHERE id=%s", (thread_id, ))
+        cursor().execute(f"UPDATE message_threads SET sender_deleted=0 WHERE id=%s", (thread_id, ))
     elif int(my_id) == receiver_id:
-        cursor().execute(f"UPDATE message_threads SET receiver_deleted=1 WHERE id=%s", (thread_id, ))
+        cursor().execute(f"UPDATE message_threads SET receiver_deleted=0 WHERE id=%s", (thread_id, ))
 
-    return jsonify(msg="Thread marked as deleted"), 200
+    return jsonify(msg="Deleted thread restored"), 200
 

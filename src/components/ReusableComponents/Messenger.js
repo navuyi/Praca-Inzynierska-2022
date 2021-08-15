@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react"
+import React, {useEffect, useState, useRef} from "react"
 import {Button, FormControl, Row} from "react-bootstrap"
 import CloseIcon from '@material-ui/icons/Close';
 import api_messages_thread_messages from "../../API_CALLS/api_messages_thread_messages";
@@ -12,19 +12,22 @@ import {limitText} from "../../utils/limitText";
 
 
 function Messenger(props) {
+    const messagesEnd = useRef(null)
     const history = useHistory()
     const [msgOffset, setMsgOffset] = useState(0)
     const [messages, setMessages] = useState([])
     const [fetching, setFetching] = useState(false)
     const [response, setResponse] = useState("")
 
+    // Fetch messages on every component render
     useEffect(() => {
         fetchMessages(msgOffset)
     }, [])
+    // Fetch messages every time thread ID changes <-- linked to thread list component - deleting/restoring threads
     useEffect(() => {
         fetchMessages(msgOffset)
-
     }, [props.thread_id])
+
 
     function fetchMessages() {
         setFetching(true)
@@ -32,6 +35,7 @@ function Messenger(props) {
             .then(res => {
                 console.log(res.data)
                 setMessages(res.data)
+                setMsgOffset(res.data.length)
                 setFetching(false)
             })
             .catch(err => {
@@ -52,7 +56,6 @@ function Messenger(props) {
         if (isEmptyString(response)) {
             return
         }
-
         if(props.threadType && props.threadType.deleted == true){
             const tmp = props.threadType
             tmp.deleted = false
@@ -76,11 +79,15 @@ function Messenger(props) {
                 }
             })
     }
-
     function handleChange(e) {
         setResponse(e.target.value)
     }
-
+    function scrollToBottom(){
+        messagesEnd.current?.scrollIntoView({behavior: "smooth"})
+    }
+    useEffect(() => {
+        scrollToBottom()
+    }, [messages])
     return (
         <div className={"messenger"}>
             <Row className={"d-flex flex-row justify-content-between align-items-center messenger-header"}>
@@ -101,7 +108,10 @@ function Messenger(props) {
                             <CircularProgress size={100}/>
                         </Row>
                         :
-                        <React.Fragment>
+                        <div >
+                            <Row className={"w-100 mt-2 d-flex justify-content-center align-items-center"}>
+                                <Button variant={"danger"} className={"w-75"} onClick={fetchMessages}> Załaduj więcej </Button>
+                            </Row>
                             {
                                 messages.map((msg, index) => {
                                     let sender = ""
@@ -112,15 +122,16 @@ function Messenger(props) {
                                     }
                                     return (
                                         <MessageBox key={index}
-                                                    side={msg.side}
-                                                    sender={sender}
-                                                    send_time={`${msg.creation_date} ${msg.creation_time}`}
-                                                    content={msg.content}
+                                                side={msg.side}
+                                                sender={sender}
+                                                send_time={`${msg.creation_date} ${msg.creation_time}`}
+                                                content={msg.content}
                                         />
                                     )
                                 })
                             }
-                        </React.Fragment>
+                            <div ref={messagesEnd} />
+                        </div>
                 }
             </div>
             <Row>

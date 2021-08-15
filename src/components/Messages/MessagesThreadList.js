@@ -9,6 +9,8 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import NotFoundIndicator from "../ReusableComponents/NotFoundIndicator";
 import DropdownItem from "react-bootstrap/DropdownItem";
 import delete_thread from "../../API_CALLS/api_messages_thread_delete";
+import {_logout} from "../../utils/_logout";
+import restore_thread from "../../API_CALLS/api_messages_thread_restore";
 
 
 function MessagesThreadList(props) {
@@ -82,6 +84,24 @@ function MessagesThreadList(props) {
                 console.log(err.response)
                 if(err.response.status === 401){
                     history.push("/login")
+                    _logout()
+                }
+            })
+    }
+
+    function restoreThread(e){
+        // Find thread to restore
+        const thread = threads.find(thread => thread.thread_id == e.target.id)
+        restore_thread(thread.thread_id)
+            .then(res => {
+                console.log(res)
+                fetchThreads()
+            })
+            .catch(err => {
+                console.log(err)
+                if(err.response.status === 401){
+                    history.push("/login")
+                    _logout()
                 }
             })
     }
@@ -132,7 +152,7 @@ function MessagesThreadList(props) {
                                                         props.threadType.deleted ? null :  <DropdownItem id={thread.thread_id} onClick={deleteThread}> Usuń wątek </DropdownItem>
                                                     }
                                                     {
-                                                        !props.threadType.deleted ? null : <DropdownItem id={thread.thread_id} > Przywróć wątek </DropdownItem>
+                                                        !props.threadType.deleted ? null : <DropdownItem id={thread.thread_id} onClick={restoreThread}> Przywróć wątek </DropdownItem>
                                                     }
                                                 </DropdownButton>
                                              </td>
