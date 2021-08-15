@@ -79,7 +79,7 @@ function GuideActiveOfferThreadList(props) {
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Nadawca</th>
+                                    <th>Rozmówca</th>
                                     <th> Email</th>
                                     <th>Tytuł</th>
                                     <th>Data</th>

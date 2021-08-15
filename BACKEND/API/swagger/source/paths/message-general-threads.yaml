@@ -1,0 +1,46 @@
+get:
+  security:
+    - bearerAuth: [ ]
+  tags:
+    - Messages
+  summary: Returns message threads where other side of the conversation is Guide
+  description: Returns only threads where other side of conversation is Guide. Endpoints reached by Users and Guides
+  parameters:
+    - in: query
+      name: thread_type
+      schema:
+        type: string
+        example: "active"
+      required: true
+      description: ID of the thread to delete
+
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                thread_id:
+                  type: integer
+                tour_id:
+                  type: integer
+                tour_header:
+                  type: string
+                creation_time:
+                  type: string
+                creation_date:
+                  type: string
+                topic:
+                  type: string
+                interlocutor_id:
+                  type: integer
+                interlocutor_fname:
+                  type: string
+                interlocutor_lname:
+                  type: string
+                interlocutor_email:
+                  type: string

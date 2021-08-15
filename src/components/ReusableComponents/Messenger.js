@@ -52,6 +52,13 @@ function Messenger(props) {
         if (isEmptyString(response)) {
             return
         }
+
+        if(props.threadType && props.threadType.deleted == true){
+            const tmp = props.threadType
+            tmp.deleted = false
+            tmp.active = true
+            props.setThreadType(tmp)
+        }
         api_messages_unicast_response(props.thread_id, props.interlocutor_id, response)
             .then(res => {
                 console.log(res)
@@ -84,7 +91,8 @@ function Messenger(props) {
                     props.setMsgVisible(false)
                 }}/>
             </Row>
-
+            <Row>
+            </Row>
             <div className={"messenger-body"}>
                 {
                     fetching ?
@@ -115,17 +123,23 @@ function Messenger(props) {
                         </React.Fragment>
                 }
             </div>
-            <Row className={"message-input-box d-flex flex-column justify-content-center align-items-center w-100"}>
-                <FormControl
-                    as='textarea'
-                    rows={5}
-                    placeholder={"Napisz coś"}
-                    className={"w-75 align-self-center"}
-                    value={response}
-                    onChange={handleChange}
-                />
-                <Button className={"w-75 mt-5"} variant={"info"} onClick={sendResponse}> Wyślij </Button>
+            <Row>
             </Row>
+            {
+                props.threadType && props.threadType.deleted == true ? null :
+                <Row className={"message-input-box d-flex flex-column justify-content-center align-items-center w-100"}>
+                    <FormControl
+                        as='textarea'
+                        rows={5}
+                        placeholder={"Napisz coś"}
+                        className={"w-75 align-self-center"}
+                        value={response}
+                        onChange={handleChange}
+                    />
+                    <Button className={"w-75 mt-5"} variant={"info"} onClick={sendResponse}> Wyślij </Button>
+                </Row>
+            }
+
         </div>
     )
 }

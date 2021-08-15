@@ -46,43 +46,48 @@ paths:
     $ref: "./paths/messages-thread-messages.yaml"
 
   "/api/messages/general/threads":
-    get:
+    $ref: "./paths/message-general-threads.yaml"
+
+  "/api/messages/thread/delete":
+    patch:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - Messages
-      summary: Returns message threads where other side of the conversation is Guide
-      description: Returns only threads where other side of conversation is Guide. Endpoints reached by Users and Guides
-      responses:
-        '200':
-         description: OK
-         content:
-          application/json:
-            schema:
-              type: array
-              items:
+      summary: Deletes thread given by its ID on sender/receiver side
+      description: Side of thread for which thread will be deleted is defined by access token identity
+      requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
                 type: object
                 properties:
                   thread_id:
                     type: integer
-                  tour_id:
-                    type: integer
-                  tour_header:
+                    example: 29
+      responses:
+        '201':
+          description: Thread deleted
+          content:
+            application/json:
+              schema:
+                properties:
+                  msg:
                     type: string
-                  creation_time:
+                    example: "Thread has been deleted"
+        '422':
+          description: Not enough data
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
                     type: string
-                  creation_date:
-                    type: string
-                  topic:
-                    type: string
-                  interlocutor_id:
-                    type: integer
-                  interlocutor_fname:
-                    type: string
-                  interlocutor_lname:
-                    type: string
-                  interlocutor_email:
-                    type: string
+                  payload:
+                    type: object
+
+
   "/api/messages/threads/guide":
 
   "/api/messages/threads/user":

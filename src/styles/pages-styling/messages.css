@@ -46,6 +46,10 @@
 
     cursor: pointer;
 }
+.messages .thread-list th{
+    vertical-align: middle;
+}
+
 
 .messages .thread-list button {
     font-family: 'Source Sans Pro', sans-serif;

@@ -8,7 +8,13 @@ bp = Blueprint("general_threads", __name__, url_prefix="/messages")
 @bp.route("/general/threads", methods=["GET"])
 @jwt_required()
 def get_general_threads():
-
+    if not "thread_type" in request.args:
+        raise APIException(msg="Thread type is not provided", code=422)
+    thread_type = request.args["thread_type"]
+    if thread_type == "active":
+        is_deleted = 0
+    elif thread_type == "deleted":
+        is_deleted = 1
     # Define my ID
     my_id = get_jwt_identity()
     # Define if is guide
@@ -23,6 +29,15 @@ def get_general_threads():
     for index, thread in enumerate(threads):
         sender_id = int(thread["sender_id"])
         receiver_id = int(thread["receiver_id"])
+
+        # Check if thread was deleted
+        print(f"{my_id}  {sender_id} {thread['sender_deleted']} {is_deleted}")
+        print(f"{my_id}  {sender_id} {thread['receiver_deleted']} {is_deleted}")
+        if int(my_id) == sender_id and thread["sender_deleted"] != is_deleted:
+            continue  # skip this thread
+        elif int(my_id) == receiver_id and thread["receiver_deleted"] != is_deleted:
+            continue # skip this thread
+
         # In case of being guide allow only conversations with another guide and only if we started the conversation
         # The other guide will see this thread under his offer's messages
         if(is_guide == 1):

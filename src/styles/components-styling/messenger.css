@@ -6,14 +6,13 @@
     flex-direction: column;
     flex-grow: 1;
     animation: dropdown 0.3s linear;
-    margin-bottom: 2em;
-}
+    margin-bottom: 3em;
 
+    margin-top: 3em;
+}
 
 .messenger .messenger-header {
     margin: 0em 0;
-    margin-top: 3em;
-
     background-image: linear-gradient(15deg, #222222, #222222);
     color: whitesmoke;
     padding: 1em 1em;

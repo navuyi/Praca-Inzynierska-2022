@@ -121,9 +121,13 @@ function TourDetails() {
                                                 text="Numer tel."
                                                 value={tourData.guide_data.phone_number}
                                             />
-                                            <Button variant={"outline-light w-100 mt-4"} onClick={() => {
-                                                setMsgVisible(true)
-                                            }}> Masz pytanie? Napisz wiadomość. </Button>
+                                            {
+                                                localStorage.getItem("access_token") ?
+                                                    <Button variant={"outline-light w-100 mt-4"} onClick={() => {
+                                                        setMsgVisible(true)
+                                                    }}> Masz pytanie? Napisz wiadomość. </Button> : null
+                                            }
+
                                         </Col>
                                     </Row>
                                     {
