@@ -42,7 +42,9 @@ function GuideNewTour() {
         start_date: "",
         end_date: "",
         tour_plan: [],
-        tour_places: []
+        tour_places: [],
+        enrollment_deadline_date: "",
+        enrollment_deadline_time: ""
     }
     const [tourData, setTourData] = useState(empty_tour_data)
     const [electives, setElectives] = useState({

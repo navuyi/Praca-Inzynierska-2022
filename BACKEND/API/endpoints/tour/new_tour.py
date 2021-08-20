@@ -58,8 +58,9 @@ def create_new_tour():
 
     ### Create new tour in tours table ###
     try:
-        columns = """header, description, guide_id, price, person_limit, start_date, end_date"""
-        statement = f"""INSERT INTO tours ({columns}) VALUES (%(header)s, %(description)s, %(guide_id)s, %(price)s, %(person_limit)s, %(start_date)s, %(end_date)s)"""
+        print(f"{tour_data['enrollment_deadline_date']} {tour_data['enrollment_deadline_time']}:00")
+        columns = """header, description, guide_id, price, person_limit, start_date, end_date, enrollment_deadline"""
+        statement = f"""INSERT INTO tours ({columns}) VALUES (%(header)s, %(description)s, %(guide_id)s, %(price)s, %(person_limit)s, %(start_date)s, %(end_date)s, %(enrollment_deadline)s)"""
         insert = {
             "header": tour_data["header"],
             "description": tour_data["description"],
@@ -67,7 +68,8 @@ def create_new_tour():
             "price": tour_data["price"],
             "person_limit": tour_data["person_limit"],
             "start_date": tour_data["start_date"],
-            "end_date": tour_data["end_date"]
+            "end_date": tour_data["end_date"],
+            "enrollment_deadline": f"{tour_data['enrollment_deadline_date']} {tour_data['enrollment_deadline_time']}"
         }
         cursor().execute(statement, insert)
         TOUR_ID = lastrowid()

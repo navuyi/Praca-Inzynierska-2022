@@ -85,6 +85,7 @@ CREATE TABLE enrollments (
     l_name VARCHAR(255) NOT NULL,
     phone_number CHAR(32), /* phone number is not necessary*/
     email VARCHAR(255) NOT NULL,
+    tickets INTEGER NOT NULL,
 
     user_id INTEGER DEFAULT NULL,  /* NULL in case client is guest - does not have an account */
     guide_id INTEGER NOT NULL,
@@ -92,7 +93,7 @@ CREATE TABLE enrollments (
 
     creation_date DATETIME NOT NULL DEFAULT NOW(),
 
-    /* user_id cannot reference id from users because user_id could be NULL */
+    FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (guide_id) REFERENCES users(id),
     FOREIGN KEY (tour_id) REFERENCES tours(id)
 );

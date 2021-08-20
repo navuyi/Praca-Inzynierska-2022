@@ -25,6 +25,10 @@ properties:
         type: array
         items:
           type: integer
+      enrollment_deadline_date:
+        type: string
+      enrollment_deadline_time:
+        type: string
   electives:
     type: object
     properties:

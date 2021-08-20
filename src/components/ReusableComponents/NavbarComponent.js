@@ -28,6 +28,7 @@ function NavbarComponent() {
                             <NavDropdown.Item as={Link} to="/account/user/enrollments"><span
                                 className="black">Użytkownik</span></NavDropdown.Item>
                             <NavDropdown.Item as={Link} to="/account/messages"><span className="black">Wiadomości</span></NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/account/messages"><span className="black">Ustawienia</span></NavDropdown.Item>
                         </NavDropdown>
                         : null
                 }

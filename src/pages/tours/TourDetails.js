@@ -15,6 +15,7 @@ import DateRangeIcon from "@material-ui/icons/DateRange"
 import GroupIcon from "@material-ui/icons/Group"
 import EmailIcon from '@material-ui/icons/Email'
 import PhoneIcon from '@material-ui/icons/Phone'
+import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import {CircularProgress} from "@material-ui/core";
 import TourPriceList from "../../components/Tours/TourPriceList"
 import TourImportantInfo from "../../components/Tours/TourImportantInfo"
@@ -102,6 +103,11 @@ function TourDetails() {
                                                 image={<GroupIcon fontSize={"medium"}/>}
                                                 text="Miejsca"
                                                 value={`xx / ${tourData.general_data.person_limit}`}
+                                            />
+                                            <TourPanelLabel
+                                                image={<AccessTimeIcon fontSize={"medium"}/>}
+                                                text="Pozostało"
+                                                value={`${tourData.general_data.days_left} dni ${tourData.general_data.time_left} godzin`}
                                             />
                                         </Col>
                                         <Col xl={5}

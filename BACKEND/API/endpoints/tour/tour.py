@@ -3,7 +3,8 @@ from flask import request, current_app
 from app.handlers import APIException
 from app.database.db import cursor
 import os
-
+from datetime import datetime
+from app.endpoints.utils.dhmFromSeconds import dhms_from_seconds
 bp = Blueprint("tour", __name__, url_prefix="/tour")
 
 
@@ -16,7 +17,7 @@ def get_tour():
     tour_id = request.args["tour_id"]
 
     ## Get general tour data
-    cursor().execute(f"SELECT id, guide_id, header, description, start_date, end_date, price, person_limit FROM tours WHERE id = %s", (tour_id, ))
+    cursor().execute(f"SELECT id, guide_id, header, description, start_date, end_date, price, person_limit, enrollment_deadline FROM tours WHERE id = %s", (tour_id, ))
     general_data = cursor().fetchone()
 
     if not general_data: # <-- offer with given tour_id does not exist
@@ -26,6 +27,15 @@ def get_tour():
     general_data["end_date"] = general_data["end_date"].strftime("%d/%m/%Y")    # <-- format date
     tour_data["general_data"] = general_data
 
+    now = datetime.now()
+    enrollment_deadline = general_data["enrollment_deadline"]
+    timedelta = enrollment_deadline-now
+    diff = timedelta.days * 24 * 3600 + timedelta.seconds
+
+    [days_left, hours_left, minutes_left] = dhms_from_seconds(diff)
+    general_data["days_left"] = days_left
+
+    general_data["time_left"] = f"    {hours_left}: {f'0{minutes_left}' if minutes_left<10 else minutes_left}"
 
     ## Get guide data <-- users table
     guide_id = general_data["guide_id"]

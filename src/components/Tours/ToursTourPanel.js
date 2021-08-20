@@ -5,6 +5,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import GroupIcon from '@material-ui/icons/Group';
 import DateRangeIcon from '@material-ui/icons/DateRange';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
 import TourPanelLabel from "./TourPanelLabel";
 import {useHistory} from "react-router-dom";
@@ -23,9 +24,9 @@ const ToursTourPanel = (props) => {
     return (
         <div onClick={() => {
             history.push(`/tours/tour?id=${props.tourId}`)
-        }}>
+        }} style={{width: "100%"}}>
             <Row className={"toursTourPanel w-100"}>
-                <Col xl={5} className={"d-flex flex-column align-items-center justify-content-center"}>
+                <Col xl={5} className={"d-flex  align-items-end justify-content-center"}>
                     <img src={props.image_url} alt={""} className={"tour-panel-main-img"}/>
                 </Col>
                 <Col xl={7} className={"d-flex flex-column"}>
@@ -33,12 +34,12 @@ const ToursTourPanel = (props) => {
                         <h1 className={"tour-panel-header"}> {limitText(props.header, 30)} </h1>
                     </Row>
                     <Row style={{flexGrow: "1"}}>
-                        <Col xl={6} className={"d-flex flex-column justify-content-center"}>
+                        <Col xl={5} className={"d-flex flex-column justify-content-center"}>
                             <p className={"tour-panel-description"}>
-                                {limitText(props.description, 256)}
+                                {limitText(props.description, 128)}
                             </p>
                         </Col>
-                        <Col xl={6}
+                        <Col xl={7}
                              className={"tour-panel-info d-flex flex-column align-items-start justify-content-center"}>
                             <TourPanelLabel
                                 image={<PersonIcon fontSize={"medium"}/>}
@@ -59,6 +60,11 @@ const ToursTourPanel = (props) => {
                                 image={<GroupIcon fontSize={"medium"}/>}
                                 text="Miejsca"
                                 value={`xx/${props.person_limit}`}
+                            />
+                            <TourPanelLabel
+                                image={<AccessTimeIcon fontSize={"medium"}/>}
+                                text="Pozostało: "
+                                value={`${props.days_left} dni ${props.time_left} godzin`}
                             />
                         </Col>
                     </Row>

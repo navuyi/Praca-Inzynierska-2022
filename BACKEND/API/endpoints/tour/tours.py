@@ -1,12 +1,11 @@
 import os.path
-
+from datetime import datetime
 from flask import Blueprint, jsonify
 from flask import request, current_app
 from app.handlers import APIException
 from app.endpoints.utils.defineSQLParams import sqlParams
-
+from app.endpoints.utils.dhmFromSeconds import dhms_from_seconds
 from app.database.db import cursor
-
 
 
 bp = Blueprint("tours", __name__, url_prefix="/tour")
@@ -53,7 +52,7 @@ def get_tours():
     else:
         by_place = False
 
-    statement = f'''SELECT id FROM tours {f'WHERE price BETWEEN {price_lower} AND {price_upper}' if by_price else 'WHERE'}
+    statement = f'''SELECT id FROM tours {f'WHERE enrollment_deadline>NOW() AND price BETWEEN {price_lower} AND {price_upper}' if by_price else 'WHERE'}
                         {f'AND' if (by_price and by_date) else ""} {f'start_date >= "{date_lower}" AND end_date <= "{date_upper}"' if by_date else ""} ORDER BY {ORDER}'''
 
     cursor().execute(statement)
@@ -95,10 +94,25 @@ def get_tours():
         # Get general information about the tour
         cursor().execute(f"SELECT * FROM tours WHERE id = %s", (tour_id, ))
         general_data = cursor().fetchall()[0]
-        general_data["start_date"] = general_data["start_date"].strftime("%d/%m/%Y") # <-- format date
-        general_data["end_date"] = general_data["end_date"].strftime("%d/%m/%Y")    # <-- format date
 
-        # Get guide data
+        date_format = "%d-%m-%Y"
+        time_format = "%H:%M"
+
+        general_data["start_date"] = general_data["start_date"].strftime(date_format) # <-- format date
+        general_data["end_date"] = general_data["end_date"].strftime(date_format)    # <-- format date
+
+        now = datetime.now()
+        enrollment_deadline = general_data["enrollment_deadline"]
+        timedelta = enrollment_deadline-now
+        diff = timedelta.days * 24 * 3600 + timedelta.seconds
+
+        [days_left, hours_left, minutes_left] = dhms_from_seconds(diff)
+        general_data["days_left"] = days_left
+
+        general_data["time_left"] = f"    {hours_left}: {f'0{minutes_left}' if minutes_left<10 else minutes_left}"
+
+
+    # Get guide data
         guide_id = general_data["guide_id"]
         cursor().execute(f"SELECT * FROM users WHERE id = %s", (guide_id, ))
         guide_data = cursor().fetchall()[0]
@@ -117,7 +131,6 @@ def get_tours():
 
         tours_data.append(tour)
 
-    print(tours_found)
 
     response = jsonify(tours_data=tours_data, tours_found=tours_found)
 

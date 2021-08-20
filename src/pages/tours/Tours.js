@@ -79,6 +79,7 @@ function Tours() {
                 setTourData(res.data.tours_data)
                 setToursFound(res.data.tours_found)
                 setLoading(false)
+                console.log(res.data)
             })
             .catch(err => {
                 console.log(err.response)
@@ -188,6 +189,8 @@ function Tours() {
                                                 guide_fname={tour.guide_data.f_name}
                                                 guide_lname={tour.guide_data.l_name}
                                                 image_url={tour.image_url}
+                                                days_left={tour.general_data.days_left}
+                                                time_left={tour.general_data.time_left}
                                             />
                                         )
                                     })

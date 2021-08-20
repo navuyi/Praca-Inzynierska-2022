@@ -104,7 +104,6 @@ function GuideNewTourInputs(props) {
                     <FormControl
                         id="end_date"
                         onChange={props.handleChange}
-                        placeholder="Cena wycieczki na osobę"
                         type="date"
                         value={props.tourData.end_date}
                         required
@@ -115,6 +114,31 @@ function GuideNewTourInputs(props) {
                     <TourPlacesSelect
                         setTourData={props.setTourData}
                         tourData={props.tourData}
+                        required
+                    />
+                </Col>
+            </Row>
+            <Row className={"d-flex justify-content-center mt-xl-5"}>
+                <h2 style={{textAlign: "center", color: "#222222"}}> Ostateczny termin zapisów </h2>
+            </Row>
+            <Row className={"d-flex justify-content-center mt-2"}>
+                <Col xl={3} lg={4} >
+                    <h6> Data </h6>
+                    <FormControl
+                        id="enrollment_deadline_date"
+                        onChange={props.handleChange}
+                        type="date"
+                        value={props.tourData.enrollment_deadline_date}
+                        required
+                    />
+                </Col>
+                <Col xl={3} lg={4} >
+                    <h6> Godzina </h6>
+                    <FormControl
+                        id="enrollment_deadline_time"
+                        onChange={props.handleChange}
+                        type="time"
+                        value={props.tourData.enrollment_deadline_time}
                         required
                     />
                 </Col>
