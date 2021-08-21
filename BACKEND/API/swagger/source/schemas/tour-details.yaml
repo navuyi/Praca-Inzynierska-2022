@@ -27,6 +27,13 @@ properties:
       guide_id:
         type: integer
         example: 1
+      enrollment_deadline:
+        type: string
+      days_left:
+        type: integer
+        example: 2
+      time_left:
+        type: string
   guide_data:
     type: object
     properties:

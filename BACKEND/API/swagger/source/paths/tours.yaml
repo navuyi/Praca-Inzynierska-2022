@@ -1,0 +1,106 @@
+get:
+  tags:
+    - Tour
+  summary: Returns limited number of tour's data and information about total search results and number of pages
+  parameters:
+    - in: query
+      name: tour_price
+      schema:
+        type: array
+        items:
+          type: integer
+    - in: query
+      name: tour_places
+      schema:
+        type: array
+        items:
+          type: integer
+    - in: query
+      name: tour_date
+      schema:
+        type: array
+        items:
+          type: string
+    - in: query
+      name: results_per_page
+      schema:
+        type: integer
+        default: 5
+    - in: query
+      name: sort_by
+      schema:
+        type: string
+        default: most_recent
+    - in: query
+      name: page
+      schema:
+        type: integer
+        default: 1
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              tours_data:
+                type: object
+                properties:
+                  general_data:
+                    type: object
+                    properties:
+                      creation_date:
+                        type: string
+                      days_left:
+                        type: integer
+                      description:
+                        type: string
+                      end_date:
+                        type: string
+                      enrollment_deadline:
+                        type: string
+                      guide_id:
+                        type: integer
+                      header:
+                        type: string
+                      id:
+                        type: integer
+                      is_active:
+                        type: integer
+                      person_limit:
+                        type: integer
+                      price:
+                        type: integer
+                      start_date:
+                        type: string
+                      time_left:
+                        type: string
+                  guide_data:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                      f_name:
+                        type: string
+                      l_name:
+                        type: string
+                      id:
+                        type: integer
+                      phone_number:
+                        type: integer
+                  image_url:
+                    type: string
+
+              tours_found:
+                type: integer
+                example: 16
+    '404':
+      description: Not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              msg:
+                type: string

@@ -18,6 +18,7 @@ function Messenger(props) {
     const [messages, setMessages] = useState([])
     const [fetching, setFetching] = useState(false)
     const [response, setResponse] = useState("")
+    const [threadEnd, setThreadEnd] = useState(false)
 
     // Fetch messages on every component render
     useEffect(() => {
@@ -34,8 +35,9 @@ function Messenger(props) {
         api_messages_thread_messages(props.thread_id, msgOffset)
             .then(res => {
                 console.log(res.data)
-                setMessages(res.data)
-                setMsgOffset(res.data.length)
+                setMessages(res.data.messages)
+                setMsgOffset(res.data.messages.length)
+                setThreadEnd(res.data.end_of_thread)
                 setFetching(false)
             })
             .catch(err => {
@@ -98,19 +100,18 @@ function Messenger(props) {
                     props.setMsgVisible(false)
                 }}/>
             </Row>
-            <Row>
-            </Row>
             <div className={"messenger-body"}>
                 {
                     fetching ?
-                        <Row className={"d-flex justify-content-center align-items-center"}
-                             style={{minHeight: "300px"}}>
+                        <Row className={"d-flex justify-content-center align-items-center h-100"}>
                             <CircularProgress size={100}/>
                         </Row>
                         :
-                        <div >
+                        <div>
                             <Row className={"w-100 mt-2 d-flex justify-content-center align-items-center"}>
-                                <Button variant={"danger"} className={"w-75"} onClick={fetchMessages}> Załaduj więcej </Button>
+                                {
+                                    threadEnd ? null : <Button variant={"danger"} className={"w-75"} onClick={fetchMessages}> Załaduj więcej </Button>
+                                }
                             </Row>
                             {
                                 messages.map((msg, index) => {

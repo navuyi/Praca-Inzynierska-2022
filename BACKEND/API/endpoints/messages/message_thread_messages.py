@@ -13,12 +13,16 @@ def get_thread_messages():
 
     my_id = get_jwt_identity()
 
-    offset = request.args["offset"]
     thread_id = request.args["thread_id"]
-    msg_limit = current_app.config["MESSAGES_LIMIT"] + int(offset)
+    msg_limit = current_app.config["MESSAGES_LIMIT"] + int(request.args["offset"])
     statement = f"SELECT * FROM (SELECT * FROM messages WHERE thread_id=%s ORDER BY creation_date DESC LIMIT {msg_limit}) as sub_query ORDER BY creation_date"
     cursor().execute(statement, (thread_id, ))
     messages = cursor().fetchall()
+    number_of_messages = len(messages)
+
+    # Find total number of messages
+    cursor().execute(f"SELECT count(*) FROM messages WHERE thread_id=%s", (thread_id, ))
+    total_messages_in_thread = cursor().fetchone()["count(*)"]
 
     # Define my side of conversation
     #cursor().execute(f"SELECT sender_id, receiver_id FROM message_threads WHERE id=%s", (thread_id, ))
@@ -26,7 +30,7 @@ def get_thread_messages():
     #thread_sender = sides["sender_id"]
     #thread_receiver = sides["receiver_id"]
 
-    converstaion = []
+    conversation = []
     for message in messages:
         # No checking for message deleted by sender/receiver for now
 
@@ -37,8 +41,6 @@ def get_thread_messages():
             "creation_time": message['creation_date'].strftime("%H:%M"),
             "was_read": message["was_read"],
         }
-        print(msg["creation_date"])
-        print(msg['creation_time'])
 
         # Define interlocutor ID
         sender_id = int(message["sender_id"])
@@ -49,7 +51,8 @@ def get_thread_messages():
         elif int(my_id) == receiver_id:
             msg["side"] = "left"
 
-        converstaion.append(msg)
+        conversation.append(msg)
 
-    response = jsonify(converstaion)
-    return jsonify(converstaion), 201
+    end_of_thread = True if total_messages_in_thread == number_of_messages else False
+    response = jsonify(messages=conversation, end_of_thread=end_of_thread)
+    return response, 201

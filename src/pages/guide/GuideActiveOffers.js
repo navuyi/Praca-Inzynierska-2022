@@ -92,6 +92,8 @@ function GuideActiveOffers() {
                                         end_date={tour.end_date}
                                         creation_date={tour.creation_date}
                                         image_url={tour.image_url}
+                                        days_left={tour.days_left}
+                                        time_left={tour.time_left}
                                     />
                                 )
                             })

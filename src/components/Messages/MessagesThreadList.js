@@ -11,12 +11,14 @@ import DropdownItem from "react-bootstrap/DropdownItem";
 import delete_thread from "../../API_CALLS/api_messages_thread_delete";
 import {_logout} from "../../utils/_logout";
 import restore_thread from "../../API_CALLS/api_messages_thread_restore";
-
+import {Pagination} from "@material-ui/lab";
 
 function MessagesThreadList(props) {
     const history = useHistory()
     const [threads, setThreads] = useState([])
     const [loading, setLoading] = useState(false)
+    const [page, setPage] = useState(1)
+    const [totalPages, setTotalPages] = useState(1)
 
     useEffect(() => {
         fetchThreads()
@@ -24,16 +26,19 @@ function MessagesThreadList(props) {
     useEffect(() => {
         fetchThreads()
     }, [props.threadType])
+    useEffect(() => {
+        fetchThreads()
+    }, [page])
 
     function fetchThreads() {
         setLoading(true)
-
         const thread_type = Object.keys(props.threadType).find(key => props.threadType[key] === true)
         console.log(thread_type)
-        api_messages_general_threads(thread_type)
+        api_messages_general_threads(thread_type, page)
             .then(res => {
                 setLoading(false)
-                setThreads(res.data)
+                setThreads(res.data.threads)
+                setTotalPages(res.data.pages)
                 console.log(res.data)
             })
             .catch(err => {
@@ -48,6 +53,13 @@ function MessagesThreadList(props) {
                     })
                 }
             })
+    }
+
+    function handlePage(e, value){
+        if(value === page){
+            return
+        }
+        setPage(value)
     }
 
     function navigateTourDetails(e) {
@@ -110,10 +122,16 @@ function MessagesThreadList(props) {
         <React.Fragment>
             {
                 loading ?
-                    <Row className={"loading-box"}>
-                        <CircularProgress size={100}/>
-                    </Row> :
+                    <React.Fragment>
+                        <Row className={"loading-box"}>
+                            <CircularProgress size={100}/>
+                        </Row>
+                        <Row className={"thread-list-pagination d-flex justify-content-center align-items-center"}>
+                            <Pagination count={totalPages} page={page} shape="rounded" color={"primary"} onChange={handlePage}/>
+                        </Row>
+                    </React.Fragment>:
                     threads.length > 0 ?
+                    <React.Fragment>
                     <Row className={"thread-list"}>
                         <Table striped bordered hover responsive={"sm"} className={"mb-0 w-100"}>
                             <thead>
@@ -124,7 +142,8 @@ function MessagesThreadList(props) {
                                 <th >Tytuł wątku</th>
                                 <th > Oferta</th>
                                 <th >Data</th>
-                                <th style={{minWidth: "200px"}} className={"d-flex justify-content-center align-items-center"}> <MoreHorizIcon fontSize={"large"}/> </th>
+
+                                <th  > </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -145,8 +164,8 @@ function MessagesThreadList(props) {
                                             </td>
                                             <td onClick={handleThreadChange}
                                                 id={thread.thread_id}> {thread.creation_date} </td>
-                                            <td className={"d-flex justify-content-center align-items-center"}>
-                                                <DropdownButton title={"Opcje"} variant={"dark"}>
+                                            <td>
+                                                <DropdownButton title={"Opcje"} variant={"dark"} className={"btn w-100"}>
                                                     <DropdownItem id={thread.thread_id} onClick={handleThreadChange}> Pokaż wątek </DropdownItem>
                                                     {
                                                         props.threadType.deleted ? null :  <DropdownItem id={thread.thread_id} onClick={deleteThread}> Usuń wątek </DropdownItem>
@@ -162,7 +181,12 @@ function MessagesThreadList(props) {
                             }
                             </tbody>
                         </Table>
-                    </Row> :
+                    </Row>
+                    <Row className={"thread-list-pagination d-flex justify-content-center align-items-center"}>
+                        <Pagination count={totalPages} page={page} shape="rounded" color={"primary"} onChange={handlePage}/>
+                    </Row>
+                    </React.Fragment>
+                        :
                     <NotFoundIndicator
                         message={"Brak konwersacji"}
                     />

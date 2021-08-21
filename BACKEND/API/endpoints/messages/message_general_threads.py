@@ -2,6 +2,7 @@ from flask import Blueprint, request, current_app, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.handlers import APIException
 from app.database.db import cursor, lastrowid
+import math
 
 bp = Blueprint("general_threads", __name__, url_prefix="/messages")
 
@@ -21,6 +22,31 @@ def get_general_threads():
     cursor().execute(f"SELECT is_guide FROM users WHERE id=%s", (my_id, ))
     is_guide = cursor().fetchone()["is_guide"]
 
+    limit = 5
+    page = int(request.args["page"])
+
+    columns = "message_threads.id, tour_id, creation_date, topic, sender_deleted, sender_id, receiver_deleted, receiver_id"
+    if is_guide == 1:  # <-- user is a guide, TODO check if both sides of the communication are guides
+        statement = f"SELECT SQL_CALC_FOUND_ROWS {columns} FROM message_threads, users WHERE " \
+                    f"(sender_id={my_id} AND sender_deleted={is_deleted} AND users.is_guide=1 AND users.id=receiver_id)" \
+                    f"OR " \
+                    f"(receiver_id={my_id} AND receiver_deleted={is_deleted} AND users.is_guide=1 AND users.id=sender_id) LIMIT {limit} OFFSET {(page-1)*limit} "
+        cursor().execute(statement)
+        threads = cursor().fetchall()
+
+        cursor().execute("SELECT FOUND_ROWS()")
+        found_rows = cursor().fetchone()["FOUND_ROWS()"]
+        pages = math.ceil(found_rows/limit)
+
+    elif is_guide == 0:  # <-- user is not a guide getting all threads available
+        statement = f"SELECT SQL_CALC_FOUND_ROWS {columns} FROM message_threads WHERE (sender_id={my_id} AND sender_deleted={is_deleted}) OR (receiver_id={my_id} AND receiver_deleted={is_deleted}) LIMIT {limit} OFFSET {(page-1)*limit} "
+        cursor().execute(statement)
+        threads = cursor().fetchall()
+
+        cursor().execute("SELECT FOUND_ROWS()")
+        found_rows = cursor().fetchone()["FOUND_ROWS()"]
+        pages = math.ceil(found_rows/limit)
+    '''
     cursor().execute(f"SELECT id, tour_id, creation_date, topic, sender_deleted, sender_id, receiver_deleted, receiver_id FROM message_threads WHERE sender_id = %s OR receiver_id = %s", (my_id, my_id))
     threads = cursor().fetchall()
 
@@ -48,12 +74,11 @@ def get_general_threads():
                 response_threads.append(thread)
         else:
             response_threads.append(thread)
+    '''
 
-    response = []
-    for thread in response_threads:
-
+    response_threads = []
+    for thread in threads:
         thr = {}
-
         # Define interlocutor
         sender_id = int(thread["sender_id"])
         receiver_id = int(thread["receiver_id"])
@@ -83,6 +108,7 @@ def get_general_threads():
         header = cursor().fetchone()["header"]
         thr["tour_header"] = header
 
-        response.append(thr)
+        response_threads.append(thr)
 
-    return jsonify(response), 201
+    response = jsonify(threads=response_threads, pages=pages)
+    return response, 201

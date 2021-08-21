@@ -4,7 +4,7 @@ from flask import Blueprint, jsonify
 from flask import request, current_app
 from app.handlers import APIException
 from app.endpoints.utils.defineSQLParams import sqlParams
-from app.endpoints.utils.dhmFromSeconds import dhms_from_seconds
+from app.endpoints.utils.dhmFromSeconds import dhm_from_seconds
 from app.database.db import cursor
 
 
@@ -52,7 +52,7 @@ def get_tours():
     else:
         by_place = False
 
-    statement = f'''SELECT id FROM tours {f'WHERE enrollment_deadline>NOW() AND price BETWEEN {price_lower} AND {price_upper}' if by_price else 'WHERE'}
+    statement = f'''SELECT id FROM tours {f'WHERE NOW()<enrollment_deadline AND price BETWEEN {price_lower} AND {price_upper}' if by_price else 'WHERE'}
                         {f'AND' if (by_price and by_date) else ""} {f'start_date >= "{date_lower}" AND end_date <= "{date_upper}"' if by_date else ""} ORDER BY {ORDER}'''
 
     cursor().execute(statement)
@@ -101,20 +101,14 @@ def get_tours():
         general_data["start_date"] = general_data["start_date"].strftime(date_format) # <-- format date
         general_data["end_date"] = general_data["end_date"].strftime(date_format)    # <-- format date
 
-        now = datetime.now()
-        enrollment_deadline = general_data["enrollment_deadline"]
-        timedelta = enrollment_deadline-now
-        diff = timedelta.days * 24 * 3600 + timedelta.seconds
-
-        [days_left, hours_left, minutes_left] = dhms_from_seconds(diff)
+        [days_left, hours_left, minutes_left] = dhm_from_seconds(general_data["enrollment_deadline"])
         general_data["days_left"] = days_left
-
-        general_data["time_left"] = f"    {hours_left}: {f'0{minutes_left}' if minutes_left<10 else minutes_left}"
+        general_data["time_left"] = f"{hours_left}:{f'0{minutes_left}' if minutes_left<10 else minutes_left}"
 
 
     # Get guide data
         guide_id = general_data["guide_id"]
-        cursor().execute(f"SELECT * FROM users WHERE id = %s", (guide_id, ))
+        cursor().execute(f"SELECT email, f_name, l_name, phone_number, id FROM users WHERE id = %s", (guide_id, ))
         guide_data = cursor().fetchall()[0]
 
         # Get main image url

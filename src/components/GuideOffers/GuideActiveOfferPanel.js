@@ -15,8 +15,9 @@ function GuideActiveOfferPanel(props) {
                     </Row>
                     <Row className={"d-flex flex-column justify-content-between align-items-start p-5"}
                          style={{flexGrow: "1"}}>
+                        <p> Status: <span>{props.days_left<0 || props.days_left<=0 && props.time_left === "0:00" ?  "Zapisy zakończone" : `Trwają zapisy, pozostało: ${props.days_left} dni ${props.time_left} godzin`} </span></p>
                         <p> Utworzono: <span>{props.creation_date}</span></p>
-                        <p> Zapisanych osób: <span>xx/{props.person_limit}</span>, pozostało <span>XY dni</span></p>
+                        <p> Zapisanych osób: xx/{props.person_limit}</p>
                         <p> Czas trwania: od <span>{props.start_date}</span> do <span>{props.end_date}</span></p>
                         <p> Cena: <span>{props.price}</span></p>
                     </Row>

@@ -24,20 +24,26 @@ get:
       content:
         application/json:
           schema:
-            type: array
-            items:
-              type: object
-              properties:
-                content:
-                  type: string
-                creation_date:
-                  type: string
-                creation_time:
-                  type: string
-                id:
-                  type: integer
-                side:
-                  type: string
-                  description: left/right - defines side of messages display
-                was_read:
-                  type: integer
+            type: object
+            properties:
+              end_of_thread:
+                type: boolean
+                default: False
+              messages:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    content:
+                      type: string
+                    creation_date:
+                      type: string
+                    creation_time:
+                      type: string
+                    id:
+                      type: integer
+                    side:
+                      type: string
+                      description: left/right - defines side of messages display
+                    was_read:
+                      type: integer

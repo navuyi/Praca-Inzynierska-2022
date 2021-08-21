@@ -4,7 +4,7 @@ from app.handlers import APIException
 from app.database.db import cursor
 import os
 from datetime import datetime
-from app.endpoints.utils.dhmFromSeconds import dhms_from_seconds
+from app.endpoints.utils.dhmFromSeconds import dhm_from_seconds
 bp = Blueprint("tour", __name__, url_prefix="/tour")
 
 
@@ -27,15 +27,10 @@ def get_tour():
     general_data["end_date"] = general_data["end_date"].strftime("%d/%m/%Y")    # <-- format date
     tour_data["general_data"] = general_data
 
-    now = datetime.now()
-    enrollment_deadline = general_data["enrollment_deadline"]
-    timedelta = enrollment_deadline-now
-    diff = timedelta.days * 24 * 3600 + timedelta.seconds
-
-    [days_left, hours_left, minutes_left] = dhms_from_seconds(diff)
+    [days_left, hours_left, minutes_left] = dhm_from_seconds(general_data["enrollment_deadline"])
     general_data["days_left"] = days_left
 
-    general_data["time_left"] = f"    {hours_left}: {f'0{minutes_left}' if minutes_left<10 else minutes_left}"
+    general_data["time_left"] = f"{hours_left}:{f'0{minutes_left}' if minutes_left<10 else minutes_left}"
 
     ## Get guide data <-- users table
     guide_id = general_data["guide_id"]

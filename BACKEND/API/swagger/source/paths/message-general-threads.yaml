@@ -11,36 +11,50 @@ get:
       schema:
         type: string
         example: "active"
+        default: "active"
       required: true
       description: ID of the thread to delete
-
+    - in: query
+      name: page
+      schema:
+        type: integer
+        example: 1
+        default: 1
+      required: true
+      description: Number of page to fetch
   responses:
     '200':
       description: OK
       content:
         application/json:
           schema:
-            type: array
-            items:
-              type: object
-              properties:
-                thread_id:
-                  type: integer
-                tour_id:
-                  type: integer
-                tour_header:
-                  type: string
-                creation_time:
-                  type: string
-                creation_date:
-                  type: string
-                topic:
-                  type: string
-                interlocutor_id:
-                  type: integer
-                interlocutor_fname:
-                  type: string
-                interlocutor_lname:
-                  type: string
-                interlocutor_email:
-                  type: string
+            type: object
+            properties:
+              pages:
+                type: integer
+                default: 1
+              threads:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    thread_id:
+                      type: integer
+                    tour_id:
+                      type: integer
+                    tour_header:
+                      type: string
+                    creation_time:
+                      type: string
+                    creation_date:
+                      type: string
+                    topic:
+                      type: string
+                    interlocutor_id:
+                      type: integer
+                    interlocutor_fname:
+                      type: string
+                    interlocutor_lname:
+                      type: string
+                    interlocutor_email:
+                      type: string

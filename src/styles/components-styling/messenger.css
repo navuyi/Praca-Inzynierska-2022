@@ -39,8 +39,7 @@
     padding-right: 2em;
     background-color: whitesmoke;
     overflow-y: auto;
-    max-height: 70vh;
-
+    height: 70vh;
     border: 5px solid #222222;
 }
 

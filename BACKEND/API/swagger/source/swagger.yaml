@@ -26,12 +26,9 @@ paths:
     $ref: "./paths/tour-details.yaml"
 
   "/api/tour/tours":
-    get:
-      tags:
-        - Tour
-      summary: Returns limited number of tour's data and information about total search results and number of pages
+    $ref: "./paths/tours.yaml"
 
-# Message endpoints
+  # Message endpoints
   "/api/messages/unicast/new":
       $ref: "./paths/message-unicast-new.yaml"
 
@@ -46,6 +43,7 @@ paths:
 
   "/api/messages/general/threads":
     $ref: "./paths/message-general-threads.yaml"
+
 
   "/api/messages/thread/delete":
     $ref: "./paths/messages-thread-delete.yaml"
