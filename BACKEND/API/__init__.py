@@ -99,6 +99,8 @@ def create_app(test_config=None):               # test_config - independent from
     from app.endpoints.messages.message_thread_delete import bp as bp_thread_delete
     from app.endpoints.messages.message_thread_restore import bp as bp_thread_restore
 
+    from app.endpoints.enrollments.enrollment_post import bp as bp_enrollment_post
+
     # Register blueprints
     app.register_blueprint(bp_authentication)
     app.register_blueprint(bp_new_tour)
@@ -124,5 +126,7 @@ def create_app(test_config=None):               # test_config - independent from
     app.register_blueprint(bp_general_threads)
     app.register_blueprint(bp_thread_delete)
     app.register_blueprint(bp_thread_restore)
+
+    app.register_blueprint(bp_enrollment_post)
 
     return app
