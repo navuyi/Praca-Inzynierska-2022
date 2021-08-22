@@ -1,0 +1,32 @@
+.enrollment{
+
+}
+.enrollment .header{
+
+}
+.enrollment .header img{
+    width: 100%;
+}
+
+.enrollment .section-header{
+    background-color: #222222;
+    border-radius: 0.5em;
+    padding: 0.5em 0;
+}
+.enrollment h1{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
+    color: whitesmoke;
+}
+.enrollment .section-header-summary{
+    background-color: orange;
+}
+.enrollment .section{
+    background-color: #f8f8f8;
+
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-bottom-right-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+}

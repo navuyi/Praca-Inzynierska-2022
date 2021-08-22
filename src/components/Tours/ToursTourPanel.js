@@ -23,7 +23,7 @@ const ToursTourPanel = (props) => {
 
     return (
         <div onClick={() => {
-            history.push(`/tours/tour?id=${props.tourId}`)
+            history.push(`/tours/tour/${props.tourId}`)
         }} style={{width: "100%"}}>
             <Row className={"toursTourPanel w-100"}>
                 <Col xl={5} className={"d-flex  align-items-end justify-content-center"}>

@@ -15,12 +15,12 @@ import TourDetails from "./pages/tours/TourDetails";
 import Account from "./pages/Account";
 import Login from './pages/Login';
 import Register from "./pages/Register";
-
+import GuideNewTourSuccess from "./pages/guide/guide-new-tour/GuideNewTourSuccess";
 import Guide from "./pages/guide/Guide";
 import User from "./pages/user/User";
 import Messages from "./pages/messages/Messages";
 import GuideActiveOffer from "./pages/guide/guide-active-offer/GuideActiveOffer";
-
+import Enrollment from "./pages/Enrollment";
 
 // Styles
 import './App.css';
@@ -54,7 +54,7 @@ import "./styles/components-styling/messageBox.css"
 import "./styles/components-styling/messenger.css"
 import "./styles/components-styling/tourDetailsMessenger.css"
 import "./styles/components-styling/notFoundIndicator.css"
-import GuideNewTourSuccess from "./pages/guide/guide-new-tour/GuideNewTourSuccess";
+import "./styles/pages-styling/enrollment.css"
 
 
 function App() {
@@ -95,10 +95,12 @@ function App() {
                 <Route exact path="/tours">
                     <Tours/>
                 </Route>
-                <Route exact path={"/tours/tour"}>
+                <Route exact path={"/tours/tour/:tour_id"}>
                     <TourDetails/>
                 </Route>
-
+                <Route exact path={"/tours/tour/:tour_id/enrollment"}>
+                    <Enrollment/>
+                </Route>
 
                 <GuideOnlyRoute path="/account/guide/active-offer/:tourID" component={GuideActiveOffer}/>
                 <GuideOnlyRoute path="/account/guide" component={Guide}/>

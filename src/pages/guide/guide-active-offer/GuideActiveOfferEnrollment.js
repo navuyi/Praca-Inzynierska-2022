@@ -43,6 +43,8 @@ function GuideActiveOfferEnrollment(props) {
                     start_date={props.general_data ? props.general_data.start_date : ""}
                     end_date={props.general_data ? props.general_data.end_date : ""}
                     image_url={props.image_url ? props.image_url : ""}
+                    days_left={props.general_data ? props.general_data.days_left : ""}
+                    time_left={props.general_data ? props.general_data.time_left : ""}
                 />
                 <Row className={"mt-5 d-flex flex-column"}>
                     <h1 className={"list-header"}> Lista zapisów </h1>

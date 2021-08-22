@@ -52,8 +52,12 @@ def create_new_tour():
     ### Check date correctness ###
     start_date = datetime.strptime(tour_data["start_date"], "%Y-%m-%d")
     end_date = datetime.strptime(tour_data["end_date"], "%Y-%m-%d")
+    enrollment_deadline = datetime.strptime(tour_data["enrollment_deadline_date"], "%Y-%m-%d")
     if end_date < start_date:
         raise APIException(msg="Data zakończenia wycieczki nie może być wcześniejsza niż data jej rozpoczęcia", code=422)
+    if enrollment_deadline > end_date:
+        raise APIException(msg="Data zakończenia zapisów nie może być późniejsza niż data końca wycieczki", code=422)
+
 
 
     ### Create new tour in tours table ###

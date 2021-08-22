@@ -25,14 +25,16 @@
 
 .guideActiveOfferHeader p {
     font-family: 'Source Sans Pro', sans-serif;
+    color: #222222;
     font-weight: bold;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     margin: 0.7em 0;
     padding: 0 0;
-}
 
+}
 .guideActiveOfferHeader span {
-    color: #0456a0;
-    font-family: "Lora", sans-serif;
-    font-size: 1rem;
+    color: whitesmoke;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    font-size: 1.1rem;
 }

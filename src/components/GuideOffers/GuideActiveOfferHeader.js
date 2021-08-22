@@ -14,6 +14,7 @@ function GuideActiveOfferHeader(props) {
                 </Row>
                 <Row className={"d-flex flex-row align-items-start pl-xl-3 pt-xl-5"}>
                     <Col xl={8}>
+                        <p> Status: <span>{props.days_left<0 || props.days_left<=0 && props.time_left === "0:00" ?  "Zapisy zakończone" : `Trwają zapisy, pozostało: ${props.days_left} dni ${props.time_left} godzin`} </span></p>
                         <p> Zapisanych: <span>xx/{props.person_limit}</span></p>
                         <p> Cena: <span>{props.price}</span></p>
                         <p> Czas trwania: od <span>{props.start_date}</span> do <span>{props.end_date}</span></p>

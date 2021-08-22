@@ -19,7 +19,7 @@ import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import {CircularProgress} from "@material-ui/core";
 import TourPriceList from "../../components/Tours/TourPriceList"
 import TourImportantInfo from "../../components/Tours/TourImportantInfo"
-import {parse} from "querystring";
+import {useParams} from "react-router-dom";
 import TourImagesGallery from "../../components/ReusableComponents/TourImagesGallery";
 
 import TourDetailsMessenger from "../../components/Tours/TourDetailsMessenger";
@@ -27,8 +27,7 @@ import TourDetailsMessenger from "../../components/Tours/TourDetailsMessenger";
 function TourDetails() {
     const [msgVisible, setMsgVisible] = useState(false)
 
-    const queryString = window.location.search
-    const queryParams = parse(queryString)
+    const {tour_id} = useParams()
 
     const [tourData, setTourData] = useState({})
     const [loading, setLoading] = useState(true)
@@ -42,7 +41,7 @@ function TourDetails() {
     function fetchData() {
         setLoading(true)
         const url = "http://167.99.143.194/api/tour/tour"
-        const tour_id = queryParams["?id"]
+        //const tour_id = queryParams["?id"]
         const params = {
             tour_id: tour_id
         }
