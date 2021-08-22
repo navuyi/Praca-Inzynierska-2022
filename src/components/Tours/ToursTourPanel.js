@@ -58,7 +58,7 @@ const ToursTourPanel = (props) => {
                             />
                             <TourPanelLabel
                                 image={<GroupIcon fontSize={"medium"}/>}
-                                text="Miejsca"
+                                text="Zapisanych"
                                 value={`xx/${props.person_limit}`}
                             />
                             <TourPanelLabel

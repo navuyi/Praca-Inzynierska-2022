@@ -98,6 +98,16 @@ CREATE TABLE enrollments (
     FOREIGN KEY (tour_id) REFERENCES tours(id)
 );
 
+CREATE TABLE enrollment_participants(
+    id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
+    f_name VARCHAR (255) NOT NULL,
+    l_name VARCHAR(255) NOT NULL,
+
+    enrollment_id INT NOT NULL,
+
+    FOREIGN KEY(enrollment_id) REFERENCES enrollments(id)
+);
+
 CREATE TABLE tour_images(
     id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
     tour_id INT NOT NULL,

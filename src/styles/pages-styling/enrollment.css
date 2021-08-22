@@ -27,6 +27,26 @@
 
     padding-top: 1em;
     padding-bottom: 1em;
-    border-bottom-right-radius: 0.5em;
-    border-bottom-left-radius: 0.5em;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.enrollment .section-summary p{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #222222;
+}
+.enrollment .section-summary span{
+    color: darkred;
+    font-family: "Lora", sans-serif;
 }
