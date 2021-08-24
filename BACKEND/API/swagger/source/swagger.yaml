@@ -71,6 +71,11 @@ paths:
             schema:
               type: object
               properties:
+                participants:
+                  type: array
+                  items:
+                    type: string
+                    example: "Joe Doe"
                 f_name:
                   type: string
                   example: Rudy
@@ -83,9 +88,6 @@ paths:
                 email:
                   type: string
                   example: rudyrr@gmail.com
-                tickets:
-                  type: integer
-                  example: 1
                 tour_id:
                   type: integer
                   example: 20

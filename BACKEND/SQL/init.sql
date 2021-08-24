@@ -108,6 +108,50 @@ CREATE TABLE enrollment_participants(
     FOREIGN KEY(enrollment_id) REFERENCES enrollments(id)
 );
 
+
+DELIMITER $$
+CREATE TRIGGER tickets_decrement
+    AFTER DELETE ON enrollment_participants
+    FOR EACH ROW
+    BEGIN
+        UPDATE enrollments e
+        SET e.tickets = e.tickets - 1
+        WHERE e.id <=> OLD.enrollment_id
+        ;
+    END$$
+        DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER tickets_increment
+    AFTER INSERT ON enrollment_participants
+    FOR EACH ROW
+    BEGIN
+        UPDATE enrollments e
+            SET e.tickets = e.tickets + 1
+            WHERE e.id <=> NEW.enrollment_id
+            ;
+        END$$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE TRIGGER tickets_update
+    AFTER UPDATE ON enrollment_participants
+    FOR EACH ROW
+    BEGIN
+        IF NOT (NEW.enrollment_id <=> OLD.enrollment_id) THEN
+        UPDATE enrollments e
+            SET e.tickets = e.tickets - 1
+            WHERE e.id <=> OLD.enrollment_id
+            ;
+        UPDATE enrollments e
+            SET e.tickets = e.tickets + 1
+            WHERE e.id <=> NEW.enrollment_id
+            ;
+        END IF;
+        END $$
+        DELIMITER ;
+
 CREATE TABLE tour_images(
     id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
     tour_id INT NOT NULL,
@@ -168,6 +212,8 @@ CREATE TABLE tour_has_places(
     FOREIGN KEY (tour_id) REFERENCES tours(id),
     FOREIGN KEY (place_id) REFERENCES tour_places(id)
 );
+
+
 
 
 

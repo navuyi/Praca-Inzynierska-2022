@@ -3,18 +3,19 @@ import {Row, Col, Container, Form, FormControl, FormLabel, Button} from "react-b
 import NavbarComponent from "../components/ReusableComponents/NavbarComponent";
 import Footer from "../components/ReusableComponents/Footer";
 
-
-import img from "../images/home/tour03.jpg"
+import {create_enrollment} from "../API_CALLS/api_enrollments_enrollment";
 import GuideActiveOfferHeader from "../components/GuideOffers/GuideActiveOfferHeader";
 import {useParams} from "react-router-dom";
 import axios from "axios";
 
+import EnrollmentConfiguration from "../components/Enrollment/EnrollmentConfiguration";
+
 function Enrollment(){
-    const [tickets, setTickets] = useState(1)
-    const [guestForms, setGuestForms] = useState([])
     const [generalData, setGeneralData] = useState({})
     const [imageUrl, setImageUrl] = useState("")
     const {tour_id} = useParams()
+    const [participants, setParticipants] = useState([])
+    const [comment, setComment] = useState("")
 
     const [personalData, setPersonalData] = useState({
         f_name: "",
@@ -30,20 +31,34 @@ function Enrollment(){
         apartment_number: ""
     })
 
-    // Render proper amount of inputs for enrollment participants
-    useEffect(() => {
-        const tmp = []
-        for(let i=0; i<tickets; i++){
-            tmp.push(
-               <FormControl
-                   className={"w-75 mt-2"}
-                   placeholder="Imię i nazwisko uczestnika wycieczki"
-                   required
-               />
-            )
+    function handleSubmit(e){
+        e.preventDefault()
+        if(participants.length===0){
+            window.scrollTo({top: 0, behavior: "smooth"})
+            return
         }
-        setGuestForms(tmp)
-    }, [tickets])
+        const data = {
+            participants: participants,
+            comment: comment,
+            tour_id: tour_id,
+            ...personalData,
+            ...address
+        }
+        create_enrollment(data)
+            .then(res => {
+                console.log(res)
+                window.alert(res.data.msg)
+            })
+            .catch(err => {
+                console.log(err)
+                if(err.response){
+                    console.log(err.response)
+                    window.alert(err.response.data.message)
+                }
+            })
+    }
+
+
     // Insert dash for proper postcode format
     useEffect(() => {
         if(address.postcode.length === 2){
@@ -66,6 +81,7 @@ function Enrollment(){
         setAddress(tmp)
     }
 
+
     function fetchData() {
         const url = "http://167.99.143.194/api/tour/tour"
         const params = {
@@ -78,7 +94,9 @@ function Enrollment(){
                 setImageUrl(res.data.image_url)
             })
             .catch(err => {
-                console.log(err.response.data)
+                if(err.response){
+                    console.log(err.response.data)
+                }
             })
     }
 
@@ -96,33 +114,17 @@ function Enrollment(){
                     days_left={generalData.days_left}
                     time_left={generalData.time_left}
                 />
-                <Form className={"w-100 d-flex flex-column justify-content-center align-items-center"}>
+                <Form onSubmit={handleSubmit} className={"w-100 d-flex flex-column justify-content-center align-items-center"}>
                     <Row className={"section-header mt-5 w-100 d-flex justify-content-center align-items-center"}>
                         <h1>Formularz zapisu na wycieczkę</h1>
                     </Row>
-                    <Row className={"section col-11 pb-5"}>
-                        <Col  className={"d-flex flex-column justify-content-start align-items-center"}>
-                            <FormLabel> Liczba biletów </FormLabel>
-                            <FormControl
-                                as={"input"}
-                                type={"number"}
-                                value={tickets}
-                                min={1}
-                                onChange={(e)=>{setTickets(e.target.value)}}
-                                className={"w-25"}
-                            />
-                            {
-                                guestForms
-                            }
-                        </Col>
-                        <Col className={"d-flex flex-column justify-content-start align-items-center "}>
-                            <FormLabel> Opcjonalny komentarz</FormLabel>
-                            <FormControl
-                                as={"textarea"}
-                                rows={3}
-                            />
-                        </Col>
-                    </Row>
+                    <EnrollmentConfiguration
+                        participants={participants}
+                        setParticipants={setParticipants}
+                        setComment={setComment}
+                        comment={comment}
+                    />
+
                     <Row className={"section-header  w-100 d-flex justify-content-center align-items-center"}>
                         <h1>Dane osobowe</h1>
                     </Row>
@@ -197,7 +199,7 @@ function Enrollment(){
                                         id={"postcode"}
                                         onChange={handleAddressChange}
                                         required
-                                        maxlength={6}
+                                        maxLength={6}
                                     />
                                 </Col>
                             </Row>
@@ -240,8 +242,8 @@ function Enrollment(){
                         <h1>Podsumowanie</h1>
                     </Row>
                     <Row className={"section section-summary col-11 d-flex flex-column align-items-center justify-content-center"}>
-                        <p> Zakup biletów dla: <span>{tickets} </span> osób</p>
-                        <p> Do zapłaty: <span>{tickets*205} </span></p>
+                        <p> Zakup biletów dla: <span>{participants.length} </span> osób</p>
+                        <p> Do zapłaty: <span>{participants.length*205} </span></p>
                         <Button type={"submit"} className={"w-100 mt-3"} variant={"danger"}> Potwierdź i przejdź do płatności </Button>
                     </Row>
                 </Form>

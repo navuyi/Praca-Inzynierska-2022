@@ -2,7 +2,7 @@ from flask import Blueprint, current_app
 from flask_jwt_extended import create_refresh_token, create_access_token, get_jwt_identity, jwt_required
 from flask import request, jsonify
 from app.handlers import APIException
-from app.database.db import cursor
+from app.database.db import cursor, lastrowid
 
 
 bp = Blueprint("new_enrollment", __name__, url_prefix="/enrollments")
@@ -14,7 +14,14 @@ def create_new_enrollment():
     body = request.json
     user_id = get_jwt_identity()
 
-    ### TODO TEST THE CHECKERS BELOW AFTER CONNECTING IT TO FRONTEND ###
+    # Check if user is already signed to that tour
+    if user_id:
+        cursor().execute(f"SELECT id FROM enrollments WHERE tour_id=%s AND user_id=%s", (body["tour_id"], user_id))
+        res = cursor().fetchall()
+        if res:
+            raise APIException(msg="Ta wycieczka została już przez Ciebie wykupiona", code=400)
+
+
     # Check if tour enrollment process is active
     cursor().execute(f"SELECT * FROM tours WHERE id=%s AND NOW() < enrollment_deadline", (body["tour_id"], ))
     res = cursor().fetchall()
@@ -25,24 +32,25 @@ def create_new_enrollment():
     # Check if tour has available number of places
     cursor().execute(f"SELECT sum(tickets) FROM enrollments WHERE tour_id=%s", (body["tour_id"], ))
     current_tickets = cursor().fetchone()["sum(tickets)"]
+    if current_tickets is None:
+        current_tickets = 0
     person_limit = tour_data["person_limit"]
-    if current_tickets and current_tickets >= person_limit: # <-- checking if there are any available tickets
+    if current_tickets >= person_limit:  # <-- checking if there are any available tickets
         raise APIException(msg="Ilość miejsc w ofercie została wyczerpana", code=400)
 
     # Check if user's amount of tickets will exceed the person limit
-    if current_tickets and current_tickets+body["tickets"] > person_limit:
-        raise  APIException(msg=f"W ofercie pozostało tylko {person_limit-cursor} miejsc", code=400)
+    if current_tickets+len(body["participants"]) > person_limit:
+        raise  APIException(msg=f"W ofercie pozostało tylko {person_limit-current_tickets} miejsc", code=400)
 
 
 
     # Create new enrollment
-    columns = f"f_name, l_name, phone_number, email, tickets, user_id, tour_id, city, postcode, street, house_number, apartment_number, comment"
+    columns = f"f_name, l_name, phone_number, email, user_id, tour_id, city, postcode, street, house_number, apartment_number, comment"
     insert = {
         "f_name": body["f_name"],
         "l_name": body["l_name"],
         "phone_number": body["phone_number"],
         "email": body["email"],
-        "tickets": body["tickets"],
         "user_id": user_id if user_id else None,
         "tour_id": body["tour_id"],
         "city": body["city"],
@@ -52,9 +60,13 @@ def create_new_enrollment():
         "apartment_number": body["apartment_number"],
         "comment": body["comment"]
     }
-    cursor().execute(f"INSERT INTO enrollments ({columns}) VALUES (%(f_name)s, %(l_name)s, %(phone_number)s, %(email)s, %(tickets)s, %(user_id)s, %(tour_id)s, %(city)s, %(postcode)s, %(street)s, %(house_number)s, %(apartment_number)s, %(comment)s )", insert)
+    cursor().execute(f"INSERT INTO enrollments ({columns}) VALUES (%(f_name)s, %(l_name)s, %(phone_number)s, %(email)s, %(user_id)s, %(tour_id)s, %(city)s, %(postcode)s, %(street)s, %(house_number)s, %(apartment_number)s, %(comment)s )", insert)
 
+    enrollment_id = lastrowid()
 
+    # Add participants to enrollment_participants table
+    for full_name in body["participants"]:
+        cursor().execute(f"INSERT INTO enrollment_participants (enrollment_id, full_name) VALUES (%s, %s)", (enrollment_id, full_name))
 
-    response = jsonify(msg="OK")
-    return response, 200
+    response = jsonify(msg=f"Zapis przebiegł pomyslnie + {current_tickets} ")
+    return response, 201
