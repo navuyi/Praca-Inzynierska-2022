@@ -94,6 +94,7 @@ function GuideActiveOffers() {
                                         image_url={tour.image_url}
                                         days_left={tour.days_left}
                                         time_left={tour.time_left}
+                                        tickets={tour.tickets}
                                     />
                                 )
                             })

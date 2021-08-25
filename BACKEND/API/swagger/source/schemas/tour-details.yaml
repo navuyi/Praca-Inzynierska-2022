@@ -88,3 +88,5 @@ properties:
     items:
       type: string
       example: "path-to-image"
+  tickets:
+    type: integer

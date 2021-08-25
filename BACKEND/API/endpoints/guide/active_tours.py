@@ -39,6 +39,11 @@ def get_active_tours():
         cursor().execute(f"SELECT filename FROM tour_images WHERE tour_id = %s AND is_main = %s", (tour["id"], 1))
         filename = cursor().fetchone()["filename"]
 
+        # Get tour enrollments
+        cursor().execute(f"SELECT COALESCE(sum(tickets), 0) FROM enrollments WHERE tour_id=%s", (tour["id"], ))
+        tickets = cursor().fetchone()["COALESCE(sum(tickets), 0)"]
+        tour["tickets"] = tickets
+
         # Change tour start/end date format
         tour["start_date"] = tour["start_date"].strftime("%d/%m/%Y")
         tour["end_date"] = tour["end_date"].strftime("%d/%m/%Y")

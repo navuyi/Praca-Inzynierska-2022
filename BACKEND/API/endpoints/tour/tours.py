@@ -106,7 +106,7 @@ def get_tours():
         general_data["time_left"] = f"{hours_left}:{f'0{minutes_left}' if minutes_left<10 else minutes_left}"
 
 
-    # Get guide data
+        # Get guide data
         guide_id = general_data["guide_id"]
         cursor().execute(f"SELECT email, f_name, l_name, phone_number, id FROM users WHERE id = %s", (guide_id, ))
         guide_data = cursor().fetchall()[0]
@@ -122,6 +122,11 @@ def get_tours():
         tour["general_data"] = general_data
         tour["guide_data"] = guide_data
         tour["image_url"] = image_url
+
+        # Get enrollment data
+        cursor().execute(f"SELECT COALESCE(sum(tickets), 0) FROM enrollments WHERE tour_id=%s", (tour_id, ))
+        tickets = cursor().fetchone()["COALESCE(sum(tickets), 0)"]
+        tour["tickets"] = tickets
 
         tours_data.append(tour)
 

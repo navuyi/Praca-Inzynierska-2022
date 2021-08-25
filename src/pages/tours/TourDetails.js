@@ -100,8 +100,8 @@ function TourDetails() {
                                             />
                                             <TourPanelLabel
                                                 image={<GroupIcon fontSize={"medium"}/>}
-                                                text="Miejsca"
-                                                value={`xx / ${tourData.general_data.person_limit}`}
+                                                text="Zapisanych"
+                                                value={`${tourData.tickets}/${tourData.general_data.person_limit}`}
                                             />
                                             <TourPanelLabel
                                                 image={<AccessTimeIcon fontSize={"medium"}/>}

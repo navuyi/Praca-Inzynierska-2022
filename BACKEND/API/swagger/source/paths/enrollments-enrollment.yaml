@@ -1,0 +1,63 @@
+post:
+  tags:
+    - Enrollments
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            participants:
+              type: array
+              items:
+                type: string
+                example: "Joe Doe"
+            f_name:
+              type: string
+              example: Rudy
+            l_name:
+              type: string
+              example: Reyes
+            phone_number:
+              type: integer
+              example: 696678260
+            email:
+              type: string
+              example: rudyrr@gmail.com
+            tour_id:
+              type: integer
+              example: 20
+            city:
+              type: string
+              example: "Nowe Chechło"
+            postcode:
+              type: string
+              example: "42-622"
+            street:
+              type: string
+              example: "Lasowicka"
+            house_number:
+              type: integer
+              example: 49
+            apartment_number:
+              type: string
+              example: 2a
+            comment:
+              type: string
+              example: Lorem ipsum sint occaecat cupidatat non proident, sunt in culpa qui officia.
+  responses:
+    '201':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              msg:
+                type: string
+
+get:
+  tags:
+    - Enrollments
+  re
+  responses:

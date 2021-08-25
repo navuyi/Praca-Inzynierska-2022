@@ -86,8 +86,10 @@ def get_tour():
             filename = file["filename"]
             tour_data["image_gallery"].append(os.path.join(current_app.config["TOUR_IMAGES_DOWNLOAD_DIRECTORY"], filename))
 
-
-
+    # Get tour enrollments
+    cursor().execute(f"SELECT COALESCE(sum(tickets), 0) FROM enrollments WHERE tour_id=%s", (tour_id, ))
+    tickets = cursor().fetchone()["COALESCE(sum(tickets), 0)"]
+    tour_data["tickets"] = tickets
 
     tour_data["electives"] = electives
 

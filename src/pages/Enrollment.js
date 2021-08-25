@@ -90,6 +90,7 @@ function Enrollment(){
         axios.get(url, {params})
             .then(res => {
                 console.log(res.data)
+                res.data.general_data.tickets=res.data.tickets
                 setGeneralData(res.data.general_data)
                 setImageUrl(res.data.image_url)
             })
@@ -113,6 +114,7 @@ function Enrollment(){
                     image_url={imageUrl}
                     days_left={generalData.days_left}
                     time_left={generalData.time_left}
+                    tickets={generalData.tickets}
                 />
                 <Form onSubmit={handleSubmit} className={"w-100 d-flex flex-column justify-content-center align-items-center"}>
                     <Row className={"section-header mt-5 w-100 d-flex justify-content-center align-items-center"}>

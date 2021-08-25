@@ -32,6 +32,7 @@ function GuideActiveOfferMessages(props) {
                     image_url={props.image_url ? props.image_url : ""}
                     days_left={props.general_data ? props.general_data.days_left : ""}
                     time_left={props.general_data ? props.general_data.time_left : ""}
+                    tickets={props ? props.tickets : ""}
                 />
                 <Row className={"mt-5 d-flex flex-column"}>
                     <h1 className={"list-header"}> Wiadomości </h1>

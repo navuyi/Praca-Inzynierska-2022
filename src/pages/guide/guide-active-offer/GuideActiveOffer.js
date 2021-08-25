@@ -70,6 +70,7 @@ function GuideActiveOffer(props) {
                                 general_data={tourData.general_data}
                                 image_url={tourData.image_url}
                                 image_url={tourData.image_url}
+                                tickets={tourData.tickets}
                             />
 
                             <GuideOnlyRoute
@@ -77,6 +78,7 @@ function GuideActiveOffer(props) {
                                 component={GuideActiveOfferEnrollment}
                                 general_data={tourData.general_data}
                                 image_url={tourData.image_url}
+                                tickets={tourData.tickets}
                             />
 
                             <GuideOnlyRoute

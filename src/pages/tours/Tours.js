@@ -191,6 +191,7 @@ function Tours() {
                                                 image_url={tour.image_url}
                                                 days_left={tour.general_data.days_left}
                                                 time_left={tour.general_data.time_left}
+                                                tickets={tour.tickets}
                                             />
                                         )
                                     })
