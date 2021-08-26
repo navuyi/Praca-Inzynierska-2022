@@ -12,8 +12,9 @@ bp = Blueprint("get_enrollments", __name__, url_prefix="/enrollments")
 @jwt_required()
 def get_enrollments():
     tour_id = request.args["tour_id"]
+    guide_id = get_jwt_identity()
 
-    cursor().execute(f"SELECT id, f_name, l_name, email, phone_number, tickets, user_id FROM enrollments WHERE tour_id=%s ", (tour_id, ))
+    cursor().execute(f"SELECT id, f_name, l_name, email, phone_number, tickets, user_id, creation_date FROM enrollments WHERE tour_id=%s", (tour_id, ))
     enrollments = cursor().fetchall()
 
 
@@ -26,8 +27,14 @@ def get_enrollments():
         for prt in participants:
             enrollment["participants"].append(prt["full_name"])
 
+        # Get conversation
+        if enrollment['user_id'] is not None:
+            cursor().execute(f"SELECT id, topic FROM message_threads WHERE (sender_id=%s AND receiver_id=%s) OR (sender_id=%s AND receiver_id=%s)", (guide_id, enrollment["user_id"], enrollment["user_id"], guide_id))
+            res = cursor().fetchall()
+            enrollment["message_threads"] = res
 
-
+        # Format date
+        enrollment["creation_date"] = enrollment["creation_date"].strftime("%d.%m.%Y")
 
 
     response = jsonify(enrollments)

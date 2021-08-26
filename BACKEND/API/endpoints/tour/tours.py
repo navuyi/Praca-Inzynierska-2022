@@ -24,7 +24,7 @@ def get_tours():
     page = int(args.get("page"))
 
     if sort_by == "most_recent":
-        ORDER = "creation_date"
+        ORDER = "creation_date DESC"
     elif sort_by == "price":
         ORDER = "price"
     elif sort_by == "price_desc":

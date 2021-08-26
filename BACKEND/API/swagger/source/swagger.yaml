@@ -157,6 +157,15 @@ paths:
                     type: array
                     items:
                       type: string
+                  message_threads:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        topic:
+                          type: string
 
 
 
@@ -164,8 +173,7 @@ paths:
 
 
 
-
-        # Endpoints for static information
+                    # Endpoints for static information
   "/api/tour/tags":
     get:
       tags:

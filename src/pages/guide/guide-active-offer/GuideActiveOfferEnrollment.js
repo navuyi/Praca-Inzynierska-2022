@@ -15,9 +15,11 @@ function GuideActiveOfferEnrollment(props) {
     const history = useHistory()
     const dispatch = useDispatch()
 
+
     useEffect(() => {
         fetchEnrollments()
     }, [])
+
 
     function fetchEnrollments(){
         get_enrollments(tourID)
