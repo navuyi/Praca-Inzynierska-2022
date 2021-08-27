@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
-import {Button, Dropdown, DropdownButton, Row, Table} from "react-bootstrap"
+import {Button, Col, DropdownButton, FormControl, FormLabel, Row, Table} from "react-bootstrap"
 import api_messages_general_threads from "../../API_CALLS/api_messages_general_threads";
 import {refesh_token} from "../../API_CALLS/api_authentication_token_refresh";
 import {CircularProgress} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 import {limitText} from "../../utils/limitText";
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+
 import NotFoundIndicator from "../ReusableComponents/NotFoundIndicator";
 import DropdownItem from "react-bootstrap/DropdownItem";
 import delete_thread from "../../API_CALLS/api_messages_thread_delete";
@@ -19,6 +19,7 @@ function MessagesThreadList(props) {
     const [loading, setLoading] = useState(false)
     const [page, setPage] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
+    const [sort, setSort] = useState("most_recent")
 
     useEffect(() => {
         fetchThreads()
@@ -28,13 +29,13 @@ function MessagesThreadList(props) {
     }, [props.threadType])
     useEffect(() => {
         fetchThreads()
-    }, [page])
+    }, [page, sort])
 
     function fetchThreads() {
         setLoading(true)
         const thread_type = Object.keys(props.threadType).find(key => props.threadType[key] === true)
         console.log(thread_type)
-        api_messages_general_threads(thread_type, page)
+        api_messages_general_threads(thread_type, page, sort)
             .then(res => {
                 setLoading(false)
                 setThreads(res.data.threads)
@@ -119,79 +120,94 @@ function MessagesThreadList(props) {
     }
 
     return (
-        <React.Fragment>
-            {
-                loading ?
-                    <React.Fragment>
-                        <Row className={"loading-box"}>
-                            <CircularProgress size={100}/>
-                        </Row>
-                        <Row className={"thread-list-pagination d-flex justify-content-center align-items-center"}>
-                            <Pagination count={totalPages} page={page} shape="rounded" color={"primary"} onChange={handlePage}/>
-                        </Row>
-                    </React.Fragment>:
+            <React.Fragment>
+                <Row className={"thread-list-header d-flex justify-content-center align-items-center mt-5"}>
+                    <Col xl={3}> </Col>
+                    <Col xl={6}>
+                        <h1> {props.threadType.active ? "Aktywne wątki " : null} {props.threadType.deleted ? "Usunięte wątki" : null}</h1>
+                    </Col>
+                    <Col xl={3}>
+                        {
+                            threads.length > 0 ?
+                                <React.Fragment>
+                                    <FormLabel> Sortuj </FormLabel>
+                                    <FormControl as={"select"} value={sort} onChange={(e)=>{setSort(e.target.value)}}>
+                                        <option value={"most_recent"}> Od najnowszych </option>
+                                        <option value={"oldest"}> Od najstarszych </option>
+                                    </FormControl>
+                                </React.Fragment>
+                                        :
+                                null
+                        }
+                    </Col>
+                </Row>
+                {
                     threads.length > 0 ?
-                    <React.Fragment>
+                <React.Fragment>
                     <Row className={"thread-list"}>
-                        <Table striped bordered hover responsive={"sm"} className={"mb-0 w-100"}>
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Rozmówca</th>
-                                <th> Email</th>
-                                <th >Tytuł wątku</th>
-                                <th > Oferta</th>
-                                <th >Data</th>
-
-                                <th  > </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {
-                                threads.map((thread, index) => {
-                                    return (
-                                        <tr key={index}>
-                                            <td onClick={handleThreadChange}
-                                                id={thread.thread_id}> {index + 1} </td>
-                                            <td onClick={handleThreadChange}
-                                                id={thread.thread_id}> {`${thread.interlocutor_fname} ${thread.interlocutor_lname}`} </td>
-                                            <td onClick={handleThreadChange}
-                                                id={thread.thread_id}> {thread.interlocutor_email} </td>
-                                            <td onClick={handleThreadChange}
-                                                id={thread.thread_id}> {limitText(thread.topic, 30)} </td>
-                                            <td><Button id={thread.tour_id} className={"w-100"} variant={'dark'}
-                                                        onClick={navigateTourDetails}> {limitText(thread.tour_header, 20)} </Button>
-                                            </td>
-                                            <td onClick={handleThreadChange}
-                                                id={thread.thread_id}> {thread.creation_date} </td>
-                                            <td>
-                                                <DropdownButton title={"Opcje"} variant={"dark"} className={"btn w-100"}>
-                                                    <DropdownItem id={thread.thread_id} onClick={handleThreadChange}> Pokaż wątek </DropdownItem>
-                                                    {
-                                                        props.threadType.deleted ? null :  <DropdownItem id={thread.thread_id} onClick={deleteThread}> Usuń wątek </DropdownItem>
-                                                    }
-                                                    {
-                                                        !props.threadType.deleted ? null : <DropdownItem id={thread.thread_id} onClick={restoreThread}> Przywróć wątek </DropdownItem>
-                                                    }
-                                                </DropdownButton>
-                                             </td>
-                                        </tr>
-                                    )
-                                })
-                            }
-                            </tbody>
-                        </Table>
+                        {
+                            loading ?
+                                <Row className={"loading-box"}>
+                                    <CircularProgress size={100}/>
+                                </Row>
+                                :
+                                <Table striped bordered hover responsive={"sm"} className={"mb-0 w-100"}>
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Rozmówca</th>
+                                        <th> Email</th>
+                                        <th >Tytuł wątku</th>
+                                        <th > Oferta</th>
+                                        <th >Data</th>
+                                        <th  > </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {
+                                        threads.map((thread, index) => {
+                                            return (
+                                                <tr key={index}>
+                                                    <td onClick={handleThreadChange}
+                                                        id={thread.thread_id}> {index + 1} </td>
+                                                    <td onClick={handleThreadChange}
+                                                        id={thread.thread_id}> {`${thread.interlocutor_fname} ${thread.interlocutor_lname}`} </td>
+                                                    <td onClick={handleThreadChange}
+                                                        id={thread.thread_id}> {thread.interlocutor_email} </td>
+                                                    <td onClick={handleThreadChange}
+                                                        id={thread.thread_id}> {limitText(thread.topic, 30)} </td>
+                                                    <td><Button id={thread.tour_id} className={"w-100"} variant={'dark'}
+                                                                onClick={navigateTourDetails}> {limitText(thread.tour_header, 20)} </Button>
+                                                    </td>
+                                                    <td onClick={handleThreadChange}
+                                                        id={thread.thread_id}> {thread.creation_date} </td>
+                                                    <td>
+                                                        <DropdownButton title={"Opcje"} variant={"dark"} className={"btn w-100"}>
+                                                            <DropdownItem id={thread.thread_id} onClick={handleThreadChange}> Pokaż wątek </DropdownItem>
+                                                            {
+                                                                props.threadType.deleted ? null :  <DropdownItem id={thread.thread_id} onClick={deleteThread}> Usuń wątek </DropdownItem>
+                                                            }
+                                                            {
+                                                                !props.threadType.deleted ? null : <DropdownItem id={thread.thread_id} onClick={restoreThread}> Przywróć wątek </DropdownItem>
+                                                            }
+                                                        </DropdownButton>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                    </tbody>
+                                </Table>
+                                }
                     </Row>
                     <Row className={"thread-list-pagination d-flex justify-content-center align-items-center"}>
                         <Pagination count={totalPages} page={page} shape="rounded" color={"primary"} onChange={handlePage}/>
                     </Row>
-                    </React.Fragment>
+                </React.Fragment>
                         :
-                    <NotFoundIndicator
-                        message={"Brak konwersacji"}
-                    />
-            }
-        </React.Fragment>
+                <NotFoundIndicator message={"Brak usuniętych wątków"}/>
+                }
+            </React.Fragment>
     )
 }
 

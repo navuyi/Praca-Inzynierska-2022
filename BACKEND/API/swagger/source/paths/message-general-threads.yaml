@@ -22,6 +22,12 @@ get:
         default: 1
       required: true
       description: Number of page to fetch
+    - in: query
+      name: sort
+      schema:
+        type: string
+        default: "most_recent"
+      required: true
   responses:
     '200':
       description: OK

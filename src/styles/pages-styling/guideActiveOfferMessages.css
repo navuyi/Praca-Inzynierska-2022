@@ -3,26 +3,39 @@
 }
 
 .guideActiveOfferMessages .list-header {
-    width: 100%;
+    background-color: #222222;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+    padding: 0.7em 0;
+}
+.guideActiveOfferMessages .list-header h1{
     text-align: center;
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
-    background-color: #222222;
+
     color: whitesmoke;
     font-size: 2.1rem;
     margin: 0 0;
     padding: 0.2em 0;
-    border-top-left-radius: 0.5em;
-    border-top-right-radius: 0.5em;
+}
+.guideActiveOfferMessages .list-header label{
+    color: whitesmoke;
+    margin: 0;
+    padding: 0;
 }
 
 .guideActiveOfferMessages .loading-circle-container {
-    min-height: 250px;
+    min-height: 440px;
 }
+
 
 
 .guideActiveOfferMessages .table-responsive-sm {
     width: 100%;
+}
+
+.guideActiveOfferMessages .pagination-element{
+    background-color: orange;
 }
 
 @media (max-width: 900px) {

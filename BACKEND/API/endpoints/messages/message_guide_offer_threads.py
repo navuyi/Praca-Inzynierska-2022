@@ -1,3 +1,5 @@
+import math
+
 from flask import Blueprint, request, current_app, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.handlers import APIException
@@ -20,11 +22,28 @@ def get_guide_offer_threads():
     if not is_guide:
         raise APIException(msg="Unauthorized", code=401)
 
+    limit = 5
+    offset = (int(request.args["page"])-1) * limit
+
+    # Handle sorting
+    if request.args["sort"] == "most_recent":
+        order = "ORDER BY creation_date DESC"
+    elif request.args["sort"] == "oldest":
+        order = "ORDER BY creation_date"
+
     # Get tour message threads
-    cursor().execute(f"SELECT * FROM message_threads WHERE tour_id = %s", (tour_id, ))
+    cursor().execute(f"SELECT SQL_CALC_FOUND_ROWS * FROM message_threads WHERE tour_id = %s {order} LIMIT {limit} OFFSET %s", (tour_id, offset))
     threads = cursor().fetchall()
 
-    response = []
+    cursor().execute("SELECT FOUND_ROWS()")
+    total_rows = cursor().fetchone()["FOUND_ROWS()"]
+    pages_total = math.ceil(total_rows/limit)
+
+    response = {
+        "pages_total": pages_total,
+        "threads": []
+    }
+
     for thread in threads:
         if not thread["hidden"]:    # <-- Do not show hidden threads
 
@@ -54,9 +73,7 @@ def get_guide_offer_threads():
             data["f_name"] = interlocutor_data["f_name"]
             data["l_name"] = interlocutor_data["l_name"]
 
-
-
-            response.append(data)
+            response["threads"].append(data)
 
 
     return jsonify(response), 201

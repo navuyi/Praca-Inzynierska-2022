@@ -47,9 +47,6 @@ function Messages() {
                     </Col>
                     <Col lg={10} sm={12} style={{padding: "0"}}>
                         <Container className={"h-100"} style={{marginTop: "0em", top: "0", flexGrow: "1"}}>
-                            <Row className={"thread-list-header d-flex justify-content-center mt-5"}>
-                                <h1> {threadType.active ? "Aktywne wątki " : null} {threadType.deleted ? "Usunięte wątki" : null}</h1>
-                            </Row>
                             <MessagesThreadList
                                 setThreadId={setThreadId}
                                 setMsgVisible={setMsgVisible}

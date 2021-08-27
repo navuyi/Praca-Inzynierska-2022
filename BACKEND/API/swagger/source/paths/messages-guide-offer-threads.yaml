@@ -12,30 +12,48 @@ get:
       schema:
         type: integer
         example: 1
+    - in: query
+      name: page
+      required: true
+      schema:
+        type: integer
+        default: 1
+    - in: query
+      name: sort
+      required: true
+      schema:
+        type: string
+        default: "most_recent"
   responses:
     '200':
       description: OK
       content:
         application/json:
           schema:
-            type: array
-            items:
-              type: object
-              properties:
-                thread_id:
-                  type: integer
-                email:
-                  type: string
-                f_name:
-                  type: string
-                l_name:
-                  type: string
-                topic:
-                  type: string
-                creation_time:
-                  type: string
-                creation_date:
-                  type: string
+            type: object
+            properties:
+              pages_total:
+                type: integer
+              threads:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    thread_id:
+                      type: integer
+                    email:
+                      type: string
+                    f_name:
+                      type: string
+                    l_name:
+                      type: string
+                    topic:
+                      type: string
+                    creation_time:
+                      type: string
+                    creation_date:
+                      type: string
+
     '401':
       description: Unauthorized
       content:
