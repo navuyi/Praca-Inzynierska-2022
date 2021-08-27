@@ -25,17 +25,23 @@ def get_general_threads():
     limit = 5
     page = int(request.args["page"])
 
+    # Handle sort
     if request.args["sort"] == "most_recent":
         order = "ORDER BY creation_date DESC"
     elif request.args["sort"] == "oldest":
         order = "ORDER BY creation_date"
 
+    # Handle search
+    search = request.args["search"]
+
+
     columns = "message_threads.id, tour_id, creation_date, topic, sender_deleted, sender_id, receiver_deleted, receiver_id"
     if is_guide == 1:  # <-- user is a guide,
-        statement = f"SELECT SQL_CALC_FOUND_ROWS {columns} FROM message_threads, users WHERE " \
-                    f"(sender_id={my_id} AND sender_deleted={is_deleted} AND users.is_guide=1 AND users.id=receiver_id)" \
-                    f"OR " \
-                    f"(receiver_id={my_id} AND receiver_deleted={is_deleted} AND users.is_guide=1 AND users.id=sender_id) {order} LIMIT {limit} OFFSET {(page-1)*limit} "
+        statement = f"""SELECT SQL_CALC_FOUND_ROWS {columns} FROM message_threads, users WHERE """ \
+                    f"""(sender_id={my_id} AND sender_deleted={is_deleted} AND users.is_guide=1 AND users.id=receiver_id)""" \
+                    f"""OR """ \
+                    f"""(receiver_id={my_id} AND receiver_deleted={is_deleted} AND users.is_guide=1 AND users.id=sender_id) """ \
+                    f"""{order} LIMIT {limit} OFFSET {(page-1)*limit} """
         cursor().execute(statement)
         threads = cursor().fetchall()
 

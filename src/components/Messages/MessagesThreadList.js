@@ -20,6 +20,7 @@ function MessagesThreadList(props) {
     const [page, setPage] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
     const [sort, setSort] = useState("most_recent")
+    const [search, setSearch] = useState("")
 
     useEffect(() => {
         fetchThreads()
@@ -29,13 +30,13 @@ function MessagesThreadList(props) {
     }, [props.threadType])
     useEffect(() => {
         fetchThreads()
-    }, [page, sort])
+    }, [page, sort, search])
 
     function fetchThreads() {
         setLoading(true)
         const thread_type = Object.keys(props.threadType).find(key => props.threadType[key] === true)
-        console.log(thread_type)
-        api_messages_general_threads(thread_type, page, sort)
+
+        api_messages_general_threads(thread_type, page, sort, search)
             .then(res => {
                 setLoading(false)
                 setThreads(res.data.threads)
@@ -61,6 +62,10 @@ function MessagesThreadList(props) {
             return
         }
         setPage(value)
+    }
+
+    function handleSearchChange(e){
+        setSearch(e.target.value)
     }
 
     function navigateTourDetails(e) {
@@ -122,7 +127,15 @@ function MessagesThreadList(props) {
     return (
             <React.Fragment>
                 <Row className={"thread-list-header d-flex justify-content-center align-items-center mt-5"}>
-                    <Col xl={3}> </Col>
+                    <Col xl={3}>
+                        {
+                            threads.length>0 ?
+                                <React.Fragment>
+                                    <FormLabel>Wyszukaj</FormLabel>
+                                    <FormControl as={"input"} placeholder={"Imię i nazwisko, email, ..."} onChange={handleSearchChange} value={search}/>
+                                </React.Fragment> : null
+                        }
+                    </Col>
                     <Col xl={6}>
                         <h1> {props.threadType.active ? "Aktywne wątki " : null} {props.threadType.deleted ? "Usunięte wątki" : null}</h1>
                     </Col>

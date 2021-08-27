@@ -1,7 +1,7 @@
 import axios from "axios";
 import {API_PREFIX} from "../config";
 
-export default function api_messages_general_threads(thread_type, page, sort) {
+export default function api_messages_general_threads(thread_type, page, sort, search) {
     const url = API_PREFIX + "/messages/general/threads"
     const access_token = localStorage.getItem("access_token")
     const config = {
@@ -11,7 +11,8 @@ export default function api_messages_general_threads(thread_type, page, sort) {
         params:{
             thread_type: thread_type,
             page: page,
-            sort: sort
+            sort: sort,
+            search: search
         }
     }
     return axios.get(url, config)

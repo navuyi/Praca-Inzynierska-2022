@@ -86,7 +86,15 @@ function GuideActiveOfferThreadList(props) {
     return (
         <React.Fragment>
             <Row className={"mt-5 list-header d-flex  align-items-center justify-content-center"}>
-                <Col xl={3}></Col>
+                <Col xl={3}>
+                    {
+                        threads.length>0 ?
+                            <React.Fragment>
+                                <FormLabel>Wyszukaj</FormLabel>
+                                <FormControl as={"input"} placeholder={"Imię i nazwisko, email, ..."}/>
+                            </React.Fragment> : null
+                    }
+                </Col>
                 <Col xl={6}>
                     <h1> Wiadomości </h1>
                 </Col>
