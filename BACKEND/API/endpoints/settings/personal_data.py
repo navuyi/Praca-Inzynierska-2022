@@ -26,7 +26,13 @@ def handle_personal_data():
 
 
     if request.method == "PUT":
-        return jsonify("OK2"), 200
+        user_id = get_jwt_identity()
+
+        insert = request.json
+        insert["user_id"] = user_id
+        cursor().execute(f"UPDATE users SET f_name=%(f_name)s, l_name=%(l_name)s, email=%(email)s, phone_number=%(phone_number)s WHERE id=%(user_id)s", insert)
+
+        return jsonify(message="Informacje zostały zaktualizowane pomyślnie"), 200
 
 
 

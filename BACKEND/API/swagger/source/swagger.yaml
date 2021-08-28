@@ -72,7 +72,7 @@ paths:
       security:
         - bearerAuth: []
       summary: Returns user's information based on user ID
-      description: This endpoint defines user_id based on JSON Web Token
+      description: This endpoint defines user_id based on JSON Web Token, no request body is needed
       responses:
         '200':
           description: OK
@@ -89,10 +89,40 @@ paths:
                     type: string
                   phone_number:
                     type: string
-
         '401':
           description: Unauthorized
-
+    put:
+      tags:
+        - Account Settings
+      security:
+        - bearerAuth: []
+      summary: Updates user's personal data
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                f_name:
+                  type: string
+                l_name:
+                  type: string
+                email:
+                  type: string
+                phone_number:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
 
 
         # Enrollments endpoints

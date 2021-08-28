@@ -153,7 +153,6 @@ function PasswordChange(){
                             operation.done === true && operation.success === false ?
                            <Alert severity={"error"} variant={"filled"} style={{width: "100%"}}> {responseMsg} </Alert> : null
                         }
-
                     </Row>
                 </Form>
             </Container>
