@@ -21,6 +21,7 @@ import User from "./pages/user/User";
 import Messages from "./pages/messages/Messages";
 import GuideActiveOffer from "./pages/guide/guide-active-offer/GuideActiveOffer";
 import Enrollment from "./pages/Enrollment";
+import Settings from "./pages/settings/Settings"
 
 // Styles
 import './App.css';
@@ -109,6 +110,7 @@ function App() {
                 <ProtectedRoute exact path="/account" component={Account}/>
                 <ProtectedRoute path="/account/user" component={User}/>
                 <ProtectedRoute path="/account/messages" component={Messages}/>
+                <ProtectedRoute path="/account/settings" component={Settings} />
 
                 <Route exact path={"/new-tour-success"}>
                     <GuideNewTourSuccess/>

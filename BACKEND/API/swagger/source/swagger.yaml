@@ -61,7 +61,41 @@ paths:
       tags:
         - Guide
 
-# Enrollments endpoints
+# Settings
+  "/api/settings/password":
+    $ref: "./paths/settings-password.yaml"
+
+  "/api/settings/personal_data":
+    get:
+      tags:
+        - Account Settings
+      security:
+        - bearerAuth: []
+      summary: Returns user's information based on user ID
+      description: This endpoint defines user_id based on JSON Web Token
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  f_name:
+                    type: string
+                  l_name:
+                    type: string
+                  email:
+                    type: string
+                  phone_number:
+                    type: string
+
+        '401':
+          description: Unauthorized
+
+
+
+        # Enrollments endpoints
   "/api/enrollments/enrollment":
     post:
       tags:

@@ -102,6 +102,9 @@ def create_app(test_config=None):               # test_config - independent from
     from app.endpoints.enrollments.enrollment_post import bp as bp_enrollment_post
     from app.endpoints.enrollments.enrollments_get import bp as bp_enrollment_get
 
+    from app.endpoints.settings.password import bp as bp_password
+    from app.endpoints.settings.personal_data import bp as bp_personal_data
+
     # Register blueprints
     app.register_blueprint(bp_authentication)
     app.register_blueprint(bp_new_tour)
@@ -130,5 +133,8 @@ def create_app(test_config=None):               # test_config - independent from
 
     app.register_blueprint(bp_enrollment_post)
     app.register_blueprint(bp_enrollment_get)
+
+    app.register_blueprint(bp_password)
+    app.register_blueprint(bp_personal_data)
 
     return app
