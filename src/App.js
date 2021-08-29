@@ -24,28 +24,29 @@ import Enrollment from "./pages/Enrollment";
 import Settings from "./pages/settings/Settings"
 
 // Styles
-import './App.css';
-import './styles/components-styling/navbarComponent.css';
-import './styles/homeWelcomeView.css';
-import './styles/components-styling/homeTourPanel.css';
-import './styles/pages-styling/home.css';
-import './styles/components-styling/homeInfoPanel.css';
-import './styles/components-styling/footer.css';
-import './styles/components-styling/sideNavbar.css';
-import './styles/pages-styling/guideProfile.css';
-import './styles/components-styling/socialLink.css';
-import './styles/pages-styling/guideNewTour.css';
-import './styles/pages-styling/guideOffers.css';
-import './styles/pages-styling/informations.css';
-import './styles/pages-styling/tours.css';
-import './styles/pages-styling/login.css';
-import './styles/pages-styling/register.css';
+import './App.css'
+import './styles/components-styling/navbarComponent.css'
+import './styles/homeWelcomeView.css'
+import './styles/components-styling/homeTourPanel.css'
+import './styles/pages-styling/home.css'
+import './styles/components-styling/homeInfoPanel.css'
+import './styles/components-styling/footer.css'
+import './styles/components-styling/sideNavbar.css'
+import './styles/pages-styling/guideProfile.css'
+import './styles/components-styling/socialLink.css'
+import './styles/pages-styling/guideNewTour.css'
+import './styles/pages-styling/guideOffers.css'
+import './styles/pages-styling/informations.css'
+import './styles/pages-styling/tours.css'
+import './styles/pages-styling/login.css'
+import './styles/pages-styling/register.css'
 import './styles/pages-styling/messages.css'
+import './styles/pages-styling/guideActiveOfferModification.css'
 
 
-import './styles/components-styling/toursTourPanel.css';
-import './styles/pages-styling/tourDetails.css';
-import './styles/components-styling/tourPanelLabel.css';
+import './styles/components-styling/toursTourPanel.css'
+import './styles/pages-styling/tourDetails.css'
+import './styles/components-styling/tourPanelLabel.css'
 import './styles/pages-styling/guideNewTourSuccess.css'
 import './styles/pages-styling/guideActiveOffers.css'
 import "./styles/pages-styling/guideActiveOfferEnrollment.css"
@@ -56,6 +57,7 @@ import "./styles/components-styling/messenger.css"
 import "./styles/components-styling/tourDetailsMessenger.css"
 import "./styles/components-styling/notFoundIndicator.css"
 import "./styles/pages-styling/enrollment.css"
+
 
 
 function App() {

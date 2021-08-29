@@ -104,10 +104,11 @@ function OfferDetails(props){
                     />
                 </Col>
             </Row>
-            <Row className={"mt-4 col-xl-8 d-flex justify-content-between w-100"}>
+            <Row className={"mt-4 col-xl-8 d-flex justify-content-between w-100 "}>
                 <Col className={"p-0"}>
                     <FormLabel>Miejsce</FormLabel>
                     <AsyncSelect
+                        isDisabled={props.disabled}
                         placeholder="Miejscowość"
                         isMulti
                         onChange={(selectedOptions) => {props.setTourPlaces(selectedOptions)}}

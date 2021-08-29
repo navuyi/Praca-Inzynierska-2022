@@ -7,6 +7,9 @@ import OfferTourPlan from "../../../components/OfferModification/OfferTourPlan";
 import {API_PREFIX} from "../../../config";
 import {useParams} from "react-router-dom";
 import axios from "axios";
+import Separator from "../../../components/ReusableComponents/Separator";
+import OfferElectives from "../../../components/OfferModification/OfferElectives";
+import OfferPriceList from "../../../components/OfferModification/OfferPriceList";
 
 
 function GuideActiveOfferModification(props) {
@@ -51,6 +54,7 @@ function GuideActiveOfferModification(props) {
             setGeneralData(res.data.general_data)
             setElectives(res.data.electives)
             setTourPlaces(res.data.tour_places)
+            setTourPlan(res.data.tour_plan)
             if(res.data.electives.image_gallery === true){
                 setImageGallery(res.data.image_gallery)
             }
@@ -81,11 +85,29 @@ function GuideActiveOfferModification(props) {
                     tourPlaces={tourPlaces}
                     setTourPlaces={setTourPlaces}
                 />
+                <Separator />
                 <OfferTourPlan
                     disabled={disabled}
                     tourPlan={tourPlan}
                     setTourPlan={setTourPlan}
                 />
+                <Separator />
+                <OfferElectives
+                    disabled={disabled}
+                    electives={electives}
+                    setElectives={setElectives}
+                />
+                <Separator />
+                {
+                    !electives.price_list ? null :
+                    <OfferPriceList
+                        disabled={disabled}
+                        priceList={priceList}
+                        setPriceList={setPriceList}
+                        visible={electives.price_list ? electives.price_list : false}
+                    />
+                }
+                <Row className={"mb-5"}></Row>
             </Container>
         </div>
     )
