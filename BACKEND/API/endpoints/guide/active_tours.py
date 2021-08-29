@@ -45,9 +45,9 @@ def get_active_tours():
         tour["tickets"] = tickets
 
         # Change tour start/end date format
-        tour["start_date"] = tour["start_date"].strftime("%d/%m/%Y")
-        tour["end_date"] = tour["end_date"].strftime("%d/%m/%Y")
-        tour["creation_date"] = tour["creation_date"].strftime("%d/%m/%Y, %H:%M")
+        tour["start_date"] = tour["start_date"].strftime("%d.%m.%Y")
+        tour["end_date"] = tour["end_date"].strftime("%d.%m.%Y")
+        tour["creation_date"] = tour["creation_date"].strftime("%d.%m.%Y, %H:%M")
         tour["image_url"] = os.path.join(current_app.config["TOUR_IMAGES_DOWNLOAD_DIRECTORY"], filename)
 
         # Define time left to end of enrollments

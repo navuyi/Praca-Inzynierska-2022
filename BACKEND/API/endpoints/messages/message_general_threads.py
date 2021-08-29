@@ -111,7 +111,7 @@ def get_general_threads():
         thr["thread_id"] = thread["id"]
         thr["tour_id"] = thread["tour_id"]
         thr["creation_time"] = thread["creation_date"].strftime("%H:%M")
-        thr["creation_date"] = thread["creation_date"].strftime("%d/%m/%Y")
+        thr["creation_date"] = thread["creation_date"].strftime("%d.%m.%Y")
         thr["topic"] = thread["topic"]
 
         # Get tour information

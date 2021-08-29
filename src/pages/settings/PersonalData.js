@@ -104,7 +104,8 @@ function PersonalData(){
                     })
                 }
                 else{
-                    setResponseMsg(err.response.data.msg)
+
+                    setResponseMsg(err.response.data.msg ? err.response.data.msg : "")
                     setOperation({
                         done: true,
                         success: false

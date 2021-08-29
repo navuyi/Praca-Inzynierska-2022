@@ -37,7 +37,7 @@ def get_thread_messages():
         msg = {
             "id": message["id"],
             "content": message["content"],
-            "creation_date": message['creation_date'].strftime("%d/%m/%Y"),
+            "creation_date": message['creation_date'].strftime("%d.%m.%Y"),
             "creation_time": message['creation_date'].strftime("%H:%M"),
             "was_read": message["was_read"],
         }

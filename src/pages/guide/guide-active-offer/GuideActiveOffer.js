@@ -57,7 +57,7 @@ function GuideActiveOffer(props) {
                                 path={`/account/guide/active-offer/${tourID}/messages`}
                             />
                             <SideNavbarLink
-                                name="Modyfikacja oferty"
+                                name="Podgląd i modyfikacja"
                                 path={`/account/guide/active-offer/${tourID}/modification`}
                             />
                         </SideNavbar>

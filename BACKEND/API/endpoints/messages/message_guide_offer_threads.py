@@ -51,7 +51,7 @@ def get_guide_offer_threads():
             data = {
                 "thread_id": thread["id"],
                 "topic": thread["topic"],
-                "creation_date": thread["creation_date"].strftime("%d/%m/%Y"),    # <-- format date
+                "creation_date": thread["creation_date"].strftime("%d.%m.%Y"),    # <-- format date
                 "creation_time": thread['creation_date'].strftime("%H:%M")
             }
 

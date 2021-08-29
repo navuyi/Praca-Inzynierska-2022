@@ -95,7 +95,7 @@ def get_tours():
         cursor().execute(f"SELECT * FROM tours WHERE id = %s", (tour_id, ))
         general_data = cursor().fetchall()[0]
 
-        date_format = "%d-%m-%Y"
+        date_format = "%d.%m.%Y"
         time_format = "%H:%M"
 
         general_data["start_date"] = general_data["start_date"].strftime(date_format) # <-- format date
