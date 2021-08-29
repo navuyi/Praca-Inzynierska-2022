@@ -19,11 +19,14 @@ function GuideActiveOfferModification(props) {
     const [tourPlan, setTourPlan] = useState([])
     const [priceList, setPriceList] = useState([])
     const [importantInfo, setImportantInfo] = useState([])
+    const [tourPlaces, setTourPlaces] = useState([])
 
     // Fetch data on component render
     useEffect(() => {
         fetchData()
     }, [])
+
+
 
     function fetchData(){
         const url = API_PREFIX+"/tour/tour"
@@ -33,7 +36,6 @@ function GuideActiveOfferModification(props) {
             }
         }
         axios.get(url, config).then(res => {
-
             // Handle date format <-- Formating from dd.mm.yyyy to yyyy-mm-dd is needed
             const[day1, month1, year1] = res.data.general_data.start_date.split(".")
             res.data.general_data.start_date = year1+"-"+month1+"-"+day1
@@ -48,6 +50,7 @@ function GuideActiveOfferModification(props) {
 
             setGeneralData(res.data.general_data)
             setElectives(res.data.electives)
+            setTourPlaces(res.data.tour_places)
             if(res.data.electives.image_gallery === true){
                 setImageGallery(res.data.image_gallery)
             }
@@ -75,6 +78,8 @@ function GuideActiveOfferModification(props) {
                 <OfferDetails
                     disabled={disabled}
                     general_data={generalData}
+                    tourPlaces={tourPlaces}
+                    setTourPlaces={setTourPlaces}
                 />
                 <OfferTourPlan
                     disabled={disabled}

@@ -1,12 +1,16 @@
-import React from "react"
+import React, {useEffect} from "react"
 import {Col, Form, FormControl, FormLabel, Row} from "react-bootstrap";
-
+import AsyncSelect from "react-select/async";
+import {fetchTourPlaces} from "../ReusableComponents/TourPlacesSelect";
+import {mapToValueLabel} from "../ReusableComponents/TourPlacesSelect";
 
 function OfferDetails(props){
 
     function handleChange(e){
 
     }
+
+
     return (
         <React.Fragment>
             <Row className={"mt-5 col-xl-8"}>
@@ -100,12 +104,18 @@ function OfferDetails(props){
                     />
                 </Col>
             </Row>
-            <Row className={"mt-4 col-xl-8 d-flex justify-content-between"}>
-                <FormLabel> Miejsca </FormLabel>
-                <FormControl
-                    as={"select"}
-                />
-                {/* TODO Tour Places Select Here */}
+            <Row className={"mt-4 col-xl-8 d-flex justify-content-between w-100"}>
+                <Col className={"p-0"}>
+                    <FormLabel>Miejsce</FormLabel>
+                    <AsyncSelect
+                        placeholder="Miejscowość"
+                        isMulti
+                        onChange={(selectedOptions) => {props.setTourPlaces(selectedOptions)}}
+                        loadOptions={fetchTourPlaces}
+                        value={props.tourPlaces ? props.tourPlaces : []}
+                        required
+                    />
+                </Col>
             </Row>
         </React.Fragment>
     );

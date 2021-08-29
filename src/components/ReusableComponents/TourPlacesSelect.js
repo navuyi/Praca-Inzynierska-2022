@@ -2,13 +2,13 @@ import AsyncSelect from 'react-select/async';
 import axios from 'axios';
 
 
-const mapToValueLabel = (data) => {
+export const mapToValueLabel = (data) => {
     return data.map((item) => ({
         value: item.id, label: item.place
     }))
 }
 
-const fetchTourPlaces = (inputValue, callback) => {
+export const fetchTourPlaces = (inputValue, callback) => {
     const data = {
         "place": inputValue
     }

@@ -93,6 +93,15 @@ def get_tour():
 
     tour_data["electives"] = electives
 
+    # Get tour places
+    cursor().execute(f"SELECT tour_places.id, place FROM tour_places, tour_has_places WHERE tour_id=%s AND tour_has_places.place_id=tour_places.id", (tour_id, ))
+    places= cursor().fetchall()
+    tour_data["tour_places"] = []
+    for place in places:
+        tour_data["tour_places"].append({
+            "value": place["id"],
+            "label": place["place"]
+    })
 
     return tour_data, 200
 
