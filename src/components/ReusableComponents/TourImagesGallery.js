@@ -7,7 +7,7 @@ function TourImagesGallery(props) {
     let images = []
     props.urls.map((url) => {
         images.push({
-            original: url.toString(),
+            original: url.filename.toString(),
             originalWidth: "100%"
         })
     })

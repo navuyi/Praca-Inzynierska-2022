@@ -51,9 +51,46 @@
 
 .guideActiveOfferModification .offerPriceList{
     animation: expand ease;
-    animation-duration: 1s;
+    animation-duration: 2s;
     animation-direction: normal;
     animation-fill-mode: forwards;
+}
+
+.guideActiveOfferModification .offerImportantInfo{
+    animation: expand ease;
+    animation-duration: 2s;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+
+.guideActiveOfferModification .offerImageGallery{
+    animation: expand ease;
+    animation-duration: 3s;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+
+.guideActiveOfferModification .gallery-container{
+    max-height: 450px;
+    overflow-y: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
+    
+    background-color: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 1em;
+}
+.guideActiveOfferModification .gallery-content{
+    height: 400px;
+    width: 400px;
+    background-size: cover;
+    display: inline-block;
+    margin: 0 1em;
+}
+.guideActiveOfferModification .gallery-container svg{
+    transform: translate(360px, 10px);
+    fill: #ffc107;
+    filter: drop-shadow(-1px 1px black);
 }
 
 @keyframes expand {

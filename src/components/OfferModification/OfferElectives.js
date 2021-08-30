@@ -10,6 +10,8 @@ function OfferElectives(props){
         props.setElectives(tmp)
     }
 
+
+
     return(
         <React.Fragment>
             <Row className={"col-xl-8"}>

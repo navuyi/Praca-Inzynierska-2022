@@ -22,12 +22,12 @@ function OfferPriceList(props){
 
     function handleDelete(e){
         const tmp = [...props.priceList]
-        tmp.splice(e.target.id, 1)
+        tmp.splice(e.currentTarget.id, 1)
         props.setPriceList(tmp)
     }
-    console.log(props.visible + "VISIBLE")
+
     return(
-        <Container className={"offerPriceList d-flex flex-column justify-content-center align-items-center"}>
+        <Container className={"offerPriceList d-flex flex-column justify-content-center align-items-center mb-5"}>
             <Row className={"col-xl-6"}>
                 <h3 className={"m-0"}> Cennik </h3>
             </Row>
@@ -57,12 +57,14 @@ function OfferPriceList(props){
                         props.priceList ? props.priceList.map((item, index) => {
                             return(
                                 <Row className={"p-0 m-0 w-100 mt-2 d-flex align-items-center justify-content-between"} key={index} style={{border: "1px solid lightgrey", borderRadius: "0.5em"}}>
-                                    <Col xl={11} xs={11} className={"m-0 p-0"}>
+                                    <Col xl={props.disabled ? 12 : 11} xs={props.disabled ? 12 : 11} className={"m-0 p-0"}>
                                         <Alert variant={"filled"} style={{width: "100%"}} severity={item.is_included == 1 ? "success" : "error"}>{item.description}</Alert>
                                     </Col>
+                                    {props.disabled ? null :
                                     <Col xl={1} xs={1} className={"m-0 p-0 d-flex justify-content-center"}>
-                                        <DeleteForeverIcon className={'delete'}  fontSize={"large"} id={index} onClick={handleDelete}/>
+                                         <DeleteForeverIcon className={'delete'}  fontSize={"large"} id={index} onClick={handleDelete} disa/>
                                     </Col>
+                                    }
                                 </Row>
                             )
                         }) : null

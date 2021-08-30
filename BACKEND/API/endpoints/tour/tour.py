@@ -75,16 +75,19 @@ def get_tour():
     tour_data["image_url"] = image_url
 
     # Get gallery images URLs if exist
-    cursor().execute(f"SELECT filename FROM tour_images WHERE tour_id = %(tour_id)s AND is_main = %(is_main)s", {
+    cursor().execute(f"SELECT id, filename FROM tour_images WHERE tour_id = %(tour_id)s AND is_main = %(is_main)s", {
         "tour_id": tour_id,
         "is_main": False
     })
     files = cursor().fetchall()
     if files:
         tour_data["image_gallery"] = []
+        electives["image_gallery"] = True
         for file in files:
-            filename = file["filename"]
-            tour_data["image_gallery"].append(os.path.join(current_app.config["TOUR_IMAGES_DOWNLOAD_DIRECTORY"], filename))
+            tour_data["image_gallery"].append({
+                "id": file["id"],
+                "filename": os.path.join(current_app.config["TOUR_IMAGES_DOWNLOAD_DIRECTORY"], file["filename"])
+            })
 
     # Get tour enrollments
     cursor().execute(f"SELECT COALESCE(sum(tickets), 0) FROM enrollments WHERE tour_id=%s", (tour_id, ))

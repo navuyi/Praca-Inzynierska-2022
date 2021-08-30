@@ -10,11 +10,14 @@ import axios from "axios";
 import Separator from "../../../components/ReusableComponents/Separator";
 import OfferElectives from "../../../components/OfferModification/OfferElectives";
 import OfferPriceList from "../../../components/OfferModification/OfferPriceList";
-
+import OfferImportantInfo from "../../../components/OfferModification/OfferImportantInfo";
+import OfferImageGallery from "../../../components/OfferModification/OfferImageGallery";
+import {refesh_token} from "../../../API_CALLS/api_authentication_token_refresh";
 
 function GuideActiveOfferModification(props) {
-    const [disabled, setDisabled] = useState(false)
+    const [disabled, setDisabled] = useState(true)
     const {tourID} = useParams()
+
 
     const [generalData, setGeneralData] = useState({})
     const [electives, setElectives] = useState({})
@@ -24,11 +27,54 @@ function GuideActiveOfferModification(props) {
     const [importantInfo, setImportantInfo] = useState([])
     const [tourPlaces, setTourPlaces] = useState([])
 
+    const [imagesToDelete, setImagesToDelete] = useState([])
+
+
     // Fetch data on component render
     useEffect(() => {
         fetchData()
     }, [])
 
+
+    function handleSubmit(e){
+        e.preventDefault()
+        if(disabled === true){
+            setDisabled(prevState => !prevState)
+        }
+        else if(disabled === false){
+            const data = {
+                tour_id: tourID,
+                general_data: {...generalData},
+                electives: {...electives},
+                imagesToDelete: [...imagesToDelete],
+                tour_plan: [...tourPlan],
+                price_list: [...priceList],
+                importantInfo: [...importantInfo],
+                tour_places: [...tourPlaces]
+            }
+            const url = API_PREFIX+"/guide/offer"
+            const access_token = localStorage.getItem("access_token")
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${access_token}`
+                }
+            }
+            console.log(data)
+            axios.put(url, data, config).then(res => {
+                console.log(res)
+            }).catch(err => {
+                console.log(err)
+                if(err.response){
+                    if(err.response.status === 401){
+                        refesh_token().then(res => {
+                            localStorage.setItem("access_token", res.data.access_token)
+                            handleSubmit(new Event("submit"))
+                        })
+                    }
+                }
+            })
+        }
+        }
 
 
     function fetchData(){
@@ -43,13 +89,13 @@ function GuideActiveOfferModification(props) {
             const[day1, month1, year1] = res.data.general_data.start_date.split(".")
             res.data.general_data.start_date = year1+"-"+month1+"-"+day1
             const[day2, month2, year2] = res.data.general_data.end_date.split(".")
-            res.data.general_data.start_date = year2+"-"+month2+"-"+day2
+            res.data.general_data.end_date = year2+"-"+month2+"-"+day2
 
             const enrollment_date = new Date(res.data.general_data.enrollment_deadline)
-            res.data.general_data.enrollment_date = enrollment_date.toLocaleDateString()
-            res.data.general_data.enrollment_time = enrollment_date.toLocaleTimeString()
-            const[day3, month3, year3] = res.data.general_data.enrollment_date.split(".")
-            res.data.general_data.enrollment_date = year3+"-"+month3+"-"+day3
+            res.data.general_data.enrollment_deadline_date = enrollment_date.toLocaleDateString()
+            res.data.general_data.enrollment_deadline_time = enrollment_date.toLocaleTimeString()
+            const[day3, month3, year3] = res.data.general_data.enrollment_deadline_date.split(".")
+            res.data.general_data.enrollment_deadline_date = year3+"-"+month3+"-"+day3
 
             setGeneralData(res.data.general_data)
             setElectives(res.data.electives)
@@ -64,7 +110,6 @@ function GuideActiveOfferModification(props) {
             if(res.data.electives.price_list === true){
                 setPriceList(res.data.price_list)
             }
-            console.log(res.data)
         }).catch(err => {
 
         })
@@ -72,16 +117,20 @@ function GuideActiveOfferModification(props) {
 
     return (
         <div className={"guideActiveOfferModification"}>
-            <Container className={"d-flex flex-column align-items-center"}>
+            <Container  className={"d-flex flex-column align-items-center"}>
                 <Row className={"mt-5 d-flex flex-column justify-content-center align-items-center"}>
                     <img src={icon} alt={""} width={175}/>
                 </Row>
-                <Row className={"mt-5 d-flex flex-column justify-content-center align-items-center"}>
+                <Row className={"mt-5 d-flex flex-column justify-content-center align-items-center col-xl-6"}>
                     <h1 style={{}}> Modyfikacja oferty </h1>
+                </Row>
+                <Row className={"mt-3 d-flex flex-column justify-content-center align-items-center col-xl-4"}>
+                    <Button className={"w-100"} onClick={handleSubmit} variant={disabled ? "info" : "danger"}> {disabled ? "Modyfikuj" : "Zapisz zmiany"} </Button>
                 </Row>
                 <OfferDetails
                     disabled={disabled}
                     general_data={generalData}
+                    setGeneralData={setGeneralData}
                     tourPlaces={tourPlaces}
                     setTourPlaces={setTourPlaces}
                 />
@@ -106,6 +155,24 @@ function GuideActiveOfferModification(props) {
                         setPriceList={setPriceList}
                         visible={electives.price_list ? electives.price_list : false}
                     />
+                }
+                {
+                    !electives.important_info ? null :
+                        <OfferImportantInfo
+                            disabled={disabled}
+                            imporantInfo={importantInfo}
+                            setImportantInfo={setImportantInfo}
+                        />
+                }
+                {
+                    !electives.image_gallery ? null:
+                        <OfferImageGallery
+                            disabled={disabled}
+                            imageGallery={imageGallery}
+                            setImageGallery={setImageGallery}
+                            imagesToDelete={imagesToDelete}
+                            setImagesToDelete={setImagesToDelete}
+                        />
                 }
                 <Row className={"mb-5"}></Row>
             </Container>
