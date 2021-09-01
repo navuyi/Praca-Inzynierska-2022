@@ -3,6 +3,7 @@ import {Container, Row, Col, Button, FormControl, FormLabel, Form} from "react-b
 import {useState} from "react";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import isEmptyString from "../../utils/isEmptyString";
 import Separator from "../ReusableComponents/Separator";
 
 function OfferTourPlan(props){
@@ -22,6 +23,9 @@ function OfferTourPlan(props){
     }
     function handleSubmit(e){
         e.preventDefault()
+        if(isEmptyString(input)){
+            return
+        }
         if(editMode === false){
             // Handle adding element
             const tmp = [...props.tourPlan]
