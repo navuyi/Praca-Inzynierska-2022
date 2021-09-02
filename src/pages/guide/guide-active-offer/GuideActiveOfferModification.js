@@ -38,7 +38,7 @@ function GuideActiveOfferModification(props) {
     const [tourPlaces, setTourPlaces] = useState([])
 
     const [imagesToDelete, setImagesToDelete] = useState([])
-
+    const [imagesToSend, setImagesToSend] = useState([])
 
     // Fetch data on component render
     useEffect(() => {
@@ -83,6 +83,16 @@ function GuideActiveOfferModification(props) {
             formData.set("important_info", JSON.stringify([...importantInfo]))
             formData.set("tour_places", JSON.stringify([...tourPlaces]))
 
+            if(imagesToSend.length > 0){
+                Array.from(imagesToSend).forEach((image) => {
+                    formData.append("images", image.file, image.file.filename)
+                })
+            }
+            for (var pair of formData.entries()) {
+                console.log(pair[0]+ ', ' + pair[1]);
+            }
+
+
             const url = API_PREFIX+"/guide/offer"
             const access_token = localStorage.getItem("access_token")
             const config = {
@@ -105,7 +115,7 @@ function GuideActiveOfferModification(props) {
             }).catch(err => {
                 console.log(err)
                 if(err.response){
-                    if(err.response.status === 401){
+                    if(err.response.status === 401 && err.response.msg==="Token has expired"){
                         refesh_token().then(res => {
                             localStorage.setItem("access_token", res.data.access_token)
                             handleSubmit(new Event("submit"))
@@ -240,6 +250,8 @@ function GuideActiveOfferModification(props) {
                             setImageGallery={setImageGallery}
                             imagesToDelete={imagesToDelete}
                             setImagesToDelete={setImagesToDelete}
+                            imagesToSend={imagesToSend}
+                            setImagesToSend={setImagesToSend}
                         />
                 }
                 <Row className={"mb-5"}></Row>

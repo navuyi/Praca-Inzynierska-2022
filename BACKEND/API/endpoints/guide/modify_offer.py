@@ -8,7 +8,10 @@ import subprocess
 from werkzeug.security import generate_password_hash, check_password_hash
 from urllib.parse import urlencode
 from urllib.request import urlopen
+from werkzeug.utils import secure_filename
 import json
+import os
+import uuid
 
 bp = Blueprint("modify_offer", __name__, url_prefix="/guide")
 
@@ -18,6 +21,12 @@ bp = Blueprint("modify_offer", __name__, url_prefix="/guide")
 def modify_offer():
     tour_id = json.loads(request.form["tour_id"])
     general_data = json.loads(request.form["general_data"])
+    guide_id = get_jwt_identity()
+    ### Check if tour_id belongs to this guide
+    cursor().execute(f"SELECT id FROM tours WHERE guide_id=%s", (guide_id, ))
+    guide_tours = cursor().fetchall()
+    if guide_id not in guide_tours:
+        raise APIException(msg="Brak uprawnień", code=401)
 
     ### Handle general data
     if int(general_data["price"]) < 0:
@@ -80,6 +89,32 @@ def modify_offer():
             command = ["rm", path]
             subprocess.run(command)     # <-- deleting file from disk
             cursor().execute(f"DELETE FROM tour_images WHERE id=%s", (id, ))    # <-- deleting specified image from database
+
+    # Handle images add
+    if "images" in request.files:
+        images = request.files.getlist("images")
+        for file in images:
+            name = secure_filename(file.filename)
+            file_prefix = os.path.splitext(name)[0] + str(":") + str(uuid.uuid4())  # File prefix and appended random sequence
+            file_ext = os.path.splitext(name)[1]
+
+            if file_ext not in current_app.config["AVAILABLE_EXTENSIONS"]:
+                raise APIException(msg="Dany format pliku nie jest obsługiwany", code=422)
+            file_path = os.path.join(current_app.config["TOUR_IMAGES_UPLOAD_DIRECTORY"], str(file_prefix + file_ext))
+            # Save the image and add path to database
+            try:
+                statement = "INSERT INTO tour_images (tour_id, path, is_main, filename) VALUES (%(tour_id)s, %(path)s, %(is_main)s, %(filename)s)"
+                insert = {
+                    "tour_id": tour_id,
+                    "path": file_path,
+                    "is_main": False,
+                    "filename": str(file_prefix + file_ext)
+                }
+                cursor().execute(statement, insert)
+                file.save(file_path)
+            except Exception as e:
+                print(e)
+                raise APIException(msg="File upload failed", code=500)
 
     return jsonify(message="Zmiany zostały wprowadzone pomyślnie"), 200
 
