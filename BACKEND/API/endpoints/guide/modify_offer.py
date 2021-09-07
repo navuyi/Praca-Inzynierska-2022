@@ -25,7 +25,7 @@ def modify_offer():
     ### Check if tour_id belongs to this guide
     cursor().execute(f"SELECT id FROM tours WHERE guide_id=%s", (guide_id, ))
     guide_tours = cursor().fetchall()
-    if guide_id not in guide_tours:
+    if int(tour_id) not in [tour["id"] for tour in guide_tours]:        # <-- nice one-liner here
         raise APIException(msg="Brak uprawnień", code=401)
 
     ### Handle general data

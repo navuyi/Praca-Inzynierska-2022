@@ -28,22 +28,8 @@ paths:
   "/api/tour/tours":
     $ref: "./paths/tours.yaml"
 
-  "/api/tour/offer/modify":
-    post:
-      summary: Modifies tour's offer
-      security:
-          - bearerAuth: [ ]
-      tags:
-        - Tour
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-      responses:
-        '200':
-          description: OK
+  "/api/tour/offer":
+    $ref: "./paths/tour-offer-modify.yaml"
 
 
 

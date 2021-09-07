@@ -5,13 +5,13 @@ import mysql.connector
 def db_get():
     if 'db' not in g:
         g.db = mysql.connector.connect(
-            host = current_app.config['DATABASE_HOST'],
-            database = current_app.config['DATABASE_NAME'],
-            user = current_app.config['DATABASE_USER'],
-            password = current_app.config['DATABASE_PASSWORD'],
-            charset = current_app.config['CHARSET'],
-            collation = current_app.config['COLLATION'],
-            autocommit = current_app.config['AUTOCOMMIT_ENABLED']
+            host=current_app.config['DATABASE_HOST'],
+            database=current_app.config['DATABASE_NAME'],
+            user=current_app.config['DATABASE_USER'],
+            password=current_app.config['DATABASE_PASSWORD'],
+            charset=current_app.config['CHARSET'],
+            collation=current_app.config['COLLATION'],
+            autocommit=current_app.config['AUTOCOMMIT_ENABLED']
         )
     return g.db
 

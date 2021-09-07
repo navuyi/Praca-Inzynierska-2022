@@ -12,7 +12,7 @@ import {_login} from "../utils/_login";
 function Login() {
     const history = useHistory();
     const dispatch = useDispatch()
-
+    const [loading, setLoading] = useState(true)
     const [error, setError] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -52,8 +52,7 @@ function Login() {
             })
             .catch(err => {
                 const code = err.response.status
-                console.log(code)
-                if (code == 404 || code == 401) {
+                if (code === 404 || code === 401 || code === 403) {
                     console.log(err.response.data.message)
                     setError(err.response.data.message)
                 }
@@ -97,7 +96,7 @@ function Login() {
                         <Button className="mt-5 w-100" size={"lg"} variant="dark" type={"submit"}> Zaloguj </Button>
                     </Row>
                 </form>
-                <Row className={"mt-4"}>
+                <Row className={"mt-4 d-flex justify-content-center align-items-center"}>
                     {
                         error ? <p className={"error-msg"}> {error} </p> :
                             <p> Nie masz konta? <span onClick={() => history.push("/register")}> Zarejestruj się.</span>

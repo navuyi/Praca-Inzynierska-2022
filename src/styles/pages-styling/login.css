@@ -46,6 +46,9 @@
     font-weight: bold;
     font-family: 'Source Sans Pro', sans-serif;
     color: #dc3545;
+    word-wrap: break-word;
+    padding: 0 1em;
+    text-align: center;
 }
 
 @media (max-width: 900px) {

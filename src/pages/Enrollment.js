@@ -9,6 +9,7 @@ import {useParams} from "react-router-dom";
 import axios from "axios";
 
 import EnrollmentConfiguration from "../components/Enrollment/EnrollmentConfiguration";
+import {API_PREFIX} from "../config";
 
 function Enrollment(){
     const [generalData, setGeneralData] = useState({})
@@ -29,6 +30,30 @@ function Enrollment(){
         street: "",
         house_number: "",
         apartment_number: ""
+    })
+
+    // Fetch personal data if is logged in
+    useEffect(() => {
+        const access_token = localStorage.getItem("access_token")
+        if(access_token){
+            const url = API_PREFIX + "/settings/personal_data"
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${access_token}`
+                }
+            }
+            axios.get(url, config).then(res => {
+                const data = {
+                    f_name: res.data.f_name,
+                    l_name: res.data.l_name,
+                    email: res.data.email,
+                    phone_number: res.data.phone_number
+                }
+                setPersonalData(data)
+            }).catch(err => {
+                console.log(err)
+            })
+        }
     })
 
     function handleSubmit(e){

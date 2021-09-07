@@ -9,6 +9,14 @@ CHARSET = 'utf8mb4'
 COLLATION = 'utf8mb4_unicode_ci'
 AUTOCOMMIT_ENABLED = True
 
+# Email configuration
+MAIL_SERVER = 'smtp.googlemail.com'
+MAIL_PORT = 587
+MAIL_USE_TLS = True
+MAIL_PASSWORD = "lubiejesc123"
+MAIL_USERNAME = "webappengthesis@gmail.com"
+
+
 # Cors configuration
 ORIGINS = [
     "http://167.99.143.194",

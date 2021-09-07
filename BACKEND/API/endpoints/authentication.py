@@ -7,6 +7,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from urllib.parse import urlencode
 from urllib.request import urlopen
 import json
+from app.endpoints.utils.email import send_email
 
 bp = Blueprint("authentication", __name__, url_prefix="/authentication")
 
@@ -88,6 +89,10 @@ def login():
     if not user_data:
         raise APIException(msg="Podany użytkownik nie istnieje", code=404)
 
+    # Check if email was confirmed
+    if user_data["is_confirmed"] == 0:
+        raise APIException(msg="Konto istnieje ale nie zostało potwierdzone. Sprawdź skrzynkę pocztową.", code=403)
+
     # Check if passwords are the same
     db_password_hash = user_data["password"]
     verified = check_password_hash(db_password_hash, password)
@@ -102,6 +107,11 @@ def login():
     refresh_token = create_refresh_token(identity=str(user_id))
     is_guide = user_data["is_guide"]
     user_id = user_data["id"]
+
+    ### TEST EMAIL SEND ###
+    html = '<p>####</p>'
+    subject = "###"
+    send_email("figlusrafal@gmail.com", subject, html)
 
 
     return jsonify(access_token=access_token, refresh_token=refresh_token, is_guide=is_guide, user_id=user_id), 200

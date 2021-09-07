@@ -7,6 +7,7 @@ from flask_jwt_extended import create_access_token, create_refresh_token, jwt_re
 from flask_jwt_extended import JWTManager
 from app.handlers import APIException
 from uuid import uuid4
+from app.extensions import mail
 
 import werkzeug
 
@@ -34,6 +35,9 @@ def create_app(test_config=None):               # test_config - independent from
     app.config["JWT_REFRESH_TOKEN_EXPIRES"] = datetime.timedelta(days=30)
     jwt = JWTManager(app)
 
+    ### Flask Mail ###
+    mail.init_app(app)
+
     ### Error handler ###
     @app.errorhandler(APIException)
     def invalid_api_usage(e):
@@ -46,21 +50,6 @@ def create_app(test_config=None):               # test_config - independent from
 
     ### CORS setup ###
     cors = CORS(app, resources={r"/*": {"origins": app.config["ORIGINS"]}}, supports_credentials=True)
-
-    '''
-    ### Swagger Setup ###
-    SWAGGER_URL = '/swagger'
-    API_URL = '/static/swagger.yaml'
-    SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
-        SWAGGER_URL,
-        API_URL,
-        config={
-            'app_name': "YourTour REST API"
-        }
-    )
-    app.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
-    '''
-
 
     # Import database methods
     from . database.db import db_init_app, db_before_request
@@ -140,5 +129,7 @@ def create_app(test_config=None):               # test_config - independent from
 
     app.register_blueprint(bp_password)
     app.register_blueprint(bp_personal_data)
+
+
 
     return app
