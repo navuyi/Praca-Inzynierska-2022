@@ -14,7 +14,7 @@ import werkzeug
 def create_app(test_config=None):               # test_config - independent from the instance configuration
     app = Flask(__name__, instance_relative_config=False)
     app.config.from_mapping(
-        SECRET_KEY = uuid4()
+        SECRET_KEY=uuid4()
     )
     # Load configuration file
     if test_config is None:

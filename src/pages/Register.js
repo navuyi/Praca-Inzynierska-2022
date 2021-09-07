@@ -1,9 +1,8 @@
 import {Button, Container, Form, Row} from "react-bootstrap";
-
+import React from "react"
 import {api_authentication_register} from '../API_CALLS/api_authentication_register'
 
 import {useState} from "react";
-import {useHistory} from 'react-router-dom'
 import NavbarComponent from "../components/ReusableComponents/NavbarComponent";
 import Footer from "../components/ReusableComponents/Footer";
 import {CircularProgress} from "@material-ui/core";
@@ -12,8 +11,11 @@ import {RECAPTCHA_PUBLIC_KEY} from "../config";
 
 function Register() {
     const [token, setToken] = useState("")
-
-    const history = useHistory();
+    const [sending, setSending] = useState(false)
+    const [process, setProcess] = useState({
+        done: false,
+        success: false
+    })
     const empty_credentials = {
         f_name: "",
         l_name: "",
@@ -22,54 +24,58 @@ function Register() {
         password_repeat: "",
         phone_number: "",
     }
-    const [info_popup, setInfoPopup] = useState("");
+    const [response, setResponse] = useState("")
     const [credentials, setCredentials] = useState(empty_credentials);
-    const [redirect, setRedirect] = useState(false)
+
     const handleChange = e => {
         // Check if phone_number input is a number
         if (e.target.id == "phone_number") {
             const input = e.target.value;
             if (isNaN(input)) {
-                setInfoPopup("Numer telefonu może zawierać tylko cyfry");
                 return;
             }
         }
         const update = {...credentials, [e.target.id]: e.target.value}
         console.log(update);
         setCredentials(update);
+        restoreDefault()
     }
 
+    const restoreDefault = () => {
+        setSending(false)
+        setProcess({
+            done: false,
+            success: false
+        })
+    }
 
     const handleSubmit = e => {
         e.preventDefault();
 
-        // Check if passwords are the same
-        if (credentials.password != credentials.password_repeat) {
-            setInfoPopup("Hasła muszą być takie same.")
-            return;
-        }
-
-        // If OK clear info popup
-        setInfoPopup("");
-
-        // Register acount
+        // Register account
         const data = {...credentials, token: token}
         console.log(data)
+        setSending(true)
         api_authentication_register(data)
             .then(res => {
                 if (res.status == 201) {
-                    setRedirect(true)
-                    setInfoPopup(res.data.message);
-
+                    setResponse(res.data.message);
+                    setSending(false)
+                    setProcess({
+                        done: true,
+                        success: true
+                    })
                     // Clear input fields and schedule redirect
                     setCredentials(empty_credentials);
-                    setTimeout(() => {
-                        history.push("/login")
-                    }, 2000)
                 }
             })
             .catch(err => {
-                setInfoPopup(err.response.data.message)
+                setResponse(err.response.data.message)
+                setSending(false)
+                setProcess({
+                    done: true,
+                    success: false
+                })
             })
 
     }
@@ -152,16 +158,31 @@ function Register() {
                             }}
                         />
                     </Row>
-                    {
-                        token ?
-                            <Row className={"d-flex justify-content-center"}>
-                                <Button type="submit" size={"lg"} className={"mt-5 mb-2 w-100"}
-                                        variant={"outline-dark"}> Zarejestruj </Button>
-                                <p>{info_popup}</p>
-                            </Row> : null
-                    }
-                    <Row className={"d-flex justify-content-center align-items-center"}>
-                        {redirect ? <CircularProgress/> : null}
+                    <Row className={"d-flex flex-column justify-content-center align-items-center mt-3"} style={{minHeight: "100px"}}>
+                        {
+                            token ?
+                                <React.Fragment>
+                                    {
+                                        sending ? <CircularProgress size={80} /> :
+                                            <React.Fragment>
+                                                {
+                                                    process.done === false ? <Button type="submit" size={"lg"} className={"w-100"} variant={"outline-dark"}> Zarejestruj </Button> : null
+                                                }
+                                                {
+                                                    process.done === true && process.success === true && !sending ?
+                                                        <p className={"response"}> {response} </p>
+                                                        : null
+                                                }
+                                                {
+                                                    process.done === true && process.success === false && !sending ?
+                                                        <p className={"response"}> {response} </p>
+                                                        : null
+                                                }
+                                            </React.Fragment>
+                                    }
+                                </React.Fragment>
+                            : null
+                        }
                     </Row>
                 </Form>
             </Container>

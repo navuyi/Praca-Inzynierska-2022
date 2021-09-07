@@ -1,0 +1,43 @@
+.registerConfirm{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+.registerConfirm .loading-header{
+    margin-bottom: 2em;
+    color: #222222;
+}
+
+.registerConfirm .success-panel{
+
+}
+.registerConfirm .success-panel h1{
+    color: #222222;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    margin-top: 1em;
+}
+.registerConfirm .success-panel p{
+    font-size: 1.3rem;
+    font-weight: bold;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+
+.registerConfirm .error-panel{
+
+}
+
+.registerConfirm .error-panel h1{
+    color: #222222;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    margin-top: 1em;
+}
+.registerConfirm .error-panel p{
+    font-size: 1.3rem;
+    font-weight: bold;
+    font-family: 'Source Sans Pro', sans-serif;
+}

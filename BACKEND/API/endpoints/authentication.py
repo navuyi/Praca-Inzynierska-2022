@@ -8,6 +8,8 @@ from urllib.parse import urlencode
 from urllib.request import urlopen
 import json
 from app.endpoints.utils.email import send_email
+from app.endpoints.utils.confirmationToken import generate_confirmation_token
+
 
 bp = Blueprint("authentication", __name__, url_prefix="/authentication")
 
@@ -35,7 +37,7 @@ def register():
             }
         '''
         if result["success"] == False:
-            raise APIException(msg="reCAPTCHA jest nieprawidłowa", code=422)
+            raise APIException(msg="Błąd reCAPTCHA. Proszę odświeżyć stronę.", code=422)
         else:
             pass
 
@@ -43,7 +45,7 @@ def register():
     cursor().execute(f"SELECT id FROM users WHERE email =%s", (credentials["email"], ))
     res = cursor().fetchall()
     if res:
-        raise APIException(msg="Podane konto już istnieje", code=409)
+        raise APIException(msg="Konto z podanym adresem email już istnieje", code=409)
 
     # Check if submitted passwords are the same
     valid = True if credentials["password"] == credentials["password_repeat"] else False
@@ -73,7 +75,22 @@ def register():
         print(e)
         raise APIException(msg="Wystąpił błąd, spróbuj ponownie", code=500, payload=jsonify(err=e))
 
-    return jsonify(message="Konto zostało pomyślnie utworzone"), 201
+    # Send email message
+    token = generate_confirmation_token(credentials["email"])
+
+    globalhost = f"167.99.143.194/register/confirm/{token}"     # <-- This link for production
+    localhost = f"localhost:3000/register/confirm/{token}"       # <-- This link for development
+
+    html = f'<h3> Witamy w serwisie YourTour </h3>' \
+           f'<a href={localhost}> Link aktywacyjny  </a>'
+    subject = "Akywacja konta w YourTour"
+    send_email(credentials["email"], subject, html)
+
+    return jsonify(message="Konto zostało pomyślnie utworzone. Sprawdź skrzynkę pocztową w celu aktywacji konta."), 201
+
+
+
+
 
 @bp.route("/login", methods=['POST'])
 def login():
@@ -107,11 +124,6 @@ def login():
     refresh_token = create_refresh_token(identity=str(user_id))
     is_guide = user_data["is_guide"]
     user_id = user_data["id"]
-
-    ### TEST EMAIL SEND ###
-    html = '<p>####</p>'
-    subject = "###"
-    send_email("figlusrafal@gmail.com", subject, html)
 
 
     return jsonify(access_token=access_token, refresh_token=refresh_token, is_guide=is_guide, user_id=user_id), 200

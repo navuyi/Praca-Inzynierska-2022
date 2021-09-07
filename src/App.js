@@ -15,6 +15,7 @@ import TourDetails from "./pages/tours/TourDetails";
 import Account from "./pages/Account";
 import Login from './pages/Login';
 import Register from "./pages/Register";
+import RegisterConfirm from "./pages/RegisterConfirm";
 import GuideNewTourSuccess from "./pages/guide/guide-new-tour/GuideNewTourSuccess";
 import Guide from "./pages/guide/Guide";
 import User from "./pages/user/User";
@@ -57,6 +58,7 @@ import "./styles/components-styling/messenger.css"
 import "./styles/components-styling/tourDetailsMessenger.css"
 import "./styles/components-styling/notFoundIndicator.css"
 import "./styles/pages-styling/enrollment.css"
+import './styles/pages-styling/registerConfirm.css'
 
 
 
@@ -121,8 +123,11 @@ function App() {
                 <Route path="/login">
                     <Login/>
                 </Route>
-                <Route path="/register">
+                <Route exact path="/register">
                     <Register/>
+                </Route>
+                <Route exact path={"/register/confirm/:token"}>
+                    <RegisterConfirm />
                 </Route>
             </Switch>
     );
