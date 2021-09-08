@@ -1,3 +1,4 @@
+import itsdangerous.exc
 from itsdangerous import URLSafeTimedSerializer
 from flask import current_app
 
@@ -8,14 +9,28 @@ def generate_confirmation_token(email):
     return serializer.dumps(email, salt=SALT)
 
 
-def confirm_token(token, expiration=1800):
+def read_email(token, expiration):
     serializer = URLSafeTimedSerializer(current_app.config["SECRET_KEY"])
-    try:
-        email = serializer.loads(
-            token,
-            salt=SALT,
-            max_age=expiration
-        )
-    except:
-        return False
+    email = serializer.loads(
+        token,
+        salt=SALT,
+        max_age=expiration
+    )
     return email
+
+
+def confirm_token(token, expiration):
+    try:
+        email = read_email(token, expiration)
+    except itsdangerous.exc.SignatureExpired:
+        email = read_email(token, expiration+2000)
+        return False, "Token stracił ważność. Zarejestruj się ponownie.", email
+    except itsdangerous.exc.BadTimeSignature:
+        email = read_email(token, expiration+2000)
+        return False, "Token stracił ważność. Zarejestruj się ponownie.", email
+    except itsdangerous.exc.BadSignature:
+        return False, "Token jest nieprawidłowy", email
+
+
+    return True, email, email
+

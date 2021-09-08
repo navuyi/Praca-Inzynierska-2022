@@ -9,7 +9,7 @@ from urllib.request import urlopen
 import json
 from app.endpoints.utils.email import send_email
 from app.endpoints.utils.confirmationToken import generate_confirmation_token
-
+from app.endpoints.utils.confirmationToken import confirm_token
 
 bp = Blueprint("authentication", __name__, url_prefix="/authentication")
 
@@ -129,6 +129,29 @@ def login():
     return jsonify(access_token=access_token, refresh_token=refresh_token, is_guide=is_guide, user_id=user_id), 200
 
 
+
+@bp.route("/confirm", methods=["POST"])
+def confirm_email():
+    if "token" not in request.args:
+        raise APIException(msg="Brak tokenu potwierdzającego", code=422) # Not sure about that code
+    token = request.args["token"]
+    success, res, email = confirm_token(token, expiration=current_app.config["TOKEN_EXPIRATION"])
+    if not success:
+        # Delete account <-- was not confirmed
+        cursor().execute(f"DELETE FROM users WHERE email=%s", (email, ))
+        raise APIException(msg=res, code=401)  # Not sure about that status code
+
+    # Token was confirmed
+    cursor().execute(f"SELECT is_confirmed FROM users WHERE email=%s", (email, ))
+    res = cursor().fetchone()
+    if res is None:
+        raise APIException(msg="Konto nie istnieje", code=400)
+    is_confirmed = res["is_confirmed"]
+    if is_confirmed == 1:
+        raise APIException(msg="Konto zostało już aktywowane", code=403)  # Not sure about that status code
+
+    cursor().execute(f"UPDATE users SET is_confirmed=1 WHERE email=%s", (email, ))
+    return jsonify(msg="Konto zostało pomyślnie aktywowane", code=200)
 
 @bp.route("/logout", methods=['POST'])
 def logout():

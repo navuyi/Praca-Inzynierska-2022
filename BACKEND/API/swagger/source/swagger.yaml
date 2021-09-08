@@ -17,8 +17,40 @@ paths:
   "/api/authentication/token/refresh":
     $ref: "./paths/token-refresh.yaml"
 
-
-  # Tours endpoints
+  "/api/authentication/confirm":
+    post:
+      summary: Confirms registered account
+      tags:
+        - Authentication
+      parameters:
+        - in: query
+          name: token
+          schema:
+            type: string
+          required: true
+          description: Unique confirmation token
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  payload:
+                    type: object
+        # Tours endpoints
   "/api/tour/new_tour":
       $ref: "./paths/new-tour.yaml"
 

@@ -16,6 +16,8 @@ MAIL_USE_TLS = True
 MAIL_PASSWORD = "lubiejesc123"
 MAIL_USERNAME = "webappengthesis@gmail.com"
 
+# Email confirmation
+TOKEN_EXPIRATION = 1800
 
 # Cors configuration
 ORIGINS = [

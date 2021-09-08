@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import NavbarComponent from "../components/ReusableComponents/NavbarComponent";
 import Footer from "../components/ReusableComponents/Footer";
 import {Container, Row, Col, Button} from "react-bootstrap"
@@ -7,6 +7,8 @@ import {CircularProgress} from "@material-ui/core";
 import success from "../images/icons/success.svg"
 import error from "../images/icons/exclamation.svg"
 import {useHistory, useParams} from "react-router-dom";
+import {API_PREFIX} from "../config";
+import axios from "axios";
 
 function RegisterConfirm(){
     const history = useHistory()
@@ -17,10 +19,44 @@ function RegisterConfirm(){
     })
     const {token} = useParams()
     const [responseMsg, setResponseMsg] = useState("")
-    console.log(token)
+
+    useEffect(() => {
+        confirmation()
+    }, [])
+
+    function confirmation(){
+        const url = API_PREFIX+"/authentication/confirm"
+        const config = {
+            params: {
+                token: token
+            }
+        }
+        setSending(true)
+        axios.post(url, null, config)
+            .then(res => {
+                console.log(res)
+                setSending(false)
+                setResponseMsg(res.data.msg)
+                setProcess({
+                    done: true,
+                    success: true
+                })
+            })
+            .catch(err => {
+                setSending(false)
+                setProcess({
+                    done: true,
+                    success: false
+                })
+                if (err.response && err.response.data.message){
+                    setResponseMsg(err.response.data.message)
+
+                }
+            })
+    }
 
     return(
-        <div class={"registerConfirm"}>
+        <div className={"registerConfirm"}>
             <NavbarComponent/>
             <Container fluid className={"h-100 d-flex flex-column justify-content-center align-items-center"} style={{marginTop: "0em", top: "0", flexGrow: "1"}}>
                 {
