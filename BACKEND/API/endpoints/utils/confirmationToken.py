@@ -23,14 +23,12 @@ def confirm_token(token, expiration):
     try:
         email = read_email(token, expiration)
     except itsdangerous.exc.SignatureExpired:
-        email = read_email(token, expiration+2000)
-        return False, "Token stracił ważność. Zarejestruj się ponownie.", email
+        return False, "Token stracił ważność. Zarejestruj się ponownie."
     except itsdangerous.exc.BadTimeSignature:
-        email = read_email(token, expiration+2000)
-        return False, "Token stracił ważność. Zarejestruj się ponownie.", email
+        return False, "Token stracił ważność. Zarejestruj się ponownie."
     except itsdangerous.exc.BadSignature:
-        return False, "Token jest nieprawidłowy", email
+        return False, "Token jest nieprawidłowy"
 
 
-    return True, email, email
+    return True, email
 

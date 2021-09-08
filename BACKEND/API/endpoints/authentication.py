@@ -135,13 +135,12 @@ def confirm_email():
     if "token" not in request.args:
         raise APIException(msg="Brak tokenu potwierdzającego", code=422) # Not sure about that code
     token = request.args["token"]
-    success, res, email = confirm_token(token, expiration=current_app.config["TOKEN_EXPIRATION"])
+    success, res = confirm_token(token, expiration=current_app.config["TOKEN_EXPIRATION"])
     if not success:
-        # Delete account <-- was not confirmed
-        cursor().execute(f"DELETE FROM users WHERE email=%s", (email, ))
         raise APIException(msg=res, code=401)  # Not sure about that status code
 
     # Token was confirmed
+    email=res
     cursor().execute(f"SELECT is_confirmed FROM users WHERE email=%s", (email, ))
     res = cursor().fetchone()
     if res is None:
