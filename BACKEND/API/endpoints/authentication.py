@@ -2,11 +2,13 @@ from flask import Blueprint, current_app
 from flask_jwt_extended import create_refresh_token, create_access_token, get_jwt_identity, jwt_required
 from flask import request, jsonify
 from app.handlers import APIException
-from app.database.db import cursor
+from app.database.db import cursor, lastrowid
 from werkzeug.security import generate_password_hash, check_password_hash
 from urllib.parse import urlencode
 from urllib.request import urlopen
 import json
+import uuid
+from datetime import datetime, timedelta
 from app.endpoints.utils.email import send_email
 from app.endpoints.utils.confirmationToken import generate_confirmation_token
 from app.endpoints.utils.confirmationToken import confirm_token
@@ -75,9 +77,16 @@ def register():
         print(e)
         raise APIException(msg="Wystąpił błąd, spróbuj ponownie", code=500, payload=jsonify(err=e))
 
-    # Send email message
-    token = generate_confirmation_token(credentials["email"])
 
+    # Send email message
+    token = str(uuid.uuid4())
+
+    # Add token to database
+    now = datetime.now()
+    exp = now + timedelta(seconds=current_app.config["TOKEN_EXPIRATION"])
+    token_expiration = exp.strftime("%Y-%m-%d %H:%M:%S")
+    cursor().execute(f"UPDATE users SET token=%s, token_expiration=%s WHERE email=%s", (token, token_expiration, credentials["email"]))
+    # Send email with activation link
     globalhost = f"167.99.143.194/register/confirm/{token}"     # <-- This link for production
     localhost = f"localhost:3000/register/confirm/{token}"       # <-- This link for development
 
@@ -86,7 +95,7 @@ def register():
     subject = "Akywacja konta w YourTour"
     send_email(credentials["email"], subject, html)
 
-    return jsonify(message="Konto zostało pomyślnie utworzone. Sprawdź skrzynkę pocztową w celu aktywacji konta."), 201
+    return jsonify(message="Konto zostało pomyślnie utworzone. Sprawdź skrzynkę pocztową w celu aktywacji konta. Link aktywacyjny będzie ważny prez 30 minut."), 201
 
 
 
@@ -133,27 +142,30 @@ def login():
 @bp.route("/confirm", methods=["POST"])
 def confirm_email():
     if "token" not in request.args:
-        raise APIException(msg="Brak tokenu potwierdzającego", code=422) # Not sure about that code
+        raise APIException(msg="Brak tokenu potwierdzającego", code=422)  # Not sure about that code
     token = request.args["token"]
-    success, res = confirm_token(token, expiration=current_app.config["TOKEN_EXPIRATION"])
-    if not success:
-        raise APIException(msg=res, code=401)  # Not sure about that status code
 
-    # Token was confirmed
-    email=res
-    cursor().execute(f"SELECT is_confirmed FROM users WHERE email=%s", (email, ))
-    res = cursor().fetchone()
-    if res is None:
-        raise APIException(msg="Konto nie istnieje", code=400)
-    is_confirmed = res["is_confirmed"]
-    if is_confirmed == 1:
-        raise APIException(msg="Konto zostało już aktywowane", code=403)  # Not sure about that status code
+    cursor().execute(f"SELECT email, is_confirmed, token, token_expiration FROM users WHERE token=%s", (token, ))
+    result = cursor().fetchone()
+    if result is None:
+        raise APIException(msg="Token jest nieprawidłowy", code=400)
 
-    cursor().execute(f"UPDATE users SET is_confirmed=1 WHERE email=%s", (email, ))
-    return jsonify(msg="Konto zostało pomyślnie aktywowane", code=200)
+    # Check if token is expired
+    token_expiration = result["token_expiration"]
+    now = datetime.now()
+    if now > token_expiration:
+        cursor().execute(f"DELETE FROM users WHERE email=%s", (result["email"], ))
+        raise APIException(msg="Token utracił ważność. Zarejestruj się ponownie.", code=400)
 
-@bp.route("/logout", methods=['POST'])
-def logout():
-    pass
+    # Check if account was already confirmed
+    if result["is_confirmed"] == 1:
+        raise APIException(msg="Konto zostało już aktywowane", code=400)
+
+    # Activate account
+    cursor().execute(f"UPDATE users SET is_confirmed=1 WHERE email=%s", (result["email"], ))
+
+    return jsonify(message="Konto zostało pomyślnie aktywowane", code=200)
+
+
 
 

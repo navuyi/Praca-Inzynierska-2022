@@ -36,7 +36,7 @@ function RegisterConfirm(){
             .then(res => {
                 console.log(res)
                 setSending(false)
-                setResponseMsg(res.data.msg)
+                setResponseMsg(res.data.message)
                 setProcess({
                     done: true,
                     success: true
