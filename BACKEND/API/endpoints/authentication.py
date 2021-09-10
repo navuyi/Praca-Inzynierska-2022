@@ -87,7 +87,7 @@ def register():
     token_expiration = exp.strftime("%Y-%m-%d %H:%M:%S")
     cursor().execute(f"UPDATE users SET token=%s, token_expiration=%s WHERE email=%s", (token, token_expiration, credentials["email"]))
     # Send email with activation link
-    globalhost = f"167.99.143.194/register/confirm/{token}"     # <-- This link for production
+    globalhost = f"https://figlus.pl/register/confirm/{token}"     # <-- This link for production
     localhost = f"localhost:3000/register/confirm/{token}"       # <-- This link for development
 
     html = f'<h3> Witamy w serwisie YourTour </h3>' \
@@ -125,7 +125,6 @@ def login():
     if not verified:
         raise APIException(msg="Hasło jest nieprawidłowe", code=401)
 
-
     # Return JWT
     user_id = str(user_data["id"])
 
@@ -133,7 +132,6 @@ def login():
     refresh_token = create_refresh_token(identity=str(user_id))
     is_guide = user_data["is_guide"]
     user_id = user_data["id"]
-
 
     return jsonify(access_token=access_token, refresh_token=refresh_token, is_guide=is_guide, user_id=user_id), 200
 

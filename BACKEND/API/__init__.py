@@ -58,7 +58,6 @@ def create_app(test_config=None):               # test_config - independent from
     db_init_app(app)
 
     @app.route('/', methods=['GET'])
-    @jwt_required()
     def index_get():
         return jsonify({"msg": "Hello World"}), 200
     from app.endpoints.authentication import bp as bp_authentication

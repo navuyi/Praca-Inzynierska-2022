@@ -22,11 +22,13 @@ TOKEN_EXPIRATION = 1800
 # Cors configuration
 ORIGINS = [
     "http://167.99.143.194",
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "https://www.figlus.pl",
+    "https://figlus.pl"
 ]
 
 # Image upload configuration
-HOST = "http://167.99.143.194"
+HOST = "https://figlus.pl"
 
 TOUR_IMAGES_UPLOAD_DIRECTORY = "/home/rfiglus/app/app/storage/tour_images"
 TOUR_IMAGES_DOWNLOAD_DIRECTORY = HOST+"/storage/tour_images/"

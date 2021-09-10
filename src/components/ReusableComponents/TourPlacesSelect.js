@@ -1,5 +1,6 @@
 import AsyncSelect from 'react-select/async';
 import axios from 'axios';
+import {API_PREFIX} from "../../config";
 
 
 export const mapToValueLabel = (data) => {
@@ -12,7 +13,7 @@ export const fetchTourPlaces = (inputValue, callback) => {
     const data = {
         "place": inputValue
     }
-    const url = "http://167.99.143.194/api/tour/places";
+    const url = API_PREFIX+"/tour/places";
     axios.get(url, {
         params: data
     })

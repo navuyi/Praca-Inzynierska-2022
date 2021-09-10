@@ -23,6 +23,7 @@ import {useParams} from "react-router-dom";
 import TourImagesGallery from "../../components/ReusableComponents/TourImagesGallery";
 
 import TourDetailsMessenger from "../../components/Tours/TourDetailsMessenger";
+import {API_PREFIX} from "../../config";
 
 function TourDetails() {
     const [msgVisible, setMsgVisible] = useState(false)
@@ -40,7 +41,7 @@ function TourDetails() {
 
     function fetchData() {
         setLoading(true)
-        const url = "http://167.99.143.194/api/tour/tour"
+        const url = API_PREFIX+"/tour/tour"
         //const tour_id = queryParams["?id"]
         const params = {
             tour_id: tour_id
@@ -48,6 +49,7 @@ function TourDetails() {
 
         axios.get(url, {params})
             .then(res => {
+                console.log("ASD")
                 console.log(res)
                 setTourData(res.data)
                 setLoading(false)

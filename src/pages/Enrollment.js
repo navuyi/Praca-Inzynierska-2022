@@ -108,7 +108,7 @@ function Enrollment(){
 
 
     function fetchData() {
-        const url = "http://167.99.143.194/api/tour/tour"
+        const url = API_PREFIX+"/tour/tour"
         const params = {
             tour_id: tour_id
         }

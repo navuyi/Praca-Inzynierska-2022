@@ -12,6 +12,7 @@ import ToursPriceSlider from "../../components/Tours/ToursPriceSlider";
 import ToursTourPanel from "../../components/Tours/ToursTourPanel";
 import {useHistory} from "react-router-dom";
 import axios from "axios";
+import {API_PREFIX} from "../../config";
 
 function Tours() {
     const history = useHistory();
@@ -69,7 +70,7 @@ function Tours() {
     function fetchData() {
         setTourData([])
         setLoading(true)
-        const url = "http://167.99.143.194/api/tour/tours"
+        const url = API_PREFIX+"/tour/tours"
         const params = {...filterData, ...resultsConfig};
         window.scroll(0, null)
         console.log(params)

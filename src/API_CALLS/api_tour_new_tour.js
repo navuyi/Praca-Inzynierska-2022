@@ -1,7 +1,8 @@
 import axios from 'axios';
+import {API_PREFIX} from "../config";
 
 export const api_tour_new_tour = (data) => {
-    const url = "http://167.99.143.194/api/tour/new_tour";
+    const url = API_PREFIX+"/tour/new_tour";
     const access_token = localStorage.getItem("access_token")
 
     const config = {
