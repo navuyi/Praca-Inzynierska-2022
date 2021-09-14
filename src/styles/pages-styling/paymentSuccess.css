@@ -11,6 +11,12 @@
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
 }
+.paymentSuccess h1{
+    background: -webkit-linear-gradient(45deg, #81e8e1, #04a098);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 .paymentSuccess h2{
     margin-top: 0.1em;
+    font-size: 1.4rem;
 }

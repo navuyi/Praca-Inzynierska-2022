@@ -15,7 +15,7 @@ function PaymentRevoked() {
                 </Row>
                 <Row className={"d-flex flex-column align-items-center mt-5"}>
                     <h1> Płatność nie została dokonana! </h1>
-                    <h2> Twój zapis na ofertę pozostaje aktywny ale musi zostać opłacony w ciągu 3 dni!</h2>
+                    <h2> Twój zapis na ofertę pozostaje aktywny ale musi zostać opłacony w ciągu 24 godzin!</h2>
                     <h3> Po tym czasie zostanie automatycznie usunięty. </h3>
                 </Row>
             </Container>
