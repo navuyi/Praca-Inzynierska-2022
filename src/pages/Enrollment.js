@@ -5,18 +5,21 @@ import Footer from "../components/ReusableComponents/Footer";
 
 import {create_enrollment} from "../API_CALLS/api_enrollments_enrollment";
 import GuideActiveOfferHeader from "../components/GuideOffers/GuideActiveOfferHeader";
-import {useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import axios from "axios";
 
 import EnrollmentConfiguration from "../components/Enrollment/EnrollmentConfiguration";
 import {API_PREFIX} from "../config";
+import {CircularProgress} from "@material-ui/core";
 
 function Enrollment(){
+    const history = useHistory()
     const [generalData, setGeneralData] = useState({})
     const [imageUrl, setImageUrl] = useState("")
     const {tour_id} = useParams()
     const [participants, setParticipants] = useState([])
     const [comment, setComment] = useState("")
+    const [sending, setSending] = useState(false)
 
     const [personalData, setPersonalData] = useState({
         f_name: "",
@@ -69,14 +72,18 @@ function Enrollment(){
             ...personalData,
             ...address
         }
+        setSending(true)
         create_enrollment(data)
             .then(res => {
                 console.log(res)
+                setSending(false)
                 window.alert(res.data.msg)
+                window.location.href = res.data.payload.url
             })
             .catch(err => {
                 console.log(err)
                 if(err.response){
+                    setSending(false)
                     console.log(err.response)
                     window.alert(err.response.data.message)
                 }
@@ -257,7 +264,7 @@ function Enrollment(){
                                                 value={address.apartment_number}
                                                 id={"apartment_number"}
                                                 onChange={handleAddressChange}
-                                                required
+                                                required={false}
                                             />
                                         </Col>
                                     </Row>
@@ -271,8 +278,15 @@ function Enrollment(){
                     <Row className={"section section-summary col-11 d-flex flex-column align-items-center justify-content-center"}>
                         <p> Zakup biletów dla: <span>{participants.length} </span> osób</p>
                         <p> Do zapłaty: <span>{participants.length*205} </span></p>
-                        <Button type={"submit"} className={"w-100 mt-3"} variant={"danger"}> Potwierdź i przejdź do płatności </Button>
                     </Row>
+                    <Row className={"section section-summary col-11 d-flex flex-column align-items-center justify-content-center"} style={{minHeight: "100px"}}>
+                        {
+                            sending ? <CircularProgress size={60} color={"secondary"} />
+                                :
+                            <Button type={"submit"} className={"w-100 "} variant={"danger"}> Potwierdź i przejdź do płatności </Button>
+                        }
+                    </Row>
+                    
                 </Form>
             </Container>
             <Footer />

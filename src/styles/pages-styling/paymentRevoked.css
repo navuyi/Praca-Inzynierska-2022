@@ -1,0 +1,16 @@
+.paymentRevoked{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.paymentRevoked h1,h2,h3{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+}
+.paymentRevoked h2,h3{
+    font-size: 1.5rem;
+    color: #dc3545;
+}

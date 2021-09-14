@@ -3,7 +3,7 @@ from flask_jwt_extended import create_refresh_token, create_access_token, get_jw
 from flask import request, jsonify
 from app.handlers import APIException
 from app.database.db import cursor, lastrowid
-
+import requests
 
 bp = Blueprint("new_enrollment", __name__, url_prefix="/enrollments")
 
@@ -68,5 +68,36 @@ def create_new_enrollment():
     for full_name in body["participants"]:
         cursor().execute(f"INSERT INTO enrollment_participants (enrollment_id, full_name) VALUES (%s, %s)", (enrollment_id, full_name))
 
-    response = jsonify(msg=f"Zapis przebiegł pomyslnie + {current_tickets} ")
-    return response, 201
+    ### Make request to bitpay API ###
+    url = "https://test.bitpay.com/invoices"
+    token = "8LXkLrUS3usBvckvHY6tECAfbbejJsyBC2PsN5xhq5RU" #TODO change it to be retrieved from the request
+    body = {
+        "token": token,
+        "price": 10,
+        "currency": "PLN",
+        "itemDesc": "Zakup wycieczki", #TODO It can be modified to tour's title
+        "notificationURL": "https://figlus.pl/api/bitpay/", #TODO Create that endpoint
+        "redirectURL": "https://figlus.pl/payment/success",  #TODO Create view for after payment, successful or not
+        "closeURL": "https://figlus.pl/payment/revoked", #TODO Create view for resigning from payment
+        "posData": {
+            "firstInfo": "hello world",
+            "secondInfo": "good bye world"
+        },
+        "transactionSpeed": "high",
+        "fullNotifications": False
+    }
+    headers = {
+        "Content-Type": "application/json",
+        "X-Accept-Version": "2.0.0"
+    }
+
+    response = requests.post(url, body, headers)
+    res = response.json()
+    print(res["data"]["url"])
+
+    payload = {
+        "url": res["data"]["url"]
+    }
+
+    response = jsonify(msg=f"Zapis przebiegł pomyslnie + {current_tickets} ", payload=payload)
+    return response, 200

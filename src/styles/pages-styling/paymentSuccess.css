@@ -1,0 +1,16 @@
+.paymentSuccess{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.paymentSuccess h1, h2{
+    color: #222222;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+}
+.paymentSuccess h2{
+    margin-top: 0.1em;
+}

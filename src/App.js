@@ -23,6 +23,8 @@ import Messages from "./pages/messages/Messages";
 import GuideActiveOffer from "./pages/guide/guide-active-offer/GuideActiveOffer";
 import Enrollment from "./pages/Enrollment";
 import Settings from "./pages/settings/Settings"
+import PaymentRevoked from "./pages/PaymentRevoked";
+import PaymentSuccess from "./pages/PaymentSuccess";
 
 // Styles
 import './App.css'
@@ -59,6 +61,8 @@ import "./styles/components-styling/tourDetailsMessenger.css"
 import "./styles/components-styling/notFoundIndicator.css"
 import "./styles/pages-styling/enrollment.css"
 import './styles/pages-styling/registerConfirm.css'
+import "./styles/pages-styling/paymentRevoked.css"
+import "./styles/pages-styling/paymentSuccess.css"
 
 
 
@@ -128,6 +132,12 @@ function App() {
                 </Route>
                 <Route exact path={"/register/confirm/:token"}>
                     <RegisterConfirm />
+                </Route>
+                <Route exact path={"/payment/success"}>
+                    <PaymentSuccess />
+                </Route>
+                <Route exact path={"/payment/revoked"}>
+                    <PaymentRevoked />
                 </Route>
             </Switch>
     );

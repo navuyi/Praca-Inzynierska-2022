@@ -49,8 +49,6 @@ function TourDetails() {
 
         axios.get(url, {params})
             .then(res => {
-                console.log("ASD")
-                console.log(res)
                 setTourData(res.data)
                 setLoading(false)
             })
