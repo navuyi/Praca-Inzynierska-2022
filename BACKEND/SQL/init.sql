@@ -109,6 +109,8 @@ CREATE TABLE enrollment_participants(
 );
 
 
+
+
 DELIMITER $$
 CREATE TRIGGER tickets_decrement
     AFTER DELETE ON enrollment_participants

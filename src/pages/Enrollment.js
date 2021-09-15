@@ -11,6 +11,7 @@ import axios from "axios";
 import EnrollmentConfiguration from "../components/Enrollment/EnrollmentConfiguration";
 import {API_PREFIX} from "../config";
 import {CircularProgress} from "@material-ui/core";
+import {refesh_token} from "../API_CALLS/api_authentication_token_refresh";
 
 function Enrollment(){
     const history = useHistory()
@@ -37,6 +38,10 @@ function Enrollment(){
 
     // Fetch personal data if is logged in
     useEffect(() => {
+      fetchPersonalData()
+    }, [])
+
+    function fetchPersonalData(){
         const access_token = localStorage.getItem("access_token")
         if(access_token){
             const url = API_PREFIX + "/settings/personal_data"
@@ -54,10 +59,20 @@ function Enrollment(){
                 }
                 setPersonalData(data)
             }).catch(err => {
-                console.log(err)
+                if(err.response.status === 401){
+                    // Try refreshing the token
+                    if(access_token){
+                        refesh_token().then(res => {
+                            localStorage.setItem("access_token", res.data.access_token)
+                            fetchPersonalData()
+                        }).catch(err => {
+                            console.log(err)
+                        })
+                    }
+                }
             })
         }
-    })
+    }
 
     function handleSubmit(e){
         e.preventDefault()
@@ -70,14 +85,13 @@ function Enrollment(){
             comment: comment,
             tour_id: tour_id,
             ...personalData,
-            ...address
+            ...address,
+            amount_payable: participants.length*generalData.price
         }
         setSending(true)
         create_enrollment(data)
             .then(res => {
-                console.log(res)
                 setSending(false)
-                window.alert(res.data.msg)
                 window.location.href = res.data.payload.url
             })
             .catch(err => {
@@ -277,7 +291,7 @@ function Enrollment(){
                     </Row>
                     <Row className={"section section-summary col-11 d-flex flex-column align-items-center justify-content-center"}>
                         <p> Zakup biletów dla: <span>{participants.length} </span> osób</p>
-                        <p> Do zapłaty: <span>{participants.length*205} </span></p>
+                        <p> Do zapłaty: <span>{participants.length*generalData.price} </span> PLN </p>
                     </Row>
                     <Row className={"section section-summary col-11 d-flex flex-column align-items-center justify-content-center"} style={{minHeight: "100px"}}>
                         {

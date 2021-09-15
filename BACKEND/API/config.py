@@ -19,6 +19,9 @@ MAIL_USERNAME = "webappengthesis@gmail.com"
 # Email confirmation
 TOKEN_EXPIRATION = 1800
 
+# BitPay
+BITPAY_SECRET_KEY = "8LXkLrUS3usBvckvHY6tECAfbbejJsyBC2PsN5xhq5RU"  # This is the API token from BitPay merchant account
+
 # Cors configuration
 ORIGINS = [
     "http://167.99.143.194",

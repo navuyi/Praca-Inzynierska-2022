@@ -94,7 +94,7 @@ def create_app(test_config=None):               # test_config - independent from
     from app.endpoints.settings.password import bp as bp_password
     from app.endpoints.settings.personal_data import bp as bp_personal_data
 
-
+    from app.endpoints.payment.bitpay import bp as bp_bitpay
 
     # Register blueprints
     app.register_blueprint(bp_authentication)
@@ -129,6 +129,7 @@ def create_app(test_config=None):               # test_config - independent from
     app.register_blueprint(bp_password)
     app.register_blueprint(bp_personal_data)
 
+    app.register_blueprint(bp_bitpay)
 
 
     return app

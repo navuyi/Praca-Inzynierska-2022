@@ -1,0 +1,34 @@
+from flask import Blueprint, current_app
+from flask_jwt_extended import create_refresh_token, create_access_token, get_jwt_identity, jwt_required
+from flask import request, jsonify
+from app.handlers import APIException
+from app.database.db import cursor, lastrowid
+import requests
+
+bp = Blueprint("handle_payment", __name__, url_prefix="/payment")
+
+
+@bp.route("/bitpay", methods=["POST"])
+def bitpay():
+    data = request.json["data"]
+
+    if data["status"] == "confirmed":
+        posData = data["posData"]
+        invoiceId = data["id"]
+        url = data["url"]
+
+        # Make confirmation request
+        response = requests.get("https://test.bitpay.com/invoices/"+str(invoiceId))
+        res = response.json()
+        data = res["data"]
+        print(data)
+
+        #TODO Check this link for status if it is confirmed or complete
+        # https://test.bitpay.com/invoices/5gQFu6DY33eYunEKZHbvsy
+
+        #TODO Continue... check if status is confirmed
+
+        return {}, 200
+    else:
+        # Nothing to handle if not confirmed
+        return jsonify("OK"), 200

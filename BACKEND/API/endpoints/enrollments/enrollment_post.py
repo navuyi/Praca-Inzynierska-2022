@@ -1,3 +1,5 @@
+import json
+
 from flask import Blueprint, current_app
 from flask_jwt_extended import create_refresh_token, create_access_token, get_jwt_identity, jwt_required
 from flask import request, jsonify
@@ -45,7 +47,7 @@ def create_new_enrollment():
 
 
     # Create new enrollment
-    columns = f"f_name, l_name, phone_number, email, user_id, tour_id, city, postcode, street, house_number, apartment_number, comment"
+    columns = f"f_name, l_name, phone_number, email, user_id, tour_id, city, postcode, street, house_number, apartment_number, comment, amount_payable"
     insert = {
         "f_name": body["f_name"],
         "l_name": body["l_name"],
@@ -58,31 +60,33 @@ def create_new_enrollment():
         "street": body["street"],
         "house_number": body["house_number"],
         "apartment_number": body["apartment_number"],
-        "comment": body["comment"]
+        "comment": body["comment"],
+        "amount_payable": body["amount_payable"]
     }
-    cursor().execute(f"INSERT INTO enrollments ({columns}) VALUES (%(f_name)s, %(l_name)s, %(phone_number)s, %(email)s, %(user_id)s, %(tour_id)s, %(city)s, %(postcode)s, %(street)s, %(house_number)s, %(apartment_number)s, %(comment)s )", insert)
-
+    cursor().execute(f"INSERT INTO enrollments ({columns}) VALUES (%(f_name)s, %(l_name)s, %(phone_number)s, %(email)s, %(user_id)s, %(tour_id)s, %(city)s, %(postcode)s, %(street)s, %(house_number)s, %(apartment_number)s, %(comment)s, %(amount_payable)s)", insert)
     enrollment_id = lastrowid()
 
     # Add participants to enrollment_participants table
     for full_name in body["participants"]:
         cursor().execute(f"INSERT INTO enrollment_participants (enrollment_id, full_name) VALUES (%s, %s)", (enrollment_id, full_name))
 
+
+
     ### Make request to bitpay API ###
     url = "https://test.bitpay.com/invoices"
-    token = "8LXkLrUS3usBvckvHY6tECAfbbejJsyBC2PsN5xhq5RU" #TODO change it to be retrieved from the request
+    token = current_app.config["BITPAY_SECRET_KEY"]
     body = {
         "token": token,
-        "price": 10,
+        "price": 10,        # TODO change it to body["amount_payable"], low value for now, for testing
         "currency": "PLN",
         "itemDesc": "Zakup wycieczki", #TODO It can be modified to tour's title
-        "notificationURL": "https://figlus.pl/api/bitpay/", #TODO Create that endpoint
-        "redirectURL": "https://figlus.pl/payment/success",  #TODO Create view for after payment, successful or not
-        "closeURL": "https://figlus.pl/payment/revoked", #TODO Create view for resigning from payment
-        "posData": {
-            "firstInfo": "hello world",
-            "secondInfo": "good bye world"
-        },
+        "notificationURL": "https://figlus.pl/api/payment/bitpay",
+        "redirectURL": "https://figlus.pl/payment/success",
+        "closeURL": "https://figlus.pl/payment/revoked",
+        "posData": json.dumps({
+            "enrollment_id": enrollment_id,
+            "amount_payable": body["amount_payable"]
+        }),
         "transactionSpeed": "high",
         "fullNotifications": False
     }
@@ -93,7 +97,6 @@ def create_new_enrollment():
 
     response = requests.post(url, body, headers)
     res = response.json()
-    print(res["data"]["url"])
 
     payload = {
         "url": res["data"]["url"]

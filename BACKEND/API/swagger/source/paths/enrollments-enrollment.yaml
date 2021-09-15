@@ -1,6 +1,7 @@
 post:
   tags:
     - Enrollments
+  summary: Creates new enrollment to given offer
   requestBody:
     content:
       application/json:
@@ -45,6 +46,9 @@ post:
             comment:
               type: string
               example: Lorem ipsum sint occaecat cupidatat non proident, sunt in culpa qui officia.
+            amount_payable:
+              type: integer
+              example: 540
   responses:
     '201':
       description: OK
@@ -55,9 +59,48 @@ post:
             properties:
               msg:
                 type: string
-
-get:
-  tags:
-    - Enrollments
-  re
-  responses:
+  get:
+    security:
+      - bearerAuth: []
+    tags:
+      - Enrollments
+    summary: Returns all enrollments connected with given tour ID
+    parameters:
+      - in: query
+        name: tour_id
+        schema:
+          type: integer
+          example: 30
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                f_name:
+                  type: string
+                l_name:
+                  type: string
+                email:
+                  type: string
+                phone_number:
+                  type: integer
+                tickets:
+                  type: integer
+                participants:
+                  type: array
+                  items:
+                    type: string
+                message_threads:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      topic:
+                        type: string
