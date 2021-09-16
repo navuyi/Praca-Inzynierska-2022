@@ -6,11 +6,17 @@
     align-items: center;
 }
 
-.paymentSuccess h1, h2{
+.paymentSuccess h1{
     color: #222222;
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: bold;
 }
+.paymentSuccess h2{
+    color: #222222;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+}
+
 .paymentSuccess h1{
     background: -webkit-linear-gradient(45deg, #81e8e1, #04a098);
     -webkit-background-clip: text;

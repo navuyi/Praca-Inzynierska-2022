@@ -14,7 +14,7 @@ def get_enrollments():
     tour_id = request.args["tour_id"]
     guide_id = get_jwt_identity()
 
-    cursor().execute(f"SELECT id, f_name, l_name, email, phone_number, tickets, user_id, creation_date FROM enrollments WHERE tour_id=%s", (tour_id, ))
+    cursor().execute(f"SELECT id, f_name, l_name, email, phone_number, tickets, user_id, creation_date, amount_paid, amount_payable FROM enrollments WHERE tour_id=%s", (tour_id, ))
     enrollments = cursor().fetchall()
 
 
@@ -36,6 +36,13 @@ def get_enrollments():
         # Format date
         enrollment["creation_date"] = enrollment["creation_date"].strftime("%d.%m.%Y")
 
+        # Enrollment payment status
+        if enrollment["amount_paid"] == 0:
+            enrollment["payment_status"] = "Oczekuje na wpłatę"
+        elif enrollment["amount_paid"] > 0 and enrollment["amount_paid"] < enrollment["amount_payable"]:
+            enrollment["payment_status"] = "Częściowa zapłata"
+        elif enrollment["amount_paid"] == enrollment["amount_payable"]:
+            enrollment["payment_status"] = "Zapłacono"
 
     response = jsonify(enrollments)
     return response, 200

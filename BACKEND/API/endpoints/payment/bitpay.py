@@ -4,6 +4,7 @@ from flask import request, jsonify
 from app.handlers import APIException
 from app.database.db import cursor, lastrowid
 import requests
+import json
 
 bp = Blueprint("handle_payment", __name__, url_prefix="/payment")
 
@@ -23,12 +24,15 @@ def bitpay():
         data = res["data"]
         print(data)
 
-        #TODO Check this link for status if it is confirmed or complete
-        # https://test.bitpay.com/invoices/5gQFu6DY33eYunEKZHbvsy
 
-        #TODO Continue... check if status is confirmed
+        # Checking if payment is confirmed
+        if data["status"] == "confirmed" or data["status"] == "complete":
+            price = data["price"]
+            posData = json.loads(data["posData"])
+            enrollment_id = posData["enrollment_id"]
+            cursor().execute(f"UPDATE enrollments SET amount_paid=%s WHERE id=%s", (price, enrollment_id))
 
-        return {}, 200
+            return {}, 200
     else:
         # Nothing to handle if not confirmed
-        return jsonify("OK"), 200
+        return jsonify("Was not confirmed"), 200

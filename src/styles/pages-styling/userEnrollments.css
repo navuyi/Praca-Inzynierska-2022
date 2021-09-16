@@ -1,0 +1,47 @@
+.userEnrollments{
+
+}
+.userEnrollments .header{
+    background-color: #222222;
+    padding: 1em 0;
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    border-radius: 0.5em;
+    margin-top: 1em;
+}
+.userEnrollments h1{
+    font-size: 2em;
+    background: -webkit-linear-gradient(15deg, orange, #fc672f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.userEnrollments #tour-img{
+    width: 100%;
+    border-radius: 10px;
+}
+.userEnrollments .enrollment-panel #setting-img:hover{
+    filter: invert(1);
+}
+
+.userEnrollments .enrollment-panel{
+    background-color: #fcb73c;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-radius: 0.5em;
+
+    margin-top: 1em;
+}
+.userEnrollments .enrollment-panel h2{
+    margin: 0;
+    padding: 0;
+    color: whitesmoke;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    font-size: 1.9rem;
+}
+
+.userEnrollments .enrollment-panel p{
+    color: #222222;
+    font-family: "Lora", sans-serif;
+    font-weight: bold;
+}
