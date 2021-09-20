@@ -23,11 +23,11 @@ function UserEnrollments() {
                                         <Col xl={5}>
                                             <img id={"tour-img"} src={img} alt={""} />
                                         </Col>
-                                        <Col xl={7} className={"d-flex flex-column align-items-start justify-content-start"}>
+                                        <Col xl={7} className={"d-flex flex-column align-items-start justify-content-start pl-5 pt-3  pt-xl-0"}>
                                             <Row className={"d-flex flex-row justify-content-between align-items-center w-100"}>
                                                 <h2> Loreim ipsum set dorim </h2>
                                             </Row>
-                                            <Row className={"flex-grow-1 d-flex flex-column justify-content-center"} >
+                                            <Row className={"flex-grow-1 d-flex flex-column justify-content-center mt-2 mt-xl-0"} >
                                                 <p>Przewodnik: </p>
                                                 <p> Data: </p>
                                                 <p> Status płatności: </p>
