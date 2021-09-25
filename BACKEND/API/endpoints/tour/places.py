@@ -16,9 +16,9 @@ def get_places():
 
     limit = 10
     # Open databse connection
-    statement = """SELECT id, place FROM tour_places WHERE place LIKE %(place)s ORDER BY place LIMIT %(limit)s;"""
+    statement = """SELECT id, place FROM tour_places WHERE place LIKE %(place)s ORDER BY char_length(place)  LIMIT %(limit)s;"""
     insert = {
-        "place": "%"+place+"%",
+        "place": place+"%",
         "limit": limit
     }
     cursor().execute(statement, insert)
