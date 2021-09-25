@@ -29,7 +29,7 @@ def get_enrollments():
 
         # Get conversation
         if enrollment['user_id'] is not None:
-            cursor().execute(f"SELECT id, topic FROM message_threads WHERE (sender_id=%s AND receiver_id=%s) OR (sender_id=%s AND receiver_id=%s)", (guide_id, enrollment["user_id"], enrollment["user_id"], guide_id))
+            cursor().execute(f"SELECT id, topic FROM message_threads WHERE tour_id=%s AND (sender_id=%s AND receiver_id=%s) OR (sender_id=%s AND receiver_id=%s)", (tour_id, guide_id, enrollment["user_id"], enrollment["user_id"], guide_id))
             res = cursor().fetchall()
             enrollment["message_threads"] = res
 

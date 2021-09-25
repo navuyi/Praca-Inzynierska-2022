@@ -22,15 +22,17 @@ function NavbarComponent() {
                 <Nav.Link as={Link} to="/tours"><span className="white">Wycieczki</span></Nav.Link>
                 {
                     isLogged ?
-                        <NavDropdown id="collasible-nav-dropdown" title="Moje konto">
-                            {isGuide ? <NavDropdown.Item as={Link} to="/account/guide/new-tour"><span
-                                className="black">Przewodnik</span></NavDropdown.Item> : null}
-                            <NavDropdown.Item as={Link} to="/account/user/enrollments"><span
-                                className="black">Użytkownik</span></NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/account/messages"><span className="black">Wiadomości</span></NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/account/settings"><span className="black">Ustawienia</span></NavDropdown.Item>
-                        </NavDropdown>
-                        : null
+                    <React.Fragment>
+                        <Nav.Link as={Link} to="/account/user/enrollments"><span className="white">Panel użytkownika</span></Nav.Link>
+                        {
+                            isGuide ?
+                            <React.Fragment>
+                                <Nav.Link as={Link} to="/account/guide/new-tour"><span className="white">Panel przewodnika</span></Nav.Link>
+                            </React.Fragment> : null
+                        }
+                        <Nav.Link as={Link} to="/account/messages"><span className="white">Wiadomości</span></Nav.Link>
+                        <Nav.Link as={Link} to="/account/settings/password-change"><span className="white">Ustawienia</span></Nav.Link>
+                    </React.Fragment> : null
                 }
             </Navbar.Collapse>
             <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">

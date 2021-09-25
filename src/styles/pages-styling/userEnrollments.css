@@ -1,5 +1,9 @@
 .userEnrollments{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 
+    align-items: center;
 }
 .userEnrollments .header{
     background-color: #222222;
@@ -11,9 +15,12 @@
 }
 .userEnrollments h1{
     font-size: 2em;
+    /*
     background: -webkit-linear-gradient(15deg, orange, #fc672f);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    */
+    color: orange;
 }
 .userEnrollments #tour-img{
     width: 100%;

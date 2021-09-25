@@ -77,7 +77,7 @@ def create_new_enrollment():
     token = current_app.config["BITPAY_SECRET_KEY"]
     body = {
         "token": token,
-        "price": 10,        # TODO change it to body["amount_payable"], low value for now, for testing
+        "price": body["amount_payable"],        # TODO change it to body["amount_payable"], low value for now, for testing
         "currency": "PLN",
         "itemDesc": "Zakup wycieczki", #TODO It can be modified to tour's title
         "notificationURL": "https://figlus.pl/api/payment/bitpay",

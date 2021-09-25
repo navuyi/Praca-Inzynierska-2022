@@ -42,14 +42,22 @@ function Guide() {
                                 name="Aktywne oferty"
                                 path="/account/guide/active-offers"
                             />
-                            <SideNavbarLink
-                                name="Zakończone oferty"
-                                path="/account/guide/closed-offers"
-                            />
-                            <SideNavbarLink
-                                name="Mój profil"
-                                path="/account/guide/profile"
-                            />
+                            {
+                                /*
+                                 <SideNavbarLink
+                                    name="Zakończone oferty"
+                                    path="/account/guide/closed-offers"
+                                 />
+                                 */
+                            }
+                            {
+                                /*
+                                 <SideNavbarLink
+                                    name="Mój profil"
+                                    path="/account/guide/profile"
+                                    />
+                                 */
+                            }
                         </SideNavbar>
                     </Col>
                     <Col lg={10} sm={12} style={{padding: "0"}}>

@@ -7,6 +7,7 @@ import SideNavbarLink from "../../components/ReusableComponents/SideNavbarLink";
 import {Switch} from "react-router-dom";
 
 import UserEnrollments from "./UserEnrollments";
+import UserEnrollmentsHistory from "./UserEnrollmentsHistory";
 import ProtectedRoute from "../../components/UtilityComponents/ProtectedRoute";
 
 // Dependencies
@@ -24,15 +25,18 @@ function User() {
                                 name="Zapisy na wycieczki"
                                 path="/account/user/enrollments"
                             />
-                            <SideNavbarLink
+                            {
+                                 <SideNavbarLink
                                 name="Historia wycieczek"
-                                path="/account/user/asdasd"
-                            />
+                                path="/account/user/history"
+                                 />
+                            }
                         </SideNavbar>
                     </Col>
                     <Col lg={10} sm={12} style={{padding: "0"}}>
                         <Switch>
-                            <ProtectedRoute exact path={"/account/user/enrollments"} component={UserEnrollments}/>
+                            <ProtectedRoute exact path={"/account/user/enrollments"} component={UserEnrollments} />
+                            <ProtectedRoute  path={"/account/user/history"} component={UserEnrollmentsHistory} />
                         </Switch>
                     </Col>
                 </Row>

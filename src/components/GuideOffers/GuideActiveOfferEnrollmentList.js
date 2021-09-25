@@ -125,13 +125,15 @@ function GuideActiveOfferEnrollmentList(props) {
                             <Row className={"d-flex align-items-center mb-3"}>
                                 <PaymentIcon fontSize={"large"}/>
                                 {
-                                    enrollmentDetails.amount_paid > 0 && enrollmentDetails.amount_paid < enrollmentDetails.amount_payable ?
-                                        <p style={{color: "#d9534f"}}> {enrollmentDetails.amount_paid} / {enrollmentDetails.amount_payable} PLN</p> :
-                                        <p style={{color: "#d9534f"}}> Oczekuje na wpłatę </p>
+                                    parseInt(enrollmentDetails.amount_paid) > 0 && parseInt(enrollmentDetails.amount_paid) < parseInt(enrollmentDetails.amount_payable) ?
+                                        <p style={{color: "#d9534f"}}> {enrollmentDetails.amount_paid} / {enrollmentDetails.amount_payable} PLN</p> : null
+                                }
+                                {
+                                    parseInt(enrollmentDetails.amount_paid) === 0 ? <p style={{color: "#d9534f"}}> Oczekuje na wpłatę </p> : null
                                 }
                                 {
                                     parseInt(enrollmentDetails.amount_paid) === parseInt(enrollmentDetails.amount_payable) ?
-                                        <p> Zapłacono </p> : null
+                                        <p> Opłacono </p> : null
                                 }
                             </Row>
                             <Row className={"d-flex align-items-center mb-3"}><EventAvailableIcon
@@ -212,7 +214,7 @@ function GuideActiveOfferEnrollmentList(props) {
                                 :
                                 <Col xl={6}
                                      className={"d-flex flex-column p-5 justify-content-center  align-items-center"}>
-                                    <p style={{fontSize: "0.9rem"}}> Ten klient nie ma konta w serwisie. Możliwy kontakt
+                                    <p style={{fontSize: "0.9rem"}}> Ta osoba nie ma konta w serwisie. Możliwy kontakt
                                         telefoniczny lub mailowy.</p>
                                 </Col>
                         }

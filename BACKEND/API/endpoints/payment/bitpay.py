@@ -30,7 +30,7 @@ def bitpay():
             price = data["price"]
             posData = json.loads(data["posData"])
             enrollment_id = posData["enrollment_id"]
-            cursor().execute(f"UPDATE enrollments SET amount_paid=%s WHERE id=%s", (price, enrollment_id))
+            cursor().execute(f"UPDATE enrollments SET amount_paid=%s, payment_date=NOW() WHERE id=%s", (price, enrollment_id))
 
             return {}, 200
     else:

@@ -66,47 +66,25 @@ paths:
 
 # User endpoints
   "/api/user/enrollments":
+    $ref: "./paths/user-enrollments.yaml"
+  "/api/user/enrollments/history":
     get:
-      tags:
-        - User
+      summary: Get user's history of enrollments.
+      description: No additional data is required.
       security:
         - bearerAuth: []
-      summary: Get user's active enrollments
-      parameters:
-        - in: query
-          name: user_id
-          schema:
-            type: integer
-            example: 1
+      tags:
+        - User
       responses:
         200:
-          description: OK
+          description: "OK"
           content:
             application/json:
               schema:
                 type: object
-                properties:
-                  header:
-                    type: string
-                  guide_f_name:
-                    type: string
-                  guide_l_name:
-                    type: string
-                  start_date:
-                    type: string
-                  end_date:
-                    type: string
-                  payment_status:
-                    type: string
-                  tour_id:
-                    type: integer
-                  amount_paid:
-                    type: integer
-                  amount_payable:
-                    type: integer
-                  amount_remaining:
-                    type: integer
-        # Message endpoints
+
+
+# Message endpoints
   "/api/messages/unicast/new":
       $ref: "./paths/message-unicast-new.yaml"
 
@@ -150,9 +128,18 @@ paths:
   "/api/enrollments/enrollment":
     $ref: "./paths/enrollments-enrollment.yaml"
 
+
   # Payment endpoints
   "/api/payment/bitpay":
-    post:
+      post:
+        tags:
+          - Payment
+
+  "/api/payment/fill":
+      $ref: "./paths/payment-fill.yaml"
+
+
+
 
         # Endpoints for static information
   "/api/tour/tags":

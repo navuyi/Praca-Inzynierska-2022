@@ -1,16 +1,26 @@
-{
-  "openapi": "3.0.3",
-  "info": {
-    "title": "$Title$",
-    "description": "$Title$",
-    "version": "1.0.0"
-  },
-  "servers": [
-    {
-      "url": "$https$"
-    }
-  ],
-  "paths": {
-    $END$
-  }
-}
+post:
+  summary: Make payment to already created enrollment
+  security:
+    - bearerAuth: []
+  tags:
+    - Payment
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            enrollment_id:
+              type: integer
+            tour_id:
+              type: integer
+  responses:
+    '200':
+      description: Returns BitPay url
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              url:
+                type: string

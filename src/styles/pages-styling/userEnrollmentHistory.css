@@ -1,0 +1,49 @@
+.userEnrollmentsHistory{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+.userEnrollmentsHistory .header{
+    background-color: #222222;
+    padding: 1em 0;
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    border-radius: 0.5em;
+    margin-top: 1em;
+}
+.userEnrollmentsHistory h1{
+    font-size: 2em;
+    /*
+    background: -webkit-linear-gradient(15deg, orange, #fc672f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    */
+    color: orange;
+}
+.userEnrollmentsHistory .panel h2{
+    margin: 0;
+    padding: 0;
+    color: whitesmoke;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.userEnrollmentsHistory .panel p{
+    color: whitesmoke;
+    font-family: "Lora", sans-serif;
+}
+.userEnrollmentsHistory .panel{
+    background-image: linear-gradient(15deg, #222222, #383838);
+    margin: 1em 0;
+    padding: 1em 0;
+    border-radius: 10px;
+    min-height: 260px;
+}
+
+.userEnrollmentsHistory #tour-img{
+    width: 100%;
+    border-radius: 10px;
+}
