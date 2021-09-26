@@ -30,7 +30,11 @@ function MessagesThreadList(props) {
     }, [props.threadType])
     useEffect(() => {
         fetchThreads()
-    }, [page, sort, search])
+    }, [page, sort])
+    useEffect(() => {
+        setPage(1)
+        fetchThreads()
+    }, [search])
 
     function fetchThreads() {
         setLoading(true)
@@ -69,7 +73,7 @@ function MessagesThreadList(props) {
     }
 
     function navigateTourDetails(e) {
-        history.push(`/tours/tour?id=${e.target.id}`)
+        history.push(`/tours/tour/${e.target.id}`)
     }
 
     function handleThreadChange(e) {
@@ -128,34 +132,20 @@ function MessagesThreadList(props) {
             <React.Fragment>
                 <Row className={"thread-list-header d-flex justify-content-center align-items-center mt-5"}>
                     <Col xl={3}>
-                        {
-                            threads.length>0 ?
-                                <React.Fragment>
-                                    <FormLabel>Wyszukaj</FormLabel>
-                                    <FormControl as={"input"} placeholder={"Imię i nazwisko, email, ..."} onChange={handleSearchChange} value={search}/>
-                                </React.Fragment> : null
-                        }
+                        <FormLabel>Wyszukaj</FormLabel>
+                        <FormControl as={"input"} placeholder={"Imię i nazwisko, email, ..."} onChange={handleSearchChange} value={search}/>
                     </Col>
                     <Col xl={6}>
                         <h1> {props.threadType.active ? "Aktywne wątki " : null} {props.threadType.deleted ? "Usunięte wątki" : null}</h1>
                     </Col>
                     <Col xl={3}>
-                        {
-                            threads.length > 0 ?
-                                <React.Fragment>
-                                    <FormLabel> Sortuj </FormLabel>
-                                    <FormControl as={"select"} value={sort} onChange={(e)=>{setSort(e.target.value)}}>
-                                        <option value={"most_recent"}> Od najnowszych </option>
-                                        <option value={"oldest"}> Od najstarszych </option>
-                                    </FormControl>
-                                </React.Fragment>
-                                        :
-                                null
-                        }
+                        <FormLabel> Sortuj </FormLabel>
+                        <FormControl as={"select"} value={sort} onChange={(e)=>{setSort(e.target.value)}}>
+                            <option value={"most_recent"}> Od najnowszych </option>
+                            <option value={"oldest"}> Od najstarszych </option>
+                        </FormControl>
                     </Col>
                 </Row>
-                {
-                    threads.length > 0 ?
                 <React.Fragment>
                     <Row className={"thread-list"}>
                         {
@@ -165,19 +155,23 @@ function MessagesThreadList(props) {
                                 </Row>
                                 :
                                 <Table striped bordered hover responsive={"sm"} className={"mb-0 w-100"}>
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Rozmówca</th>
-                                        <th> Email</th>
-                                        <th >Tytuł wątku</th>
-                                        <th > Oferta</th>
-                                        <th >Data</th>
-                                        <th  > </th>
-                                    </tr>
-                                    </thead>
+                                    {
+                                        threads.length > 0 ?
+                                            <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Rozmówca</th>
+                                                <th> Email</th>
+                                                <th >Tytuł wątku</th>
+                                                <th > Oferta</th>
+                                                <th >Data</th>
+                                                <th  > </th>
+                                            </tr>
+                                            </thead> : null
+                                    }
                                     <tbody>
                                     {
+                                        threads.length > 0 ?
                                         threads.map((thread, index) => {
                                             return (
                                                 <tr key={index}>
@@ -207,19 +201,19 @@ function MessagesThreadList(props) {
                                                     </td>
                                                 </tr>
                                             )
-                                        })
+                                        }) :
+                                        <Row className={"d-flex justify-content-center h-100 align-items-center"}>
+                                            <h5> Nie znaleziono wątków </h5>
+                                        </Row>
                                     }
                                     </tbody>
                                 </Table>
                                 }
                     </Row>
                     <Row className={"thread-list-pagination d-flex justify-content-center align-items-center"}>
-                        <Pagination count={totalPages} page={page} shape="rounded" color={"primary"} onChange={handlePage}/>
+                        <Pagination count={totalPages} page={page} variant={"text"} shape="rounded" color={"secondary"} onChange={handlePage}/>
                     </Row>
                 </React.Fragment>
-                        :
-                <NotFoundIndicator message={"Brak usuniętych wątków"}/>
-                }
             </React.Fragment>
     )
 }

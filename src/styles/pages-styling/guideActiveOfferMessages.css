@@ -1,6 +1,9 @@
 .guideActiveOfferMessages {
 
 }
+.guideActiveOfferMessages .thread-list {
+    min-height:450px;
+}
 
 .guideActiveOfferMessages .list-header {
     background-color: #222222;

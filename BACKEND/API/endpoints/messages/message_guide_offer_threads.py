@@ -13,6 +13,7 @@ def get_guide_offer_threads():
     if "tour_id" not in request.args:
         raise APIException(msg="tour_id is required", code=422)
 
+    my_id = get_jwt_identity()
     tour_id = request.args["tour_id"]
     guide_id = get_jwt_identity()
 
@@ -31,8 +32,22 @@ def get_guide_offer_threads():
     elif request.args["sort"] == "oldest":
         order = "ORDER BY creation_date"
 
+    # Handle search
+    search = request.args["search"]
+
     # Get tour message threads
-    cursor().execute(f"SELECT SQL_CALC_FOUND_ROWS * FROM message_threads WHERE tour_id = %s {order} LIMIT {limit} OFFSET %s", (tour_id, offset))
+    statement = f"SELECT SQL_CALC_FOUND_ROWS mt.id, mt.hidden, mt.sender_id, mt.receiver_id, mt.tour_id, mt.topic, mt.creation_date, mt.sender_deleted, mt.receiver_deleted FROM message_threads mt, users WHERE" \
+                f" tour_id = %(tour_id)s AND " \
+                f"(sender_id={my_id} AND receiver_id=users.id AND (users.email LIKE %(search)s OR users.f_name LIKE %(search)s OR users.l_name LIKE %(search)s OR CONCAT(users.f_name, ' ', users.l_name) LIKE %(search)s)) OR " \
+                f"(receiver_id={my_id} AND sender_id=users.id AND (users.email LIKE %(search)s OR users.f_name LIKE %(search)s OR users.l_name LIKE %(search)s OR CONCAT(users.f_name, ' ', users.l_name) LIKE %(search)s))" \
+                f"{order} LIMIT {limit} OFFSET {offset}"
+
+    #statement = f"SELECT SQL_CALC_FOUND_ROWS * FROM message_threads WHERE tour_id = %(tour_id)s {order} LIMIT {limit} OFFSET {offset}"
+    insert = {
+        "tour_id": tour_id,
+        "search": '%'+search+"%"
+    }
+    cursor().execute(statement, insert)
     threads = cursor().fetchall()
 
     cursor().execute("SELECT FOUND_ROWS()")

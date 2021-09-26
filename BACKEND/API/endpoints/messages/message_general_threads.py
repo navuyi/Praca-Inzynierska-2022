@@ -35,14 +35,18 @@ def get_general_threads():
     search = request.args["search"]
 
 
-    columns = "message_threads.id, tour_id, creation_date, topic, sender_deleted, sender_id, receiver_deleted, receiver_id"
+    columns = "message_threads.id, tour_id, message_threads.creation_date, topic, sender_deleted, sender_id, receiver_deleted, receiver_id"
     if is_guide == 1:  # <-- user is a guide,
-        statement = f"""SELECT SQL_CALC_FOUND_ROWS {columns} FROM message_threads, users WHERE """ \
-                    f"""(sender_id={my_id} AND sender_deleted={is_deleted} AND users.is_guide=1 AND users.id=receiver_id)""" \
+        statement = f"""SELECT SQL_CALC_FOUND_ROWS {columns} FROM message_threads, users, tours WHERE """ \
+                    f"""(sender_id={my_id} AND tours.guide_id !={my_id} AND message_threads.tour_id=tours.id AND sender_deleted=%(is_deleted)s AND users.is_guide=1 AND users.id=receiver_id AND (users.email LIKE %(search)s OR users.f_name LIKE %(search)s OR users.l_name LIKE %(search)s OR CONCAT(users.f_name, ' ', users.l_name) LIKE %(search)s) )""" \
                     f"""OR """ \
-                    f"""(receiver_id={my_id} AND receiver_deleted={is_deleted} AND users.is_guide=1 AND users.id=sender_id) """ \
+                    f"""(receiver_id={my_id} AND tours.guide_id !={my_id} AND message_threads.tour_id=tours.id  AND receiver_deleted=%(is_deleted)s AND users.is_guide=1 AND users.id=sender_id AND (users.email LIKE %(search)s OR users.f_name LIKE %(search)s OR users.l_name LIKE %(search)s OR CONCAT(users.f_name, ' ', users.l_name) LIKE %(search)s) ) """ \
                     f"""{order} LIMIT {limit} OFFSET {(page-1)*limit} """
-        cursor().execute(statement)
+        insert = {
+            "is_deleted": is_deleted,
+            "search": "%"+search+"%",
+        }
+        cursor().execute(statement, insert)
         threads = cursor().fetchall()
 
         cursor().execute("SELECT FOUND_ROWS()")
@@ -50,7 +54,10 @@ def get_general_threads():
         pages = math.ceil(found_rows/limit)
 
     elif is_guide == 0:  # <-- user is not a guide getting all threads available
-        statement = f"SELECT SQL_CALC_FOUND_ROWS {columns} FROM message_threads WHERE (sender_id={my_id} AND sender_deleted={is_deleted}) OR (receiver_id={my_id} AND receiver_deleted={is_deleted}) {order} LIMIT {limit} OFFSET {(page-1)*limit} "
+        statement = f"SELECT SQL_CALC_FOUND_ROWS {columns} FROM message_threads, users WHERE " \
+                    f"(sender_id={my_id} AND sender_deleted={is_deleted} AND (users.email LIKE '%{search}%' OR users.f_name LIKE '%{search}' OR users.l_name LIKE '%{search}%' OR CONCAT(users.f_name, ' ', users.l_name) LIKE '%{search}%') AND users.id=receiver_id) " \
+                    f"OR (receiver_id={my_id} AND receiver_deleted={is_deleted} AND (users.email LIKE '%{search}%' OR users.f_name LIKE '%{search}' OR users.l_name LIKE '%{search}%' OR CONCAT(users.f_name, ' ', users.l_name) LIKE '%{search}%') AND users.id=sender_id )  " \
+                    f"{order} LIMIT {limit} OFFSET {(page-1)*limit} "
         cursor().execute(statement)
         threads = cursor().fetchall()
 

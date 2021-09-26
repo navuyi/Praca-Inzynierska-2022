@@ -16,6 +16,7 @@ function GuideActiveOfferThreadList(props) {
     const [page, setPage] = useState(1)
     const [pagesTotal, setPagesTotal] = useState(5)
     const [sort, setSort] = useState("most_recent")
+    const [search, setSearch] = useState("")
 
     useEffect(() => {
         fetchThreads()
@@ -23,6 +24,11 @@ function GuideActiveOfferThreadList(props) {
     useEffect(() => {
         fetchThreads()
     }, [page, sort])
+    useEffect(() => {
+        setPage(1)
+        fetchThreads()
+        console.log(search)
+    }, [search])
 
     const handlePage = (e, value) => {
         setPage(value)
@@ -35,7 +41,8 @@ function GuideActiveOfferThreadList(props) {
             params: {
                 tour_id: tourID,
                 page: page,
-                sort: sort
+                sort: sort,
+                search: search
             },
             headers: {
                 Authorization: `Bearer ${access_token}`
@@ -50,7 +57,7 @@ function GuideActiveOfferThreadList(props) {
                 console.log(res.data)
             })
             .catch(err => {
-                if(err.response){
+                if (err.response) {
                     if (err.response.status === 401) {
                         refesh_token().then(res => {
                             localStorage.setItem("access_token", res.data.access_token)
@@ -87,28 +94,20 @@ function GuideActiveOfferThreadList(props) {
         <React.Fragment>
             <Row className={"mt-5 list-header d-flex  align-items-center justify-content-center"}>
                 <Col xl={3}>
-                    {
-                        threads.length>0 ?
-                            <React.Fragment>
-                                <FormLabel>Wyszukaj</FormLabel>
-                                <FormControl as={"input"} placeholder={"Imię i nazwisko, email, ..."}/>
-                            </React.Fragment> : null
-                    }
+                    <FormLabel>Wyszukaj</FormLabel>
+                    <FormControl as={"input"} placeholder={"Imię i nazwisko, email, ..."} value={search} onChange={(e)=> {setSearch(e.target.value)}}/>
                 </Col>
                 <Col xl={6}>
                     <h1> Wiadomości </h1>
                 </Col>
                 <Col xl={3}>
-                    {
-                        threads.length>0 ?
-                            <React.Fragment>
-                                <FormLabel >Sortuj</FormLabel>
-                                <FormControl as={"select"} onChange={(e)=>{setSort(e.target.value)}} value={sort}>
-                                    <option value={"most_recent"}> Od najnowszych </option>
-                                    <option value={"oldest"}> Od najstarszych </option>
-                                </FormControl>
-                            </React.Fragment> : null
-                    }
+                    <FormLabel>Sortuj</FormLabel>
+                    <FormControl as={"select"} onChange={(e) => {
+                        setSort(e.target.value)
+                    }} value={sort}>
+                        <option value={"most_recent"}> Od najnowszych</option>
+                        <option value={"oldest"}> Od najstarszych</option>
+                    </FormControl>
                 </Col>
             </Row>
             {
@@ -116,48 +115,51 @@ function GuideActiveOfferThreadList(props) {
                     <Row className={"d-flex justify-content-center align-items-center loading-circle-container"}>
                         <CircularProgress size={100}/>
                     </Row> :
-                    threads && threads.length > 0 ?
-                        <React.Fragment>
-                            <Row className={"thread-list"} >
-                                <Table striped bordered hover responsive={"sm"} className={"mb-0 w-100"} style={{minHeight: "392px"}}>
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Rozmówca</th>
-                                        <th> Email</th>
-                                        <th>Tytuł</th>
-                                        <th>Data</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {
-                                        threads.map((thread, index) => {
-                                            return (
-                                                <tr style={{cursor: "pointer"}} key={index}>
-                                                    <td id={thread.thread_id} onClick={handleThreadChange}>{index + 1}</td>
-                                                    <td id={thread.thread_id}
-                                                        onClick={handleThreadChange}> {`${thread.f_name} ${thread.l_name}`} </td>
-                                                    <td id={thread.thread_id}
-                                                        onClick={handleThreadChange}> {thread.email} </td>
-                                                    <td id={thread.thread_id}
-                                                        onClick={handleThreadChange}> {thread.topic} </td>
-                                                    <td id={thread.thread_id}
-                                                        onClick={handleThreadChange}>{thread.creation_date}</td>
-                                                </tr>
-                                            )
-                                        })
-                                    }
-                                    </tbody>
-                                </Table>
-                            </Row>
-                            <Row className={"pagination-element d-flex justify-content-center pt-2 pb-2"}>
-                                <Pagination count={pagesTotal} page={page}  color={"primary"} onChange={handlePage}/>
-                            </Row>
-                        </React.Fragment>
-                        :
-                        <NotFoundIndicator
-                            message={"Brak konwersacji dla tej oferty"}
-                        />
+                    <React.Fragment>
+                        <Row className={"thread-list"}>
+                            <Table striped bordered hover responsive={"sm"} className={"mb-0 w-100 h-100"}>
+                                {
+                                    threads.length > 0 ?
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Rozmówca</th>
+                                            <th> Email</th>
+                                            <th>Tytuł</th>
+                                            <th>Data</th>
+                                        </tr>
+                                        </thead> : null
+                                }
+                                <tbody>
+                                {
+                                    threads.length > 0 ?
+                                    threads.map((thread, index) => {
+                                        return (
+                                            <tr style={{cursor: "pointer"}} key={index}>
+                                                <td id={thread.thread_id}
+                                                    onClick={handleThreadChange}>{index + 1}</td>
+                                                <td id={thread.thread_id}
+                                                    onClick={handleThreadChange}> {`${thread.f_name} ${thread.l_name}`} </td>
+                                                <td id={thread.thread_id}
+                                                    onClick={handleThreadChange}> {thread.email} </td>
+                                                <td id={thread.thread_id}
+                                                    onClick={handleThreadChange}> {thread.topic} </td>
+                                                <td id={thread.thread_id}
+                                                    onClick={handleThreadChange}>{thread.creation_date}</td>
+                                            </tr>
+                                        )
+                                    }) :
+                                    <Row className={"d-flex justify-content-center h-100 align-items-center"}>
+                                        <h5> Nie znaleziono wątków </h5>
+                                    </Row>
+                                }
+                                </tbody>
+                            </Table>
+                        </Row>
+                        <Row className={"pagination-element d-flex justify-content-center pt-2 pb-2"}>
+                            <Pagination count={pagesTotal} page={page} color={"primary"} onChange={handlePage}/>
+                        </Row>
+                    </React.Fragment>
             }
         </React.Fragment>
     )
