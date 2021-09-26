@@ -37,9 +37,8 @@ def get_guide_offer_threads():
 
     # Get tour message threads
     statement = f"SELECT SQL_CALC_FOUND_ROWS mt.id, mt.hidden, mt.sender_id, mt.receiver_id, mt.tour_id, mt.topic, mt.creation_date, mt.sender_deleted, mt.receiver_deleted FROM message_threads mt, users WHERE" \
-                f" tour_id = %(tour_id)s AND " \
-                f"(sender_id={my_id} AND receiver_id=users.id AND (users.email LIKE %(search)s OR users.f_name LIKE %(search)s OR users.l_name LIKE %(search)s OR CONCAT(users.f_name, ' ', users.l_name) LIKE %(search)s)) OR " \
-                f"(receiver_id={my_id} AND sender_id=users.id AND (users.email LIKE %(search)s OR users.f_name LIKE %(search)s OR users.l_name LIKE %(search)s OR CONCAT(users.f_name, ' ', users.l_name) LIKE %(search)s))" \
+                f"(tour_id = %(tour_id)s AND sender_id={my_id} AND receiver_id=users.id AND (users.email LIKE %(search)s OR users.f_name LIKE %(search)s OR users.l_name LIKE %(search)s OR CONCAT(users.f_name, ' ', users.l_name) LIKE %(search)s)) OR " \
+                f"(tour_id = %(tour_id)s AND receiver_id={my_id} AND sender_id=users.id AND (users.email LIKE %(search)s OR users.f_name LIKE %(search)s OR users.l_name LIKE %(search)s OR CONCAT(users.f_name, ' ', users.l_name) LIKE %(search)s))" \
                 f"{order} LIMIT {limit} OFFSET {offset}"
 
     #statement = f"SELECT SQL_CALC_FOUND_ROWS * FROM message_threads WHERE tour_id = %(tour_id)s {order} LIMIT {limit} OFFSET {offset}"
