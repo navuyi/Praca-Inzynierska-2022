@@ -17,11 +17,11 @@ def fill_payment():
     enrollment_id = request.json["enrollment_id"]
 
     # Get amount to be paid
-    cursor().execute(f"SELECT amount_paid, amount_payable FROM enrollments WHERE id=%s", (enrollment_id, ))
+    cursor().execute(f"SELECT enrollments.id, amount_payable, COALESCE(sum(amount_paid), 0) as amount_paid FROM enrollments LEFT JOIN payments ON enrollments.id=payments.enrollment_id WHERE enrollments.id=%s GROUP BY enrollments.id", (enrollment_id, ))
+    #cursor().execute(f"SELECT amount_paid, amount_payable FROM enrollments WHERE id=%s", (enrollment_id, ))
     data = cursor().fetchone()
-    amount_paid = int(data["amount_paid"])
     amount_payable = int(data["amount_payable"])
-
+    amount_paid = int(data["amount_paid"])
     amount_to_fill = amount_payable - amount_paid
 
     ### Make request to bitpay API ###

@@ -65,6 +65,7 @@ import "./styles/pages-styling/paymentRevoked.css"
 import "./styles/pages-styling/paymentSuccess.css"
 import "./styles/pages-styling/userEnrollments.css"
 import "./styles/pages-styling/userEnrollmentHistory.css"
+import "./styles/pages-styling/userPaymentHistory.css"
 
 
 function App() {

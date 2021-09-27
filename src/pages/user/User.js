@@ -9,7 +9,7 @@ import {Switch} from "react-router-dom";
 import UserEnrollments from "./UserEnrollments";
 import UserEnrollmentsHistory from "./UserEnrollmentsHistory";
 import ProtectedRoute from "../../components/UtilityComponents/ProtectedRoute";
-
+import UserPaymentHistory from "./UserPaymentHistory";
 // Dependencies
 
 
@@ -25,18 +25,22 @@ function User() {
                                 name="Zapisy na wycieczki"
                                 path="/account/user/enrollments"
                             />
-                            {
-                                 <SideNavbarLink
+                             <SideNavbarLink
                                 name="Historia wycieczek"
                                 path="/account/user/history"
-                                 />
-                            }
+                             />
+                            <SideNavbarLink
+                                name="Historia płatności"
+                                path="/account/user/payment/history"
+                            />
+
                         </SideNavbar>
                     </Col>
                     <Col lg={10} sm={12} style={{padding: "0"}}>
                         <Switch>
                             <ProtectedRoute exact path={"/account/user/enrollments"} component={UserEnrollments} />
-                            <ProtectedRoute  path={"/account/user/history"} component={UserEnrollmentsHistory} />
+                            <ProtectedRoute exact  path={"/account/user/history"} component={UserEnrollmentsHistory} />
+                            <ProtectedRoute exact path={"/account/user/payment/history"} component={UserPaymentHistory} />
                         </Switch>
                     </Col>
                 </Row>

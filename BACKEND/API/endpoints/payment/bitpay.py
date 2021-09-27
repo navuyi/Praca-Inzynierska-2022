@@ -30,7 +30,8 @@ def bitpay():
             price = data["price"]
             posData = json.loads(data["posData"])
             enrollment_id = posData["enrollment_id"]
-            cursor().execute(f"UPDATE enrollments SET amount_paid=%s, payment_date=NOW() WHERE id=%s", (price, enrollment_id))
+            # Create new insert in payments table
+            cursor().execute(f"INSERT INTO payments (enrollment_id, amount_paid) VALUES (%s, %s)", (enrollment_id, price))
 
             return {}, 200
     else:

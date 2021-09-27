@@ -13,12 +13,15 @@ def get_user_enrollments():
     user_id = get_jwt_identity()
 
     ### Get user enrollments ###
-    cursor().execute("SELECT tours.id as tour_id, enrollments.id as enrollment_id, enrollments.amount_payable, enrollments.amount_paid, tours.header, tours.start_date, tours.end_date, users.f_name as guide_f_name, users.l_name as guide_l_name from tours, enrollments, users WHERE "
+    cursor().execute("SELECT tours.id as tour_id, enrollments.id as enrollment_id, enrollments.amount_payable, tours.header, tours.start_date, tours.end_date, users.f_name as guide_f_name, users.l_name as guide_l_name from tours, enrollments, users WHERE "
                      "tours.end_date > NOW() AND users.is_guide=1 AND users.id = tours.guide_id AND enrollments.tour_id = tours.id AND enrollments.user_id = %s", (user_id, ))
 
     enrollments = cursor().fetchall()
 
     for enrollment in enrollments:
+        cursor().execute(f"SELECT COALESCE(sum(amount_paid), 0) as amount_paid FROM payments WHERE enrollment_id=%s", (enrollment["enrollment_id"], ))
+        enrollment["amount_paid"] = cursor().fetchone()["amount_paid"]
+
         # Define payment status and remaining amount to be paid
         if enrollment["amount_paid"] == 0:
             enrollment["payment_status"] = "awaiting"        # No payment was done
