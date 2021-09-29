@@ -72,31 +72,10 @@ paths:
    $ref: "./paths/user-enrollments-history.yaml"
 
   "/api/user/payments/history":
-    get:
-      summary:  Gets user's history of payments
-      security:
-        - bearerAuth: []
-      tags:
-        - User
-      parameters:
-        - in: query
-          name: page
-          schema:
-            type: integer
-        - in: query
-          name: sort
-          schema:
-            type: string
-      responses:
-        200:
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                type: object
-                #TODO Fill response parameters
+    $ref: "./paths/user-payments-history.yaml"
 
-# Message endpoints
+
+  # Message endpoints
   "/api/messages/unicast/new":
       $ref: "./paths/message-unicast-new.yaml"
 

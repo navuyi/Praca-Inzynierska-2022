@@ -28,31 +28,33 @@ get:
               total_rows:
                 type: integer
               enrollments:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  tour_id:
-                    type: integer
-                  creation_date:
-                    type: string
-                  amount_payable:
-                    type: integer
-                  tour_start_date:
-                    type: string
-                  tour_end_date:
-                    type: string
-                  tour_header:
-                    type: string
-                  tour_description:
-                    type: string
-                  guide_f_name:
-                    type: string
-                  guide_l_name:
-                    type: string
-                  image_url:
-                    type: string
-                  places:
-                    type: array
-                    items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    tour_id:
+                      type: integer
+                    creation_date:
                       type: string
+                    amount_payable:
+                      type: integer
+                    tour_start_date:
+                      type: string
+                    tour_end_date:
+                      type: string
+                    tour_header:
+                      type: string
+                    tour_description:
+                      type: string
+                    guide_f_name:
+                      type: string
+                    guide_l_name:
+                      type: string
+                    image_url:
+                      type: string
+                    places:
+                      type: array
+                      items:
+                        type: string

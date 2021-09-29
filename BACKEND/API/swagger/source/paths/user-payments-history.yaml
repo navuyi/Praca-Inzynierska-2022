@@ -1,0 +1,42 @@
+get:
+  summary:  Gets user's history of payments
+  security:
+    - bearerAuth: []
+  tags:
+    - User
+  parameters:
+    - in: query
+      name: page
+      schema:
+        type: integer
+    - in: query
+      name: sort
+      schema:
+        type: string
+  responses:
+    200:
+      description: "OK"
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              total_pages:
+                type: integer
+              payments:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    amount_paid:
+                      type: integer
+                    created:
+                      type: string
+                    enrollment_id:
+                      type: integer
+                    payment_id:
+                      type: integer
+                    tour_header:
+                      type: string
+                    tour_id:
+                      type: integer

@@ -14,7 +14,7 @@ function UserPaymentHistory(){
     const [payments, setPayments] = useState([])
     const [loading, setLoading] = useState(true)
 
-    const minHeight = "450px"
+    const minHeight = "400px"
 
     useEffect(() => {
         fetchPayments()
@@ -117,11 +117,15 @@ function UserPaymentHistory(){
                     }
                 </Row>
                 }
-                <Row className={"d-flex justify-content-center w-100"}>
-                    <Pagination page={page} variant={"outlined"} shape={"rounded"}  count={totalPages} onChange={(e, value) => {
-                        setPage(value)
-                    }}/>
-                </Row>
+                {
+                    payments.length > 0 ?
+                        <Row className={"d-flex justify-content-center w-100"}>
+                            <Pagination page={page} variant={"outlined"} shape={"rounded"}  count={totalPages} onChange={(e, value) => {
+                                setPage(value)
+                            }}/>
+                        </Row> : null
+                }
+
             </Container>
         </div>
     )
