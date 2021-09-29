@@ -23,7 +23,7 @@ def get_user_enrollments_history():
 
     LIMIT = 5
     OFFSET = (int(page)-1)*LIMIT
-    cursor().execute(f"SELECT SQL_CALC_FOUND_ROWS enrollments.id, tour_id, enrollments.creation_date, amount_payable, amount_paid, payment_date, "
+    cursor().execute(f"SELECT SQL_CALC_FOUND_ROWS enrollments.id, tour_id, enrollments.creation_date, amount_payable, "
                      f"start_date as tour_start_date, end_date as tour_end_date, tours.header as tour_header, tours.description as tour_description, users.f_name as guide_f_name, users.l_name as guide_l_name  "
                      f"FROM enrollments, tours, users "
                      f"WHERE enrollments.user_id={user_id} AND tours.id=enrollments.tour_id AND users.is_guide=1 AND users.id=tours.guide_id AND NOW() > end_date ORDER BY {ORDER} LIMIT {LIMIT} OFFSET {OFFSET}")

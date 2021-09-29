@@ -67,14 +67,26 @@ paths:
 # User endpoints
   "/api/user/enrollments":
     $ref: "./paths/user-enrollments.yaml"
+
   "/api/user/enrollments/history":
+   $ref: "./paths/user-enrollments-history.yaml"
+
+  "/api/user/payments/history":
     get:
-      summary: Get user's history of enrollments.
-      description: No additional data is required.
+      summary:  Gets user's history of payments
       security:
         - bearerAuth: []
       tags:
         - User
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+        - in: query
+          name: sort
+          schema:
+            type: string
       responses:
         200:
           description: "OK"
@@ -82,7 +94,7 @@ paths:
             application/json:
               schema:
                 type: object
-
+                #TODO Fill response parameters
 
 # Message endpoints
   "/api/messages/unicast/new":

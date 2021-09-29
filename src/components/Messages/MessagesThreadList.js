@@ -201,12 +201,15 @@ function MessagesThreadList(props) {
                                                     </td>
                                                 </tr>
                                             )
-                                        }) :
-                                        <Row className={"d-flex justify-content-center h-100 align-items-center"}>
-                                            <h5> Nie znaleziono wątków </h5>
-                                        </Row>
+                                        }) : null
                                     }
                                     </tbody>
+                                    {
+                                        threads.length === 0 ?
+                                            <Row className={"d-flex justify-content-center h-100 align-items-center"}>
+                                                <h5> Nie znaleziono wątków </h5>
+                                            </Row> : null
+                                    }
                                 </Table>
                                 }
                     </Row>

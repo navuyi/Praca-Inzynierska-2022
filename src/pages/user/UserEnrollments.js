@@ -40,7 +40,9 @@ function UserEnrollments() {
         })
     }
     useEffect(() => {
-        fillPayment()
+        if(payment.tour_id && payment.enrollment_id){
+            fillPayment()
+        }
     }, [payment])
 
     function handlePaymentClick(e){

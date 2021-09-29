@@ -1,0 +1,58 @@
+get:
+  summary: Gets user's history of enrollments.
+  security:
+    - bearerAuth: []
+  tags:
+    - User
+  parameters:
+    - in: query
+      name: page
+      schema:
+        type: integer
+      required: true
+    - in: query
+      name: sort
+      schema:
+        type: string
+      required: true
+  responses:
+    200:
+      description: "OK"
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              total_pages:
+                type: integer
+              total_rows:
+                type: integer
+              enrollments:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  tour_id:
+                    type: integer
+                  creation_date:
+                    type: string
+                  amount_payable:
+                    type: integer
+                  tour_start_date:
+                    type: string
+                  tour_end_date:
+                    type: string
+                  tour_header:
+                    type: string
+                  tour_description:
+                    type: string
+                  guide_f_name:
+                    type: string
+                  guide_l_name:
+                    type: string
+                  image_url:
+                    type: string
+                  places:
+                    type: array
+                    items:
+                      type: string
