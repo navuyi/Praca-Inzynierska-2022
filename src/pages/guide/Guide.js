@@ -42,14 +42,10 @@ function Guide() {
                                 name="Aktywne oferty"
                                 path="/account/guide/active-offers"
                             />
-                            {
-                                /*
-                                 <SideNavbarLink
-                                    name="Zakończone oferty"
-                                    path="/account/guide/closed-offers"
-                                 />
-                                 */
-                            }
+                             <SideNavbarLink
+                                name="Zakończone oferty"
+                                path="/account/guide/closed-offers"
+                             />
                             {
                                 /*
                                  <SideNavbarLink

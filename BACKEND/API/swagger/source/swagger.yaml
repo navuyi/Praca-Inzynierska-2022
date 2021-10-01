@@ -104,10 +104,40 @@ paths:
 
   "/api/guide/tours/closed":
     get:
+      security:
+        - bearerAuth: []
       tags:
         - Guide
+      summary: Returns history of guide's offers/tours
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+        - in: query
+          name: sort
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_pages:
+                    type: integer
+                  tours:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        header:
+                          type: string
+                        #TODO CONTINUE
 
-# Settings
+        # Settings
   "/api/settings/password":
     $ref: "./paths/settings-password.yaml"
 

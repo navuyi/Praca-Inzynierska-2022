@@ -77,7 +77,7 @@ function GuideActiveOffers() {
                     </Col>
                 </Row>
                 <Row className={"d-flex flex-column align-items-center justify-content-center mt-5"}
-                     style={{flexGrow: "1"}}>
+                     style={{flexGrow: "1", minHeight: "400px"}}>
                     {
                         loading ? <CircularProgress size={100} color={"secondary"}/> :
                             data.map((tour, index) => {

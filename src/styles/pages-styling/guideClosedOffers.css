@@ -1,0 +1,22 @@
+.guideClosedOffers{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+.guideClosedOffers .header-tab {
+    background-color: orange;
+    padding: 1em 0;
+
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+}
+
+.guideClosedOffers .header-tab label {
+    color: #222222;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 0 0;
+}
