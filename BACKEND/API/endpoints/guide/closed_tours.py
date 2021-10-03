@@ -33,9 +33,11 @@ def get_active_tours():
         elif sort == "oldest":
             ORDER = "ORDER BY creation_date"
 
-    #TODO Continue below and then finish frontend
-    statement = f"SELECT SQL_CALC_FOUND_ROWS tours.id, header, description, start_date, end_date, enrollment_deadline, person_limit, price, enrollments.creation_date, COALESCE(tickets, 0) as tickets FROM tours" \
-                f" LEFT JOIN enrollments ON tours.id=enrollments.tour_id WHERE guide_id=%(guide_id)s {ORDER} LIMIT {LIMIT} OFFSET {OFFSET}"
+
+    statement = f"SELECT SQL_CALC_FOUND_ROWS DISTINCT tours.id, header, description, start_date, end_date, enrollment_deadline, person_limit, price, enrollments.creation_date, sum(COALESCE(tickets, 0)) as tickets FROM tours " \
+                f" LEFT JOIN enrollments ON tours.id=enrollments.tour_id  WHERE guide_id=%(guide_id)s {ORDER} LIMIT {LIMIT} OFFSET {OFFSET} GROUP BY id"
+
+    statement = f"SELECT SQL_CALC_FOUND_ROWS id, header, description, start_date, end_date, enrollment_deadline, person_limit, price FROM tours WHERE guide_id=%(guide_id)s {ORDER} LIMIT {LIMIT} OFFSET {OFFSET}"
     insert = {
         "guide_id": user_id
     }
@@ -47,12 +49,20 @@ def get_active_tours():
     pages = math.ceil(found_rows/LIMIT)
 
     for offer in offers:
-        offer["creation_date"] = offer["creation_date"].strftime("%d.%m.%Y") if offer["creation_date"] is not None else None
+        #offer["creation_date"] = offer["creation_date"].strftime("%d.%m.%Y") if offer["creation_date"] is not None else None
         offer["start_date"] = offer["start_date"].strftime("%d.%m.%Y")
         offer["end_date"] = offer["end_date"].strftime("%d.%m.%Y")
         offer["enrollment_deadline"] = offer["enrollment_deadline"].strftime("%d.%m.%Y")
 
-
+        #TODO Or try fetching the data in separate query
+        tour_id = offer["id"]
+        statement = f"SELECT sum(COALESCE(tickets, 0)) as tickets FROM enrollments WHERE tour_id=%(tour_id)s"
+        insert = {
+            "tour_id": tour_id
+        }
+        cursor().execute(statement, insert)
+        data = cursor().fetchone()
+        offer["tickets"] = data["tickets"] if data["tickets"] is not None else 0
 
     response = jsonify(offers=offers, total_pages=pages)
     return response, 200

@@ -6,6 +6,7 @@ import axios from "axios";
 import {refesh_token} from "../../API_CALLS/api_authentication_token_refresh";
 import {Pagination} from "@material-ui/lab";
 import {limitText} from "../../utils/limitText";
+import {useHistory} from "react-router-dom";
 
 function GuideClosedOffers() {
     const [sort, setSort] = useState("most_recent")
@@ -13,6 +14,7 @@ function GuideClosedOffers() {
     const [totalPages, setTotalPages] = useState(1)
     const [loading, setLoading] = useState(true)
     const [offers, setOffers] = useState([])
+    const history = useHistory()
 
     useEffect(() => {
         fetchOffers()
@@ -37,7 +39,7 @@ function GuideClosedOffers() {
         setLoading(true)
         axios.get(url, config).then(res => {
             console.log(res)
-            //setOffers(res.data.offers)
+            setOffers(res.data.offers)
             setLoading(false)
             setTotalPages(res.data.total_pages)
         }).catch(err => {
@@ -108,9 +110,13 @@ function GuideClosedOffers() {
                                 {
                                     offers.map((item, index) => {
                                         return (
-                                            <tr key={index}>
-                                                <td>{item.id}</td>
-                                                <td>{limitText(item.header, 48)}</td>
+                                            <tr id={item.id} key={index} onClick={(e) => {
+                                                const tour_id = e.currentTarget.id
+                                                history.push(`/tours/tour/${tour_id}`)
+                                            }
+                                            }>
+                                                <td ><b>{item.id}</b></td>
+                                                <td className={"td-header"}>{limitText(item.header, 48)}</td>
                                                 <td>{item.start_date} {" - "} {item.end_date}</td>
                                                 <td>{item.enrollment_deadline}</td>
                                                 <td>{item.tickets}</td>

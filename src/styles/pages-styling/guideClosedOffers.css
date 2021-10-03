@@ -20,3 +20,15 @@
     font-size: 1.2rem;
     margin: 0 0;
 }
+
+.guideClosedOffers tr{
+    cursor: pointer;
+    text-align: center;
+}
+.guideClosedOffers .td-header{
+    text-align: left;
+}
+
+.guideClosedOffers tr:hover{
+    background-color: #fabb52;
+}
