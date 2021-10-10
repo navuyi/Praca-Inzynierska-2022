@@ -1,12 +1,9 @@
 import React, {useEffect, useState} from "react"
 import NavbarComponent from "../../components/ReusableComponents/NavbarComponent"
 import Footer from "../../components/ReusableComponents/Footer"
-
 import {Button, Col, Container, Row} from "react-bootstrap"
 import TourPanelLabel from "../../components/Tours/TourPanelLabel"
-
 import axios from "axios"
-
 import img from "../../images/home/tour03.jpg"
 import Separator from "../../components/ReusableComponents/Separator"
 import PersonIcon from "@material-ui/icons/Person"
@@ -66,9 +63,8 @@ function TourDetails() {
 
                     <Container fluid className={"h-100"} style={{marginTop: "0em", top: "0", flexGrow: "1"}}>
                         <Row style={{minHeight: "75vh"}}>
-                            <Col lg={2} sm={12} style={{backgroundColor: "orange", padding: "0"}}
+                            <Col lg={2} sm={12}
                                  className={"d-flex justify-content-center align-items-center"}>
-
                             </Col>
                             <Col lg={8} sm={12} style={{padding: "0"}}>
                                 <Container
@@ -192,7 +188,7 @@ function TourDetails() {
                                     }
                                 </Container>
                             </Col>
-                            <Col lg={2} sm={12} style={{backgroundColor: "orange", padding: "0"}}
+                            <Col lg={2} sm={12}
                                  className={"d-flex justify-content-center align-items-center"}>
 
                             </Col>

@@ -1,0 +1,42 @@
+.tourDetailsRemade{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+.tourDetailsRemade .header{
+    text-align: center;
+    color: #222222;
+    font-family: "Lora", sans-serif;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.tourDetailsRemade .description{
+    font-size: 1.3rem;
+    font-family: "Lora", sans-serif;
+}
+.tourDetailsRemade .main-image{
+    width: 100%;
+    border-radius: 1em;
+}
+.tourDetailsRemade .info-details{
+
+}
+.tourDetailsRemade .info-details h2{
+    font-family: "Lora", sans-serif;
+    color: #222222;
+    font-weight: normal;
+}
+.tourDetailsRemade .info-details p{
+    margin: 0;
+    padding: 0;
+    font-size: 1.1rem;
+}
+.tourDetailsRemade .info-details span{
+    color: dodgerblue;
+    font-weight: bold;
+    font-size: 1.1rem;
+}

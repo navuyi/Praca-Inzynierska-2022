@@ -12,6 +12,7 @@ import Home from "./pages/Home";
 import Information from "./pages/Informations";
 import Tours from "./pages/tours/Tours";
 import TourDetails from "./pages/tours/TourDetails";
+import TourDetailsRemade from "./pages/tours/TourDetailsRemade";
 import Account from "./pages/Account";
 import Login from './pages/Login';
 import Register from "./pages/Register";
@@ -67,6 +68,7 @@ import "./styles/pages-styling/userEnrollments.css"
 import "./styles/pages-styling/userEnrollmentHistory.css"
 import "./styles/pages-styling/userPaymentHistory.css"
 import "./styles/pages-styling/guideClosedOffers.css"
+import "./styles/pages-styling/tourDetailsRemade.css"
 
 
 function App() {
@@ -108,7 +110,7 @@ function App() {
                     <Tours/>
                 </Route>
                 <Route exact path={"/tours/tour/:tour_id"}>
-                    <TourDetails/>
+                    <TourDetailsRemade/>
                 </Route>
                 <Route exact path={"/tours/tour/:tour_id/enrollment"}>
                     <Enrollment/>
