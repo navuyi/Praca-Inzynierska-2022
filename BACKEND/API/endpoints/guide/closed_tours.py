@@ -34,9 +34,6 @@ def get_active_tours():
             ORDER = "ORDER BY creation_date"
 
 
-    statement = f"SELECT SQL_CALC_FOUND_ROWS DISTINCT tours.id, header, description, start_date, end_date, enrollment_deadline, person_limit, price, enrollments.creation_date, sum(COALESCE(tickets, 0)) as tickets FROM tours " \
-                f" LEFT JOIN enrollments ON tours.id=enrollments.tour_id  WHERE guide_id=%(guide_id)s {ORDER} LIMIT {LIMIT} OFFSET {OFFSET} GROUP BY id"
-
     statement = f"SELECT SQL_CALC_FOUND_ROWS id, header, description, start_date, end_date, enrollment_deadline, person_limit, price FROM tours WHERE guide_id=%(guide_id)s {ORDER} LIMIT {LIMIT} OFFSET {OFFSET}"
     insert = {
         "guide_id": user_id
