@@ -110,7 +110,7 @@ function App() {
                     <Tours/>
                 </Route>
                 <Route exact path={"/tours/tour/:tour_id"}>
-                    <TourDetailsRemade/>
+                    <TourDetails/>
                 </Route>
                 <Route exact path={"/tours/tour/:tour_id/enrollment"}>
                     <Enrollment/>

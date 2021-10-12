@@ -21,7 +21,7 @@
 
 .tourDetails .description {
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 600;
     font-family: 'Source Sans Pro', sans-serif;
 }
@@ -62,12 +62,12 @@
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 1.1rem;
     font-weight: bold;
-    color: whitesmoke;
+    color: #222222;
 
     width: 100%;
     filter: opacity(0.9);
 
-    background-image: linear-gradient(15deg, #336699, #0a3b5e);
+    border: 1px solid #222222;
     padding: 1em 1em;
     margin: 0.1em;
 
@@ -79,4 +79,10 @@
     min-width: 100%;
 
 }
-
+.image-gallery-slide{
+    max-height: 450px;
+}
+.tourDetails .ending-header{
+    font-family: "Lora", sans-serif;
+    font-weight: normal;
+}

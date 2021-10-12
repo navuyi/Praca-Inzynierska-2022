@@ -1,5 +1,5 @@
 import React from "react"
-
+import Alert from "@material-ui/lab/Alert";
 
 function TourImportantInfo(props) {
 
@@ -8,7 +8,7 @@ function TourImportantInfo(props) {
         width: "100%",
         textAlign: "center",
         fontWeight: "bold",
-        color: "#d9534f"
+        color: "#222222"
     }
     const style = {
         border: "2px solid #d9534f",
@@ -27,9 +27,7 @@ function TourImportantInfo(props) {
             {
                 props.important_info.map((info, index) => {
                     return (
-                        <div style={style} key={index}>
-                            {info.description}
-                        </div>
+                        <Alert key={index} severity={"warning"} className={"w-100 mt-2"}>{info.description}</Alert>
                     )
                 })
             }

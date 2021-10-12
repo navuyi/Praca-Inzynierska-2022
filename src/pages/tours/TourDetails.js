@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react"
 import NavbarComponent from "../../components/ReusableComponents/NavbarComponent"
 import Footer from "../../components/ReusableComponents/Footer"
-import {Button, Col, Container, Row} from "react-bootstrap"
+import {Col, Button, Container, Row} from "react-bootstrap"
 import TourPanelLabel from "../../components/Tours/TourPanelLabel"
 import axios from "axios"
 import img from "../../images/home/tour03.jpg"
@@ -16,15 +16,16 @@ import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import {CircularProgress} from "@material-ui/core";
 import TourPriceList from "../../components/Tours/TourPriceList"
 import TourImportantInfo from "../../components/Tours/TourImportantInfo"
-import {useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import TourImagesGallery from "../../components/ReusableComponents/TourImagesGallery";
-
+import {Button as MaterialButton} from "@material-ui/core";
+import {Alert} from "@material-ui/lab";
 import TourDetailsMessenger from "../../components/Tours/TourDetailsMessenger";
 import {API_PREFIX} from "../../config";
 
 function TourDetails() {
     const [msgVisible, setMsgVisible] = useState(false)
-
+    const history = useHistory()
     const {tour_id} = useParams()
 
     const [tourData, setTourData] = useState({})
@@ -35,10 +36,15 @@ function TourDetails() {
 
     }, [])
 
+    function navigateToEnrollment(){
+        setTimeout(()=>{
+            history.push(`/tours/tour/${tour_id}/enrollment`)
+        }, 200)
+    }
 
     function fetchData() {
         setLoading(true)
-        const url = API_PREFIX+"/tour/tour"
+        const url = API_PREFIX + "/tour/tour"
         //const tour_id = queryParams["?id"]
         const params = {
             tour_id: tour_id
@@ -48,6 +54,7 @@ function TourDetails() {
             .then(res => {
                 setTourData(res.data)
                 setLoading(false)
+                console.log(res.data)
             })
             .catch(err => {
                 console.log(err.response.data)
@@ -69,11 +76,21 @@ function TourDetails() {
                             <Col lg={8} sm={12} style={{padding: "0"}}>
                                 <Container
                                     className={"details-body d-flex flex-column align-items-center justify-content-center"}>
-                                    <Row className={"d-flex justify-content-center"}>
-                                        <img src={tourData.image_url} alt={""} className="details-main-img"/>
-                                    </Row>
                                     <Row className={"col-xl-10 mt-5"}>
                                         <h1> {tourData.general_data.header} </h1>
+                                    </Row>
+                                    <Row className={"col-xl-10 mt-5 d-flex justify-content-center align-items-scenter"}>
+                                        {
+                                            tourData.general_data.is_active === true ?
+                                                <MaterialButton variant={"outlined"} size={"large"} color={"primary"}
+                                                                onClick={navigateToEnrollment}> Zapisz się już teraz
+                                                    !</MaterialButton>
+                                                : <Alert severity={"error"}> Oferta nie jest aktywna. Nie można jej
+                                                    wykupić.</Alert>
+                                        }
+                                    </Row>
+                                    <Row className={"d-flex justify-content-center"}>
+                                        <img src={tourData.image_url} alt={""} className="details-main-img"/>
                                     </Row>
                                     <Row className={"col-xl-10 mt-5"}>
                                 <span className="description">
@@ -180,17 +197,23 @@ function TourDetails() {
                                     {
                                         tourData.image_gallery ?
                                             <Row
-                                                className={"w-100 col-10 d-flex justify-content-between align-items-center"}
+                                                className={"w-100 col-10 d-flex justify-content-center align-items-center"}
                                                 style={{minHeight: "500px"}}>
                                                 <TourImagesGallery urls={tourData.image_gallery}/>
                                             </Row>
                                             : null
                                     }
+                                    <Row
+                                        className={"w-100 col-10 d-flex flex-column align-items-center justify-content-center pb-5 "}>
+                                        <h2 className={"ending-header"}> Wygląda ciekawie? </h2>
+                                        <MaterialButton variant={"outlined"} size={"large"} color={"primary"}
+                                                        onClick={navigateToEnrollment} className={"w-100"}> Zapisz się
+                                            zanim braknie miejsc! </MaterialButton>
+                                    </Row>
                                 </Container>
                             </Col>
                             <Col lg={2} sm={12}
                                  className={"d-flex justify-content-center align-items-center"}>
-
                             </Col>
                         </Row>
                     </Container>}

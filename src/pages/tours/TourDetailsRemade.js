@@ -62,9 +62,9 @@ function TourDetailsRemade() {
                 </Row>
                 <Row className={"mt-5 d-flex flex-column align-items-center info-details w-100 col-xl-8"} >
                     <h2> Informacje szczegółowe </h2>
-                    <Col >
+                    <Col>
                         <Row className={"d-flex align-items-center  mt-5"}>
-                           <Col className={"d-flex justify-content-start align-items-center"}>
+                           <Col className={"d-flex justify-content-start align-items-center"}  >
                                <AttachMoneyIcon  fontSize={"large"}/>
                                <p>{`Cena: `}<span>{`${tourData.general_data.price}`}</span></p>
                            </Col>

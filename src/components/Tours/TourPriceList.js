@@ -2,7 +2,7 @@ import React from "react"
 
 import BlockIcon from '@material-ui/icons/Block';
 import CheckIcon from '@material-ui/icons/Check';
-
+import Alert from "@material-ui/lab/Alert";
 
 function TourPriceList(props) {
 
@@ -52,13 +52,12 @@ function TourPriceList(props) {
             <h3 style={{width: "100%", textAlign: "center"}}> Cennik </h3>
             {
                 props.price_list.map((item, index) => {
-                    item.is_included ? style = styleSuccess : style = styleDanger
-                    item.is_included ? icon = <CheckIcon/> : icon = <BlockIcon/>
+                    const itemToReturn = item.is_included ?
+                        <Alert key={index} severity={"success"} className={"w-100 mt-2"}> {item.description} </Alert>
+                        :
+                        <Alert key={index} severity={"error"} className={"w-100 mt-2"}> {item.description} </Alert>
                     return (
-                        <div style={style} key={index}>
-                            {item.description}
-                            {icon}
-                        </div>
+                        itemToReturn
                     )
                 })
             }

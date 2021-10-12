@@ -1,10 +1,15 @@
 .tourDetailsMessenger {
     width: 100%;
 
-    animation: dropdown 0.5s ease-in-out forwards;
+
     transform-origin: top;
     margin-top: 2em;
     padding: 2em;
+
+    animation: expand ease;
+    animation-duration: 2s;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
 
 }
 

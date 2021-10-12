@@ -23,6 +23,12 @@ def get_tour():
     if not general_data: # <-- offer with given tour_id does not exist
         raise APIException(msg="Oferta nie istnieje", code=404)
 
+    # Define tour status
+    if general_data["enrollment_deadline"] < datetime.now():
+        general_data["is_active"] = False
+    else:
+        general_data["is_active"] = True
+
     general_data["start_date"] = general_data["start_date"].strftime("%d.%m.%Y") # <-- format date
     general_data["end_date"] = general_data["end_date"].strftime("%d.%m.%Y")    # <-- format date
     tour_data["general_data"] = general_data
