@@ -36,8 +36,8 @@ function TourDetails() {
 
     }, [])
 
-    function navigateToEnrollment(){
-        setTimeout(()=>{
+    function navigateToEnrollment() {
+        setTimeout(() => {
             history.push(`/tours/tour/${tour_id}/enrollment`)
         }, 200)
     }
@@ -203,13 +203,16 @@ function TourDetails() {
                                             </Row>
                                             : null
                                     }
-                                    <Row
-                                        className={"w-100 col-10 d-flex flex-column align-items-center justify-content-center pb-5 "}>
-                                        <h2 className={"ending-header"}> Wygląda ciekawie? </h2>
-                                        <MaterialButton variant={"outlined"} size={"large"} color={"primary"}
-                                                        onClick={navigateToEnrollment} className={"w-100"}> Zapisz się
-                                            zanim braknie miejsc! </MaterialButton>
-                                    </Row>
+                                    {
+                                        tourData.general_data.is_active ?
+                                            <Row
+                                                className={"w-100 col-10 d-flex flex-column align-items-center justify-content-center pb-5 "}>
+                                                <h2 className={"ending-header"}> Wygląda ciekawie? </h2>
+                                                <MaterialButton variant={"outlined"} size={"large"} color={"primary"}
+                                                                onClick={navigateToEnrollment}
+                                                                className={"w-100"}> Zapisz się
+                                                    zanim braknie miejsc! </MaterialButton>
+                                            </Row> : null}
                                 </Container>
                             </Col>
                             <Col lg={2} sm={12}

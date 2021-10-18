@@ -100,6 +100,7 @@ def create_app(test_config=None):               # test_config - independent from
     from app.endpoints.user.enrollments_history import bp as bp_user_enrollments_history
     from app.endpoints.payment.fill_payment import bp as bp_fill_payment
     from app.endpoints.user.payments_history import bp as bp_payments_history
+    from app.endpoints.tour.tours_recent import bp as bp_recent_tours
 
 
     # Register blueprints
@@ -141,6 +142,6 @@ def create_app(test_config=None):               # test_config - independent from
     app.register_blueprint(bp_fill_payment)
     app.register_blueprint(bp_user_enrollments_history)
     app.register_blueprint(bp_payments_history)
-
+    app.register_blueprint(bp_recent_tours)
 
     return app

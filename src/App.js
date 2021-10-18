@@ -30,7 +30,7 @@ import PaymentSuccess from "./pages/PaymentSuccess";
 // Styles
 import './App.css'
 import './styles/components-styling/navbarComponent.css'
-import './styles/homeWelcomeView.css'
+import './styles/components-styling/homeWelcomeView.css'
 import './styles/components-styling/homeTourPanel.css'
 import './styles/pages-styling/home.css'
 import './styles/components-styling/homeInfoPanel.css'

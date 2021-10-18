@@ -48,26 +48,6 @@
     outline: none;
 }
 
-.homeWelcomeView button {
-    border: none;
-    outline: none;
-    height: 40px;
-    width: 20%;
-
-    border-radius: 0.5em;
-
-    padding: 0 1em;
-    box-sizing: border-box;
-}
-
-.homeWelcomeView button:hover {
-    background-color: rgb(34, 34, 34);
-    color: whitesmoke;
-}
-
-.homeWelcomeView button:active {
-    box-shadow: 0px 0px 10px 5px whitesmoke;
-}
 
 @media (max-width: 900px) {
     .homeWelcomeView {

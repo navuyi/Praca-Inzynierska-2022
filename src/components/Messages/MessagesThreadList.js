@@ -109,6 +109,7 @@ function MessagesThreadList(props) {
                     _logout()
                 }
             })
+        props.setMsgVisible(false)
     }
 
     function restoreThread(e){

@@ -63,8 +63,36 @@ paths:
   "/api/tour/offer":
     $ref: "./paths/tour-offer-modify.yaml"
 
+  "/api/tour/tours/recent":
+    get:
+      summary:  Returns defined number of most recent offers
+      tags:
+        - Tour
+      parameters:
+        - in: query
+          name: amount
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tour_id:
+                    type: integer
+                  description:
+                    type: string
+                  header:
+                    type: header
+                  url:
+                    type: string
+                  filename:
+                    type: string
 
-# User endpoints
+        # User endpoints
   "/api/user/enrollments":
     $ref: "./paths/user-enrollments.yaml"
 
