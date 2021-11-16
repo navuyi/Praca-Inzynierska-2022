@@ -25,7 +25,7 @@ function GuideNewTourSuccess() {
                 <Row className={"d-flex flex-column"}>
                     <Link to={"/account/guide/new-tour"}><Button variant={"outline-dark"}> Stwórz
                         kolejną </Button></Link>
-                    <Link to={"/account/guide/offers"}><Button variant={"outline-dark"}> Zobacz utworzone
+                    <Link to={"/account/guide/active-offers"}><Button variant={"outline-dark"}> Zobacz utworzone
                         oferty </Button></Link>
                 </Row>
             </Container>

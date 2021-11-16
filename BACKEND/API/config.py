@@ -37,8 +37,9 @@ HOST = "https://figlus.pl"
 TOUR_IMAGES_UPLOAD_DIRECTORY = "/home/rfiglus/app/app/storage/tour_images"
 TOUR_IMAGES_DOWNLOAD_DIRECTORY = HOST+"/storage/tour_images/"
 AVAILABLE_EXTENSIONS = ['.jpg', '.png', '.gif', '.tif', '.tiff', '.jpeg', '.bmp']
-MAX_CONTENT_LENGTH = 16 * 1000 * 1000
-TOUR_IMAGES_LIMIT = 20
+MAX_CONTENT_LENGTH = 16 * 1000 * 1000   # This is max request size
+MAX_IMAGE_SIZE = 3 * 1000 * 1000
+TOUR_IMAGES_LIMIT = 8
 
 # ReCAPTCHA
 RECAPTCHA_ENABLED = True    # Enable/disable reCAPTCHA verification

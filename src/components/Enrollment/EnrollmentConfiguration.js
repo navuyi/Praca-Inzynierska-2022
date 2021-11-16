@@ -1,23 +1,28 @@
 import React, {useEffect, useState} from "react"
 import {Button, Col, FormControl, FormLabel, Row} from "react-bootstrap";
 import BackspaceIcon from "@material-ui/icons/Backspace";
-import axios from "axios";
-import {API_PREFIX} from "../../config";
+import {Form} from "react-bootstrap";
 
 
 function EnrollmentConfiguration(props){
     const [participantInput, setParticipantInput] = useState("")
 
     const handleParticipantAdd = (e) => {
+        e.preventDefault()
         const tmp = [...props.participants]
         tmp.push(participantInput)
         props.setParticipants(tmp)
         setParticipantInput("")
     }
+
     const handleParticipantDelete = (e) => {
         const tmp = [...props.participants]
         tmp.splice(e.currentTarget.id, 1)
         props.setParticipants(tmp)
+    }
+
+    const handleChange = (e) => {
+        setParticipantInput(e.target.value)
     }
 
     return(
@@ -33,10 +38,11 @@ function EnrollmentConfiguration(props){
                             className={"w-50"}
                             placeholder={"Imię i nazwisko uczestnika"}
                             value={participantInput}
-                            onChange={(e) => {setParticipantInput(e.target.value)}}
+                            onChange={handleChange}
                         />
                         <Button variant={"info w-25"} onClick={handleParticipantAdd}> Dodaj </Button>
                     </Row>
+
                     {
                         props.participants.map((participant, index) => {
                             return(

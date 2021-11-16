@@ -51,11 +51,10 @@ function GuideNewTourInputs(props) {
                     <Button variant={"outline-primary"} className={"w-100"} onClick={() => {
                         document.getElementById("main-img-input").click()
                     }}> Dodaj zdjęcie główne</Button>
-                    <input
+                    <FormControl
                         type="file"
                         onChange={handleMainImageChange}
                         accept="image/*"
-                        required
                         id="main-img-input"
                         style={{display: "none"}}
                     />

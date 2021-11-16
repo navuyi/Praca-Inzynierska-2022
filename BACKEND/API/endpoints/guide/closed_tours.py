@@ -34,7 +34,7 @@ def get_active_tours():
             ORDER = "ORDER BY creation_date"
 
 
-    statement = f"SELECT SQL_CALC_FOUND_ROWS id, header, description, start_date, end_date, enrollment_deadline, person_limit, price FROM tours WHERE guide_id=%(guide_id)s {ORDER} LIMIT {LIMIT} OFFSET {OFFSET}"
+    statement = f"SELECT SQL_CALC_FOUND_ROWS id, header, description, start_date, end_date, enrollment_deadline, person_limit, price FROM tours WHERE NOW() > end_date AND guide_id=%(guide_id)s {ORDER} LIMIT {LIMIT} OFFSET {OFFSET}"
     insert = {
         "guide_id": user_id
     }
@@ -51,7 +51,7 @@ def get_active_tours():
         offer["end_date"] = offer["end_date"].strftime("%d.%m.%Y")
         offer["enrollment_deadline"] = offer["enrollment_deadline"].strftime("%d.%m.%Y")
 
-        #TODO Or try fetching the data in separate query
+
         tour_id = offer["id"]
         statement = f"SELECT sum(COALESCE(tickets, 0)) as tickets FROM enrollments WHERE tour_id=%(tour_id)s"
         insert = {

@@ -44,9 +44,9 @@ def create_app(test_config=None):               # test_config - independent from
         [msg, code] = e.drop_err()
         return jsonify(msg), code
 
-    @app.errorhandler(werkzeug.exceptions.RequestEntityTooLarge)
-    def handle_entity_too_large(e):
-        return {"message": "Załączony plik jest za duży"}, 413
+    #@app.errorhandler(werkzeug.exceptions.RequestEntityTooLarge)
+    #def handle_entity_too_large(e):
+    #    return {"message": "Załączony plik jest za duży"}, 413
 
     ### CORS setup ###
     cors = CORS(app, resources={r"/*": {"origins": app.config["ORIGINS"]}}, supports_credentials=True)

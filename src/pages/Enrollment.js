@@ -14,7 +14,6 @@ import {CircularProgress} from "@material-ui/core";
 import {refesh_token} from "../API_CALLS/api_authentication_token_refresh";
 
 function Enrollment(){
-    const history = useHistory()
     const [generalData, setGeneralData] = useState({})
     const [imageUrl, setImageUrl] = useState("")
     const {tour_id} = useParams()
@@ -248,6 +247,8 @@ function Enrollment(){
                                         onChange={handleAddressChange}
                                         required
                                         maxLength={6}
+                                        pattern="[0-9][0-9]-[0-9][0-9][0-9]"
+                                        title="xx-yyy"
                                     />
                                 </Col>
                             </Row>

@@ -47,7 +47,15 @@ def create_new_tour():
             numOfFiles += 1
     file_limit = current_app.config["TOUR_IMAGES_LIMIT"]
     if numOfFiles > file_limit:
-        raise APIException(msg="Zbyt dużo plików, limit wynosi: "+str(file_limit), code=413)
+        raise APIException(msg="Załączono zbyt dużo plików. Limit wynosi: "+str(file_limit), code=422)
+
+    ### Check if single file is not too large ###
+    for key in request.files:
+        file = request.files[key]
+        blob = file.read()
+        size = len(blob)
+        if size > current_app.config["MAX_IMAGE_SIZE"] and key != "main_image":
+            raise APIException(msg=f"Plik o nazwie '{file.filename}' jest zbyt duży", code=422)
 
     ### Check date correctness ###
     start_date = datetime.strptime(tour_data["start_date"], "%Y-%m-%d")

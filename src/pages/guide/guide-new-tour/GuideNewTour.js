@@ -72,11 +72,18 @@ function GuideNewTour() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        setUpload(true)
         // Check if tour plan is provided
         if (tourData.tour_plan.length <= 0) {
             window.alert("Proszę wypełnić plan wycieczki");
-            return true
+            return
+        }
+
+        // Check if main image is provided
+        if(formData.has("main_image") === false){
+            console.log("ASDADASD")
+            window.scroll(0,0)
+            window.alert("Proszę załadować zdjęcie główne wycieczki.")
+            return
         }
 
         // Add tourData to formData object
@@ -92,7 +99,7 @@ function GuideNewTour() {
         }
         // Image gallery will be sent if images were added and then the section was unchecked - checking it on the server side //
 
-
+        setUpload(true)
         api_tour_new_tour(formData)
             .then(res => {
                 const data = res.data;
@@ -114,7 +121,16 @@ function GuideNewTour() {
                             _logout()                                      // <-- logout in case of failure
                             history.push("/login")      // <-- redirect to to login page in case of failure
                         })
-                } else {
+                }else if(err.response.status === 413){
+                    const data = err.response.data;
+                    setUpload(false)
+                    window.scrollTo(0, document.body.scrollHeight);
+                    setErrorInfo({
+                        visible: true,
+                        text: "Rozmiar załączonych plików jest zbyt duży. Usuń niektóre pozycje i spróbuj ponownie."
+                    });
+                }
+                else {
                     const data = err.response.data;
                     setUpload(false)
                     window.scrollTo(0, document.body.scrollHeight);
@@ -174,7 +190,12 @@ function GuideNewTour() {
                                     <CircularProgress size={"120px"} color={"primary"}/>
                                 </div> :
                                 errorInfo.visible ?
-                                    <Alert severity={"error"} variant={"filled"}> {errorInfo.text} </Alert> :
+                                    <Alert severity={"error"} variant={"filled"} className={"w-50 error-alert"} onClick={() => {
+                                        setErrorInfo({
+                                            visible: false,
+                                            text: ""
+                                        })
+                                    }}> {errorInfo.text} </Alert> :
                                     <Button className={"w-50 pt-3 pb-3"} type="submit"> Opublikuj ofertę
                                         wycieczki </Button>
                         }

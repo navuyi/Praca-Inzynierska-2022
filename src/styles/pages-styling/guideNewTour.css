@@ -169,6 +169,10 @@
 }
 
 
+.guideNewTour .error-alert{
+    cursor: pointer;
+}
+
 @media (max-width: 900px) {
     .guideNewTour .cont {
         background-color: #ffffff;
