@@ -5,6 +5,7 @@ from app.handlers import APIException
 from app.database.db import cursor
 from app.endpoints.utils.dhmFromSeconds import dhm_from_seconds
 import os
+from datetime import timedelta
 from datetime import datetime
 
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -47,6 +48,8 @@ def get_active_tours():
         # Change tour start/end date format
         tour["start_date"] = tour["start_date"].strftime("%d.%m.%Y")
         tour["end_date"] = tour["end_date"].strftime("%d.%m.%Y")
+
+        tour["creation_date"] = tour["creation_date"] + timedelta(hours=1)
         tour["creation_date"] = tour["creation_date"].strftime("%d.%m.%Y, %H:%M")
         tour["image_url"] = os.path.join(current_app.config["TOUR_IMAGES_DOWNLOAD_DIRECTORY"], filename)
 

@@ -20,6 +20,7 @@ function GuideNewTourInputs(props) {
                     <FormControl
                         as="textarea"
                         id="header"
+                        maxlength={250}
                         onChange={props.handleChange}
                         rows={1}
                         placeholder="Nagłówek wycieczki"
@@ -37,6 +38,7 @@ function GuideNewTourInputs(props) {
                         placeholder="Miejsce na opis wycieczki"
                         onChange={props.handleChange}
                         id="description"
+                        maxlength={1024}
                         value={props.tourData.description}
                         required
                     />

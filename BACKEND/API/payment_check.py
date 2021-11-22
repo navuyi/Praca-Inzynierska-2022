@@ -23,20 +23,25 @@ try:
     password = config.MAIL_PASSWORD
 
     server = smtplib.SMTP(smtp_server, port)
-    server.ehlo() # Can be omitted
+    server.ehlo()  # Can be omitted
     server.starttls()
     server.login(sender_email, password)
 
     if conn.is_connected():
         cursor = conn.cursor(dictionary=True)
+
         ### Perform payment check ###
-        cursor.execute(f"SELECT id, creation_date, email, amount_paid, amount_payable FROM enrollments")
+        cursor.execute(f"SELECT id, creation_date, email, amount_payable FROM enrollments")
         enrollments = cursor.fetchall()
 
 
         for enrollment in enrollments:
-            deadline = enrollment["creation_date"] + timedelta(hours=24)
+            deadline = enrollment["creation_date"] + timedelta(hours=24)  # hours=24
             now = datetime.now()
+
+            cursor.execute(f"SELECT COALESCE(sum(amount_paid), 0) as amount_paid FROM payments WHERE enrollment_id={enrollment['id']}")
+            enrollment["amount_paid"] = cursor.fetchone()["amount_paid"]
+
             if(now > deadline and enrollment["amount_paid"] < enrollment["amount_payable"]):
                 print("Payment deadline exceeded. Deleting this enrollment")
                 enrollment_id = enrollment["id"]
@@ -59,3 +64,4 @@ finally:
         cursor.close()
         conn.close()
         server.quit()
+

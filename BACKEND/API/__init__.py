@@ -1,15 +1,14 @@
 import datetime
 import os
-from flask import Flask, jsonify, g, request
+from flask import Flask, jsonify
 from flask_cors import CORS
-from flask_swagger_ui import get_swaggerui_blueprint
-from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required
 from flask_jwt_extended import JWTManager
-from app.handlers import APIException
 from uuid import uuid4
+
+from app.handlers import APIException
 from app.extensions import mail
 
-import werkzeug
+
 
 def create_app(test_config=None):               # test_config - independent from the instance configuration
     app = Flask(__name__, instance_relative_config=False)
@@ -21,7 +20,7 @@ def create_app(test_config=None):               # test_config - independent from
         app.config.from_pyfile('config.py', silent=True)
     else:
         # Importing test config if it was provided to create_app()
-        app.config.from_mapping(test_config)
+        app.config.from_pyfile(test_config)
 
     try:
         os.makedirs(app.instance_path)
