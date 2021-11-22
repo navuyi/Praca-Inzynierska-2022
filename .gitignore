@@ -7,6 +7,7 @@
 
 # testing
 /coverage
+/BACKEND/API/test_config.py
 
 # production
 /build

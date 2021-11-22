@@ -8,6 +8,7 @@
             <mapping deploy="app/app/" local="$PROJECT_DIR$/BACKEND/API/" web="/" />
             <mapping deploy="SQL" local="$PROJECT_DIR$/BACKEND/SQL" />
             <mapping deploy="public_html" local="$PROJECT_DIR$/build" />
+            <mapping deploy="app/" local="$PROJECT_DIR$/BACKEND/tests/" />
           </mappings>
         </serverdata>
       </paths>
