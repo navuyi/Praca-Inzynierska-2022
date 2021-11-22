@@ -167,6 +167,7 @@ function Tours() {
                                     <FormControl as={"select"} className={"w-50"} onChange={handleChange}
                                                  id="sort-select" value={resultsConfig.sort_by}>
                                         <option value={"most_recent"}> Od najnowszych</option>
+                                        <option value={"oldest"}> Od najstarszych </option>
                                         <option value={"price"}> Cena rosnąco</option>
                                         <option value={"price_desc"}> Cena malejąco</option>
                                     </FormControl>

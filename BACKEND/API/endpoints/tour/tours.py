@@ -25,6 +25,8 @@ def get_tours():
 
     if sort_by == "most_recent":
         ORDER = "creation_date DESC"
+    elif sort_by == "oldest":
+        ORDER = "creation_date"
     elif sort_by == "price":
         ORDER = "price"
     elif sort_by == "price_desc":
