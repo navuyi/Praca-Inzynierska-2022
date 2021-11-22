@@ -175,6 +175,7 @@ function Tours() {
                             <Row className={"center-body"} style={{flexGrow: "1"}}>
                                 {loading ? <CircularProgress size={120} color={"secondary"}/> : null}
                                 {
+                                    tourData.length ?
                                     tourData.map((tour, index) => {
                                         return (
                                             <ToursTourPanel
@@ -195,8 +196,9 @@ function Tours() {
                                                 tickets={tour.tickets}
                                             />
                                         )
-                                    })
+                                    }) : <h3>Brak wyników</h3>
                                 }
+
                             </Row>
                             <div className={"center-footer"}>
                                 <Pagination count={Math.ceil(toursFound / resultsConfig.results_per_page)}

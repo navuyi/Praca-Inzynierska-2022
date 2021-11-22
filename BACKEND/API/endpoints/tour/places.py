@@ -15,7 +15,7 @@ def get_places():
         return {"msg": "no input"}, 400
 
     limit = 10
-    # Open databse connection
+
     statement = """SELECT id, place FROM tour_places WHERE place LIKE %(place)s ORDER BY char_length(place)  LIMIT %(limit)s;"""
     insert = {
         "place": place+"%",

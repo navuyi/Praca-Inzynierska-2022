@@ -1,39 +1,44 @@
 import json
+import pytest
+from app import create_app
 
-try:
-    from app import create_app
-    from app.database import db
-    import unittest
+def bytesToString(item):
+    return str(item, 'utf-8')
 
+def bytesToObject(item):
+    return json.loads(str(item, 'utf-8'))
+
+
+'''
+@pytest.fixture
+def client():
     app = create_app("test_config.py")
-    print("Hello world")
+    yield app.test_client()
+
+'''
 
 
+@pytest.fixture
+def client():
+    app = create_app("test_config.py")
+    with app.app_context():
+        with app.test_client() as client:
+            yield client
 
 
-    class SignupTest(unittest.TestCase):
-        def setUp(self):
-            self.app = app.test_client()
-            self.db = db.get_db()
+# Each test function should start with "test_"
+def test_default(client):
+    response = client.get("/")
+    print(response.data)
+    print(response.json["msg"])
+    assert response.json["msg"] == "Hello World"
 
-        def test_successful_signup(self):
-            payload = json.dumps({
-                "email": "andrewg@gmail.com",
-                "password": "cisco123"
-            })
+#TODO CONTINUE HERE WRITE TESTS FOR ENDPOINTS WHERE THERE IS USER INPUT
 
-            response = self.app.post("/api/authentication/login", headers={"Content-Type": "application/json"}, data=payload)
-
-            self.assertEqual(str, type(response.json['id']))
-            self.assertEqual(200, response.status_code)
-
-
-        def tearDown(self):
-            # Delete Database collections after the test is complete
-            for collection in self.db.list_collection_names():
-                self.db.drop_collection(collection)
-
-except Exception as e:
-    print(e)
+def test_login(client):
+    response = client.get("/tour/places", query_string={
+        "place": "Tarnowskie"
+    })
+    print(response)
 
 

@@ -190,14 +190,7 @@ paths:
 
 
 
-        # Endpoints for static information
-  "/api/tour/tags":
-    get:
-      tags:
-        - Tour
-        #TODO: Continue
-      responses:
-
+  # Endpoints for static information
   "/api/tour/places":
     $ref: "./paths/places.yaml"
 
