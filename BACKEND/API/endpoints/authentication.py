@@ -91,7 +91,7 @@ def register():
     localhost = f"localhost:3000/register/confirm/{token}"       # <-- This link for development
 
     html = f'<h3> Witamy w serwisie YourTour </h3>' \
-           f'<a href={localhost}> Link aktywacyjny  </a>'
+           f'<a href={globalhost}> Link aktywacyjny  </a>'
     subject = "Akywacja konta w YourTour"
     send_email(credentials["email"], subject, html)
 
@@ -104,7 +104,7 @@ def register():
 @bp.route("/login", methods=['POST'])
 def login():
     if "email" not in request.json or "password" not in request.json:
-        raise APIException(msg="Brakuje danych", code=422)
+        raise APIException(msg="Brakuje danych", code=401)
     # Email & password provided in request body
     email = request.json["email"]
     password = request.json["password"]
@@ -113,7 +113,7 @@ def login():
     cursor().execute("SELECT * FROM users WHERE email = %(email)s", {"email": email})
     user_data = cursor().fetchone()
     if not user_data:
-        raise APIException(msg="Podany użytkownik nie istnieje", code=404)
+        raise APIException(msg="Podany użytkownik nie istnieje", code=401)
 
     # Check if email was confirmed
     if user_data["is_confirmed"] == 0:

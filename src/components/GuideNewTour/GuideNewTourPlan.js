@@ -66,7 +66,7 @@ function GuideNewTourPlan(props) {
                                       onChange={(e) => setPlanInput(e.target.value)}/>
                     </Form.Group>
                     {
-                        editMode ? <Button onClick={handlePointAdd} className={"w-100 btn-primary"}> Edytuj </Button> :
+                        editMode ? <Button onClick={handlePointAdd} className={"w-100 btn-primary"}> Zatwierdź </Button> :
                             <Button onClick={handlePointAdd} className={"w-100 btn-success"}> Dodaj </Button>
                     }
                 </Col>
