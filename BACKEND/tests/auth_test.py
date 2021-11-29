@@ -1,6 +1,6 @@
 import json
 import warnings
-
+import random
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 warnings.filterwarnings("ignore", category=PendingDeprecationWarning)
 
@@ -107,3 +107,33 @@ Site key: 6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
 Secret key: 6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe
 
 '''
+
+def test_registration_success(client):
+    url = "/authentication/register"
+    random_letters = ['a','b','d','v','w','c','b','z','y','w','q']
+    data = dict(
+        f_name="FName",
+        l_name="LName",
+        email=f"namename_${random.choice(random_letters)}{random.choice(random_letters)}{random.choice(random_letters)}{random.choice(random_letters)}@gmail.com",
+        password="cisco123",
+        phone_number="123123123",
+        password_repeat="cisco123",
+        token="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+    )
+    response = client.post(url, json=data)
+    assert response.status_code == 201
+
+
+def test_registration_user_already_exists(client):
+    url = "/authentication/register"
+    data = dict(
+        f_name="FName",
+        l_name="LName",
+        email="andrewg@gmail.com",
+        password="cisco123",
+        phone_number="123123123",
+        password_repeat="cisco123",
+        token="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+    )
+    response = client.post(url, json=data)
+    assert response.status_code == 409
