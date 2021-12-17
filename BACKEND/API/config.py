@@ -17,7 +17,7 @@ MAIL_PASSWORD = "lubiejesc123"
 MAIL_USERNAME = "webappengthesis@gmail.com"
 
 # Email confirmation
-TOKEN_EXPIRATION = 1800
+TOKEN_EXPIRATION = 60 * 1
 
 # BitPay and payments
 BITPAY_SECRET_KEY = "8LXkLrUS3usBvckvHY6tECAfbbejJsyBC2PsN5xhq5RU"  # This is the API token from BitPay merchant account

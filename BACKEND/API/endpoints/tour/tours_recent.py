@@ -18,7 +18,7 @@ def get_recent_tours():
     else:
         amount = 3
 
-    statement = f"SELECT tours.id as tour_id, header, description, filename FROM tours left join tour_images on tours.id=tour_images.tour_id AND is_main=1 ORDER BY tours.creation_date DESC LIMIT %s"
+    statement = f"SELECT tours.id as tour_id, header, description, filename FROM tours left join tour_images on tours.id=tour_images.tour_id AND is_main=1 ORDER BY tours.creation_date  LIMIT %s"
     insert = (amount, )
     cursor().execute(statement, insert)
     recents = cursor().fetchall()

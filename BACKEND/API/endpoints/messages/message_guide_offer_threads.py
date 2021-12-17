@@ -23,6 +23,16 @@ def get_guide_offer_threads():
     if not is_guide:
         raise APIException(msg="Unauthorized", code=401)
 
+    # Check if tour belongs to the guide
+    cursor().execute(f"SELECT guide_id FROM tours WHERE id = %s", (tour_id, ))
+    res = cursor().fetchone()
+    if res:
+        t_id = res["guide_id"]
+        if int(t_id) != int(guide_id):
+            raise APIException(msg="Unauthorized", code=403)
+    else:
+        raise APIException(msg="Not found", code=403)
+
     limit = 5
     offset = (int(request.args["page"])-1) * limit
 

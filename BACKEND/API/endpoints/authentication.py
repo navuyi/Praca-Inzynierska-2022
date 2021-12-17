@@ -88,7 +88,7 @@ def register():
     cursor().execute(f"UPDATE users SET token=%s, token_expiration=%s WHERE email=%s", (token, token_expiration, credentials["email"]))
     # Send email with activation link
     globalhost = f"https://figlus.pl/register/confirm/{token}"     # <-- This link for production
-    localhost = f"localhost:3000/register/confirm/{token}"       # <-- This link for development
+    #localhost = f"localhost:3000/register/confirm/{token}"       # <-- This link for development
 
     html = f'<h3> Witamy w serwisie YourTour </h3>' \
            f'<a href={globalhost}> Link aktywacyjny  </a>'
@@ -151,7 +151,8 @@ def confirm_email():
     # Check if token is expired
     token_expiration = result["token_expiration"]
     now = datetime.now()
-    if now > token_expiration:
+    is_confirmed = result["is_confirmed"]
+    if is_confirmed != 1 and (now > token_expiration):
         cursor().execute(f"DELETE FROM users WHERE email=%s", (result["email"], ))
         raise APIException(msg="Token utracił ważność. Zarejestruj się ponownie.", code=400)
 

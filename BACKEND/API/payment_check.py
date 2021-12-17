@@ -30,10 +30,22 @@ try:
     if conn.is_connected():
         cursor = conn.cursor(dictionary=True)
 
+
+        ### Perform email confirmation test ###
+        cursor.execute(f"SELECT id, is_confirmed, token_expiration FROM users")
+        users = cursor.fetchall()
+        for user in users:
+            now = datetime.now()
+            if user["is_confirmed"] !=1 and (now > user["token_expiration"]):
+                # Delete that account
+                print(f"Deleting unconfirmed account with ID {user['id']}")
+                cursor.execute(f"DELETE FROM users WHERE id=%s", (user["id"], ))
+
+
+
         ### Perform payment check ###
         cursor.execute(f"SELECT id, creation_date, email, amount_payable FROM enrollments")
         enrollments = cursor.fetchall()
-
 
         for enrollment in enrollments:
             deadline = enrollment["creation_date"] + timedelta(hours=24)  # hours=24
