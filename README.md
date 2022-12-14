@@ -10,7 +10,7 @@ The goal of the project was to develop a SPA web application for tour guides.
 ## Technologies
 Frontend
 - React
-- Javascripr
+- Javascript
 - Bootstrap
 
 Backend
